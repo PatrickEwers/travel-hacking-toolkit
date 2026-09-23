@@ -2,7 +2,9 @@
 
 A dependency-free flashcard and exercise app for the 1000 most useful Thai words, with SuperMemo SM-2 spaced repetition, wrong-answer requeueing, and playable audio so you can practice the five tones.
 
-**Run it:** open `index.html` in any modern browser. No build step, no server needed. Progress is stored in the browser's local storage (export/import in Settings to move it between devices). To host it, copy this folder to any static host or serve it with `python3 -m http.server` from this directory.
+**Live:** https://thai-flashcards-pi.vercel.app (Vercel project `thai-flashcards`, root directory `apps/thai-flashcards`, auto-deploys from this repo).
+
+**Run it locally:** open `index.html` in any modern browser. No build step, no server needed. Progress is stored in the browser's local storage (export/import in Settings to move it between devices). To host it, copy this folder to any static host or serve it with `python3 -m http.server` from this directory.
 
 ## What's inside
 
