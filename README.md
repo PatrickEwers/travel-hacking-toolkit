@@ -569,6 +569,10 @@ travel-hacking-toolkit/
 └── LICENSE                         # MIT
 ```
 
+## Extras
+
+- **[Thai 1000 flashcards](apps/thai-flashcards/)** – a standalone browser app (open `apps/thai-flashcards/index.html`) that teaches the 1000 most useful Thai words with SM-2 spaced repetition, listening quizzes, a tone drill, and playable audio. Handy before a Thailand trip. See its [README](apps/thai-flashcards/README.md).
+
 ## Contributing
 
 PRs welcome. The skill tables in this README and `llms.txt` are auto-generated from each skill's `SKILL.md` frontmatter — don't hand-edit them.
