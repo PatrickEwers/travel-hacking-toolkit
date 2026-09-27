@@ -170,6 +170,14 @@
     save();
   }
   function advance() { session.idx++; nextCard(); }
+  function flip() {
+    if (!session || session.flipped || !session.current) return;
+    if (ThaiAudio.isRecording()) { ThaiAudio.stopRecording().then(() => render()); }
+    session.flipped = true;
+    render();
+    // English-first cards: hear the answer as soon as it is revealed so you can compare with what you said.
+    if (state.settings.autoplay && state.settings.front === "english") play(BY_ID[session.current].thai);
+  }
 
   // ---------- views ----------
   const TABS = [["home", "Home"], ["session", "Study"], ["practice", "Practice"], ["browse", "Browse"], ["stats", "Stats"], ["settings", "Settings"]];
@@ -253,7 +261,9 @@
         </div></div>`;
     }
     const w = BY_ID[session.current], card = getCard(w.id);
-    const bar = `<div class="session-bar"><span>${MODES[session.kind].name}</span><div class="progress"><div style="width:${Math.round(100 * session.idx / session.queue.length)}%"></div></div><span>${session.idx + 1} / ${session.queue.length}</span>${session.relearn.size ? `<span class="badge leech">${session.relearn.size} relearning</span>` : ""}<button class="btn sm ghost" data-action="end">End</button></div>`;
+    const fronts = [["thai", "ไทย → EN"], ["english", "EN → ไทย"], ["audio", "🔊 → ไทย"]];
+    const dirSwitch = session.kind === "flash" ? `<span class="seg">${fronts.map(f => `<button class="${state.settings.front === f[0] ? "on" : ""}" data-action="front" data-front="${f[0]}" title="Card front">${f[1]}</button>`).join("")}</span>` : "";
+    const bar = `<div class="session-bar"><span>${MODES[session.kind].name}</span>${dirSwitch}<div class="progress"><div style="width:${Math.round(100 * session.idx / session.queue.length)}%"></div></div><span>${session.idx + 1} / ${session.queue.length}</span>${session.relearn.size ? `<span class="badge leech">${session.relearn.size} relearning</span>` : ""}<button class="btn sm ghost" data-action="end">End</button></div>`;
     if (session.kind === "flash") return bar + viewFlash(w, card);
     if (session.kind === "tone") return bar + viewTone(w, card);
     return bar + viewChoice(w, card);
@@ -274,7 +284,7 @@
     const front = state.settings.front;
     if (!session.flipped) {
       let inner;
-      if (front === "english") inner = `<div class="en prompt">${esc(w.en)}</div>`;
+      if (front === "english") inner = `<div class="en prompt">${esc(w.en)}</div><div class="meta">say it in Thai, then flip to check</div><div class="audio-row"><button class="btn rec ${ThaiAudio.isRecording() ? "on" : ""}" data-action="record" title="Record yourself (R)">${ThaiAudio.isRecording() ? "■ Stop" : "● Record me"}</button></div>`;
       else if (front === "audio") inner = `<button class="speaker" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button><div class="meta">listen, then flip</div>`;
       else inner = `<div class="thai">${esc(w.thai)}</div>${state.settings.showRoman ? `<div class="roman">${romanHtml(w)}</div>` : ""}${playBtns(w, { noRecord: true })}`;
       return `<div class="card clickable" data-action="flip"><span class="cat badge">${CAT_LABELS[w.cat] || w.cat}</span><span class="stage">${stageBadge(card)}</span>${inner}<div class="hint">tap or press space to flip</div></div>
@@ -426,10 +436,12 @@
     const el = e.target.closest("[data-action]");
     if (!el) return;
     const a = el.dataset.action;
+    if (a !== "flip" && el.closest('[data-action="flip"]')) e.stopPropagation();
     if (a === "nav") { const v = el.dataset.view; if (v === "session" && !session) { state.view = "home"; startSession("flash"); if (!session) render(); return; } state.view = v; render(); }
     else if (a === "start") { if (el.dataset.src) state.settings.practiceSource = el.dataset.src; startSession(el.dataset.kind, el.dataset.extra ? { extraNew: Number(el.dataset.extra) } : {}); }
     else if (a === "end") { session = null; state.view = "home"; render(); }
-    else if (a === "flip") { if (session && !session.flipped) { session.flipped = true; render(); } }
+    else if (a === "flip") { flip(); }
+    else if (a === "front") { state.settings.front = el.dataset.front; save(); if (session) { session.flipped = false; render(); } else render(); }
     else if (a === "grade") { if (session && session.flipped) { grade(session.current, Number(el.dataset.q)); advance(); } }
     else if (a === "choose") { if (session && !session.answered) { const id = el.dataset.id; session.answered = true; session.lastResult = id; const ok = id === session.q.answer; grade(session.current, ok ? (Date.now() - session.shownAt < 3500 ? 5 : 4) : 1); render(); if (!ok || session.kind === "listen") play(BY_ID[session.current].thai); } }
     else if (a === "tone") { if (session && !session.answered) { const t = el.dataset.tone; session.answered = true; session.lastResult = t; const ok = t === session.q.answer; grade(session.current, ok ? 4 : 1, { tone: session.q.answer }); render(); } }
@@ -464,7 +476,7 @@
     if (k === "s" || k === "S") { play(w.thai, true); e.preventDefault(); return; }
     if (k === "r" || k === "R") { toggleRecord(); e.preventDefault(); return; }
     if (session.kind === "flash") {
-      if ((k === " " || k === "Enter") && !session.flipped) { session.flipped = true; render(); e.preventDefault(); }
+      if ((k === " " || k === "Enter") && !session.flipped) { flip(); e.preventDefault(); }
       else if (session.flipped && "1234".includes(k) && k) { grade(w.id, GRADES["1234".indexOf(k)].q); advance(); e.preventDefault(); }
     } else if (session.kind === "tone") {
       if (!session.answered && "12345".includes(k) && k) { document.querySelectorAll('[data-action="tone"]')["12345".indexOf(k)].click(); e.preventDefault(); }
