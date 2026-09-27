@@ -75,8 +75,8 @@
   function describeAudioError(m) {
     if (m.includes("no-speech-api")) return "This browser has no speech engine and online audio failed.";
     if (m.includes("no-thai-voice")) return "No Thai voice found in this browser. See Settings → Audio for how to install one.";
-    if (m.includes("online-play-blocked") || m.includes("not-allowed")) return "Audio is blocked until you tap the page. Tap Play again.";
-    if (m.includes("online-tts-failed")) return ThaiAudio.thaiVoices().length ? "Online audio failed. Switch engine to 'Browser voice' in Settings." : "No Thai voice installed and online audio is unreachable. See Settings → Audio.";
+    if (m.includes("online-play-blocked") || m.includes("not-allowed")) return "The browser blocked playback. Tap Play again (first tap unlocks audio on iPhone).";
+    if (m.includes("online-tts-failed")) return "Server audio failed and no Thai voice is installed on this device. See Settings → Audio → Diagnostics.";
     if (m.includes("audio-busy")) return "Speech engine is busy. Try again in a second.";
     if (m.includes("synthesis") || m.includes("unavailable")) return "The Thai voice failed to start. On iPhone check the ringer switch, or set engine to Online in Settings.";
     return "Audio error: " + m;
@@ -382,8 +382,13 @@
       ["Speech engine in this browser", d.speechApi ? "yes" : "no"],
       ["Voices loaded", d.voicesLoaded ? String(d.voicesLoaded) : "none yet (tap a Play button once, then reopen Settings)"],
       ["Thai voices", d.thaiVoices.length ? d.thaiVoices.join(", ") : "none"],
-      ["Last playback", d.lastError ? "failed: " + esc(d.lastError) : (d.lastEngine ? "ok via " + d.lastEngine + " voice" : "not tried yet")]
+      ["Server audio", d.serverAudio ? (ui.serverAudio === undefined ? "checking…" : ui.serverAudio) : "not available from a local file"],
+      ["Last playback", d.lastError ? "failed: " + esc(d.lastError) : (d.lastEngine ? "ok via " + (d.lastEngine === "online" ? "server audio" : "browser voice") : "not tried yet")]
     ];
+    if (d.serverAudio && ui.serverAudio === undefined) {
+      ui.serverAudio = null;
+      fetch("api/tts?q=" + encodeURIComponent("สวัสดี")).then(r => { ui.serverAudio = r.ok ? "ok (" + (r.headers.get("content-type") || "") + ")" : "failed: HTTP " + r.status; }).catch(e => { ui.serverAudio = "failed: " + e.message; }).then(() => { if (state.view === "settings") render(); });
+    }
     const iosNote = d.isIOS ? `<p style="margin-top:8px"><b>iPhone / iPad:</b> the ringer (silent) switch mutes browser speech. Flip it to ring, or set Engine to <i>Online</i>, which plays as normal media and ignores the switch. If no Thai voice is listed: Settings → Accessibility → Spoken Content → Voices → Thai → download Kanya.</p>` : "";
     return `<div class="setting" style="display:block"><label>Diagnostics<small>What the app can see about audio on this device.</small></label>
       <table style="margin-top:8px;font-size:.85rem;border-collapse:collapse">${rows.map(r => `<tr><td style="color:var(--muted);padding:2px 12px 2px 0;vertical-align:top">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>${iosNote}</div>`;
@@ -401,8 +406,8 @@
     </div>
     <div class="panel"><h2>Audio</h2>
       <div class="setting"><label>Auto-play<small>Speak the word when a card appears.</small></label><input type="checkbox" data-setting="autoplay" ${s.autoplay ? "checked" : ""}></div>
-      <div class="setting"><label>Engine<small>Browser voice is offline and instant. Online uses Google Translate audio as a fallback.</small></label>
-        <select data-setting="engine"><option value="auto" ${s.engine === "auto" ? "selected" : ""}>Auto (browser, then online)</option><option value="browser" ${s.engine === "browser" ? "selected" : ""}>Browser voice only</option><option value="online" ${s.engine === "online" ? "selected" : ""}>Online (Google Translate)</option></select></div>
+      <div class="setting"><label>Engine<small>Server audio streams an MP3 per word from this site (needs internet, plays on every device). Browser voice uses a Thai voice installed on your device.</small></label>
+        <select data-setting="engine"><option value="auto" ${s.engine === "auto" ? "selected" : ""}>Auto (server audio, then browser voice)</option><option value="online" ${s.engine === "online" ? "selected" : ""}>Server audio only (works on iPhone in silent mode)</option><option value="browser" ${s.engine === "browser" ? "selected" : ""}>Browser voice only (offline)</option></select></div>
       <div class="setting"><label>Thai voice<small>${voices.length ? voices.length + " Thai voice" + (voices.length > 1 ? "s" : "") + " found." : "No Thai voice installed. macOS: System Settings → Accessibility → Spoken Content → add Thai (Kanya). Windows: Settings → Time & Language → add Thai speech. Android: Google TTS → install Thai. Chrome desktop has Google ไทย online."}</small></label>
         <select data-setting="voiceURI" ${voices.length ? "" : "disabled"}><option value="">Auto</option>${voices.map(v => `<option value="${esc(v.voiceURI)}" ${s.voiceURI === v.voiceURI ? "selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("")}</select></div>
       <div class="setting"><label>Speed<small>Normal ${s.rate.toFixed(2)} · Slow ${s.slowRate.toFixed(2)}</small></label><div class="row"><input type="range" min="0.5" max="1.2" step="0.05" value="${s.rate}" data-setting="rate"><input type="range" min="0.3" max="0.9" step="0.05" value="${s.slowRate}" data-setting="slowRate"></div></div>

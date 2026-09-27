@@ -39,12 +39,14 @@ Each card carries an easiness factor (EF, starts at 2.5), a repetition count and
 
 The romanization marks tone with one diacritic per syllable: `à` low, `â` falling, `á` high, `ǎ` rising, unmarked = mid. Syllables are colour-coded, and each shows a pitch-contour glyph and the Thai tone name (สามัญ, เอก, โท, ตรี, จัตวา).
 
-Audio uses the browser's speech synthesis with a Thai voice. If none is installed, the app falls back to Google Translate's audio (needs internet). To get an offline voice:
+Audio comes from the site's own `api/tts` endpoint (server-generated MP3, cached on the CDN). Opened as a local file, the app uses the browser's speech synthesis with a Thai voice instead. To get an offline voice:
 
 - **macOS / iOS:** System Settings → Accessibility → Spoken Content → System Voice → Manage Voices → Thai (Kanya).
 - **Windows:** Settings → Time & Language → Speech → Add voices → Thai.
 - **Android:** Google Text-to-speech → Install voice data → Thai.
 - **Chrome desktop** already ships an online "Google ไทย" voice.
+
+When hosted (e.g. on Vercel), the app streams an MP3 per word from its own `api/tts` serverless function instead, which works on every device including iPhones on silent, and falls back to the device voice only if that fails.
 
 Press 🔊 for normal speed, 🐢 for slow (better for hearing the contour), ● to record yourself, then 🎙 to play it back against the reference.
 

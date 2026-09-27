@@ -34,8 +34,30 @@
     return list.find(v => pref.test(v.name)) || list[0];
   }
 
+  // One shared <audio> element. iOS only allows play() inside a user gesture, but once an element has
+  // played (even a silent clip) during a gesture, its src can be swapped and replayed later.
+  const SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";
+  let player = null;
+  function getPlayer() {
+    if (!player && typeof root.Audio !== "undefined") { player = new root.Audio(); player.preload = "auto"; player.setAttribute && player.setAttribute("playsinline", ""); }
+    return player;
+  }
+  function unlock() {
+    if (state.unlockedMedia) return;
+    const p = getPlayer(); if (!p) return;
+    try { p.src = SILENT; const pr = p.play(); if (pr && pr.then) pr.then(() => { state.unlockedMedia = true; }).catch(() => {}); } catch (e) { /* ignore */ }
+  }
+  if (typeof document !== "undefined") ["pointerdown", "touchend", "keydown"].forEach(ev => document.addEventListener(ev, unlock, { capture: true, passive: true }));
+
+  function ttsUrl(text, slow) {
+    const local = typeof location !== "undefined" && /^https?:$/.test(location.protocol);
+    if (local) return "api/tts?q=" + encodeURIComponent(text) + (slow ? "&slow=1" : "");
+    return "https://translate.google.com/translate_tts?ie=UTF-8&tl=th&client=tw-ob&ttsspeed=" + (slow ? "0.24" : "1") + "&q=" + encodeURIComponent(text);
+  }
+
   function stopOnline() {
-    if (state.fallbackAudio) { try { state.fallbackAudio.pause(); } catch (e) { /* ignore */ } state.fallbackAudio = null; }
+    const p = getPlayer();
+    if (p && !p.paused) { try { p.pause(); } catch (e) { /* ignore */ } }
   }
   function stop() {
     if (synth) synth.cancel();
@@ -78,33 +100,39 @@
 
   function speakOnline(text, opts) {
     return new Promise((resolve, reject) => {
-      const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=th&client=tw-ob&ttsspeed=" +
-        ((opts.rate || 0.9) < 0.75 ? "0.3" : "1") + "&q=" + encodeURIComponent(text);
-      const a = new Audio(url);
-      state.fallbackAudio = a;
-      a.onended = () => resolve("online");
-      a.onerror = () => reject(new Error("online-tts-failed"));
-      a.play().then(() => { state.unlocked = true; }).catch(err => reject(new Error("online-play-blocked:" + (err && err.name || err))));
+      const p = getPlayer();
+      if (!p) return reject(new Error("no-audio-element"));
+      let settled = false;
+      const done = v => { if (!settled) { settled = true; resolve(v); } };
+      const fail = e => { if (!settled) { settled = true; reject(e); } };
+      p.onended = () => done("online");
+      p.onerror = () => fail(new Error("online-tts-failed"));
+      p.onpause = () => { if (p.currentTime > 0 && !p.ended) done("canceled"); };
+      p.src = ttsUrl(text, opts.slow || (opts.rate || 0.9) < 0.75);
+      p.playbackRate = 1;
+      p.load();
+      const pr = p.play();
+      if (pr && pr.then) pr.then(() => { state.unlockedMedia = true; }).catch(err => fail(new Error("online-play-blocked:" + (err && err.name || err))));
     });
   }
 
-  /* engine: "auto" | "browser" | "online" */
+  /* engine: "auto" (server audio, then browser voice) | "browser" | "online" */
   async function speak(text, opts) {
     opts = opts || {};
     const engine = opts.engine || "auto";
     state.lastText = text; state.lastError = null;
     stopOnline();
+    if (synth && (synth.speaking || synth.pending)) synth.cancel();
     try {
       let result;
       if (engine === "online") result = await speakOnline(text, opts);
       else if (engine === "browser") result = await speakBrowser(text, opts);
       else {
-        try { result = await speakBrowser(text, opts); }
+        try { result = await speakOnline(text, opts); }
         catch (e) {
-          const m = String(e.message);
-          if (m.startsWith("no-thai-voice") || m.startsWith("no-speech-api") || /voice-unavailable|language-unavailable|synthesis-unavailable|synthesis-failed/.test(m)) {
-            result = await speakOnline(text, opts);
-          } else throw e;
+          state.lastOnlineError = String(e.message);
+          if (/online-play-blocked/.test(String(e.message))) throw e;
+          result = await speakBrowser(text, opts);
         }
       }
       if (result !== "canceled") state.lastEngine = result;
@@ -124,7 +152,9 @@
       thaiVoices: th.map(v => v.name + " (" + v.lang + ")"),
       lastEngine: state.lastEngine,
       lastError: state.lastError,
-      unlocked: state.unlocked
+      lastOnlineError: state.lastOnlineError || null,
+      serverAudio: typeof location !== "undefined" && /^https?:$/.test(location.protocol),
+      unlocked: state.unlocked || !!state.unlockedMedia
     };
   }
 
