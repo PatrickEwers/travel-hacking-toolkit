@@ -2,17 +2,23 @@
    plus microphone recording so you can compare your tone against the reference. */
 (function (root) {
   "use strict";
-  const state = { voices: [], ready: false, lastError: null, fallbackAudio: null };
+  const state = { voices: [], ready: false, lastError: null, lastEngine: null, lastText: null,
+    fallbackAudio: null, current: null, unlocked: false };
+  const synth = "speechSynthesis" in root ? root.speechSynthesis : null;
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent || "") ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
   function refreshVoices() {
-    if (!("speechSynthesis" in root)) return [];
-    state.voices = root.speechSynthesis.getVoices() || [];
-    state.ready = state.voices.length > 0;
+    if (!synth) return [];
+    const v = synth.getVoices() || [];
+    if (v.length) { state.voices = v; state.ready = true; }
     return state.voices;
   }
-  if ("speechSynthesis" in root) {
+  if (synth) {
     refreshVoices();
-    root.speechSynthesis.onvoiceschanged = refreshVoices;
+    synth.addEventListener && synth.addEventListener("voiceschanged", refreshVoices);
+    // Some browsers only populate the list after a first (silent) call.
+    if (!state.voices.length) setTimeout(refreshVoices, 300);
   }
 
   function thaiVoices() {
@@ -24,27 +30,49 @@
     const list = thaiVoices();
     if (!list.length) return null;
     if (voiceURI) { const v = list.find(x => x.voiceURI === voiceURI); if (v) return v; }
-    // Prefer known natural voices when several exist.
     const pref = /google|kanya|premwadee|niwat|achara|narisa|natural/i;
     return list.find(v => pref.test(v.name)) || list[0];
   }
 
+  function stopOnline() {
+    if (state.fallbackAudio) { try { state.fallbackAudio.pause(); } catch (e) { /* ignore */ } state.fallbackAudio = null; }
+  }
   function stop() {
-    if ("speechSynthesis" in root) root.speechSynthesis.cancel();
-    if (state.fallbackAudio) { try { state.fallbackAudio.pause(); } catch (e) {} state.fallbackAudio = null; }
+    if (synth) synth.cancel();
+    stopOnline();
   }
 
+  /* Resolves when the utterance finishes. A cancelled/interrupted utterance (because a newer one
+     started) resolves too: it is not a failure the user needs to hear about. */
   function speakBrowser(text, opts) {
     return new Promise((resolve, reject) => {
+      if (!synth || typeof root.SpeechSynthesisUtterance === "undefined") return reject(new Error("no-speech-api"));
       const voice = pickVoice(opts.voiceURI);
-      if (!voice) return reject(new Error("no-thai-voice"));
-      const u = new SpeechSynthesisUtterance(text);
-      u.voice = voice; u.lang = voice.lang || "th-TH";
+      // If the voice list has loaded and holds no Thai voice, let the caller fall back.
+      if (!voice && state.voices.length) return reject(new Error("no-thai-voice"));
+      const u = new root.SpeechSynthesisUtterance(text);
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) || "th-TH";
       u.rate = opts.rate || 0.9; u.pitch = 1; u.volume = 1;
-      u.onend = () => resolve("browser");
-      u.onerror = e => reject(new Error("tts-error:" + (e.error || "unknown")));
-      root.speechSynthesis.cancel();
-      root.speechSynthesis.speak(u);
+      let settled = false;
+      u.onend = () => { if (settled) return; settled = true; state.unlocked = true; resolve("browser"); };
+      u.onerror = e => {
+        if (settled) return; settled = true;
+        const code = (e && e.error) || "unknown";
+        if (code === "canceled" || code === "interrupted") return resolve("canceled");
+        reject(new Error("tts-error:" + code));
+      };
+      // Keep a reference: Chrome garbage-collects utterances mid-speech and never fires onend.
+      state.current = u;
+      const go = () => {
+        try {
+          if (synth.paused) synth.resume();
+          synth.speak(u);
+          // Safari sometimes queues an utterance and never starts it. Nudge it.
+          if (isIOS) setTimeout(() => { if (!settled && synth.paused) synth.resume(); }, 250);
+        } catch (err) { if (!settled) { settled = true; reject(err); } }
+      };
+      if (synth.speaking || synth.pending) { synth.cancel(); setTimeout(go, 60); } else go();
     });
   }
 
@@ -56,7 +84,7 @@
       state.fallbackAudio = a;
       a.onended = () => resolve("online");
       a.onerror = () => reject(new Error("online-tts-failed"));
-      a.play().catch(err => reject(err));
+      a.play().then(() => { state.unlocked = true; }).catch(err => reject(new Error("online-play-blocked:" + (err && err.name || err))));
     });
   }
 
@@ -64,16 +92,40 @@
   async function speak(text, opts) {
     opts = opts || {};
     const engine = opts.engine || "auto";
-    stop();
+    state.lastText = text; state.lastError = null;
+    stopOnline();
     try {
-      if (engine === "online") return await speakOnline(text, opts);
-      if (engine === "browser") return await speakBrowser(text, opts);
-      try { return await speakBrowser(text, opts); }
-      catch (e) { if (String(e.message).startsWith("no-thai-voice")) return await speakOnline(text, opts); throw e; }
+      let result;
+      if (engine === "online") result = await speakOnline(text, opts);
+      else if (engine === "browser") result = await speakBrowser(text, opts);
+      else {
+        try { result = await speakBrowser(text, opts); }
+        catch (e) {
+          const m = String(e.message);
+          if (m.startsWith("no-thai-voice") || m.startsWith("no-speech-api") || /voice-unavailable|language-unavailable|synthesis-unavailable|synthesis-failed/.test(m)) {
+            result = await speakOnline(text, opts);
+          } else throw e;
+        }
+      }
+      if (result !== "canceled") state.lastEngine = result;
+      return result;
     } catch (e) {
-      state.lastError = e;
+      state.lastError = String(e && e.message || e);
       throw e;
     }
+  }
+
+  function diagnostics() {
+    const th = thaiVoices();
+    return {
+      speechApi: !!synth,
+      isIOS,
+      voicesLoaded: state.voices.length,
+      thaiVoices: th.map(v => v.name + " (" + v.lang + ")"),
+      lastEngine: state.lastEngine,
+      lastError: state.lastError,
+      unlocked: state.unlocked
+    };
   }
 
   // ---------- Recorder ----------
@@ -107,6 +159,8 @@
     return a.play();
   }
 
-  root.ThaiAudio = { speak, stop, thaiVoices, refreshVoices, pickVoice, startRecording, stopRecording,
-    isRecording, playRecording, hasRecording: () => !!rec.url, state };
-})(window);
+  const api = { speak, stop, thaiVoices, refreshVoices, pickVoice, diagnostics, startRecording, stopRecording,
+    isRecording, playRecording, hasRecording: () => !!rec.url, state, isIOS };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  root.ThaiAudio = api;
+})(typeof window !== "undefined" ? window : globalThis);

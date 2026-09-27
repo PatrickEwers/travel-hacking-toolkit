@@ -72,15 +72,23 @@
       <button class="btn" data-action="playrec" ${ThaiAudio.hasRecording() ? "" : "disabled"} title="Play your recording">🎙 Me</button>`}
     </div>`;
   }
+  function describeAudioError(m) {
+    if (m.includes("no-speech-api")) return "This browser has no speech engine and online audio failed.";
+    if (m.includes("no-thai-voice")) return "No Thai voice found in this browser. See Settings → Audio for how to install one.";
+    if (m.includes("online-play-blocked") || m.includes("not-allowed")) return "Audio is blocked until you tap the page. Tap Play again.";
+    if (m.includes("online-tts-failed")) return ThaiAudio.thaiVoices().length ? "Online audio failed. Switch engine to 'Browser voice' in Settings." : "No Thai voice installed and online audio is unreachable. See Settings → Audio.";
+    if (m.includes("audio-busy")) return "Speech engine is busy. Try again in a second.";
+    if (m.includes("synthesis") || m.includes("unavailable")) return "The Thai voice failed to start. On iPhone check the ringer switch, or set engine to Online in Settings.";
+    return "Audio error: " + m;
+  }
   function play(text, slow) {
     const s = state.settings;
     ThaiAudio.speak(text, { rate: slow ? s.slowRate : s.rate, voiceURI: s.voiceURI, engine: s.engine })
+      .then(() => { if (ui.audioTest) { ui.audioTest = false; render(); } })
       .catch(e => {
         const m = String(e && e.message || e);
-        if (m.includes("no-thai-voice")) toast("No Thai voice found in this browser. See Settings → Audio for how to install one.", 5000);
-        else if (m.includes("online-tts-failed")) toast(ThaiAudio.thaiVoices().length ? "Online audio failed. Switch engine to 'Browser voice' in Settings." : "No Thai voice installed and online audio is unreachable. See Settings → Audio.", 6000);
-        else if (m.includes("NotAllowed")) toast("Audio blocked until you tap the page once. Tap anywhere, then press Play again.", 5000);
-        else toast("Audio error: " + m, 4000);
+        toast(describeAudioError(m), 6000);
+        if (state.view === "settings") render();
       });
   }
   function stageBadge(card) { const st = SM2.stage(card); return `<span class="badge ${st}">${st}</span>${card && SM2.isLeech(card) ? ' <span class="badge leech">leech</span>' : ""}`; }
@@ -120,7 +128,7 @@
     render();
     const front = state.settings.front;
     const w = BY_ID[session.current];
-    if (state.settings.autoplay) {
+    if (state.settings.autoplay && ui.interacted) {
       if (session.kind === "flash" && front !== "english") play(w.thai);
       else if (session.kind === "mc" || session.kind === "listen") play(w.thai);
       else if (session.kind === "tone") play(session.q.syllableThai || w.thai);
@@ -323,7 +331,7 @@
       <div class="tones" style="margin-top:14px">${chips}</div>${fb}<div class="kbd-help">1–5 choose tone · P play · S slow · ⏎ continue</div>`;
   }
 
-  const ui = { search: "", cat: "", stage: "", focusSearch: false };
+  const ui = { search: "", cat: "", stage: "", focusSearch: false, interacted: false, audioTest: false };
   function viewBrowse() {
     const term = ui.search.trim().toLowerCase();
     const termPlain = SM2.stripTone(term);
@@ -368,6 +376,18 @@
         <div class="row" style="margin-top:10px"><button class="btn" data-action="start" data-kind="flash" data-src="hard">Drill my hardest words</button></div>` : "<p>No lapses yet. Keep going.</p>"}</div>`;
   }
 
+  function audioDiagnostics() {
+    const d = ThaiAudio.diagnostics();
+    const rows = [
+      ["Speech engine in this browser", d.speechApi ? "yes" : "no"],
+      ["Voices loaded", d.voicesLoaded ? String(d.voicesLoaded) : "none yet (tap a Play button once, then reopen Settings)"],
+      ["Thai voices", d.thaiVoices.length ? d.thaiVoices.join(", ") : "none"],
+      ["Last playback", d.lastError ? "failed: " + esc(d.lastError) : (d.lastEngine ? "ok via " + d.lastEngine + " voice" : "not tried yet")]
+    ];
+    const iosNote = d.isIOS ? `<p style="margin-top:8px"><b>iPhone / iPad:</b> the ringer (silent) switch mutes browser speech. Flip it to ring, or set Engine to <i>Online</i>, which plays as normal media and ignores the switch. If no Thai voice is listed: Settings → Accessibility → Spoken Content → Voices → Thai → download Kanya.</p>` : "";
+    return `<div class="setting" style="display:block"><label>Diagnostics<small>What the app can see about audio on this device.</small></label>
+      <table style="margin-top:8px;font-size:.85rem;border-collapse:collapse">${rows.map(r => `<tr><td style="color:var(--muted);padding:2px 12px 2px 0;vertical-align:top">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>${iosNote}</div>`;
+  }
   function viewSettings() {
     const s = state.settings, voices = ThaiAudio.thaiVoices();
     const catOn = c => !s.categories.length || s.categories.includes(c);
@@ -387,6 +407,7 @@
         <select data-setting="voiceURI" ${voices.length ? "" : "disabled"}><option value="">Auto</option>${voices.map(v => `<option value="${esc(v.voiceURI)}" ${s.voiceURI === v.voiceURI ? "selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("")}</select></div>
       <div class="setting"><label>Speed<small>Normal ${s.rate.toFixed(2)} · Slow ${s.slowRate.toFixed(2)}</small></label><div class="row"><input type="range" min="0.5" max="1.2" step="0.05" value="${s.rate}" data-setting="rate"><input type="range" min="0.3" max="0.9" step="0.05" value="${s.slowRate}" data-setting="slowRate"></div></div>
       <div class="setting"><label>Test</label><div class="row"><button class="btn" data-action="play" data-text="สวัสดีครับ ขอบคุณมาก">🔊 สวัสดีครับ</button><button class="btn" data-action="play" data-slow="1" data-text="สวัสดีครับ ขอบคุณมาก">🐢 slow</button></div></div>
+      ${audioDiagnostics()}
     </div>
     <div class="panel"><h2>Data</h2>
       <div class="setting"><label>Backup<small>Progress lives in this browser's local storage. Export to move it to another device.</small></label><div class="row"><button class="btn" data-action="export">⬇ Export JSON</button><label class="btn">⬆ Import JSON<input type="file" accept="application/json" data-input="import" class="hidden"></label></div></div>
@@ -395,6 +416,7 @@
   }
 
   // ---------- events ----------
+  ["pointerdown", "keydown", "touchstart"].forEach(ev => document.addEventListener(ev, () => { ui.interacted = true; }, { capture: true, passive: true }));
   document.addEventListener("click", e => {
     const el = e.target.closest("[data-action]");
     if (!el) return;
