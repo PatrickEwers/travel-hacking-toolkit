@@ -19,16 +19,40 @@ module.exports = async (req, res) => {
   const q = String((req.query && req.query.q) || "").trim().slice(0, 200);
   const slow = String((req.query && req.query.slow) || "") === "1";
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Accept-Ranges", "bytes");
   if (!q) { res.status(400).json({ error: "missing q" }); return; }
-  try {
-    const buf = await fetchGoogle(q, slow);
-    res.setHeader("Content-Type", "audio/mpeg");
-    res.setHeader("Content-Length", String(buf.length));
-    res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=31536000, immutable");
-    res.status(200).send(buf);
-  } catch (e) {
+  let buf;
+  try { buf = await fetchGoogle(q, slow); }
+  catch (e) {
     res.setHeader("Cache-Control", "no-store");
     res.status(502).json({ error: "tts upstream failed", detail: String(e.message || e) });
+    return;
   }
+  const len = buf.length;
+  res.setHeader("Content-Type", "audio/mpeg");
+  // Safari (especially iOS) probes media with Range requests and refuses to play when the server ignores them.
+  const range = req.headers && req.headers.range;
+  const m = range && /^bytes=(\d*)-(\d*)$/.exec(String(range));
+  if (m && (m[1] !== "" || m[2] !== "")) {
+    let start = m[1] === "" ? Math.max(0, len - Number(m[2])) : Number(m[1]);
+    let end = m[1] !== "" && m[2] !== "" ? Math.min(Number(m[2]), len - 1) : len - 1;
+    if (start >= len || start > end) {
+      res.setHeader("Content-Range", "bytes */" + len);
+      res.status(416).end();
+      return;
+    }
+    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("Content-Range", "bytes " + start + "-" + end + "/" + len);
+    res.setHeader("Content-Length", String(end - start + 1));
+    res.status(206);
+    if (req.method === "HEAD") { res.end(); return; }
+    res.send(buf.subarray(start, end + 1));
+    return;
+  }
+  res.setHeader("Content-Length", String(len));
+  res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=31536000, immutable");
+  res.status(200);
+  if (req.method === "HEAD") { res.end(); return; }
+  res.send(buf);
 };
 module.exports.fetchGoogle = fetchGoogle;
