@@ -34,6 +34,7 @@ Each card carries an easiness factor (EF, starts at 2.5), a repetition count and
 - EF is updated with Wozniak's formula `EF' = EF + (0.1 − (5−q)(0.08 + (5−q)·0.02))`, floored at 1.3, so cards you keep missing come back more often for good.
 - When cards are due, the ones with the most lapses are shown first, then the most overdue. Cards with 4+ lapses are flagged as leeches.
 - New cards enter in dataset order (most essential categories first), capped per day (default 20, adjustable).
+- **Extra study** (Home, and after every session): review today's cards again, study ahead (cards due in the next 3 days), add 10 or 25 new words beyond the cap, or drill a whole category in any mode. A card already scheduled today does not have its interval stretched again by a repeat pass, but a wrong answer still resets it, so extra practice never inflates the spacing.
 
 ## Tones and audio
 

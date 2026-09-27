@@ -101,21 +101,32 @@
     const filter = activeFilter();
     const day = SM2.today();
     let ids;
-    const src = kind === "flash" ? "queue" : state.settings.practiceSource;
-    if (src === "queue") {
+    const src = opts.source || (kind === "flash" ? "queue" : state.settings.practiceSource);
+    const cap = n => n > 0 ? n : Infinity;
+    if (src === "today") {
+      ids = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).last === day);
+    } else if (src === "ahead") {
+      ids = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).seen && getCard(id).due > day && getCard(id).due <= day + (opts.days || 3))
+        .sort((a, b) => getCard(a).due - getCard(b).due).slice(0, 60);
+    } else if (src === "category") {
+      const cat = opts.category;
+      const weight = id => { const c = getCard(id); return c && c.seen ? (c.lapses * 1000) + Math.max(0, 50 - (c.due - day)) : 0; };
+      ids = ALL_IDS.filter(id => BY_ID[id].cat === cat).sort((a, b) => weight(b) - weight(a)).slice(0, opts.limit || 40);
+    } else if (src === "queue") {
       const newAllowed = opts.extraNew != null ? opts.extraNew : Math.max(0, state.settings.newPerDay - dayLog(day).new);
       const q = SM2.buildQueue(state.cards, ALL_IDS, { day, newLimit: newAllowed, filter });
       ids = opts.extraNew != null ? q.fresh : q.due.concat(q.fresh);
-      if (kind === "tone") ids = ids.filter(id => BY_ID[id].syl.length <= 3);
-    } else {
+    }
+    if (src === "today" || src === "ahead" || src === "category") { if (kind === "tone") ids = ids.filter(id => BY_ID[id].syl.length <= 3); }
+    else if (src !== "queue") {
       let pool = ALL_IDS.filter(filter);
       if (src === "learned") pool = pool.filter(id => getCard(id) && getCard(id).seen);
       if (src === "hard") pool = pool.filter(id => getCard(id) && getCard(id).lapses > 0).sort((a, b) => getCard(b).lapses - getCard(a).lapses);
       if (kind === "tone") pool = pool.filter(id => BY_ID[id].syl.length <= 3);
       ids = src === "hard" ? pool.slice(0, 20) : shuffle(pool).slice(0, 20);
     }
-    if (!ids.length) { toast(kind === "flash" ? "Nothing due and today's new-card limit is reached." : "No words match this practice source yet."); return; }
-    session = { kind, queue: ids, idx: 0, relearn: new Set(), flipped: false, answered: false, right: 0, wrong: 0, total: ids.length, start: Date.now(), q: null, current: null, shownAt: 0, lastResult: null };
+    if (!ids.length) { toast(src === "queue" ? "Nothing due and today's new-card limit is reached. Pick an extra-study option below." : "No words match this source yet."); state.view = "home"; render(); return; }
+    session = { kind, source: src, queue: ids, idx: 0, relearn: new Set(), flipped: false, answered: false, right: 0, wrong: 0, total: ids.length, start: Date.now(), q: null, current: null, shownAt: 0, lastResult: null };
     state.view = "session";
     nextCard();
   }
@@ -155,10 +166,14 @@
     const prev = getCard(id);
     const wasNew = !prev || !prev.seen;
     const log = dayLog(day);
+    const reviewedToday = prev && prev.last === day && !wasNew;
     if (session.relearn.has(id)) {
       log.reviews++;
       if (q >= 3) { session.relearn.delete(id); log.correct++; }
       else requeue(id);
+    } else if (reviewedToday && q >= 3) {
+      // Extra pass on a card already scheduled today: count it, but don't stretch the interval again.
+      log.reviews++; log.correct++;
     } else {
       state.cards[id] = SM2.review(ensureCard(id), q, day);
       log.reviews++; if (q >= 3) log.correct++; if (wasNew) log.new++;
@@ -211,17 +226,38 @@
         <h2>Today's session</h2>
         <p>${q.due.length} due review${q.due.length === 1 ? "" : "s"} and ${q.fresh.length} new word${q.fresh.length === 1 ? "" : "s"}. Wrong answers come back within the same session and again tomorrow.</p>
         <div class="row" style="margin-top:12px">
-          <button class="btn primary" data-action="start" data-kind="flash" ${q.due.length + q.fresh.length ? "" : "disabled"}>▶ Study flashcards</button>
-          <button class="btn" data-action="start" data-kind="mc" ${q.due.length + q.fresh.length ? "" : "disabled"}>Quiz the queue</button>
-          ${!q.due.length && q.remainingNew ? `<button class="btn" data-action="start" data-kind="flash" data-extra="10">＋ Learn 10 extra new words</button>` : ""}
+          ${q.due.length + q.fresh.length ? `<button class="btn primary" data-action="start" data-kind="flash">▶ Study flashcards</button>
+          <button class="btn" data-action="start" data-kind="mc">Quiz the queue</button>` : `<span class="meta">All caught up for today. Keep going with the options below.</span>`}
         </div>
       </div>
+      ${extraStudyPanel()}
       <div class="panel">
         <h2>How it works</h2>
         <p><b>SM-2</b> (the SuperMemo 2 algorithm): every card has an easiness factor starting at 2.5. Grade it <i>Good</i> and the interval goes 1 day → 6 days → interval × EF. Grade it <i>Again</i> and it restarts from 1 day, its EF drops, and it is re-queued a few cards later in the same session. Cards with the most lapses are shown first when due.</p>
         <p><b>Tones</b>: the romanization carries one tone mark per syllable — <span class="tone-low">à low</span>, <span class="tone-falling">â falling</span>, <span class="tone-high">á high</span>, <span class="tone-rising">ǎ rising</span>, plain = mid. Press 🔊 to hear the word, 🐢 for a slow version, ● to record yourself and compare.</p>
         <div class="tones" style="justify-content:flex-start">${SM2.TONES.map(t => `<div class="tone-chip">${contourSvg(t, 40)}<div class="lbl"><span class="tone-${t}">${t}</span><small>${SM2.TONE_INFO[t].thai}</small></div></div>`).join("")}</div>
       </div>`;
+  }
+
+  function extraStudyPanel() {
+    const day = SM2.today(), filter = activeFilter();
+    const today = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).last === day).length;
+    const ahead = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).seen && getCard(id).due > day && getCard(id).due <= day + 3).length;
+    const unseen = ALL_IDS.filter(id => filter(id) && !(getCard(id) && getCard(id).seen)).length;
+    const kind = ui.extraKind || "flash";
+    return `<div class="panel">
+      <h2>Extra study</h2>
+      <p>Go beyond today's schedule. Repeating a card you already reviewed today won't stretch its interval again, but getting it wrong still resets it, so the spacing stays honest.</p>
+      <div class="row" style="margin:8px 0 12px"><label>Mode&nbsp;<select data-input="extraKind">${Object.entries(MODES).map(([k, m]) => `<option value="${k}" ${kind === k ? "selected" : ""}>${m.ic} ${m.name}</option>`).join("")}</select></label></div>
+      <div class="row">
+        <button class="btn" data-action="start" data-kind="${kind}" data-source="today" ${today ? "" : "disabled"}>🔁 Review today's ${today} card${today === 1 ? "" : "s"} again</button>
+        <button class="btn" data-action="start" data-kind="${kind}" data-source="ahead" ${ahead ? "" : "disabled"}>⏩ Study ahead (${ahead} due in 3 days)</button>
+        <button class="btn" data-action="start" data-kind="flash" data-extra="10" ${unseen ? "" : "disabled"}>＋ 10 new words</button>
+        <button class="btn" data-action="start" data-kind="flash" data-extra="25" ${unseen ? "" : "disabled"}>＋ 25 new words</button>
+      </div>
+      <div class="row" style="margin-top:10px"><label>Drill a category&nbsp;<select data-input="extraCat"><option value="">choose…</option>${CATS.map(c => `<option value="${c}" ${ui.extraCat === c ? "selected" : ""}>${CAT_LABELS[c] || c} (${WORDS.filter(w => w.cat === c).length})</option>`).join("")}</select></label>
+        <button class="btn" data-action="start" data-kind="${kind}" data-source="category" ${ui.extraCat ? "" : "disabled"}>▶ Drill ${ui.extraCat ? (CAT_LABELS[ui.extraCat] || ui.extraCat) : "category"}</button></div>
+    </div>`;
   }
 
   function viewPractice() {
@@ -258,7 +294,7 @@
           ${q.due.length ? `<button class="btn primary" data-action="start" data-kind="${session.kind}">Continue</button>` : ""}
           <button class="btn" data-action="nav" data-view="practice">Practice modes</button>
           <button class="btn" data-action="nav" data-view="home">Home</button>
-        </div></div>`;
+        </div></div>${extraStudyPanel()}`;
     }
     const w = BY_ID[session.current], card = getCard(w.id);
     const fronts = [["thai", "ไทย → EN"], ["english", "EN → ไทย"], ["audio", "🔊 → ไทย"]];
@@ -437,8 +473,14 @@
     if (!el) return;
     const a = el.dataset.action;
     if (a !== "flip" && el.closest('[data-action="flip"]')) e.stopPropagation();
-    if (a === "nav") { const v = el.dataset.view; if (v === "session" && !session) { state.view = "home"; startSession("flash"); if (!session) render(); return; } state.view = v; render(); }
-    else if (a === "start") { if (el.dataset.src) state.settings.practiceSource = el.dataset.src; startSession(el.dataset.kind, el.dataset.extra ? { extraNew: Number(el.dataset.extra) } : {}); }
+    if (a === "nav") { const v = el.dataset.view; if (v === "session" && !session) { startSession("flash"); return; } state.view = v; render(); }
+    else if (a === "start") {
+      if (el.dataset.src) state.settings.practiceSource = el.dataset.src;
+      const o = {};
+      if (el.dataset.extra) o.extraNew = Number(el.dataset.extra);
+      if (el.dataset.source) { o.source = el.dataset.source; if (o.source === "category") o.category = ui.extraCat; }
+      startSession(el.dataset.kind, o);
+    }
     else if (a === "end") { session = null; state.view = "home"; render(); }
     else if (a === "flip") { flip(); }
     else if (a === "front") { state.settings.front = el.dataset.front; save(); if (session) { session.flipped = false; render(); } else render(); }
@@ -465,6 +507,8 @@
       state.settings.categories = on.length === CATS.length ? [] : on; save(); render();
     } else if (el.dataset.input === "cat") { ui.cat = el.value; render(); }
     else if (el.dataset.input === "stage") { ui.stage = el.value; render(); }
+    else if (el.dataset.input === "extraKind") { ui.extraKind = el.value; render(); }
+    else if (el.dataset.input === "extraCat") { ui.extraCat = el.value; render(); }
     else if (el.dataset.input === "import") { importJson(el.files[0]); }
   });
   document.addEventListener("input", e => { if (e.target.dataset.input === "search") { ui.search = e.target.value; ui.focusSearch = true; render(); } });
