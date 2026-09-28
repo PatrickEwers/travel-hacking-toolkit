@@ -45,7 +45,7 @@ Lesson cards are **priority** until mastered:
 - they go to the front of the queue (due lesson cards before other due cards, new lesson cards before new dictionary words) and do not count against the daily new-card cap;
 - their intervals are capped by a ladder of 1, 2, 4, 7, 14, 30 days per consecutive correct answer, so they come back far more often than SM-2 alone would schedule; a wrong answer restarts the ladder;
 - **mastered** means six correct answers in a row (interval ≥ 21 days, reps ≥ 3), after which the card follows the normal SM-2 schedule;
-- by default lesson cards show the English first so you practise *saying* the Thai, then flip to hear and check (Settings → "Lesson cards: speaking practice").
+- the lesson "Speak" drill starts English-first so you practise *saying* the Thai, then flip to hear and check; "Read" starts Thai-first. The direction switch on the study screen always applies, to lesson cards too.
 
 Home shows per-lesson progress with Speak / Listen / quiz drills. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
 

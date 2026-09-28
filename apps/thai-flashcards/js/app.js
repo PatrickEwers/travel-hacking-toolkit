@@ -9,7 +9,7 @@
     colors: "Colors", clothing: "Clothing", work: "Work & study", adverbs: "Adverbs", classifiers: "Classifiers",
     emergency: "Emergency", tech: "Tech", lesson: "Teacher lessons" };
   const DEFAULTS = { newPerDay: 20, front: "thai", autoplay: true, rate: 0.9, slowRate: 0.55, voiceURI: "",
-    engine: "auto", categories: [], practiceSource: "queue", showRoman: true, lessonSpeak: true };
+    engine: "auto", categories: [], practiceSource: "queue", showRoman: true };
   const GRADES = [
     { q: 1, cls: "again", label: "Again", key: "1" },
     { q: 3, cls: "hard", label: "Hard", key: "2" },
@@ -55,7 +55,7 @@
   function activeFilter() { const c = state.settings.categories; return c.length ? id => BY_ID[id].lesson != null || c.includes(BY_ID[id].cat) : () => true; }
   // Lesson cards are priority until mastered (6 correct answers in a row on the tight ladder).
   const isPriority = id => BY_ID[id].lesson != null && !SM2.isMastered(getCard(id));
-  const frontFor = w => (w.lesson != null && state.settings.lessonSpeak) ? "english" : state.settings.front;
+  const frontFor = () => state.settings.front;
   function updateStreak(day) {
     const s = state.streak || (state.streak = { last: null, count: 0 });
     if (s.last === day) return;
@@ -283,10 +283,10 @@
     if (!LESSONS.length) return "";
     return `<div class="panel">
       <h2>Teacher lessons</h2>
-      <p>Lesson sentences jump the queue and repeat on a tight ladder (1, 2, 4, 7, 14, 30 days) until you have said each one right six times in a row. A slip restarts the ladder. Mastered sentences settle into the normal schedule.</p>
+      <p>Lesson sentences jump the queue and repeat on a tight ladder (1, 2, 4, 7, 14, 30 days) until you have said each one right six times in a row. A slip restarts the ladder. Mastered sentences settle into the normal schedule. The direction switch on the study screen applies to lesson cards too; Speak starts English-first, Read starts Thai-first.</p>
       <div class="list" style="margin-top:10px">${LESSONS.map(L => { const st = lessonStats(L.lesson); const pct = st.total ? Math.round(100 * st.mastered / st.total) : 0; return `<div class="wrow">
         <div class="main" style="flex-direction:column;align-items:stretch;gap:6px"><div><b>Lesson ${L.lesson}</b> · ${esc(L.title)} <span class="meta">${st.total} cards · ${st.seen} seen · ${st.mastered} mastered${st.priorityDue ? " · " + st.priorityDue + " to practise now" : ""}</span></div><div class="progress"><div style="width:${pct}%"></div></div></div>
-        <div class="right"><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}">🗣 Speak</button><button class="btn sm" data-action="start" data-kind="listen" data-source="lesson" data-lesson="${L.lesson}">🎧 Listen</button><button class="btn sm" data-action="start" data-kind="reverse" data-source="lesson" data-lesson="${L.lesson}">EN→ไทย quiz</button></div></div>`; }).join("")}</div>
+        <div class="right"><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}" data-front="english" title="English first: say the Thai, flip to check">🗣 Speak</button><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}" data-front="thai" title="Thai first: read it, flip for the meaning">📖 Read</button><button class="btn sm" data-action="start" data-kind="listen" data-source="lesson" data-lesson="${L.lesson}">🎧 Listen</button><button class="btn sm" data-action="start" data-kind="reverse" data-source="lesson" data-lesson="${L.lesson}">EN→ไทย quiz</button></div></div>`; }).join("")}</div>
     </div>`;
   }
   function extraStudyPanel() {
@@ -497,7 +497,6 @@
       <div class="setting"><label>New words per day<small>How many unseen words enter the queue each day.</small></label><input type="number" min="0" max="200" value="${s.newPerDay}" data-setting="newPerDay" style="width:90px"></div>
       <div class="setting"><label>Card front<small>What you see before flipping.</small></label>
         <select data-setting="front"><option value="thai" ${s.front === "thai" ? "selected" : ""}>Thai script (+ audio)</option><option value="english" ${s.front === "english" ? "selected" : ""}>English meaning</option><option value="audio" ${s.front === "audio" ? "selected" : ""}>Audio only</option></select></div>
-      <div class="setting"><label>Lesson cards: speaking practice<small>Always show the English first for teacher-lesson sentences, so you say the Thai before checking. Overrides the card-front setting for those cards.</small></label><input type="checkbox" data-setting="lessonSpeak" ${s.lessonSpeak ? "checked" : ""}></div>
       <div class="setting"><label>Show romanization on the front<small>Hide it once you can read Thai script.</small></label><input type="checkbox" data-setting="showRoman" ${s.showRoman ? "checked" : ""}></div>
       <div class="setting" style="display:block"><label>Categories to study<small>Deselect what you don't need. Applies to the queue and practice.</small></label>
         <div class="cats" style="margin-top:8px">${CATS.map(c => `<label class="${catOn(c) ? "" : "off"}"><input type="checkbox" data-cat="${c}" ${catOn(c) ? "checked" : ""}>${CAT_LABELS[c] || c}</label>`).join("")}</div></div>
@@ -531,6 +530,7 @@
       const o = {};
       if (el.dataset.extra) o.extraNew = Number(el.dataset.extra);
       if (el.dataset.source) { o.source = el.dataset.source; if (o.source === "category") o.category = ui.extraCat; if (o.source === "lesson") o.lesson = Number(el.dataset.lesson); }
+      if (el.dataset.front) { state.settings.front = el.dataset.front; save(); }
       startSession(el.dataset.kind, o);
     }
     else if (a === "end") { session = null; state.view = "home"; render(); }
