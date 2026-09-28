@@ -36,9 +36,22 @@ Each card carries an easiness factor (EF, starts at 2.5), a repetition count and
 - New cards enter in dataset order (most essential categories first), capped per day (default 20, adjustable).
 - **Extra study** (Home, and after every session): review today's cards again, study ahead (cards due in the next 3 days), add 10 or 25 new words beyond the cap, or drill a whole category in any mode. A card already scheduled today does not have its interval stretched again by a repeat pass, but a wrong answer still resets it, so extra practice never inflates the spacing.
 
+## Teacher lessons (priority deck)
+
+`data/lessons.js` holds sentences from private lessons, grouped by lesson number: `[thai, romanization, english]`. On load they merge into the deck; a sentence whose Thai already exists in the dictionary tags that word instead of duplicating it.
+
+Lesson cards are **priority** until mastered:
+
+- they go to the front of the queue (due lesson cards before other due cards, new lesson cards before new dictionary words) and do not count against the daily new-card cap;
+- their intervals are capped by a ladder of 1, 2, 4, 7, 14, 30 days per consecutive correct answer, so they come back far more often than SM-2 alone would schedule; a wrong answer restarts the ladder;
+- **mastered** means six correct answers in a row (interval ≥ 21 days, reps ≥ 3), after which the card follows the normal SM-2 schedule;
+- by default lesson cards show the English first so you practise *saying* the Thai, then flip to hear and check (Settings → "Lesson cards: speaking practice").
+
+Home shows per-lesson progress with Speak / Listen / quiz drills. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
+
 ## Tones and audio
 
-The romanization marks tone with one diacritic per syllable: `à` low, `â` falling, `á` high, `ǎ` rising, unmarked = mid. Syllables are colour-coded, and each shows a pitch-contour glyph and the Thai tone name (สามัญ, เอก, โท, ตรี, จัตวา).
+The romanization is a Paiboon-style "house system" chosen to match what Thai language schools use: unaspirated stops **g / bp / dt / j** (ก ป ต จ), aspirated **k / p / t / ch** (ข ค, ผ พ, ถ ท, ฉ ช); vowels a/aa, i/ee, u/oo, e/ay (เอ), o/oh (โอ), aw (ออ), ae (แ), eu (อือ), eua (เอือ), er (เออ), ia, ua, ai, ao, oi (ออย), oei (เ-ย). Tone is marked with one diacritic per syllable: `à` low, `â` falling, `á` high, `ǎ` rising, unmarked = mid. Syllables are colour-coded, and each shows a pitch-contour glyph and the Thai tone name (สามัญ, เอก, โท, ตรี, จัตวา).
 
 Audio comes from the site's own `api/tts` endpoint (server-generated MP3, cached on the CDN). Opened as a local file, the app uses the browser's speech synthesis with a Thai voice instead. To get an offline voice:
 

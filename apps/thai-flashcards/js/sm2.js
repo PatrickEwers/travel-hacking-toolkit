@@ -108,17 +108,34 @@
     opts = opts || {};
     const day = opts.day === undefined ? today() : opts.day;
     const filter = opts.filter || (() => true);
-    const due = [], fresh = [];
+    const priority = opts.priority || (() => false);
+    const due = [], fresh = [], freshPriority = [];
     for (const id of ids) {
       if (!filter(id)) continue;
       const c = cards[id];
-      if (!c || !c.seen) fresh.push(id);
+      if (!c || !c.seen) { (priority(id) ? freshPriority : fresh).push(id); }
       else if (c.due <= day) due.push(c);
     }
-    due.sort((a, b) => (b.lapses - a.lapses) || (a.due - b.due) || (a.ef - b.ef));
+    // Priority (lesson) cards first, then most-lapsed, then most overdue, then hardest.
+    due.sort((a, b) => ((priority(b.id) ? 1 : 0) - (priority(a.id) ? 1 : 0)) || (b.lapses - a.lapses) || (a.due - b.due) || (a.ef - b.ef));
     const newLimit = opts.newLimit === undefined ? 20 : Math.max(0, opts.newLimit);
-    return { due: due.map(c => c.id), fresh: fresh.slice(0, newLimit), remainingNew: fresh.length };
+    // Priority new cards are not counted against the daily new-card limit.
+    return { due: due.map(c => c.id), fresh: freshPriority.concat(fresh.slice(0, newLimit)), remainingNew: fresh.length + freshPriority.length };
   }
+
+  /* Tight schedule for priority cards until they are mastered: the SM-2 interval is capped by
+     step (1, 2, 4, 7, 14, 30 days) per consecutive correct answer. A lapse restarts the ladder. */
+  const PRIORITY_STEPS = [1, 2, 4, 7, 14, 30];
+  function capPriority(card, day) {
+    if (day === undefined) day = today();
+    const c = Object.assign({}, card);
+    if (c.reps > 0) {
+      const cap = PRIORITY_STEPS[Math.min(c.reps, PRIORITY_STEPS.length) - 1];
+      if (c.interval > cap) { c.interval = cap; c.due = day + cap; }
+    }
+    return c;
+  }
+  function isMastered(card) { return !!card && card.seen > 0 && card.reps >= 3 && card.interval >= 21; }
 
   // Number of due cards per day for the next n days (forecast)
   function forecast(cards, n, day) {
@@ -134,7 +151,8 @@
   }
 
   const api = { TONES, TONE_INFO, CONTOURS, syllables, syllableTone, stripTone, analyze,
-    today, newCard, review, previewInterval, isDue, isLeech, stage, buildQueue, forecast, DAY_MS };
+    today, newCard, review, previewInterval, isDue, isLeech, stage, buildQueue, forecast, DAY_MS,
+    PRIORITY_STEPS, capPriority, isMastered };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.SM2 = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -2,6 +2,7 @@
 const assert = require("assert");
 const SM2 = require("../js/sm2.js");
 const WORDS = require("../data/words.js");
+const LESSONS = require("../data/lessons.js");
 let passed = 0;
 function t(name, fn) { fn(); passed++; console.log("ok -", name); }
 
@@ -74,5 +75,41 @@ t("stage + leech + forecast", () => {
   assert.ok(SM2.isLeech({ lapses: 4 }) && !SM2.isLeech({ lapses: 3 }));
   const f = SM2.forecast({ a: { seen: 1, due: 10 }, b: { seen: 1, due: 12 }, c: { seen: 1, due: 3 }, d: { seen: 0, due: 11 } }, 4, 10);
   assert.deepStrictEqual(f, [2, 0, 1, 0]);
+});
+t("dictionary uses the house romanization (g/bp/dt, ee/oo/oh, no kh/ph/th onsets)", () => {
+  for (const w of WORDS) for (const syl of SM2.syllables(w[1])) {
+    const n = syl.normalize("NFD");
+    assert.ok(!/^(kh|ph|th)/.test(n), w[1]);
+    assert.ok(!/i[\u0300-\u036f]?i|u[\u0300-\u036f]?u/.test(n), w[1]);
+  }
+});
+t("lessons: valid, unique, tone-parsable, same alphabet as dictionary", () => {
+  const seen = new Set();
+  for (const L of LESSONS) {
+    assert.ok(Number.isInteger(L.lesson) && L.items.length, "lesson " + L.lesson);
+    for (const it of L.items) {
+      assert.strictEqual(it.length, 3, JSON.stringify(it));
+      assert.ok(!seen.has(it[0]), "duplicate " + it[0]); seen.add(it[0]);
+      assert.ok(/^[\u0E00-\u0E7F0-9 .\-]+$/.test(it[0]), it[0]);
+      assert.ok(/^[a-zàáâǎèéêěìíîǐòóôǒùúûǔ\- ]+$/.test(it[1].normalize("NFC")), it[1]);
+      for (const s of SM2.analyze(it[1])) assert.ok(SM2.TONES.includes(s.tone));
+    }
+  }
+  // a lesson item that duplicates a dictionary word must spell it identically
+  const dict = Object.fromEntries(WORDS.map(w => [w[0], w[1]]));
+  for (const L of LESSONS) for (const it of L.items) if (dict[it[0]]) assert.strictEqual(it[1], dict[it[0]], it[0]);
+});
+t("priority queue: lesson cards first and exempt from the new-card cap; ladder caps intervals", () => {
+  const cards = { a: Object.assign(SM2.newCard("a"), { seen: 2, due: 5, lapses: 3, reps: 1 }), p: Object.assign(SM2.newCard("p"), { seen: 2, due: 9, lapses: 0, reps: 1 }) };
+  const q = SM2.buildQueue(cards, ["a", "p", "n1", "n2", "L1", "n3"], { day: 10, newLimit: 1, priority: id => id === "p" || id === "L1" });
+  assert.deepStrictEqual(q.due, ["p", "a"]);
+  assert.deepStrictEqual(q.fresh, ["L1", "n1"]);
+  let c = SM2.newCard("L1");
+  const ivs = [];
+  for (let d = 0, i = 0; i < 7; i++) { c = SM2.capPriority(SM2.review(c, 4, d), d); ivs.push(c.interval); d += c.interval; }
+  assert.deepStrictEqual(ivs.slice(0, 6), [1, 2, 4, 7, 14, 30]);
+  assert.ok(!SM2.isMastered(Object.assign({}, c, { interval: 14, reps: 5 })));
+  assert.ok(SM2.isMastered(Object.assign({}, c, { interval: 30, reps: 6 })));
+  assert.ok(ivs[6] >= 30);
 });
 console.log("\n" + passed + " tests passed");

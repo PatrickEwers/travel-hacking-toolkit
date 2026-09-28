@@ -7,9 +7,9 @@
     grammar: "Grammar", verbs: "Verbs", adjectives: "Adjectives", food: "Food & drink", travel: "Travel", places: "Places",
     shopping: "Shopping", body: "Body & health", family: "Family", home: "Home", nature: "Nature", animals: "Animals",
     colors: "Colors", clothing: "Clothing", work: "Work & study", adverbs: "Adverbs", classifiers: "Classifiers",
-    emergency: "Emergency", tech: "Tech" };
+    emergency: "Emergency", tech: "Tech", lesson: "Teacher lessons" };
   const DEFAULTS = { newPerDay: 20, front: "thai", autoplay: true, rate: 0.9, slowRate: 0.55, voiceURI: "",
-    engine: "auto", categories: [], practiceSource: "queue", showRoman: true };
+    engine: "auto", categories: [], practiceSource: "queue", showRoman: true, lessonSpeak: true };
   const GRADES = [
     { q: 1, cls: "again", label: "Again", key: "1" },
     { q: 3, cls: "hard", label: "Hard", key: "2" },
@@ -26,8 +26,17 @@
 
   const WORDS = THAI_WORDS.map((w, i) => ({ id: w[0], thai: w[0], roman: w[1], en: w[2], cat: w[3], idx: i, syl: SM2.analyze(w[1]) }));
   const BY_ID = Object.fromEntries(WORDS.map(w => [w.id, w]));
-  const ALL_IDS = WORDS.map(w => w.id);
   const CATS = [...new Set(WORDS.map(w => w.cat))];
+  // Teacher lessons: a sentence whose Thai already exists in the dictionary tags that word; others become new cards.
+  const LESSONS = typeof THAI_LESSONS !== "undefined" ? THAI_LESSONS : [];
+  for (const L of LESSONS) for (const it of L.items) {
+    const ex = BY_ID[it[0]];
+    if (ex) { ex.lesson = L.lesson; continue; }
+    const w = { id: it[0], thai: it[0], roman: it[1], en: it[2], cat: "lesson", lesson: L.lesson, idx: WORDS.length, syl: SM2.analyze(it[1]) };
+    WORDS.push(w); BY_ID[w.id] = w;
+  }
+  const ALL_IDS = WORDS.map(w => w.id);
+  const lessonIds = n => WORDS.filter(w => w.lesson === n).map(w => w.id);
 
   // ---------- persistence ----------
   let state = load();
@@ -42,7 +51,10 @@
   const getCard = id => state.cards[id] || null;
   const ensureCard = id => state.cards[id] || (state.cards[id] = SM2.newCard(id));
   function dayLog(day) { day = day === undefined ? SM2.today() : day; return state.log[day] || (state.log[day] = { reviews: 0, correct: 0, new: 0 }); }
-  function activeFilter() { const c = state.settings.categories; return c.length ? id => c.includes(BY_ID[id].cat) : () => true; }
+  function activeFilter() { const c = state.settings.categories; return c.length ? id => BY_ID[id].lesson != null || c.includes(BY_ID[id].cat) : () => true; }
+  // Lesson cards are priority until mastered (6 correct answers in a row on the tight ladder).
+  const isPriority = id => BY_ID[id].lesson != null && !SM2.isMastered(getCard(id));
+  const frontFor = w => (w.lesson != null && state.settings.lessonSpeak) ? "english" : state.settings.front;
   function updateStreak(day) {
     const s = state.streak || (state.streak = { last: null, count: 0 });
     if (s.last === day) return;
@@ -91,7 +103,8 @@
         if (state.view === "settings") render();
       });
   }
-  function stageBadge(card) { const st = SM2.stage(card); return `<span class="badge ${st}">${st}</span>${card && SM2.isLeech(card) ? ' <span class="badge leech">leech</span>' : ""}`; }
+  function stageBadge(card, word) { const st = SM2.stage(card); const w = word || (card ? BY_ID[card.id] : null); const prio = w && w.lesson != null && !SM2.isMastered(card); return `<span class="badge ${st}">${st}</span>${prio ? ' <span class="badge prio">priority</span>' : ""}${card && SM2.isLeech(card) ? ' <span class="badge leech">leech</span>' : ""}`; }
+  function catBadge(w) { return `<span class="cat badge${w.lesson != null ? " prio" : ""}">${w.lesson != null ? "Lesson " + w.lesson : (CAT_LABELS[w.cat] || w.cat)}</span>`; }
   function dueText(card) { if (!card || !card.seen) return "new"; const d = card.due - SM2.today(); return d <= 0 ? "due now" : d === 1 ? "tomorrow" : "in " + d + " d"; }
 
   // ---------- session ----------
@@ -108,16 +121,19 @@
     } else if (src === "ahead") {
       ids = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).seen && getCard(id).due > day && getCard(id).due <= day + (opts.days || 3))
         .sort((a, b) => getCard(a).due - getCard(b).due).slice(0, 60);
+    } else if (src === "lesson") {
+      const rank = id => { const c = getCard(id); return (SM2.isMastered(c) ? 1e6 : 0) - ((c ? c.lapses : 0) * 1000) + (c && c.seen ? Math.max(0, c.due - day) : 500); };
+      ids = lessonIds(opts.lesson).sort((a, b) => rank(a) - rank(b));
     } else if (src === "category") {
       const cat = opts.category;
       const weight = id => { const c = getCard(id); return c && c.seen ? (c.lapses * 1000) + Math.max(0, 50 - (c.due - day)) : 0; };
       ids = ALL_IDS.filter(id => BY_ID[id].cat === cat).sort((a, b) => weight(b) - weight(a)).slice(0, opts.limit || 40);
     } else if (src === "queue") {
       const newAllowed = opts.extraNew != null ? opts.extraNew : Math.max(0, state.settings.newPerDay - dayLog(day).new);
-      const q = SM2.buildQueue(state.cards, ALL_IDS, { day, newLimit: newAllowed, filter });
+      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day, newLimit: newAllowed, filter });
       ids = opts.extraNew != null ? q.fresh : q.due.concat(q.fresh);
     }
-    if (src === "today" || src === "ahead" || src === "category") { if (kind === "tone") ids = ids.filter(id => BY_ID[id].syl.length <= 3); }
+    if (src === "today" || src === "ahead" || src === "category" || src === "lesson") { if (kind === "tone") ids = ids.filter(id => BY_ID[id].syl.length <= 3); }
     else if (src !== "queue") {
       let pool = ALL_IDS.filter(filter);
       if (src === "learned") pool = pool.filter(id => getCard(id) && getCard(id).seen);
@@ -137,8 +153,8 @@
     session.flipped = false; session.answered = false; session.lastResult = null; session.shownAt = Date.now();
     buildQuestion();
     render();
-    const front = state.settings.front;
     const w = BY_ID[session.current];
+    const front = frontFor(w);
     if (state.settings.autoplay && ui.interacted) {
       if (session.kind === "flash" && front !== "english") play(w.thai);
       else if (session.kind === "mc" || session.kind === "listen") play(w.thai);
@@ -175,7 +191,9 @@
       // Extra pass on a card already scheduled today: count it, but don't stretch the interval again.
       log.reviews++; log.correct++;
     } else {
+      const wasPriority = isPriority(id);
       state.cards[id] = SM2.review(ensureCard(id), q, day);
+      if (wasPriority) state.cards[id] = SM2.capPriority(state.cards[id], day);
       log.reviews++; if (q >= 3) log.correct++; if (wasNew) log.new++;
       if (q < 3) { session.relearn.add(id); requeue(id); }
     }
@@ -191,7 +209,7 @@
     session.flipped = true;
     render();
     // English-first cards: hear the answer as soon as it is revealed so you can compare with what you said.
-    if (state.settings.autoplay && state.settings.front === "english") play(BY_ID[session.current].thai);
+    if (state.settings.autoplay && frontFor(BY_ID[session.current]) === "english") play(BY_ID[session.current].thai);
   }
 
   // ---------- views ----------
@@ -199,7 +217,7 @@
   function render() {
     const v = state.view || "home";
     $("#tabs").innerHTML = TABS.map(([k, l]) => `<button data-action="nav" data-view="${k}" class="${v === k ? "active" : ""}">${l}</button>`).join("");
-    const due = SM2.buildQueue(state.cards, ALL_IDS, { day: SM2.today(), newLimit: 0, filter: activeFilter() }).due.length;
+    const due = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day: SM2.today(), newLimit: 0, filter: activeFilter() }).due.length;
     $("#headerRight").innerHTML = `<span class="badge">${due} due</span><span class="badge">🔥 ${currentStreak()}</span>`;
     const views = { home: viewHome, session: viewSession, practice: viewPractice, browse: viewBrowse, stats: viewStats, settings: viewSettings };
     $("#main").innerHTML = (views[v] || viewHome)();
@@ -213,14 +231,15 @@
   }
   function viewHome() {
     const day = SM2.today(), log = dayLog(day), c = counts();
-    const q = SM2.buildQueue(state.cards, ALL_IDS, { day, newLimit: Math.max(0, state.settings.newPerDay - log.new), filter: activeFilter() });
+    const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day, newLimit: Math.max(0, state.settings.newPerDay - log.new), filter: activeFilter() });
     const acc = log.reviews ? Math.round(100 * log.correct / log.reviews) : null;
     return `
       <div class="grid">
         <div class="tile"><div class="k">Due now</div><div class="v">${q.due.length}</div></div>
         <div class="tile"><div class="k">New today</div><div class="v">${q.fresh.length}<small>of ${state.settings.newPerDay}</small></div></div>
         <div class="tile"><div class="k">Reviews today</div><div class="v">${log.reviews}${acc != null ? `<small>${acc}% right</small>` : ""}</div></div>
-        <div class="tile"><div class="k">Learned</div><div class="v">${c.learning + c.young + c.mature + c.relearning}<small>/ 1000</small></div></div>
+        <div class="tile"><div class="k">Learned</div><div class="v">${c.learning + c.young + c.mature + c.relearning}<small>/ ${ALL_IDS.length}</small></div></div>
+        ${LESSONS.length ? `<div class="tile"><div class="k">Lesson cards mastered</div><div class="v">${lessonStats().mastered}<small>/ ${lessonStats().total}</small></div></div>` : ""}
       </div>
       <div class="panel">
         <h2>Today's session</h2>
@@ -230,6 +249,7 @@
           <button class="btn" data-action="start" data-kind="mc">Quiz the queue</button>` : `<span class="meta">All caught up for today. Keep going with the options below.</span>`}
         </div>
       </div>
+      ${lessonsPanel()}
       ${extraStudyPanel()}
       <div class="panel">
         <h2>How it works</h2>
@@ -239,6 +259,22 @@
       </div>`;
   }
 
+  function lessonStats(n) {
+    const ids = n == null ? WORDS.filter(w => w.lesson != null).map(w => w.id) : lessonIds(n);
+    const cards = ids.map(getCard);
+    return { total: ids.length, seen: cards.filter(c => c && c.seen).length, mastered: cards.filter(SM2.isMastered).length,
+      priorityDue: ids.filter(id => isPriority(id) && (!getCard(id) || !getCard(id).seen || getCard(id).due <= SM2.today())).length };
+  }
+  function lessonsPanel() {
+    if (!LESSONS.length) return "";
+    return `<div class="panel">
+      <h2>Teacher lessons</h2>
+      <p>Lesson sentences jump the queue and repeat on a tight ladder (1, 2, 4, 7, 14, 30 days) until you have said each one right six times in a row. A slip restarts the ladder. Mastered sentences settle into the normal schedule.</p>
+      <div class="list" style="margin-top:10px">${LESSONS.map(L => { const st = lessonStats(L.lesson); const pct = st.total ? Math.round(100 * st.mastered / st.total) : 0; return `<div class="wrow">
+        <div class="main" style="flex-direction:column;align-items:stretch;gap:6px"><div><b>Lesson ${L.lesson}</b> · ${esc(L.title)} <span class="meta">${st.total} cards · ${st.seen} seen · ${st.mastered} mastered${st.priorityDue ? " · " + st.priorityDue + " to practise now" : ""}</span></div><div class="progress"><div style="width:${pct}%"></div></div></div>
+        <div class="right"><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}">🗣 Speak</button><button class="btn sm" data-action="start" data-kind="listen" data-source="lesson" data-lesson="${L.lesson}">🎧 Listen</button><button class="btn sm" data-action="start" data-kind="reverse" data-source="lesson" data-lesson="${L.lesson}">EN→ไทย quiz</button></div></div>`; }).join("")}</div>
+    </div>`;
+  }
   function extraStudyPanel() {
     const day = SM2.today(), filter = activeFilter();
     const today = ALL_IDS.filter(id => filter(id) && getCard(id) && getCard(id).last === day).length;
@@ -285,7 +321,7 @@
     if (!session) return viewPractice();
     if (!session.current) {
       const mins = Math.max(1, Math.round((Date.now() - session.start) / 60000));
-      const q = SM2.buildQueue(state.cards, ALL_IDS, { day: SM2.today(), newLimit: 0, filter: activeFilter() });
+      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day: SM2.today(), newLimit: 0, filter: activeFilter() });
       return `<div class="panel done">
         <div class="big">🎉 Session complete</div>
         <p>${session.right} right · ${session.wrong} wrong · ${session.total} cards · ${mins} min</p>
@@ -294,7 +330,7 @@
           ${q.due.length ? `<button class="btn primary" data-action="start" data-kind="${session.kind}">Continue</button>` : ""}
           <button class="btn" data-action="nav" data-view="practice">Practice modes</button>
           <button class="btn" data-action="nav" data-view="home">Home</button>
-        </div></div>${extraStudyPanel()}`;
+        </div></div>${lessonsPanel()}${extraStudyPanel()}`;
     }
     const w = BY_ID[session.current], card = getCard(w.id);
     const fronts = [["thai", "ไทย → EN"], ["english", "EN → ไทย"], ["audio", "🔊 → ไทย"]];
@@ -307,7 +343,7 @@
 
   function cardBack(w, card, opts) {
     return `<div class="card">
-      <span class="cat badge">${CAT_LABELS[w.cat] || w.cat}</span><span class="stage">${stageBadge(card)}</span>
+      ${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>
       <div class="thai">${esc(w.thai)}</div>
       <div class="roman">${romanHtml(w)}</div>
       ${toneChips(w)}
@@ -317,13 +353,13 @@
     </div>`;
   }
   function viewFlash(w, card) {
-    const front = state.settings.front;
+    const front = frontFor(w);
     if (!session.flipped) {
       let inner;
-      if (front === "english") inner = `<div class="en prompt">${esc(w.en)}</div><div class="meta">say it in Thai, then flip to check</div><div class="audio-row"><button class="btn rec ${ThaiAudio.isRecording() ? "on" : ""}" data-action="record" title="Record yourself (R)">${ThaiAudio.isRecording() ? "■ Stop" : "● Record me"}</button></div>`;
+      if (front === "english") inner = `<div class="en prompt">${esc(w.en)}</div><div class="meta">${w.lesson != null ? "lesson sentence · " : ""}say it in Thai, then flip to check</div><div class="audio-row"><button class="btn rec ${ThaiAudio.isRecording() ? "on" : ""}" data-action="record" title="Record yourself (R)">${ThaiAudio.isRecording() ? "■ Stop" : "● Record me"}</button></div>`;
       else if (front === "audio") inner = `<button class="speaker" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button><div class="meta">listen, then flip</div>`;
       else inner = `<div class="thai">${esc(w.thai)}</div>${state.settings.showRoman ? `<div class="roman">${romanHtml(w)}</div>` : ""}${playBtns(w, { noRecord: true })}`;
-      return `<div class="card clickable" data-action="flip"><span class="cat badge">${CAT_LABELS[w.cat] || w.cat}</span><span class="stage">${stageBadge(card)}</span>${inner}<div class="hint">tap or press space to flip</div></div>
+      return `<div class="card clickable" data-action="flip">${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>${inner}<div class="hint">tap or press space to flip</div></div>
         <div class="kbd-help">Space flip · P play · S slow</div>`;
     }
     const base = card && card.seen ? card : SM2.newCard(w.id);
@@ -353,7 +389,7 @@
         <div class="thai small">${esc(w.thai)}</div><div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${playBtns(w)}
         <button class="btn primary" data-action="next">Continue ⏎</button></div>`;
     }
-    return `<div class="card"><span class="cat badge">${CAT_LABELS[w.cat] || w.cat}</span><span class="stage">${stageBadge(card)}</span>${prompt}</div><div class="options">${opts}</div>${fb}<div class="kbd-help">1–4 choose · P play · ⏎ continue</div>`;
+    return `<div class="card">${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>${prompt}</div><div class="options">${opts}</div>${fb}<div class="kbd-help">1–4 choose · P play · ⏎ continue</div>`;
   }
   function viewTone(w, card) {
     const q = session.q, s = w.syl[q.sylIndex];
@@ -369,7 +405,7 @@
       fb = `<div class="feedback ${ok ? "ok" : "bad"}"><div class="title">${ok ? "✔ " + s.tone + " tone" : "✘ It was the " + s.tone + " tone (" + SM2.TONE_INFO[s.tone].thai + ")"}</div>
         <div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${playBtns(w)}<button class="btn primary" data-action="next">Continue ⏎</button></div>`;
     }
-    return `<div class="card"><span class="cat badge">${CAT_LABELS[w.cat] || w.cat}</span><span class="stage">${stageBadge(card)}</span>
+    return `<div class="card">${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>
       <div class="thai">${esc(w.thai)}</div>
       <div class="roman">${shownRoman}</div>
       <div class="meta">what tone is the underlined syllable?</div>
@@ -381,20 +417,20 @@
   function viewBrowse() {
     const term = ui.search.trim().toLowerCase();
     const termPlain = SM2.stripTone(term);
-    let rows = WORDS.filter(w => (!ui.cat || w.cat === ui.cat));
+    let rows = WORDS.filter(w => !ui.cat || (ui.cat.startsWith("lesson:") ? w.lesson === Number(ui.cat.slice(7)) : w.cat === ui.cat));
     if (ui.stage) rows = rows.filter(w => SM2.stage(getCard(w.id)) === ui.stage || (ui.stage === "leech" && getCard(w.id) && SM2.isLeech(getCard(w.id))));
     if (term) rows = rows.filter(w => w.thai.includes(term) || SM2.stripTone(w.roman).includes(termPlain) || w.en.toLowerCase().includes(term));
     const total = rows.length;
     rows = rows.slice(0, 150);
     return `<div class="toolbar">
         <input type="search" id="search" placeholder="Search Thai, romanization or English…" value="${esc(ui.search)}" data-input="search">
-        <select data-input="cat"><option value="">All categories</option>${CATS.map(c => `<option value="${c}" ${ui.cat === c ? "selected" : ""}>${CAT_LABELS[c] || c}</option>`).join("")}</select>
+        <select data-input="cat"><option value="">All categories</option>${LESSONS.map(L => `<option value="lesson:${L.lesson}" ${ui.cat === "lesson:" + L.lesson ? "selected" : ""}>Lesson ${L.lesson}</option>`).join("")}${CATS.map(c => `<option value="${c}" ${ui.cat === c ? "selected" : ""}>${CAT_LABELS[c] || c}</option>`).join("")}</select>
         <select data-input="stage"><option value="">Any stage</option>${["new", "learning", "relearning", "young", "mature", "leech"].map(s => `<option value="${s}" ${ui.stage === s ? "selected" : ""}>${s}</option>`).join("")}</select>
       </div>
       <p class="meta" style="margin:0 0 10px">${total} word${total === 1 ? "" : "s"}${total > 150 ? " (showing first 150)" : ""}</p>
       <div class="list">${rows.map(w => { const c = getCard(w.id); return `<div class="wrow">
         <div class="main"><span class="thai">${esc(w.thai)}</span><span class="roman">${romanHtml(w)}</span><span class="en">${esc(w.en)}</span></div>
-        <div class="right"><span class="due">${dueText(c)}</span>${stageBadge(c)}<button class="btn icon" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button></div></div>`; }).join("")}</div>`;
+        <div class="right">${w.lesson != null ? `<span class="badge prio">L${w.lesson}</span>` : ""}<span class="due">${dueText(c)}</span>${stageBadge(c, w)}<button class="btn icon" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button></div></div>`; }).join("")}</div>`;
   }
 
   function viewStats() {
@@ -416,6 +452,7 @@
       </div>
       <div class="panel"><h2>Reviews, last 14 days</h2><div class="bars">${hist.map(h => `<div class="bar ${h.d === day ? "today" : ""}" title="${h.reviews} reviews, ${h.new} new"><div style="height:${Math.round(100 * h.reviews / maxH)}%"></div><span>${h.reviews || ""}</span></div>`).join("")}</div></div>
       <div class="panel"><h2>Due in the next 7 days</h2><div class="bars">${fc.map((n, i) => `<div class="bar ${i === 0 ? "today" : ""}"><div style="height:${Math.round(100 * n / maxF)}%"></div><span>${i === 0 ? "today" : dayName(day + i)} ${n}</span></div>`).join("")}</div></div>
+      ${LESSONS.length ? `<div class="panel"><h2>Teacher lessons</h2><div class="tone-acc">${LESSONS.map(L => { const st = lessonStats(L.lesson); return `<div class="t"><div><b>Lesson ${L.lesson}</b><small>${st.mastered} / ${st.total} mastered · ${st.seen} seen</small></div></div>`; }).join("")}</div></div>` : ""}
       <div class="panel"><h2>Tone recognition</h2><p>From the tone drill. Which tones your ear still confuses.</p>
         <div class="tone-acc">${SM2.TONES.map(t => { const s = state.toneStats[t]; return `<div class="t">${contourSvg(t, 40)}<div><b class="tone-${t}">${t}</b><small>${s && s.n ? Math.round(100 * s.ok / s.n) + "% of " + s.n : "no data"}</small></div></div>`; }).join("")}</div></div>
       <div class="panel"><h2>Hardest words</h2>${hard.length ? `<div class="list">${hard.map(cd => { const w = BY_ID[cd.id]; return `<div class="wrow"><div class="main"><span class="thai">${esc(w.thai)}</span><span class="roman">${romanHtml(w)}</span><span class="en">${esc(w.en)}</span></div><div class="right"><span class="due">${cd.lapses} lapses · EF ${cd.ef.toFixed(2)}</span><button class="btn icon" data-action="play" data-text="${esc(w.thai)}">🔊</button></div></div>`; }).join("")}</div>
@@ -446,6 +483,7 @@
       <div class="setting"><label>New words per day<small>How many unseen words enter the queue each day.</small></label><input type="number" min="0" max="200" value="${s.newPerDay}" data-setting="newPerDay" style="width:90px"></div>
       <div class="setting"><label>Card front<small>What you see before flipping.</small></label>
         <select data-setting="front"><option value="thai" ${s.front === "thai" ? "selected" : ""}>Thai script (+ audio)</option><option value="english" ${s.front === "english" ? "selected" : ""}>English meaning</option><option value="audio" ${s.front === "audio" ? "selected" : ""}>Audio only</option></select></div>
+      <div class="setting"><label>Lesson cards: speaking practice<small>Always show the English first for teacher-lesson sentences, so you say the Thai before checking. Overrides the card-front setting for those cards.</small></label><input type="checkbox" data-setting="lessonSpeak" ${s.lessonSpeak ? "checked" : ""}></div>
       <div class="setting"><label>Show romanization on the front<small>Hide it once you can read Thai script.</small></label><input type="checkbox" data-setting="showRoman" ${s.showRoman ? "checked" : ""}></div>
       <div class="setting" style="display:block"><label>Categories to study<small>Deselect what you don't need. Applies to the queue and practice.</small></label>
         <div class="cats" style="margin-top:8px">${CATS.map(c => `<label class="${catOn(c) ? "" : "off"}"><input type="checkbox" data-cat="${c}" ${catOn(c) ? "checked" : ""}>${CAT_LABELS[c] || c}</label>`).join("")}</div></div>
@@ -478,7 +516,7 @@
       if (el.dataset.src) state.settings.practiceSource = el.dataset.src;
       const o = {};
       if (el.dataset.extra) o.extraNew = Number(el.dataset.extra);
-      if (el.dataset.source) { o.source = el.dataset.source; if (o.source === "category") o.category = ui.extraCat; }
+      if (el.dataset.source) { o.source = el.dataset.source; if (o.source === "category") o.category = ui.extraCat; if (o.source === "lesson") o.lesson = Number(el.dataset.lesson); }
       startSession(el.dataset.kind, o);
     }
     else if (a === "end") { session = null; state.view = "home"; render(); }

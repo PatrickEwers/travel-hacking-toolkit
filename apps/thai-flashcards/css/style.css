@@ -169,3 +169,5 @@ kbd { font-family: var(--font); }
 .seg button:not(.on):hover { color: var(--text); }
 @media (max-width: 480px) { .session-bar { flex-wrap: wrap; } .session-bar .progress { order: 5; flex-basis: 100%; } }
 @media (max-width: 480px) { .session-bar > span:first-child { display: none; } .session-bar .btn.sm { margin-left: auto; } }
+.badge.prio { color: var(--accent); border-color: var(--accent); background: rgba(245,180,0,.10); }
+.wrow .progress { height: 5px; }
