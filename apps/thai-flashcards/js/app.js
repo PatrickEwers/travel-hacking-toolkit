@@ -245,17 +245,19 @@
     const day = SM2.today(), log = dayLog(day), c = counts();
     const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, priorityRank: id => LESSON_RANK[id] ?? Infinity, day, newLimit: Math.max(0, state.settings.newPerDay - log.new), filter: activeFilter() });
     const acc = log.reviews ? Math.round(100 * log.correct / log.reviews) : null;
+    const lessonFresh = q.fresh.filter(id => BY_ID[id].lesson != null).length;
+    const lessonDue = q.due.filter(id => BY_ID[id].lesson != null).length;
     return `
       <div class="grid">
         <div class="tile"><div class="k">Due now</div><div class="v">${q.due.length}</div></div>
-        <div class="tile"><div class="k">New today</div><div class="v">${q.fresh.length}<small>of ${state.settings.newPerDay}</small></div></div>
+        <div class="tile"><div class="k">New today</div><div class="v">${q.fresh.length - lessonFresh}<small>of ${state.settings.newPerDay}${lessonFresh ? " + " + lessonFresh + " lesson" : ""}</small></div></div>
         <div class="tile"><div class="k">Reviews today</div><div class="v">${log.reviews}${acc != null ? `<small>${acc}% right</small>` : ""}</div></div>
         <div class="tile"><div class="k">Learned</div><div class="v">${c.learning + c.young + c.mature + c.relearning}<small>/ ${ALL_IDS.length}</small></div></div>
         ${LESSONS.length ? `<div class="tile"><div class="k">Lesson cards mastered</div><div class="v">${lessonStats().mastered}<small>/ ${lessonStats().total}</small></div></div>` : ""}
       </div>
       <div class="panel">
         <h2>Today's session</h2>
-        <p>${q.due.length} due review${q.due.length === 1 ? "" : "s"} and ${q.fresh.length} new word${q.fresh.length === 1 ? "" : "s"}. Wrong answers come back within the same session and again tomorrow.</p>
+        <p>${q.due.length} due review${q.due.length === 1 ? "" : "s"}${lessonDue ? " (" + lessonDue + " from lessons)" : ""}${lessonFresh ? ", " + lessonFresh + " new lesson sentence" + (lessonFresh === 1 ? "" : "s") : ""} and ${q.fresh.length - lessonFresh} new word${q.fresh.length - lessonFresh === 1 ? "" : "s"}. Lesson cards come first. Wrong answers come back within the same session and again tomorrow.</p>
         <div class="row" style="margin-top:12px">
           ${q.due.length + q.fresh.length ? `<button class="btn primary" data-action="start" data-kind="flash">▶ Study flashcards</button>
           <button class="btn" data-action="start" data-kind="mc">Quiz the queue</button>` : `<span class="meta">All caught up for today. Keep going with the options below.</span>`}
