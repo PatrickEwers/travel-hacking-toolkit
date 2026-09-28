@@ -109,6 +109,7 @@
     const day = opts.day === undefined ? today() : opts.day;
     const filter = opts.filter || (() => true);
     const priority = opts.priority || (() => false);
+    const depri = opts.deprioritize || (() => false);
     const due = [], fresh = [], freshPriority = [];
     for (const id of ids) {
       if (!filter(id)) continue;
@@ -117,11 +118,13 @@
       else if (c.due <= day) due.push(c);
     }
     // Priority (lesson) cards first, then most-lapsed, then most overdue, then hardest.
-    due.sort((a, b) => ((priority(b.id) ? 1 : 0) - (priority(a.id) ? 1 : 0)) || (b.lapses - a.lapses) || (a.due - b.due) || (a.ef - b.ef));
+    due.sort((a, b) => ((priority(b.id) ? 1 : 0) - (priority(a.id) ? 1 : 0)) || ((depri(a.id) ? 1 : 0) - (depri(b.id) ? 1 : 0)) || (b.lapses - a.lapses) || (a.due - b.due) || (a.ef - b.ef));
     const newLimit = opts.newLimit === undefined ? 20 : Math.max(0, opts.newLimit);
     // Priority new cards are not counted against the daily new-card limit; optional rank orders them (e.g. lesson order).
     if (opts.priorityRank) freshPriority.sort((a, b) => opts.priorityRank(a) - opts.priorityRank(b));
-    return { due: due.map(c => c.id), fresh: freshPriority.concat(fresh.slice(0, newLimit)), remainingNew: fresh.length + freshPriority.length };
+    // Deprioritised (rare / formal) new cards are introduced only after every other new card.
+    const ordered = fresh.filter(id => !depri(id)).concat(fresh.filter(depri));
+    return { due: due.map(c => c.id), fresh: freshPriority.concat(ordered.slice(0, newLimit)), remainingNew: fresh.length + freshPriority.length };
   }
 
   /* Tight schedule for priority cards until they are mastered: the SM-2 interval is capped by

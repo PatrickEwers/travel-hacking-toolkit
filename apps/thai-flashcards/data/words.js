@@ -7,6 +7,10 @@
 //           eu (อือ), eua (เอือ), er (เออ), ia (เอีย), ua (อัว), ai, ao, oi (ออย), oei (เ-ย).
 const THAI_WORDS = [
 // ---- greetings & politeness ----
+["ไปก่อนนะ","bpai-gàwn-ná","bye, I'm off (casual goodbye)","greetings"],
+["แล้วเจอกัน","láeo-jer-gan","see you (later)","greetings"],
+["เป็นไงบ้าง","bpen-ngai-bâang","how's it going?","greetings"],
+["ฝันดี","fǎn-dee","good night / sweet dreams","greetings"],
 ["สวัสดี","sà-wàt-dee","hello / goodbye","greetings"],
 ["ครับ","kráp","polite particle (male speaker)","greetings"],
 ["ค่ะ","kâ","polite particle (female, statement)","greetings"],
@@ -126,6 +130,7 @@ const THAI_WORDS = [
 ["ประมาณ","bprà-maan","approximately","numbers"],
 ["เท่านั้น","tâo-nán","only","numbers"],
 // ---- time & calendar ----
+["เสาร์อาทิตย์","sǎo-aa-tít","weekend (Sat–Sun)","time"],
 ["ปีหน้า","bpee-nâa","next year","time"],
 ["อาทิตย์หน้า","aa-tít-nâa","next week","time"],
 ["เวลา","way-laa","time","time"],
@@ -282,6 +287,7 @@ const THAI_WORDS = [
 ["เมื่อ","mêua","when (conjunction)","grammar"],
 ["ตอน","dtawn","at the time of / period","grammar"],
 // ---- verbs ----
+["อยากได้","yàak-dâi","would like (to have)","verbs"],
 ["ต้องการ","dtâwng-gaan","need / want","verbs"],
 ["เกลียด","glìat","hate","verbs"],
 ["ตัดสินใจ","dtàt-sǐn-jai","decide","verbs"],
@@ -496,6 +502,9 @@ const THAI_WORDS = [
 ["ฟรี","free","free (no charge)","adjectives"],
 ["สุดยอด","sùt-yâwt","awesome","adjectives"],
 // ---- food & drink ----
+["ข้าวเช้า","kâao-cháao","breakfast","food"],
+["ข้าวเที่ยง","kâao-tîang","lunch","food"],
+["ข้าวเย็น","kâao-yen","dinner","food"],
 ["อาหาร","aa-hǎan","food","food"],
 ["ข้าว","kâao","rice / meal","food"],
 ["ข้าวเหนียว","kâao-nǐao","sticky rice","food"],
@@ -575,6 +584,10 @@ const THAI_WORDS = [
 ["ไก่ทอด","gài-tâwt","fried chicken","food"],
 ["ลาบ","lâap","minced meat salad","food"],
 // ---- travel & transport ----
+["ค่ารถ","kâa-rót","fare (bus / taxi)","travel"],
+["พาสปอร์ต","páat-sà-bpàwt","passport","travel"],
+["ตม.","dtaw-maw","immigration (spoken abbreviation)","travel"],
+["ดีเลย์","dee-lay","delayed","travel"],
 ["ไกด์","gái","guide","travel"],
 ["ทัวร์","tua","tour","travel"],
 ["รถ","rót","car / vehicle","travel"],
@@ -706,6 +719,7 @@ const THAI_WORDS = [
 ["บันได","ban-dai","stairs","places"],
 ["ที่อยู่","têe-yòo","address","places"],
 // ---- shopping & money ----
+["ตังค์","dtang","money (casual)","shopping"],
 ["เงิน","ngern","money / silver","shopping"],
 ["บาท","bàat","baht","shopping"],
 ["สตางค์","sà-dtaang","satang / small change","shopping"],
@@ -806,6 +820,7 @@ const THAI_WORDS = [
 ["คนรัก","kon-rák","lover / sweetheart","family"],
 ["ทารก","taa-rók","baby","family"],
 // ---- home & objects ----
+["ทีวี","tee-wee","TV","home"],
 ["บ้าน","bâan","house / home","home"],
 ["คอนโด","kawn-doh","condo","home"],
 ["ห้องครัว","hâwng-krua","kitchen","home"],
@@ -949,6 +964,7 @@ const THAI_WORDS = [
 ["เสียง","sǐang","sound / voice / tone","work"],
 ["วรรณยุกต์","wan-ná-yúk","tone mark","work"],
 // ---- adverbs & connectors ----
+["อยู่ๆ ก็","yòo-yòo-gâw","suddenly / out of nowhere","adverbs"],
 ["มาก","mâak","very / much","adverbs"],
 ["มากๆ","mâak-mâak","very much","adverbs"],
 ["จัง","jang","really / so (colloquial)","adverbs"],

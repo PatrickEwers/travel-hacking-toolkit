@@ -3,11 +3,12 @@ const assert = require("assert");
 const SM2 = require("../js/sm2.js");
 const WORDS = require("../data/words.js");
 const LESSONS = require("../data/lessons.js");
+const USAGE = require("../data/usage-notes.js");
 let passed = 0;
 function t(name, fn) { fn(); passed++; console.log("ok -", name); }
 
-t("dataset has exactly 1000 words", () => assert.strictEqual(WORDS.length, 1000));
-t("thai keys are unique", () => assert.strictEqual(new Set(WORDS.map(w => w[0])).size, 1000));
+t("dataset has at least 1000 words", () => assert.ok(WORDS.length >= 1000, String(WORDS.length)));
+t("thai keys are unique", () => assert.strictEqual(new Set(WORDS.map(w => w[0])).size, WORDS.length));
 t("every entry has thai, romanization, english, category", () => {
   for (const w of WORDS) {
     assert.strictEqual(w.length, 4, JSON.stringify(w));
@@ -111,5 +112,13 @@ t("priority queue: lesson cards first and exempt from the new-card cap; ladder c
   assert.ok(!SM2.isMastered(Object.assign({}, c, { interval: 14, reps: 5 })));
   assert.ok(SM2.isMastered(Object.assign({}, c, { interval: 30, reps: 6 })));
   assert.ok(ivs[6] >= 30);
+});
+t("usage notes reference real words and valid levels; deprioritised cards sort last", () => {
+  const ids = new Set(WORDS.map(w => w[0]));
+  for (const [k, u] of Object.entries(USAGE)) { assert.ok(ids.has(k), k); assert.ok(["rare", "formal", "note"].includes(u.level), k); assert.ok(u.note, k); }
+  const q = SM2.buildQueue({}, ["r1", "a", "f1", "b", "c"], { day: 0, newLimit: 3, deprioritize: id => id === "r1" || id === "f1" });
+  assert.deepStrictEqual(q.fresh, ["a", "b", "c"]);
+  const cards = { r1: Object.assign(SM2.newCard("r1"), { seen: 1, due: 0, lapses: 5 }), a: Object.assign(SM2.newCard("a"), { seen: 1, due: 0, lapses: 0 }) };
+  assert.deepStrictEqual(SM2.buildQueue(cards, ["r1", "a"], { day: 0, deprioritize: id => id === "r1" }).due, ["a", "r1"]);
 });
 console.log("\n" + passed + " tests passed");

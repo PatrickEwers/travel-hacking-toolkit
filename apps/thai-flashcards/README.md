@@ -10,7 +10,7 @@ A dependency-free flashcard and exercise app for the 1000 most useful Thai words
 
 | Path | Purpose |
 |------|---------|
-| `data/words.js` | 1000 words: Thai script, tone-marked romanization, English, category (24 categories, from greetings and numbers to food, transport, emergencies). |
+| `data/words.js` | 1000+ words: Thai script, tone-marked romanization, English, category (24 categories, from greetings and numbers to food, transport, emergencies). |
 | `js/sm2.js` | SM-2 scheduler, queue builder, forecast, and the tone parser. Pure functions, also runs in Node. |
 | `js/audio.js` | Thai text-to-speech (browser voice first, Google Translate audio as fallback) and microphone recording for self-comparison. |
 | `js/app.js` | The UI: study session, practice modes, browse, stats, settings. |
@@ -48,6 +48,16 @@ Lesson cards are **priority** until mastered:
 - the lesson "Speak" drill starts English-first so you practise *saying* the Thai, then flip to hear and check; "Read" starts Thai-first. The direction switch on the study screen always applies, to lesson cards too.
 
 Home shows per-lesson progress with Speak / Listen / quiz drills. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
+
+## Usage marks (textbook vs. spoken Thai)
+
+`data/usage-notes.js` tags dictionary words by register:
+
+- **rare** (⚠ not in everyday use): academically correct forms Thais don't say, e.g. อรุณสวัสดิ์ "good morning". The card shows why and what to say instead. Introduced only after every other new card, and sorted last when due.
+- **formal** (you'll hear it, not say it): signs, announcements, staff phrases, written words. Also deprioritised.
+- **note** (spoken form differs): the word is right but conversation shortens or reshapes it, e.g. month names drop their last syllable, เท่าไร is said เท่าไหร่. Not deprioritised.
+
+The spoken alternatives (ไปก่อนนะ, เป็นไงบ้าง, ข้าวเที่ยง, ทีวี, พาสปอร์ต, ตม., ดีเลย์ …) are ordinary cards in the deck. Browse can filter by each mark.
 
 ## Tones and audio
 

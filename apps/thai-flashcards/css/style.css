@@ -171,3 +171,11 @@ kbd { font-family: var(--font); }
 @media (max-width: 480px) { .session-bar > span:first-child { display: none; } .session-bar .btn.sm { margin-left: auto; } }
 .badge.prio { color: var(--accent); border-color: var(--accent); background: rgba(245,180,0,.10); }
 .wrow .progress { height: 5px; }
+
+.usage-pill { font-size: .78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid; margin-top: 14px; }
+.usage-pill.rare, .badge.usage-rare { color: var(--bad); border-color: var(--bad); background: rgba(248,113,113,.10); }
+.usage-pill.formal, .badge.usage-formal { color: var(--high); border-color: var(--high); background: rgba(251,146,60,.10); }
+.usage-pill.note, .badge.usage-note { color: var(--accent-2); border-color: var(--accent-2); background: rgba(56,189,248,.10); }
+.usage-note { font-size: .88rem; text-align: left; border-left: 3px solid; border-radius: 8px; padding: 8px 12px; background: var(--bg3); max-width: 520px; }
+.usage-note.rare { border-color: var(--bad); } .usage-note.formal { border-color: var(--high); } .usage-note.note { border-color: var(--accent-2); }
+.usage-note .use { display: block; margin-top: 4px; }
