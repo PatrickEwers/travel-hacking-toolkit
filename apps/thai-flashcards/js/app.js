@@ -36,7 +36,8 @@
     WORDS.push(w); BY_ID[w.id] = w;
   }
   const ALL_IDS = WORDS.map(w => w.id);
-  const lessonIds = n => WORDS.filter(w => w.lesson === n).map(w => w.id);
+  const LESSON_RANK = {}; { let r = 0; for (const L of LESSONS) for (const it of L.items) LESSON_RANK[it[0]] = r++; }
+  const lessonIds = n => LESSONS.filter(L => L.lesson === n).flatMap(L => L.items.map(it => it[0]));
 
   // ---------- persistence ----------
   let state = load();
@@ -130,7 +131,7 @@
       ids = ALL_IDS.filter(id => BY_ID[id].cat === cat).sort((a, b) => weight(b) - weight(a)).slice(0, opts.limit || 40);
     } else if (src === "queue") {
       const newAllowed = opts.extraNew != null ? opts.extraNew : Math.max(0, state.settings.newPerDay - dayLog(day).new);
-      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day, newLimit: newAllowed, filter });
+      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, priorityRank: id => LESSON_RANK[id] ?? Infinity, day, newLimit: newAllowed, filter });
       ids = opts.extraNew != null ? q.fresh : q.due.concat(q.fresh);
     }
     if (src === "today" || src === "ahead" || src === "category" || src === "lesson") { if (kind === "tone") ids = ids.filter(id => BY_ID[id].syl.length <= 3); }
@@ -217,7 +218,7 @@
   function render() {
     const v = state.view || "home";
     $("#tabs").innerHTML = TABS.map(([k, l]) => `<button data-action="nav" data-view="${k}" class="${v === k ? "active" : ""}">${l}</button>`).join("");
-    const due = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day: SM2.today(), newLimit: 0, filter: activeFilter() }).due.length;
+    const due = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, priorityRank: id => LESSON_RANK[id] ?? Infinity, day: SM2.today(), newLimit: 0, filter: activeFilter() }).due.length;
     $("#headerRight").innerHTML = `<span class="badge">${due} due</span><span class="badge">🔥 ${currentStreak()}</span>`;
     const views = { home: viewHome, session: viewSession, practice: viewPractice, browse: viewBrowse, stats: viewStats, settings: viewSettings };
     $("#main").innerHTML = (views[v] || viewHome)();
@@ -231,7 +232,7 @@
   }
   function viewHome() {
     const day = SM2.today(), log = dayLog(day), c = counts();
-    const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day, newLimit: Math.max(0, state.settings.newPerDay - log.new), filter: activeFilter() });
+    const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, priorityRank: id => LESSON_RANK[id] ?? Infinity, day, newLimit: Math.max(0, state.settings.newPerDay - log.new), filter: activeFilter() });
     const acc = log.reviews ? Math.round(100 * log.correct / log.reviews) : null;
     return `
       <div class="grid">
@@ -321,7 +322,7 @@
     if (!session) return viewPractice();
     if (!session.current) {
       const mins = Math.max(1, Math.round((Date.now() - session.start) / 60000));
-      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, day: SM2.today(), newLimit: 0, filter: activeFilter() });
+      const q = SM2.buildQueue(state.cards, ALL_IDS, { priority: isPriority, priorityRank: id => LESSON_RANK[id] ?? Infinity, day: SM2.today(), newLimit: 0, filter: activeFilter() });
       return `<div class="panel done">
         <div class="big">🎉 Session complete</div>
         <p>${session.right} right · ${session.wrong} wrong · ${session.total} cards · ${mins} min</p>
@@ -365,7 +366,7 @@
     const base = card && card.seen ? card : SM2.newCard(w.id);
     const relearn = session.relearn.has(w.id);
     return cardBack(w, card) + `<div class="grades">${GRADES.map(g => {
-      const iv = relearn ? (g.q >= 3 ? "leave relearn" : "again soon") : (SM2.previewInterval(base, g.q) + " d");
+      const iv = relearn ? (g.q >= 3 ? "leave relearn" : "again soon") : ((isPriority(w.id) ? SM2.capPriority(SM2.review(base, g.q)).interval : SM2.previewInterval(base, g.q)) + " d");
       return `<button class="${g.cls}" data-action="grade" data-q="${g.q}"><span>${g.label}</span><small>${iv}</small><kbd>${g.key}</kbd></button>`;
     }).join("")}</div><div class="kbd-help">1 again · 2 hard · 3 good · 4 easy · P play · S slow · R record</div>`;
   }
