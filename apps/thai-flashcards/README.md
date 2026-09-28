@@ -49,6 +49,10 @@ Lesson cards are **priority** until mastered:
 
 Home shows per-lesson progress with Speak / Listen / quiz drills. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
 
+## Word-by-word gloss
+
+On the reveal side of any multi-word card, the sentence is broken into its words: Thai, romanization and meaning per chip, each tappable to hear that word alone. `js/gloss.js` segments the romanization greedily (longest known word first), confirms every match by locating its Thai script in the sentence in order (so homophones with different spellings cannot be confused), and understands the repeat sign ๆ. Words that are not cards of their own live in `data/glossary.js` (lookup only). Single words and names get no gloss.
+
 ## Usage marks (textbook vs. spoken Thai)
 
 `data/usage-notes.js` tags dictionary words by register:

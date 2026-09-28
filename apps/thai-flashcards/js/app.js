@@ -39,6 +39,16 @@
     WORDS.push(w); BY_ID[w.id] = w;
   }
   const ALL_IDS = WORDS.map(w => w.id);
+  const GLOSS_INDEX = Gloss.buildIndex(WORDS.concat((typeof THAI_GLOSSARY !== "undefined" ? THAI_GLOSSARY : []).map(g => ({ thai: g[0], roman: g[1], en: g[2] }))));
+  const glossCache = {};
+  function glossHtml(w) {
+    if (!(w.id in glossCache)) glossCache[w.id] = Gloss.gloss(w, GLOSS_INDEX);
+    const g = glossCache[w.id];
+    if (!g) return "";
+    return `<div class="gloss">${g.parts.map(p => p.unmatched
+      ? `<span class="gpart unmatched"><span class="gr">${esc(p.roman)}</span></span>`
+      : `<button class="gpart" data-action="play" data-text="${esc(p.thai)}" title="Play this word"><span class="gt">${esc(p.thai)}</span><span class="gr">${romanHtml({ roman: p.roman, syl: SM2.analyze(p.roman) })}</span><span class="ge">${esc(p.en)}</span></button>`).join("")}</div>`;
+  }
   const LESSON_RANK = {}; { let r = 0; for (const L of LESSONS) for (const it of L.items) LESSON_RANK[it[0]] = r++; }
   const lessonIds = n => LESSONS.filter(L => L.lesson === n).flatMap(L => L.items.map(it => it[0]));
 
@@ -368,6 +378,7 @@
       <div class="roman">${romanHtml(w)}</div>
       ${toneChips(w)}
       <div class="en">${esc(w.en)}</div>
+      ${glossHtml(w)}
       ${usageNote(w)}
       ${playBtns(w, opts)}
       <div class="meta">${card && card.seen ? `interval ${card.interval} d · EF ${card.ef.toFixed(2)} · ${card.lapses} lapse${card.lapses === 1 ? "" : "s"} · ${card.correct}/${card.seen} right` : "first time seeing this card"}</div>
@@ -407,7 +418,7 @@
     if (session.answered) {
       const ok = session.lastResult === q.answer;
       fb = `<div class="feedback ${ok ? "ok" : "bad"}"><div class="title">${ok ? "✔ Correct" : "✘ Not quite"}</div>
-        <div class="thai small">${esc(w.thai)}</div><div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${usageNote(w)}${playBtns(w)}
+        <div class="thai small">${esc(w.thai)}</div><div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${glossHtml(w)}${usageNote(w)}${playBtns(w)}
         <button class="btn primary" data-action="next">Continue ⏎</button></div>`;
     }
     return `<div class="card">${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>${usagePill(w)}${prompt}</div><div class="options">${opts}</div>${fb}<div class="kbd-help">1–4 choose · P play · ⏎ continue</div>`;

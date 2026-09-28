@@ -4,6 +4,8 @@ const SM2 = require("../js/sm2.js");
 const WORDS = require("../data/words.js");
 const LESSONS = require("../data/lessons.js");
 const USAGE = require("../data/usage-notes.js");
+const GLOSSARY = require("../data/glossary.js");
+const Gloss = require("../js/gloss.js");
 let passed = 0;
 function t(name, fn) { fn(); passed++; console.log("ok -", name); }
 
@@ -120,5 +122,21 @@ t("usage notes reference real words and valid levels; deprioritised cards sort l
   assert.deepStrictEqual(q.fresh, ["a", "b", "c"]);
   const cards = { r1: Object.assign(SM2.newCard("r1"), { seen: 1, due: 0, lapses: 5 }), a: Object.assign(SM2.newCard("a"), { seen: 1, due: 0, lapses: 0 }) };
   assert.deepStrictEqual(SM2.buildQueue(cards, ["r1", "a"], { day: 0, deprioritize: id => id === "r1" }).due, ["a", "r1"]);
+});
+t("word-by-word gloss segments lesson sentences and dictionary phrases", () => {
+  const idx = Gloss.buildIndex(WORDS.map(w => ({ thai: w[0], roman: w[1], en: w[2] })).concat(GLOSSARY.map(g => ({ thai: g[0], roman: g[1], en: g[2] }))));
+  const g1 = Gloss.gloss({ thai: "ผมพูดภาษาไทยนิดหน่อยครับ", roman: "pǒm pôot paa-sǎa tai nít nòi kráp" }, idx);
+  assert.deepStrictEqual(g1.parts.map(p => p.thai), ["ผม", "พูด", "ภาษาไทย", "นิดหน่อย", "ครับ"]);
+  const g2 = Gloss.gloss({ thai: "ห้องน้ำอยู่ที่ไหน", roman: "hâwng-náam-yòo-têe-nǎi" }, idx);
+  assert.deepStrictEqual(g2.parts.map(p => p.thai), ["ห้องน้ำ", "อยู่", "ที่ไหน"]);
+  assert.strictEqual(Gloss.gloss({ thai: "สวัสดี", roman: "sà-wàt-dee" }, idx), null);       // one word, no gloss
+  assert.strictEqual(Gloss.gloss({ thai: "มกราคม", roman: "má-gá-raa-kom" }, idx), null);
+  // homophone safety: เจอกันใหม่ must pick ใหม่ (mài), never ไหม; order check keeps คน before อเมริกา
+  const g3 = Gloss.gloss({ thai: "เจอกันใหม่ครับ", roman: "jer gan mài kráp" }, idx);
+  assert.deepStrictEqual(g3.parts.map(p => p.thai), ["เจอ", "กัน", "ใหม่", "ครับ"]);
+  // every lesson sentence with 2+ words gets a gloss with at most one unmatched piece
+  let glossed = 0, total = 0;
+  for (const L of LESSONS) for (const it of L.items) { if (!/[-\s]/.test(it[1])) continue; total++; const g = Gloss.gloss({ thai: it[0], roman: it[1] }, idx); if (g) { glossed++; assert.ok(g.unmatched <= 1, it[1] + " -> " + JSON.stringify(g.parts)); } }
+  assert.ok(glossed >= total - 3, glossed + "/" + total);
 });
 console.log("\n" + passed + " tests passed");

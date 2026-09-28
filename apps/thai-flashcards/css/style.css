@@ -179,3 +179,12 @@ kbd { font-family: var(--font); }
 .usage-note { font-size: .88rem; text-align: left; border-left: 3px solid; border-radius: 8px; padding: 8px 12px; background: var(--bg3); max-width: 520px; }
 .usage-note.rare { border-color: var(--bad); } .usage-note.formal { border-color: var(--high); } .usage-note.note { border-color: var(--accent-2); }
 .usage-note .use { display: block; margin-top: 4px; }
+
+.gloss { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 640px; }
+.gpart { display: flex; flex-direction: column; align-items: center; gap: 1px; background: var(--bg3); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; color: var(--text); min-width: 64px; }
+.gpart:hover { border-color: var(--accent); }
+.gpart .gt { font-family: var(--thai); font-size: 1.25rem; line-height: 1.4; }
+.gpart .gr { font-size: .85rem; }
+.gpart .gr .syl { font-weight: 600; }
+.gpart .ge { font-size: .72rem; color: var(--muted); max-width: 120px; line-height: 1.2; }
+.gpart.unmatched { opacity: .5; }
