@@ -70,8 +70,19 @@
   let toastTimer;
   function toast(msg, ms) { let t = $("#toast"); if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); } t.textContent = msg; t.classList.remove("hidden"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.add("hidden"), ms || 3200); }
   function contourSvg(tone, w) { w = w || 48; return `<svg viewBox="0 0 60 40" width="${w}" height="${Math.round(w * 2 / 3)}" aria-hidden="true"><path d="${SM2.CONTOURS[tone]}" fill="none" stroke="${SM2.TONE_INFO[tone].color}" stroke-width="4" stroke-linecap="round"/></svg>`; }
-  function romanHtml(word, hl) {
-    return word.syl.map((s, i) => `<span class="syl tone-${s.tone}${hl === i ? " hl" : ""}" style="${hl === i ? "text-decoration: underline; text-underline-offset: 5px;" : ""}">${esc(s.text)}</span>`).join('<span class="sep">-</span>');
+  // Render romanization with tone colours, keeping the original separators: "-" inside a word, spaces between words.
+  function romanHtml(word, hl, plain) {
+    let i = 0;
+    return word.roman.split(/(-|\s+)/).map(part => {
+      if (part === "-") return '<span class="sep">-</span>';
+      if (/^\s+$/.test(part)) return '<span class="sep">&nbsp;</span>';
+      if (!part) return "";
+      const s = word.syl[i], idx = i++;
+      const isHl = hl === idx;
+      const style = hl == null ? "" : (isHl ? "text-decoration:underline;text-underline-offset:6px;font-weight:700" : "opacity:.55");
+      const text = plain && !isHl ? s.plain : (plain && isHl && !session.answered ? s.plain : s.text);
+      return `<span class="syl tone-${hl == null || isHl ? s.tone : "mid"}" style="${style}">${esc(text)}</span>`;
+    }).join("");
   }
   function toneChips(word) {
     return `<div class="tones">` + word.syl.map(s => `<div class="tone-chip">${contourSvg(s.tone, 40)}<div class="lbl"><span class="tone-${s.tone}">${esc(s.text)} · ${s.tone}</span><small>${SM2.TONE_INFO[s.tone].thai}</small></div></div>`).join("") + `</div>`;
@@ -399,7 +410,7 @@
       if (session.answered) { if (t === q.answer) cls = "correct"; else if (t === session.lastResult) cls = "wrong"; }
       return `<button class="tone-chip big ${cls}" data-action="tone" data-tone="${t}" ${session.answered ? "disabled" : ""}>${contourSvg(t, 56)}<div class="lbl"><span class="tone-${t}">${t}</span><small>${SM2.TONE_INFO[t].thai} · ${i + 1}</small></div></button>`;
     }).join("");
-    const shownRoman = w.syl.map((x, i) => `<span class="syl${i === q.sylIndex ? "" : ""}" style="${i === q.sylIndex ? "text-decoration:underline;text-underline-offset:6px;font-weight:700" : "opacity:.55"}">${esc(session.answered ? x.text : x.plain)}</span>`).join('<span class="sep">-</span>');
+    const shownRoman = romanHtml(w, q.sylIndex, true);
     let fb = "";
     if (session.answered) {
       const ok = session.lastResult === q.answer;
