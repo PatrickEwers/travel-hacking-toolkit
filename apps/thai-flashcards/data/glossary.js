@@ -1,5 +1,6 @@
-// Extra lookup-only entries for the word-by-word gloss: pieces of lesson sentences that are not
-// cards of their own. Same format as words.js: [thai, romanization, english]. Never scheduled.
+// Extra entries for the word-by-word gloss: words that are not in the dictionary.
+// Same format as words.js: [thai, romanization, english]. An entry becomes a real (priority) card
+// only when it appears in a lesson sentence; otherwise it is lookup-only.
 const THAI_GLOSSARY = [
   ["ไทย", "tai", "Thai"],
   ["นิด", "nít", "a bit"],
