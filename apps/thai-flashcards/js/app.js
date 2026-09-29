@@ -438,7 +438,8 @@
       const o = BY_ID[id];
       let cls = "";
       if (session.answered) { if (id === q.answer) cls = "correct"; else if (id === session.lastResult) cls = "wrong"; }
-      const label = k === "mc" ? esc(o.en) : `<span class="thai">${esc(o.thai)}</span>${session.answered && state.settings.showRoman ? `<span class="roman" style="font-size:.9rem">${romanHtml(o)}</span>` : ""}`;
+      // Thai answers: romanization first, Thai script small underneath.
+      const label = k === "mc" ? esc(o.en) : `<span class="opt-stack"><span class="roman opt-roman">${romanHtml(o)}</span><span class="thai-s">${esc(o.thai)}</span></span>`;
       return `<button class="${cls}" data-action="choose" data-id="${esc(id)}" ${session.answered ? "disabled" : ""}><kbd>${i + 1}</kbd>${label}</button>`;
     }).join("");
     let fb = "";

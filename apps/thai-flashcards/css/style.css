@@ -212,3 +212,8 @@ kbd { font-family: var(--font); }
   .wrow .right { flex-wrap: wrap; justify-content: flex-start; }
   .wrow .right .btn.icon { margin-left: auto; }
 }
+
+/* quiz answers in Thai: romanization first, script below */
+.options button .opt-stack { display: flex; flex-direction: column; gap: 2px; }
+.options button .opt-roman { font-size: 1.2rem; }
+.options button .opt-roman .syl { font-weight: 700; }
