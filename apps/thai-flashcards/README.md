@@ -47,7 +47,9 @@ Lesson cards are **priority** until mastered:
 - **mastered** means six correct answers in a row (interval ≥ 21 days, reps ≥ 3), after which the card follows the normal SM-2 schedule;
 - the lesson "Speak" drill starts English-first so you practise *saying* the Thai, then flip to hear and check; "Read" starts Thai-first. The direction switch on the study screen always applies, to lesson cards too.
 
-Home shows per-lesson progress with Speak / Listen / quiz drills. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
+Every word inside a lesson sentence also becomes its own priority card (tagged with the lesson it first appears in), introduced just before the sentence that uses it; its back lists the lesson sentences it comes from. Dictionary phrases such as พูดอีกครั้ง or ภาษาไทย are broken into their words via `THAI_GLOSS_SPLIT` in `data/glossary.js`, and pieces that are not dictionary words (โซดา, ธุรกิจ, ภาค …) come from the glossary.
+
+Home shows per-lesson progress with Speak / Read / Listen / quiz drills. Browse lists everything romanization-first (or English-first) in A–Z order, filterable by lesson, category, stage and usage mark. To add a lesson, append an object to `data/lessons.js` in the same romanization system and run `node test/run.js`, which checks every item.
 
 ## Word-by-word gloss
 

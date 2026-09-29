@@ -9,7 +9,7 @@
     colors: "Colors", clothing: "Clothing", work: "Work & study", adverbs: "Adverbs", classifiers: "Classifiers",
     emergency: "Emergency", tech: "Tech", lesson: "Teacher lessons" };
   const DEFAULTS = { newPerDay: 20, front: "thai", autoplay: true, rate: 0.9, slowRate: 0.55, voiceURI: "",
-    engine: "auto", categories: [], practiceSource: "queue", showRoman: true };
+    engine: "auto", categories: [], practiceSource: "queue", showRoman: true, browseBy: "roman" };
   const GRADES = [
     { q: 1, cls: "again", label: "Again", key: "1" },
     { q: 3, cls: "hard", label: "Hard", key: "2" },
@@ -32,25 +32,51 @@
   const USAGE = typeof THAI_USAGE !== "undefined" ? THAI_USAGE : {};
   const USAGE_LABEL = { rare: "⚠ not in everyday use", formal: "formal · you'll hear it, not say it", note: "ⓘ spoken form differs" };
   const isDeprioritized = id => { const u = USAGE[id]; return !!u && (u.level === "rare" || u.level === "formal"); };
+  const GLOSSARY = typeof THAI_GLOSSARY !== "undefined" ? THAI_GLOSSARY : [];
+  const GLOSS_SKIP = new Set(typeof THAI_GLOSS_SPLIT !== "undefined" ? THAI_GLOSS_SPLIT : []);
+  const LESSON_RANK = {}; let rankN = 0;
+  const addLesson = (w, n) => { if (w.lesson == null) w.lesson = n; w.lessons = w.lessons || []; if (!w.lessons.includes(n)) w.lessons.push(n); };
+  const rankOf = id => { if (!(id in LESSON_RANK)) LESSON_RANK[id] = rankN++; };
+  // Pass 1: each lesson item becomes a card (or tags the matching dictionary word).
   for (const L of LESSONS) for (const it of L.items) {
-    const ex = BY_ID[it[0]];
-    if (ex) { ex.lesson = L.lesson; continue; }
-    const w = { id: it[0], thai: it[0], roman: it[1], en: it[2], cat: "lesson", lesson: L.lesson, idx: WORDS.length, syl: SM2.analyze(it[1]) };
-    WORDS.push(w); BY_ID[w.id] = w;
+    let w = BY_ID[it[0]];
+    if (!w) { w = { id: it[0], thai: it[0], roman: it[1], en: it[2], cat: "lesson", idx: WORDS.length, syl: SM2.analyze(it[1]) }; WORDS.push(w); BY_ID[w.id] = w; }
+    addLesson(w, L.lesson);
+  }
+  // Building blocks for the gloss: dictionary words and the glossary, never other lesson sentences.
+  const GLOSS_INDEX = Gloss.buildIndex(WORDS.filter(w => w.cat !== "lesson").concat(GLOSSARY.map(g => ({ thai: g[0], roman: g[1], en: g[2] }))));
+  // Pass 2: every word inside a lesson sentence gets its own lesson card, introduced just before the sentence.
+  for (const L of LESSONS) for (const it of L.items) {
+    const g = Gloss.gloss({ thai: it[0], roman: it[1] }, GLOSS_INDEX, { skip: GLOSS_SKIP });
+    if (g) for (const part of g.parts) {
+      if (part.unmatched || part.thai === "ๆ") continue;
+      let w = BY_ID[part.thai];
+      if (!w) { w = { id: part.thai, thai: part.thai, roman: part.roman, en: part.en, cat: "lesson", derived: true, idx: WORDS.length, syl: SM2.analyze(part.roman) }; WORDS.push(w); BY_ID[w.id] = w; }
+      addLesson(w, L.lesson);
+      w.inSentences = w.inSentences || [];
+      if (!w.inSentences.includes(it[0])) w.inSentences.push(it[0]);
+      rankOf(w.id);
+    }
+    rankOf(it[0]);
   }
   const ALL_IDS = WORDS.map(w => w.id);
-  const GLOSS_INDEX = Gloss.buildIndex(WORDS.concat((typeof THAI_GLOSSARY !== "undefined" ? THAI_GLOSSARY : []).map(g => ({ thai: g[0], roman: g[1], en: g[2] }))));
+  const lessonIds = n => WORDS.filter(w => w.lessons && w.lessons.includes(n)).map(w => w.id).sort((a, b) => LESSON_RANK[a] - LESSON_RANK[b]);
   const glossCache = {};
   function glossHtml(w) {
-    if (!(w.id in glossCache)) glossCache[w.id] = Gloss.gloss(w, GLOSS_INDEX);
+    if (!(w.id in glossCache)) glossCache[w.id] = Gloss.gloss(w, GLOSS_INDEX, { skip: GLOSS_SKIP });
     const g = glossCache[w.id];
     if (!g) return "";
     return `<div class="gloss">${g.parts.map(p => p.unmatched
       ? `<span class="gpart unmatched"><span class="gr">${esc(p.roman)}</span></span>`
       : `<button class="gpart" data-action="play" data-text="${esc(p.thai)}" title="Play this word"><span class="gt">${esc(p.thai)}</span><span class="gr">${romanHtml({ roman: p.roman, syl: SM2.analyze(p.roman) })}</span><span class="ge">${esc(p.en)}</span></button>`).join("")}</div>`;
   }
-  const LESSON_RANK = {}; { let r = 0; for (const L of LESSONS) for (const it of L.items) LESSON_RANK[it[0]] = r++; }
-  const lessonIds = n => LESSONS.filter(L => L.lesson === n).flatMap(L => L.items.map(it => it[0]));
+  // On a word card: the lesson sentences it comes from, tappable to hear them.
+  function inLessonsHtml(w) {
+    const ids = (w.inSentences || []).filter(id => id !== w.id).slice(0, 3);
+    if (!ids.length) return "";
+    return `<div class="in-lessons"><div class="meta">In your lessons</div>${ids.map(id => { const x = BY_ID[id]; return `<button class="inl" data-action="play" data-text="${esc(x.thai)}" title="Play the sentence"><span class="roman">${romanHtml(x)}</span><span class="en">${esc(x.en)}</span></button>`; }).join("")}</div>`;
+  }
+  const lessonBadge = w => w.lessons ? `<span class="badge prio" title="From lesson ${w.lessons.join(" and ")}">L${w.lessons.join("·")}</span>` : "";
 
   // ---------- persistence ----------
   let state = load();
@@ -299,7 +325,7 @@
     if (!LESSONS.length) return "";
     return `<div class="panel">
       <h2>Teacher lessons</h2>
-      <p>Lesson sentences jump the queue and repeat on a tight ladder (1, 2, 4, 7, 14, 30 days) until you have said each one right six times in a row. A slip restarts the ladder. Mastered sentences settle into the normal schedule. The direction switch on the study screen applies to lesson cards too; Speak starts English-first, Read starts Thai-first.</p>
+      <p>Lesson sentences jump the queue and repeat on a tight ladder (1, 2, 4, 7, 14, 30 days) until you have said each one right six times in a row. A slip restarts the ladder. Mastered sentences settle into the normal schedule. Every word inside a lesson sentence also gets its own card, introduced just before the sentence, with the sentences it comes from shown on its back. The direction switch on the study screen applies to lesson cards too; Speak starts English-first, Read starts Thai-first.</p>
       <div class="list" style="margin-top:10px">${LESSONS.map(L => { const st = lessonStats(L.lesson); const pct = st.total ? Math.round(100 * st.mastered / st.total) : 0; return `<div class="wrow">
         <div class="main" style="flex-direction:column;align-items:stretch;gap:6px"><div><b>Lesson ${L.lesson}</b> · ${esc(L.title)} <span class="meta">${st.total} cards · ${st.seen} seen · ${st.mastered} mastered${st.priorityDue ? " · " + st.priorityDue + " to practise now" : ""}</span></div><div class="progress"><div style="width:${pct}%"></div></div></div>
         <div class="right"><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}" data-front="english" title="English first: say the Thai, flip to check">🗣 Speak</button><button class="btn sm" data-action="start" data-kind="flash" data-source="lesson" data-lesson="${L.lesson}" data-front="thai" title="Thai first: read it, flip for the meaning">📖 Read</button><button class="btn sm" data-action="start" data-kind="listen" data-source="lesson" data-lesson="${L.lesson}">🎧 Listen</button><button class="btn sm" data-action="start" data-kind="reverse" data-source="lesson" data-lesson="${L.lesson}">EN→ไทย quiz</button></div></div>`; }).join("")}</div>
@@ -379,6 +405,7 @@
       ${toneChips(w)}
       <div class="en">${esc(w.en)}</div>
       ${glossHtml(w)}
+      ${inLessonsHtml(w)}
       ${usageNote(w)}
       ${playBtns(w, opts)}
       <div class="meta">${card && card.seen ? `interval ${card.interval} d · EF ${card.ef.toFixed(2)} · ${card.lapses} lapse${card.lapses === 1 ? "" : "s"} · ${card.correct}/${card.seen} right` : "first time seeing this card"}</div>
@@ -418,7 +445,7 @@
     if (session.answered) {
       const ok = session.lastResult === q.answer;
       fb = `<div class="feedback ${ok ? "ok" : "bad"}"><div class="title">${ok ? "✔ Correct" : "✘ Not quite"}</div>
-        <div class="thai small">${esc(w.thai)}</div><div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${glossHtml(w)}${usageNote(w)}${playBtns(w)}
+        <div class="thai small">${esc(w.thai)}</div><div class="roman">${romanHtml(w)}</div>${toneChips(w)}<div class="en">${esc(w.en)}</div>${glossHtml(w)}${inLessonsHtml(w)}${usageNote(w)}${playBtns(w)}
         <button class="btn primary" data-action="next">Continue ⏎</button></div>`;
     }
     return `<div class="card">${catBadge(w)}<span class="stage">${stageBadge(card, w)}</span>${usagePill(w)}${prompt}</div><div class="options">${opts}</div>${fb}<div class="kbd-help">1–4 choose · P play · ⏎ continue</div>`;
@@ -445,24 +472,48 @@
       <div class="tones" style="margin-top:14px">${chips}</div>${fb}<div class="kbd-help">1–5 choose tone · P play · S slow · ⏎ continue</div>`;
   }
 
-  const ui = { search: "", cat: "", stage: "", focusSearch: false, interacted: false, audioTest: false };
+  const ui = { search: "", cat: "", stage: "", lesson: "", shown: 150, focusSearch: false, interacted: false, audioTest: false };
+  const sortKey = {
+    roman: w => SM2.stripTone(w.roman).toLowerCase().replace(/[^a-z ]/g, "").trim(),
+    en: w => w.en.toLowerCase().replace(/[()"'?!.,…]/g, "").replace(/^(to|a|an|the)\s+/, "").trim()
+  };
   function viewBrowse() {
+    const by = state.settings.browseBy === "en" ? "en" : "roman";
     const term = ui.search.trim().toLowerCase();
     const termPlain = SM2.stripTone(term);
-    let rows = WORDS.filter(w => !ui.cat || (ui.cat.startsWith("lesson:") ? w.lesson === Number(ui.cat.slice(7)) : w.cat === ui.cat));
+    let rows = WORDS;
+    if (ui.lesson === "any") rows = rows.filter(w => w.lessons);
+    else if (ui.lesson === "none") rows = rows.filter(w => !w.lessons);
+    else if (ui.lesson) rows = rows.filter(w => w.lessons && w.lessons.includes(Number(ui.lesson)));
+    if (ui.cat) rows = rows.filter(w => w.cat === ui.cat);
     if (ui.stage) rows = rows.filter(w => SM2.stage(getCard(w.id)) === ui.stage || (ui.stage === "leech" && getCard(w.id) && SM2.isLeech(getCard(w.id))) || (ui.stage.startsWith("usage:") && USAGE[w.id] && USAGE[w.id].level === ui.stage.slice(6)));
     if (term) rows = rows.filter(w => w.thai.includes(term) || SM2.stripTone(w.roman).includes(termPlain) || w.en.toLowerCase().includes(term));
-    const total = rows.length;
-    rows = rows.slice(0, 150);
+    const keyed = rows.map(w => [sortKey[by](w), w]).sort((a, b) => a[0].localeCompare(b[0]));
+    const total = keyed.length, shown = keyed.slice(0, ui.shown);
+    let lastLetter = "";
+    const list = shown.map(([k, w]) => {
+      const c = getCard(w.id);
+      const letter = /^[a-z]/.test(k) ? k[0].toUpperCase() : "#";
+      const head = letter !== lastLetter ? `<div class="letter">${letter}</div>` : "";
+      lastLetter = letter;
+      const main = by === "en"
+        ? `<div class="bh en-h">${esc(w.en)}</div><div class="bs"><span class="roman">${romanHtml(w)}</span><span class="thai-s">${esc(w.thai)}</span></div>`
+        : `<div class="bh roman">${romanHtml(w)}</div><div class="bs"><span class="en">${esc(w.en)}</span><span class="thai-s">${esc(w.thai)}</span></div>`;
+      return `${head}<div class="wrow"><div class="main brow">${main}</div>
+        <div class="right">${lessonBadge(w)}${USAGE[w.id] ? `<span class="badge usage-${USAGE[w.id].level}" title="${esc(USAGE[w.id].note)}">${USAGE[w.id].level}</span>` : ""}<span class="due">${dueText(c)}</span>${stageBadge(c, w)}<button class="btn icon" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button></div></div>`;
+    }).join("");
     return `<div class="toolbar">
-        <input type="search" id="search" placeholder="Search Thai, romanization or English…" value="${esc(ui.search)}" data-input="search">
-        <select data-input="cat"><option value="">All categories</option>${LESSONS.map(L => `<option value="lesson:${L.lesson}" ${ui.cat === "lesson:" + L.lesson ? "selected" : ""}>Lesson ${L.lesson}</option>`).join("")}${CATS.map(c => `<option value="${c}" ${ui.cat === c ? "selected" : ""}>${CAT_LABELS[c] || c}</option>`).join("")}</select>
+        <span class="seg"><button class="${by === "roman" ? "on" : ""}" data-action="browseBy" data-by="roman">Romanized A–Z</button><button class="${by === "en" ? "on" : ""}" data-action="browseBy" data-by="en">English A–Z</button></span>
+        <input type="search" id="search" placeholder="${by === "en" ? "Search English, romanization or Thai…" : "Search romanization, English or Thai…"}" value="${esc(ui.search)}" data-input="search">
+      </div>
+      <div class="toolbar">
+        <select data-input="lesson"><option value="">All words</option>${LESSONS.map(L => `<option value="${L.lesson}" ${ui.lesson === String(L.lesson) ? "selected" : ""}>Lesson ${L.lesson}: ${esc(L.title)}</option>`).join("")}<option value="any" ${ui.lesson === "any" ? "selected" : ""}>Any lesson</option><option value="none" ${ui.lesson === "none" ? "selected" : ""}>Not from a lesson</option></select>
+        <select data-input="cat"><option value="">All categories</option>${CATS.filter(c => c !== "lesson").map(c => `<option value="${c}" ${ui.cat === c ? "selected" : ""}>${CAT_LABELS[c] || c}</option>`).join("")}</select>
         <select data-input="stage"><option value="">Any stage</option>${["new", "learning", "relearning", "young", "mature", "leech"].map(s => `<option value="${s}" ${ui.stage === s ? "selected" : ""}>${s}</option>`).join("")}<option disabled>──</option><option value="usage:rare" ${ui.stage === "usage:rare" ? "selected" : ""}>⚠ not in everyday use</option><option value="usage:formal" ${ui.stage === "usage:formal" ? "selected" : ""}>formal / heard not said</option><option value="usage:note" ${ui.stage === "usage:note" ? "selected" : ""}>ⓘ spoken form differs</option></select>
       </div>
-      <p class="meta" style="margin:0 0 10px">${total} word${total === 1 ? "" : "s"}${total > 150 ? " (showing first 150)" : ""}</p>
-      <div class="list">${rows.map(w => { const c = getCard(w.id); return `<div class="wrow">
-        <div class="main"><span class="thai">${esc(w.thai)}</span><span class="roman">${romanHtml(w)}</span><span class="en">${esc(w.en)}</span></div>
-        <div class="right">${w.lesson != null ? `<span class="badge prio">L${w.lesson}</span>` : ""}${USAGE[w.id] ? `<span class="badge usage-${USAGE[w.id].level}" title="${esc(USAGE[w.id].note)}">${USAGE[w.id].level}</span>` : ""}<span class="due">${dueText(c)}</span>${stageBadge(c, w)}<button class="btn icon" data-action="play" data-text="${esc(w.thai)}" title="Play">🔊</button></div></div>`; }).join("")}</div>`;
+      <p class="meta" style="margin:0 0 10px">${total} word${total === 1 ? "" : "s"}${total > shown.length ? `, showing ${shown.length}` : ""}</p>
+      <div class="list">${list}</div>
+      ${total > shown.length ? `<div class="row" style="justify-content:center;margin-top:12px"><button class="btn" data-action="more">Show ${Math.min(150, total - shown.length)} more</button></div>` : ""}`;
   }
 
   function viewStats() {
@@ -553,6 +604,8 @@
     }
     else if (a === "end") { session = null; state.view = "home"; render(); }
     else if (a === "flip") { flip(); }
+    else if (a === "browseBy") { state.settings.browseBy = el.dataset.by; save(); ui.shown = 150; render(); }
+    else if (a === "more") { ui.shown += 150; render(); }
     else if (a === "front") { state.settings.front = el.dataset.front; save(); if (session) { session.flipped = false; render(); } else render(); }
     else if (a === "grade") { if (session && session.flipped) { grade(session.current, Number(el.dataset.q)); advance(); } }
     else if (a === "choose") { if (session && !session.answered) { const id = el.dataset.id; session.answered = true; session.lastResult = id; const ok = id === session.q.answer; grade(session.current, ok ? (Date.now() - session.shownAt < 3500 ? 5 : 4) : 1); render(); if (!ok || session.kind === "listen") play(BY_ID[session.current].thai); } }
@@ -575,13 +628,14 @@
     } else if (el.dataset.cat) {
       const on = CATS.filter(c => { const box = document.querySelector(`[data-cat="${c}"]`); return box && box.checked; });
       state.settings.categories = on.length === CATS.length ? [] : on; save(); render();
-    } else if (el.dataset.input === "cat") { ui.cat = el.value; render(); }
-    else if (el.dataset.input === "stage") { ui.stage = el.value; render(); }
+    } else if (el.dataset.input === "cat") { ui.cat = el.value; ui.shown = 150; render(); }
+    else if (el.dataset.input === "lesson") { ui.lesson = el.value; ui.shown = 150; render(); }
+    else if (el.dataset.input === "stage") { ui.stage = el.value; ui.shown = 150; render(); }
     else if (el.dataset.input === "extraKind") { ui.extraKind = el.value; render(); }
     else if (el.dataset.input === "extraCat") { ui.extraCat = el.value; render(); }
     else if (el.dataset.input === "import") { importJson(el.files[0]); }
   });
-  document.addEventListener("input", e => { if (e.target.dataset.input === "search") { ui.search = e.target.value; ui.focusSearch = true; render(); } });
+  document.addEventListener("input", e => { if (e.target.dataset.input === "search") { ui.search = e.target.value; ui.shown = 150; ui.focusSearch = true; render(); } });
   document.addEventListener("keydown", e => {
     if (e.target.matches("input, select, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
     if (!session || !session.current) return;

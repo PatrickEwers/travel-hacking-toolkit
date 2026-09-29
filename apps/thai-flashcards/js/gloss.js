@@ -18,7 +18,8 @@
 
   /* word: {thai, roman}. Returns { parts: [{thai, roman, en}|{roman, unmatched:true}], matched, unmatched }
      or null when a gloss would not help (single word, or too little matched). */
-  function gloss(word, idx) {
+  function gloss(word, idx, opts) {
+    const skip = (opts && opts.skip) || null;
     const tokens = String(word.roman).normalize("NFC").split(/[-\s]+/).filter(Boolean);
     if (tokens.length < 2) return null;
     const parts = []; let cursor = 0, i = 0, matched = 0, unmatched = 0;
@@ -31,6 +32,7 @@
         let best = null;
         for (const c of cands) {
           if (c.thai === word.thai) continue;                 // the card itself is not a gloss of itself
+          if (skip && skip.has(c.thai)) continue;             // phrases are shown as their individual words
           const pos = word.thai.indexOf(c.thai, cursor);
           if (pos >= 0 && (!best || pos < best.pos)) best = { thai: c.thai, roman: key, en: c.en, pos };
         }

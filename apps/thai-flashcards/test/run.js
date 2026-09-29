@@ -125,8 +125,11 @@ t("usage notes reference real words and valid levels; deprioritised cards sort l
 });
 t("word-by-word gloss segments lesson sentences and dictionary phrases", () => {
   const idx = Gloss.buildIndex(WORDS.map(w => ({ thai: w[0], roman: w[1], en: w[2] })).concat(GLOSSARY.map(g => ({ thai: g[0], roman: g[1], en: g[2] }))));
-  const g1 = Gloss.gloss({ thai: "ผมพูดภาษาไทยนิดหน่อยครับ", roman: "pǒm pôot paa-sǎa tai nít nòi kráp" }, idx);
-  assert.deepStrictEqual(g1.parts.map(p => p.thai), ["ผม", "พูด", "ภาษาไทย", "นิดหน่อย", "ครับ"]);
+  const skip = new Set(GLOSSARY.split);
+  const g1 = Gloss.gloss({ thai: "ผมพูดภาษาไทยนิดหน่อยครับ", roman: "pǒm pôot paa-sǎa tai nít nòi kráp" }, idx, { skip });
+  assert.deepStrictEqual(g1.parts.map(p => p.thai), ["ผม", "พูด", "ภาษา", "ไทย", "นิดหน่อย", "ครับ"]);
+  const g0 = Gloss.gloss({ thai: "พูดอีกครั้งครับ", roman: "pôot èek kráng kráp" }, idx, { skip });
+  assert.deepStrictEqual(g0.parts.map(p => p.thai), ["พูด", "อีกครั้ง", "ครับ"]);
   const g2 = Gloss.gloss({ thai: "ห้องน้ำอยู่ที่ไหน", roman: "hâwng-náam-yòo-têe-nǎi" }, idx);
   assert.deepStrictEqual(g2.parts.map(p => p.thai), ["ห้องน้ำ", "อยู่", "ที่ไหน"]);
   assert.strictEqual(Gloss.gloss({ thai: "สวัสดี", roman: "sà-wàt-dee" }, idx), null);       // one word, no gloss
@@ -136,7 +139,9 @@ t("word-by-word gloss segments lesson sentences and dictionary phrases", () => {
   assert.deepStrictEqual(g3.parts.map(p => p.thai), ["เจอ", "กัน", "ใหม่", "ครับ"]);
   // every lesson sentence with 2+ words gets a gloss with at most one unmatched piece
   let glossed = 0, total = 0;
-  for (const L of LESSONS) for (const it of L.items) { if (!/[-\s]/.test(it[1])) continue; total++; const g = Gloss.gloss({ thai: it[0], roman: it[1] }, idx); if (g) { glossed++; assert.ok(g.unmatched <= 1, it[1] + " -> " + JSON.stringify(g.parts)); } }
+  // every word of every lesson sentence resolves to a known word, so each gets its own card
+  for (const L of LESSONS) for (const it of L.items) { if (!/[-\s]/.test(it[1])) continue; total++; const g = Gloss.gloss({ thai: it[0], roman: it[1] }, idx, { skip }); if (g) { glossed++; assert.strictEqual(g.unmatched, 0, it[1] + " -> " + JSON.stringify(g.parts)); } }
   assert.ok(glossed >= total - 3, glossed + "/" + total);
+  for (const k of GLOSSARY.split) assert.ok(WORDS.some(w => w[0] === k), "split entry not in dictionary: " + k);
 });
 console.log("\n" + passed + " tests passed");
