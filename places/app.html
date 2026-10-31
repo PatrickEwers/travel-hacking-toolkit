@@ -149,7 +149,7 @@ function classify({ name = '', osmType = '', osmClass = '', text = '' }) {
 
 // ---------- helpers ----------
 const gq = p => p.gmaps_query || [p.name, p.address || p.city].filter(Boolean).join(', ');
-const gmaps = p => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(gq(p));
+const gmaps = p => p.google_maps_url || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(gq(p));
 const gdirections = p => 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(gq(p));
 function dist(a, b) {
   const R = 6371000, r = x => x * Math.PI / 180;
@@ -231,12 +231,13 @@ function renderList() {
   el.innerHTML = `<div style="height:${topH}px"></div>
     <div class="ltools"><span class="meta">Sort</span>
       <select class="inline" id="sort">${[['category','By category'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
-      <span style="flex:1"></span><button id="export">Export…</button></div>${body}`;
+      <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>${body}`;
   el.querySelectorAll('.lgroup h3').forEach(h => h.style.top = topH + 'px');
   el.querySelectorAll('.litem').forEach(r => r.onclick = e => { if (e.target.dataset.star) return; showPlace(r.dataset.id); });
   el.querySelectorAll('[data-star]').forEach(b => b.onclick = () => toggleStar(b.dataset.star));
   document.getElementById('sort').onchange = e => { sortBy = e.target.value; renderList(); };
   document.getElementById('export').onclick = showExport;
+  document.getElementById('import').onclick = showImport;
 }
 
 function renderAll() { renderChips(); renderMap(); if (view === 'list') renderList(); }
@@ -419,10 +420,158 @@ function showExport() {
     JSON.stringify({ exported: new Date().toISOString(), new_places: load(LS.places), edits: load(LS.over), new_categories: load(LS.cats) }, null, 2));
 }
 
+// ---------- import from Google Takeout ----------
+// Accepts the Takeout .zip, or individual files from it:
+//   Maps (your places)/Saved Places.json   GeoJSON, starred places, usually with coordinates
+//   Maps (your places)/Reviews.json        GeoJSON, places you reviewed
+//   Maps/My labeled places/Labeled places.json
+//   Saved/<list name>.csv                  one CSV per saved list; often only Title/Note/URL, no coordinates
+const FAV_LISTS = /^(favou?rite|starred|star)/i;
+function coordsFromUrl(u) {
+  if (!u) return null;
+  const m = u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || u.match(/[?&](?:q|query|ll)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/);
+  return m ? { lat:+m[1], lng:+m[2] } : null;
+}
+function nameFromUrl(u) {
+  const m = (u || '').match(/\/place\/([^/@?]+)/);
+  return m ? decodeURIComponent(m[1]).replace(/\+/g, ' ') : '';
+}
+function parseCSV(text) {
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i+1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+    else f += c;
+  }
+  if (f || row.length) { row.push(f); rows.push(row); }
+  return rows.filter(r => r.some(x => x.trim()));
+}
+function fromGeoJSON(json, source) {
+  return (json.features || []).map(ft => {
+    const pr = ft.properties || {}, loc = pr.location || pr.Location || {};
+    const g = (ft.geometry && ft.geometry.coordinates) || [];
+    let lat = +g[1], lng = +g[0];
+    const geo = loc['Geo Coordinates'];
+    if ((!lat && !lng) && geo) { lat = +geo.Latitude; lng = +geo.Longitude; }
+    const url = pr.google_maps_url || pr['Google Maps URL'] || '';
+    if (!lat && !lng) { const c = coordsFromUrl(url); if (c) ({ lat, lng } = c); }
+    return {
+      name: loc.name || loc['Business Name'] || pr.Title || pr.name || nameFromUrl(url),
+      address: loc.address || loc.Address || pr.address || '',
+      country: loc.country_code || loc['Country Code'] || '',
+      lat: lat || null, lng: lng || null, url,
+      note: pr.Comment || pr.review_text_published || pr['Review Comment'] || '',
+      list: source, starred: /saved places/i.test(source),
+      date: (pr.date || pr.Published || pr.Updated || '').slice(0, 10)
+    };
+  }).filter(x => x.name);
+}
+function fromSavedCSV(text, listName) {
+  const rows = parseCSV(text); if (!rows.length) return [];
+  const head = rows[0].map(h => h.trim().toLowerCase());
+  const col = n => head.indexOf(n);
+  const ui = col('url');
+  return rows.slice(1).map(r => {
+    // unquoted URLs like .../@13.74,100.48,17z contain commas: glue the extra fields back into the URL
+    if (ui >= 0 && r.length > head.length) r = r.slice(0, ui).concat(r.slice(ui, ui + r.length - head.length + 1).join(','), r.slice(ui + r.length - head.length + 1));
+    const url = r[ui] || '';
+    const c = coordsFromUrl(url);
+    return { name: (r[col('title')] || '').trim() || nameFromUrl(url), note: [r[col('note')], r[col('comment')]].filter(Boolean).join(' — '),
+      tags: (r[col('tags')] || '').split(/[,;]/).map(s => s.trim()).filter(Boolean),
+      url, lat: c ? c.lat : null, lng: c ? c.lng : null, address: '', list: listName, starred: FAV_LISTS.test(listName) };
+  }).filter(x => x.name);
+}
+async function readImportFiles(files) {
+  const out = [];
+  const handle = async (path, text) => {
+    const base = path.split('/').pop(), listName = base.replace(/\.(csv|json)$/i, '');
+    if (/\.json$/i.test(base)) { try { const j = JSON.parse(text); if (j.features) out.push(...fromGeoJSON(j, listName)); } catch (e) {} }
+    else if (/\.csv$/i.test(base)) out.push(...fromSavedCSV(text, listName));
+  };
+  for (const f of files) {
+    if (/\.zip$/i.test(f.name)) {
+      if (!window.JSZip) await new Promise((ok, err) => { const s = document.createElement('script');
+        s.src = 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'; s.onload = ok; s.onerror = err; document.head.appendChild(s); });
+      const zip = await JSZip.loadAsync(f);
+      for (const path of Object.keys(zip.files)) {
+        if (!/(maps|saved)/i.test(path) || !/\.(csv|json)$/i.test(path)) continue;
+        await handle(path, await zip.files[path].async('string'));
+      }
+    } else await handle(f.name, await f.text());
+  }
+  return out;
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function geocodeName(name, hint) {
+  const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&q=${encodeURIComponent([name, hint].filter(Boolean).join(', '))}`;
+  const r = await fetch(url, { headers:{ 'Accept-Language':'en' } }); if (!r.ok) return null;
+  const [hit] = await r.json(); if (!hit) return null;
+  const a = hit.address || {};
+  return { lat:+hit.lat, lng:+hit.lon, address: hit.display_name.split(',').slice(0,4).join(','), city: a.city || a.town || a.state || '',
+    country: a.country || '', osmType: hit.type, osmClass: hit.category };
+}
+function showImport() {
+  if (view === 'list') setView('map');
+  open(`<h2>Import from Google Maps</h2>
+    <ol class="meta" style="padding-left:18px;margin:6px 0">
+      <li>Go to <a href="https://takeout.google.com" target="_blank" rel="noopener">takeout.google.com</a> → “Deselect all”.</li>
+      <li>Tick <b>Saved</b> (your lists) and <b>Maps (your places)</b> (starred places, reviews). Optionally <b>Maps</b> (labeled places).</li>
+      <li>Export once, download the .zip, and pick it here. Individual .csv/.json files work too.</li>
+    </ol>
+    <label>Hint for places without coordinates (helps the lookup)<input id="i-hint" placeholder="e.g. Bangkok"></label>
+    <div class="row"><input type="file" id="i-file" accept=".zip,.json,.csv" multiple></div>
+    <div id="i-status" class="meta" style="margin-top:8px"></div>`);
+  document.getElementById('i-file').onchange = async e => {
+    const st = document.getElementById('i-status'), hint = document.getElementById('i-hint').value.trim();
+    st.textContent = 'Reading…';
+    let items;
+    try { items = await readImportFiles([...e.target.files]); } catch (err) { st.textContent = 'Could not read that file: ' + err.message; return; }
+    if (!items.length) { st.textContent = 'No saved places found. Make sure the export includes “Saved” or “Maps (your places)”.'; return; }
+    // de-duplicate: same Google URL, or same name within 150 m; merge lists/stars
+    const existing = allPlaces(), merged = [];
+    for (const it of items) {
+      const twin = merged.find(m => (it.url && m.url === it.url) || (m.name.toLowerCase() === it.name.toLowerCase() && (!m.lat || !it.lat || dist(m, it) < 150)));
+      if (twin) { twin.lists.add(it.list); twin.starred ||= it.starred; twin.note ||= it.note; if (!twin.lat && it.lat) Object.assign(twin, { lat:it.lat, lng:it.lng }); twin.tags.push(...(it.tags||[])); }
+      else merged.push({ ...it, lists: new Set([it.list]), tags: [...(it.tags || [])] });
+    }
+    const fresh = merged.filter(m => !existing.some(p => (m.url && p.google_maps_url === m.url) || (p.name.toLowerCase() === m.name.toLowerCase() && (!m.lat || dist(p, m) < 150))));
+    const skipped = merged.length - fresh.length, failed = [], added = [];
+    const today = new Date().toISOString().slice(0,10);
+    for (let i = 0; i < fresh.length; i++) {
+      const m = fresh[i];
+      st.textContent = `Importing ${i + 1} / ${fresh.length}: ${m.name}${!m.lat ? ' (looking up location…)' : ''}`;
+      let geo = null;
+      if (!m.lat) { try { geo = await geocodeName(m.name, m.address || hint); } catch (err) {} await sleep(1100); } // Nominatim: max 1 req/s
+      if (!m.lat && !geo) { failed.push(m); continue; }
+      const listTags = [...m.lists].map(s => s.toLowerCase());
+      const p = { id: slug(m.name) + '-' + Math.random().toString(36).slice(2, 6), name: m.name,
+        category: classify({ name: m.name, osmType: geo && geo.osmType, osmClass: geo && geo.osmClass, text: [m.note, ...listTags, ...m.tags].join(' ') }),
+        city: (geo && geo.city) || '', country: (geo && geo.country) || m.country || '', address: m.address || (geo && geo.address) || '',
+        lat: +(m.lat || geo.lat).toFixed(6), lng: +(m.lng || geo.lng).toFixed(6), coords_precision: m.lat ? 'exact' : 'approximate',
+        google_maps_url: m.url || undefined, notes: m.note || '', tags: [...new Set(listTags.concat(m.tags))], sources: [],
+        starred: !!m.starred, visited: null, added: today, imported_from: 'google-takeout' };
+      added.push(p);
+    }
+    store(LS.places, load(LS.places).concat(added)); fitted = false; renderAll();
+    st.innerHTML = `<b>Imported ${added.length}</b>${skipped ? ` · ${skipped} already here` : ''}${failed.length ? ` · ${failed.length} couldn't be located` : ''}.
+      Categories were set automatically; fix any from the place card or the list.
+      ${added.some(p => p.coords_precision === 'approximate') ? '<br>Pins looked up by name are approximate: check them.' : ''}
+      ${failed.length ? `<br><button id="i-failed">Download the ${failed.length} unlocated places</button>` : ''}
+      <br>Then use Export… → My changes and send the file to Claude to save it for all devices.`;
+    const fb = document.getElementById('i-failed');
+    if (fb) fb.onclick = () => download('unlocated-places.csv', 'text/csv', 'name,lists,note,url\n' +
+      failed.map(m => [m.name, [...m.lists].join('; '), m.note, m.url].map(v => `"${String(v || '').replace(/"/g,'""')}"`).join(',')).join('\n'));
+  };
+}
+
 // deep links: #<place-id> opens a place, #list opens the list
 renderAll();
 const hash = decodeURIComponent(location.hash.slice(1));
 if (hash === 'list') setView('list');
+else if (hash === 'import') showImport();
 else if (hash) showPlace(hash);
 </script>
 </body>

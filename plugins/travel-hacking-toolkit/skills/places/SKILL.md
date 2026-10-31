@@ -48,7 +48,20 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
   line which new category you'd suggest. Don't create categories the user didn't ask for.
 - **Stars:** `"starred": true`. Set it when the user says star / favourite / must-go.
 
+## Importing from Google Maps
+
+There is no Google Maps connector and no API for a user's saved places. The route is Google Takeout:
+takeout.google.com → Deselect all → tick **Saved** (lists, CSV per list) and **Maps (your places)**
+(`Saved Places.json`, `Reviews.json`) → export → in the app: List → Import… → pick the .zip.
+The app parses the files, takes coordinates from the GeoJSON or from the Google URL, looks up the
+rest by name on OpenStreetMap (1/s, approximate), de-duplicates, auto-categorizes, stars places from
+"Saved Places"/"Favourite" lists, and tags each place with the list names. Unlocated places can be
+downloaded as CSV: identify those with web search like any add-by-name request.
+Deep link: `index.html#import`.
+
 ## Merging changes from the app
+
+Run `python3 places/merge_changes.py <my-places-changes.json>`. It does the steps below and rebuilds.
 
 The app saves edits on the device. ☰ List → Export… → "My changes" downloads
 `my-places-changes.json` with `new_places`, `edits` (`{id: {category?, starred?}}`) and

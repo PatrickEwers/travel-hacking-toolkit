@@ -15,6 +15,8 @@ DATA = ROOT / "data" / "places.json"
 OUT = ROOT / "places"
 
 def gmaps(p):
+    if p.get("google_maps_url"):
+        return p["google_maps_url"]
     q = p.get("gmaps_query") or ", ".join(x for x in (p["name"], p.get("address") or p.get("city")) if x)
     return "https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(q)
 
