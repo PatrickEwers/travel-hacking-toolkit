@@ -25,7 +25,7 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
    For a venue inside a mall, the mall's coordinates are fine: set `coords_precision: "building"`
    and put the floor in `address`. If you only have an area, use `"approximate"` and say so.
 3. **Write the entry** to `data/places.json` → `places[]` following `_meta.schema`. Required:
-   `id` (kebab-case, unique), `name`, `lat`, `lng`. Fill `category`, `city`, `country`, `address`,
+   `id` (kebab-case, unique), `name`, `lat`, `lng`, `category`. Fill `city`, `country`, `address`,
    `notes` (what makes it worth going, prices, what to order), `hours` (flag conflicts), `sources`,
    `added` (today). Set `gmaps_query` to a short string Google Maps resolves to the real listing
    (e.g. `"TICTACTOE EmSphere Bangkok"`).
@@ -33,15 +33,39 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
 5. **Reply** with a one-row table (name, category, address, coords precision) and the Google Maps
    share link: `https://www.google.com/maps/search/?api=1&query=<url-encoded gmaps_query>`.
 
-If the user pastes `new-places.json` exported from the app, merge those entries into
-`data/places.json` (skip ids that already exist), then rebuild.
+## Categories
+
+`data/places.json → categories[]` is the scheme: `id`, `label`, `color` (map pin color), `icon`
+(emoji), `keywords` (used by the app's auto-categorizer). `build.py` rejects unknown category ids.
+
+- **Auto-categorize every new place.** Decide from what the place actually is (your web search),
+  not just its name: a "bar" that's really a club is `nightclub`; a bar on a roof is `rooftop-bar`.
+  Pick the most specific existing category; use `other` only as a last resort.
+- **When the user names a new category** ("this is a jazz bar, make a category for it"), add it
+  to `categories[]` before `other`, with a color clearly distinct from the existing ones, a fitting
+  emoji and a few keywords. Then re-check existing places that belong in it and move them.
+- **When nothing fits and the user didn't name one**, use the closest category and say in one
+  line which new category you'd suggest. Don't create categories the user didn't ask for.
+- **Stars:** `"starred": true`. Set it when the user says star / favourite / must-go.
+
+## Merging changes from the app
+
+The app saves edits on the device. ☰ List → Export… → "My changes" downloads
+`my-places-changes.json` with `new_places`, `edits` (`{id: {category?, starred?}}`) and
+`new_categories`. To merge: add new categories first (keep their color), apply edits to matching
+ids, append new places (skip ids that already exist), set `_meta.last_updated`, rebuild.
 
 ## The app (`places/index.html`)
 
-- Map with every place marked; centered on Bangkok when empty.
+- Map pins colored by category, starred places get a gold ring. Category chips along the top
+  act as legend and filter (tap several; "★ Starred" filters to favourites).
+- List view (List button, or `#list` link): grouped by category, or sorted by distance/name,
+  with a star toggle per row.
+- Place card: star toggle and a category dropdown to fix the auto-category, incl. "＋ New category…".
 - ◎ starts location tracking; within 120 m of a saved place it pops a "You are here" card.
 - Add bar: type a name (OpenStreetMap search near the map view), paste a Google Maps link, or
-  "use my current location". On-device additions go to localStorage; ☰ → Export JSON to persist.
+  "use my current location". The category is pre-filled automatically (keywords, then the
+  OpenStreetMap place type) and can be changed before saving.
 - Each place: Open in Google Maps, Directions, Share (native share sheet / copies the link).
 - Deep link: `index.html#<place-id>` opens that place.
 - Location needs HTTPS or localhost: `python3 -m http.server -d places 8000`, or host it.

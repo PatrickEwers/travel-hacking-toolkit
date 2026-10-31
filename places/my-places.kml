@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>
-<Placemark><name>TICTACTOE Bangkok</name><description>bar
+<Style id="cat-bar"><IconStyle><color>ff0c59e8</color></IconStyle></Style>
+<Folder><name>Bar</name>
+<Placemark><name>TICTACTOE Bangkok</name><styleUrl>#cat-bar</styleUrl><description>Bar
 5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110
 Social 'dating bar' on EmSphere 5F built for meeting people; one drink order comes with two glasses. Budget roughly 400-1,000 THB. Daytime coffee session (~490 THB incl. two drinks) per Time Out. EmSphere is the mall with the Gourmet Market supermarket on the ground floor, 3-5 min walk from BTS Phrom Phong.
 https://www.google.com/maps/search/?api=1&amp;query=TICTACTOE%20EmSphere%20Bangkok</description><Point><coordinates>100.56611,13.73194,0</coordinates></Point></Placemark>
+</Folder>
 </Document></kml>

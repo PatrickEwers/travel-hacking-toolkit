@@ -5,7 +5,7 @@
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
-      "category": "bar | restaurant | cafe | sight | shop | hotel | nightlife | other",
+      "category": "id from categories[] (auto-assigned; user can override)",
       "city": "city name",
       "country": "country name",
       "address": "street address incl. floor/unit",
@@ -18,10 +18,225 @@
       "sources": "URLs used to identify the place",
       "visited": "YYYY-MM-DD or null",
       "added": "YYYY-MM-DD",
-      "gmaps_query": "optional: text Google Maps should search for the share link (defaults to name + address)"
+      "gmaps_query": "optional: text Google Maps should search for the share link (defaults to name + address)",
+      "starred": "true if the user starred it"
     },
     "staleness_days": 3650
   },
+  "categories": [
+    {
+      "id": "nightclub",
+      "label": "Nightclub",
+      "color": "#7b2ff7",
+      "icon": "🪩",
+      "keywords": [
+        "nightclub",
+        "club",
+        "disco",
+        "dance club",
+        "edm",
+        "techno",
+        "live music venue"
+      ]
+    },
+    {
+      "id": "bar",
+      "label": "Bar",
+      "color": "#e8590c",
+      "icon": "🍸",
+      "keywords": [
+        "bar",
+        "pub",
+        "cocktail",
+        "speakeasy",
+        "beer",
+        "wine bar",
+        "lounge",
+        "taproom",
+        "brewery",
+        "whisky",
+        "gin bar",
+        "sake bar"
+      ]
+    },
+    {
+      "id": "rooftop-bar",
+      "label": "Rooftop bar",
+      "color": "#c2255c",
+      "icon": "🌃",
+      "keywords": [
+        "rooftop",
+        "sky bar",
+        "skybar"
+      ]
+    },
+    {
+      "id": "restaurant",
+      "label": "Restaurant",
+      "color": "#d6336c",
+      "icon": "🍽️",
+      "keywords": [
+        "restaurant",
+        "bistro",
+        "dining",
+        "eatery",
+        "steakhouse",
+        "omakase",
+        "izakaya",
+        "kitchen",
+        "grill",
+        "sushi",
+        "ramen",
+        "pizza",
+        "bbq",
+        "barbecue",
+        "thai food",
+        "pad thai",
+        "seafood",
+        "brasserie",
+        "trattoria",
+        "diner",
+        "canteen"
+      ]
+    },
+    {
+      "id": "street-food",
+      "label": "Street food",
+      "color": "#f08c00",
+      "icon": "🍜",
+      "keywords": [
+        "street food",
+        "food stall",
+        "noodle",
+        "hawker",
+        "food court",
+        "street stall",
+        "khao",
+        "boat noodle",
+        "som tam",
+        "moo ping",
+        "satay",
+        "dim sum"
+      ]
+    },
+    {
+      "id": "cafe",
+      "label": "Café",
+      "color": "#8d5b3a",
+      "icon": "☕",
+      "keywords": [
+        "cafe",
+        "café",
+        "coffee",
+        "bakery",
+        "tea",
+        "dessert",
+        "roastery",
+        "patisserie",
+        "brunch"
+      ]
+    },
+    {
+      "id": "market",
+      "label": "Market",
+      "color": "#2f9e44",
+      "icon": "🧺",
+      "keywords": [
+        "market",
+        "night market",
+        "floating market",
+        "bazaar"
+      ]
+    },
+    {
+      "id": "mall",
+      "label": "Mall & shopping",
+      "color": "#1c7ed6",
+      "icon": "🛍️",
+      "keywords": [
+        "mall",
+        "shopping",
+        "department store",
+        "plaza",
+        "boutique",
+        "shop",
+        "supermarket"
+      ]
+    },
+    {
+      "id": "temple",
+      "label": "Temple",
+      "color": "#f59f00",
+      "icon": "🛕",
+      "keywords": [
+        "temple",
+        "wat",
+        "shrine",
+        "pagoda",
+        "church",
+        "mosque"
+      ]
+    },
+    {
+      "id": "museum",
+      "label": "Museum & gallery",
+      "color": "#5c7cfa",
+      "icon": "🏛️",
+      "keywords": [
+        "museum",
+        "gallery",
+        "exhibition",
+        "art space"
+      ]
+    },
+    {
+      "id": "park",
+      "label": "Park & nature",
+      "color": "#37b24d",
+      "icon": "🌳",
+      "keywords": [
+        "park",
+        "garden",
+        "nature",
+        "beach",
+        "lake",
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "spa",
+      "label": "Spa & massage",
+      "color": "#12b886",
+      "icon": "💆",
+      "keywords": [
+        "spa",
+        "massage",
+        "wellness",
+        "sauna",
+        "onsen"
+      ]
+    },
+    {
+      "id": "hotel",
+      "label": "Hotel",
+      "color": "#495057",
+      "icon": "🏨",
+      "keywords": [
+        "hotel",
+        "hostel",
+        "resort",
+        "guesthouse",
+        "inn"
+      ]
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "color": "#868e96",
+      "icon": "📍",
+      "keywords": []
+    }
+  ],
   "places": [
     {
       "id": "tictactoe-bangkok",
@@ -48,7 +263,8 @@
         "https://thestandard.co/life/tictactoe-bangkok/"
       ],
       "visited": null,
-      "added": "2026-10-31"
+      "added": "2026-10-31",
+      "starred": false
     }
   ]
 }
