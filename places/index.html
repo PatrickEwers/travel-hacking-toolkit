@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Places</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root { --bg:#fff; --fg:#1d1d1f; --muted:#6e6e73; --line:#e5e5ea; --accent:#0a7cff; --near:#0b8a4a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1c1c1e; --fg:#f2f2f7; --muted:#a1a1a6; --line:#38383a; } }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; font:15px/1.4 -apple-system, system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+  #map { position:absolute; inset:0; }
+  .bar { position:absolute; top:10px; left:10px; right:10px; z-index:1000; display:flex; gap:6px; }
+  .bar input { flex:1; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--fg); font-size:15px; }
+  button { padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--fg); font-size:14px; cursor:pointer; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .sheet { position:absolute; left:10px; right:10px; bottom:10px; z-index:1000; max-height:55%; overflow:auto;
+           background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:12px 14px; box-shadow:0 4px 18px rgba(0,0,0,.18); display:none; }
+  .sheet.show { display:block; }
+  .sheet h2 { margin:0 0 2px; font-size:18px; }
+  .meta { color:var(--muted); font-size:13px; }
+  .here { color:var(--near); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.03em; }
+  .row { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .result { padding:8px 0; border-bottom:1px solid var(--line); cursor:pointer; }
+  .result:last-child { border-bottom:0; }
+  label { display:block; margin-top:8px; font-size:13px; color:var(--muted); }
+  label input, label select, label textarea { width:100%; margin-top:3px; padding:8px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font:inherit; }
+  .me { width:16px; height:16px; border-radius:50%; background:var(--accent); border:3px solid #fff; box-shadow:0 0 0 2px var(--accent); }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="bar">
+  <input id="q" placeholder="Add a place by name, or paste a Google Maps link" autocomplete="off">
+  <button class="primary" id="go">Add</button>
+  <button id="locate" title="Track my location">◎</button>
+  <button id="menu" title="List / export">☰</button>
+</div>
+<div class="sheet" id="sheet"></div>
+
+<script>
+const SEED = {"places": [{"id": "tictactoe-bangkok", "name": "TICTACTOE Bangkok", "category": "bar", "city": "Bangkok", "country": "Thailand", "address": "5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110", "lat": 13.73194, "lng": 100.56611, "gmaps_query": "TICTACTOE EmSphere Bangkok", "coords_precision": "building", "notes": "Social 'dating bar' on EmSphere 5F built for meeting people; one drink order comes with two glasses. Budget roughly 400-1,000 THB. Daytime coffee session (~490 THB incl. two drinks) per Time Out. EmSphere is the mall with the Gourmet Market supermarket on the ground floor, 3-5 min walk from BTS Phrom Phong.", "tags": ["bar", "social", "mall", "phrom-phong", "sukhumvit"], "hours": "Evening from 19:00 per The Standard; daytime coffee session per Time Out. Sources conflict, check before going.", "sources": ["https://www.timeout.com/bangkok/bars/tictactoe", "https://thestandard.co/life/tictactoe-bangkok/"], "visited": null, "added": "2026-10-31"}]};
+const NEAR_METERS = 120;           // "you are here" radius
+const LS_KEY = 'myplaces.local.v1';
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug = s => s.toLowerCase().normalize('NFKD').replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'-').slice(0,60);
+const local = () => JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+const saveLocal = arr => localStorage.setItem(LS_KEY, JSON.stringify(arr));
+const allPlaces = () => {
+  const seed = (SEED && SEED.places) || [];
+  const ids = new Set(seed.map(p => p.id));
+  return seed.concat(local().filter(p => !ids.has(p.id)));
+};
+
+// Google Maps link: query by name + address so it resolves to the real listing, not just a pin.
+const gq = p => p.gmaps_query || [p.name, p.address || p.city].filter(Boolean).join(', ');
+const gmaps = p => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(gq(p));
+const gdirections = p => 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(gq(p));
+
+function dist(a, b) { // haversine, meters
+  const R = 6371000, r = x => x * Math.PI / 180;
+  const dLat = r(b.lat - a.lat), dLng = r(b.lng - a.lng);
+  const h = Math.sin(dLat/2)**2 + Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLng/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const fmtDist = m => m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(1) + ' km';
+
+// ---------- map ----------
+const map = L.map('map', { zoomControl:false }).setView([13.7466, 100.5393], 13); // Bangkok
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap' }).addTo(map);
+const layer = L.layerGroup().addTo(map);
+let me = null, meMarker = null, nearShownId = null;
+
+function render() {
+  layer.clearLayers();
+  const ps = allPlaces();
+  ps.forEach(p => L.marker([p.lat, p.lng], { title:p.name }).addTo(layer).on('click', () => showPlace(p)));
+  if (ps.length && !me) map.fitBounds(L.latLngBounds(ps.map(p => [p.lat, p.lng])).pad(0.3), { maxZoom:15 });
+}
+
+const sheet = document.getElementById('sheet');
+const open = html => { sheet.innerHTML = html; sheet.classList.add('show'); };
+const close = () => sheet.classList.remove('show');
+map.on('click', close);
+
+function showPlace(p, isHere) {
+  const d = me ? fmtDist(dist(me, p)) + ' away' : '';
+  open(`
+    ${isHere ? '<div class="here">📍 You are here</div>' : ''}
+    <h2>${esc(p.name)}</h2>
+    <div class="meta">${esc(p.category || '')}${p.city ? ' · ' + esc(p.city) : ''}${d ? ' · ' + d : ''}</div>
+    ${p.address ? `<div class="meta">${esc(p.address)}</div>` : ''}
+    ${p.notes ? `<p>${esc(p.notes)}</p>` : ''}
+    ${p.hours ? `<div class="meta">🕒 ${esc(p.hours)}</div>` : ''}
+    ${(p.sources||[]).length ? `<div class="meta">${p.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(new URL(u).hostname)}</a>`).join(' · ')}</div>` : ''}
+    <div class="row">
+      <a href="${gmaps(p)}" target="_blank" rel="noopener"><button class="primary">Open in Google Maps</button></a>
+      <a href="${gdirections(p)}" target="_blank" rel="noopener"><button>Directions</button></a>
+      <button onclick="sharePlace('${esc(p.id)}')">Share</button>
+      ${local().some(x => x.id === p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : ''}
+    </div>`);
+  map.panTo([p.lat, p.lng]);
+}
+
+window.sharePlace = async id => {
+  const p = allPlaces().find(x => x.id === id);
+  const url = gmaps(p), text = `${p.name}${p.notes ? ' — ' + p.notes.split('. ')[0] : ''}`;
+  if (navigator.share) { try { await navigator.share({ title:p.name, text, url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  await navigator.clipboard.writeText(`${p.name}\n${url}`);
+  alert('Google Maps link copied');
+};
+window.removePlace = id => { saveLocal(local().filter(p => p.id !== id)); close(); render(); };
+
+// ---------- location awareness ----------
+function onPos(pos) {
+  me = { lat:pos.coords.latitude, lng:pos.coords.longitude };
+  if (!meMarker) {
+    meMarker = L.marker([me.lat, me.lng], { icon:L.divIcon({ className:'', html:'<div class="me"></div>', iconSize:[22,22] }), zIndexOffset:1000 }).addTo(map);
+    map.setView([me.lat, me.lng], 16);
+  } else meMarker.setLatLng([me.lat, me.lng]);
+  const nearest = allPlaces().map(p => ({ p, d:dist(me, p) })).sort((a,b) => a.d - b.d)[0];
+  if (nearest && nearest.d <= NEAR_METERS) {
+    if (nearShownId !== nearest.p.id) {
+      nearShownId = nearest.p.id;
+      showPlace(nearest.p, true);
+      if (navigator.vibrate) navigator.vibrate(80);
+    }
+  } else nearShownId = null;
+}
+function startTracking() {
+  if (!navigator.geolocation) return alert('Geolocation not available in this browser');
+  navigator.geolocation.watchPosition(onPos, e => alert('Location: ' + e.message), { enableHighAccuracy:true, maximumAge:15000 });
+}
+document.getElementById('locate').onclick = startTracking;
+if (navigator.permissions) navigator.permissions.query({ name:'geolocation' }).then(s => { if (s.state === 'granted') startTracking(); });
+
+// ---------- add by name ----------
+function parseGmapsUrl(s) {
+  const m = s.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || s.match(/[?&](?:q|query|ll)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/) || s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+  if (!m) return null;
+  const name = decodeURIComponent((s.match(/\/place\/([^/@]+)/) || [,''])[1]).replace(/\+/g, ' ');
+  return { lat:+m[1], lng:+m[2], name };
+}
+async function search(q) {
+  const c = map.getCenter();
+  const vb = [c.lng - 0.3, c.lat + 0.3, c.lng + 0.3, c.lat - 0.3].join(',');
+  const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&viewbox=${vb}&q=${encodeURIComponent(q)}`;
+  const r = await fetch(url, { headers:{ 'Accept-Language':'en' } });
+  return r.ok ? r.json() : [];
+}
+function addForm(seed) {
+  open(`<h2>New place</h2>
+    <label>Name<input id="f-name" value="${esc(seed.name)}"></label>
+    <label>Category<select id="f-cat">${['bar','restaurant','cafe','nightlife','sight','shop','hotel','other'].map(c => `<option ${c===seed.category?'selected':''}>${c}</option>`).join('')}</select></label>
+    <label>Address / floor<input id="f-addr" value="${esc(seed.address || '')}"></label>
+    <label>Notes<textarea id="f-notes" rows="3" placeholder="What makes it good, what to order"></textarea></label>
+    <div class="meta">Pin: ${seed.lat.toFixed(5)}, ${seed.lng.toFixed(5)} — drag the marker to adjust</div>
+    <div class="row"><button class="primary" id="f-save">Save</button><button onclick="cancelAdd()">Cancel</button></div>`);
+  const tmp = L.marker([seed.lat, seed.lng], { draggable:true }).addTo(map);
+  map.setView([seed.lat, seed.lng], 17);
+  window.cancelAdd = () => { map.removeLayer(tmp); close(); };
+  document.getElementById('f-save').onclick = () => {
+    const ll = tmp.getLatLng(), name = document.getElementById('f-name').value.trim();
+    if (!name) return;
+    const p = { id: slug(name) + '-' + Date.now().toString(36).slice(-4), name,
+      category: document.getElementById('f-cat').value, city: seed.city || '', country: seed.country || '',
+      address: document.getElementById('f-addr').value.trim(), lat:+ll.lat.toFixed(6), lng:+ll.lng.toFixed(6),
+      coords_precision:'exact', notes: document.getElementById('f-notes').value.trim(), tags:[], sources:[],
+      visited: new Date().toISOString().slice(0,10), added: new Date().toISOString().slice(0,10) };
+    saveLocal(local().concat(p)); map.removeLayer(tmp); render(); showPlace(p);
+  };
+}
+document.getElementById('go').onclick = async () => {
+  const q = document.getElementById('q').value.trim();
+  if (!q) return;
+  const g = parseGmapsUrl(q);
+  if (g) return addForm({ ...g, name: g.name || '' });
+  // "I'm here now": no query match needed, use current position
+  open('<div class="meta">Searching…</div>');
+  let res = [];
+  try { res = await search(q); } catch (e) {}
+  const items = res.map((r, i) => `<div class="result" data-i="${i}"><b>${esc(r.name || r.display_name.split(',')[0])}</b><div class="meta">${esc(r.display_name)}</div></div>`).join('');
+  open(`<h2>Pick a match for “${esc(q)}”</h2>${items || '<div class="meta">No match on OpenStreetMap.</div>'}
+    <div class="row">${me ? '<button id="use-here">Use my current location</button>' : ''}<button id="use-center">Place at map center</button></div>`);
+  sheet.querySelectorAll('.result').forEach(el => el.onclick = () => {
+    const r = res[+el.dataset.i], a = r.address || {};
+    addForm({ name: r.name || q, lat:+r.lat, lng:+r.lon, address: r.display_name.split(',').slice(0,4).join(','),
+      city: a.city || a.town || a.state || '', country: a.country || '', category: r.type === 'bar' || r.type === 'pub' ? 'bar' : r.type === 'cafe' ? 'cafe' : r.type === 'restaurant' ? 'restaurant' : 'other' });
+  });
+  const uh = document.getElementById('use-here'); if (uh) uh.onclick = () => addForm({ name:q, ...me });
+  document.getElementById('use-center').onclick = () => { const c = map.getCenter(); addForm({ name:q, lat:c.lat, lng:c.lng }); };
+};
+document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('go').click(); });
+
+// ---------- list + export ----------
+function download(name, mime, body) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([body], { type:mime })); a.download = name; a.click();
+}
+const xml = s => esc(s);
+function toKML(ps) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>\n` +
+    ps.map(p => `<Placemark><name>${xml(p.name)}</name><description>${xml([p.category, p.address, p.notes, gmaps(p)].filter(Boolean).join('\n'))}</description><Point><coordinates>${p.lng},${p.lat},0</coordinates></Point></Placemark>`).join('\n') +
+    `\n</Document></kml>`;
+}
+function toCSV(ps) {
+  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  return ['name,category,address,city,latitude,longitude,notes,google_maps_url']
+    .concat(ps.map(p => [p.name, p.category, p.address, p.city, p.lat, p.lng, p.notes, gmaps(p)].map(q).join(','))).join('\n');
+}
+document.getElementById('menu').onclick = () => {
+  const ps = allPlaces().map(p => ({ p, d: me ? dist(me, p) : null })).sort((a,b) => (a.d ?? 0) - (b.d ?? 0));
+  open(`<h2>${ps.length} places</h2>
+    ${ps.map(({p,d}) => `<div class="result" data-id="${esc(p.id)}"><b>${esc(p.name)}</b><div class="meta">${esc(p.category||'')} · ${esc(p.city||'')}${d!=null ? ' · ' + fmtDist(d) : ''}</div></div>`).join('')}
+    <div class="row">
+      <button id="x-kml">Export KML (Google My Maps)</button>
+      <button id="x-csv">Export CSV</button>
+      <button id="x-json">Export new places (JSON)</button>
+    </div>
+    <div class="meta" style="margin-top:8px">Places you add here are saved on this device. Export JSON and hand it to Claude (or merge into data/places.json) to make them permanent.</div>`);
+  sheet.querySelectorAll('.result').forEach(el => el.onclick = () => showPlace(allPlaces().find(p => p.id === el.dataset.id)));
+  document.getElementById('x-kml').onclick = () => download('my-places.kml', 'application/vnd.google-earth.kml+xml', toKML(allPlaces()));
+  document.getElementById('x-csv').onclick = () => download('my-places.csv', 'text/csv', toCSV(allPlaces()));
+  document.getElementById('x-json').onclick = () => download('new-places.json', 'application/json', JSON.stringify(local(), null, 2));
+};
+
+// deep link: index.html#tictactoe-bangkok opens that place
+render();
+const hash = decodeURIComponent(location.hash.slice(1));
+if (hash) { const p = allPlaces().find(x => x.id === hash); if (p) showPlace(p); }
+</script>
+</body>
+</html>
