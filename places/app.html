@@ -6,6 +6,9 @@
 <title>My Places</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js"></script>
 <style>
   :root { --bg:#fff; --bg2:#f5f5f7; --fg:#1d1d1f; --muted:#6e6e73; --line:#e5e5ea; --accent:#0a7cff; --near:#0b8a4a; --star:#f5b301; }
   @media (prefers-color-scheme: dark) { :root { --bg:#1c1c1e; --bg2:#2c2c2e; --fg:#f2f2f7; --muted:#a1a1a6; --line:#38383a; } }
@@ -178,7 +181,31 @@ const visible = () => allPlaces().filter(p => (!filter.starred || p.starred) && 
 
 // ---------- map ----------
 const map = L.map('map', { zoomControl:false }).setView([13.7466, 100.5393], 13); // Bangkok
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap' }).addTo(map);
+// Basemap: OpenFreeMap "Liberty" vector style (Google-Maps-like look, free, no API key).
+// Labels are forced to English, else romanized (latin) name, else the local name, so Thai streets read
+// "Sukhumvit Road" / "Soi Sukhumvit 24" instead of Thai script.
+const LATIN_LABEL = ['coalesce', ['get', 'name:en'], ['get', 'name_en'], ['get', 'name:latin'], ['get', 'name_int'], ['get', 'name']];
+function latinLabels(gl) {
+  for (const l of gl.getStyle().layers) {
+    if (l.type !== 'symbol') continue;
+    const tf = gl.getLayoutProperty(l.id, 'text-field');
+    if (tf && /name/.test(JSON.stringify(tf))) gl.setLayoutProperty(l.id, 'text-field', LATIN_LABEL); // skip road-number shields
+  }
+}
+let basemapOk = false;
+function rasterFallback() { // if WebGL or the vector tiles are unavailable
+  if (basemapOk) return; basemapOk = true;
+  if (window.vectorBase) map.removeLayer(window.vectorBase);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { maxZoom:20, subdomains:'abcd', attribution:'© OpenStreetMap contributors © CARTO' }).addTo(map);
+}
+try {
+  window.vectorBase = L.maplibreGL({ style:'https://tiles.openfreemap.org/styles/liberty',
+    attribution:'<a href="https://openfreemap.org" target="_blank">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>' }).addTo(map);
+  const gl = window.vectorBase.getMaplibreMap();
+  gl.on('style.load', () => { basemapOk = true; latinLabels(gl); });
+  setTimeout(rasterFallback, 8000);
+} catch (e) { rasterFallback(); }
 const layer = L.layerGroup().addTo(map);
 const pinIcon = p => { const c = cat(p.category); return L.divIcon({ className:'', iconSize:[30,30], iconAnchor:[15,30],
   html:`<div class="pin-wrap"><div class="pin ${p.starred ? 'starred' : ''}" style="background:${c.color}"><span>${c.icon}</span></div>${p.starred ? '<span class="s">★</span>' : ''}</div>` }); };
