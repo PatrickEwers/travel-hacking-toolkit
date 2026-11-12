@@ -2346,6 +2346,35 @@
       "starred": false,
       "google_type": "night_club",
       "google_maps_url": "https://maps.google.com/?cid=8014656051790792170"
+    },
+    {
+      "id": "bloom-bar-sukhumvit-23",
+      "name": "Bloom Bar",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "24/3 Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7397767,
+      "lng": 100.5633146,
+      "gmaps_query": "Bloom Bar Sukhumvit 23 Bangkok",
+      "coords_precision": "exact",
+      "notes": "Small bar on Sukhumvit Soi 23, a few minutes north of Soi Cowboy. Google rating 4.9 from 48 reviews.",
+      "tags": [
+        "bar",
+        "soi-23",
+        "asok",
+        "sukhumvit"
+      ],
+      "hours": "Daily 18:00-01:00 per Google.",
+      "sources": [
+        "https://maps.google.com/?cid=9235910412369035555"
+      ],
+      "visited": null,
+      "added": "2026-11-12",
+      "starred": false,
+      "google_place_id": "ChIJ9Wv6YmSf4jARI4GWCpaLLIA",
+      "google_type": "bar",
+      "google_maps_url": "https://maps.google.com/?cid=9235910412369035555"
     }
   ]
 }
