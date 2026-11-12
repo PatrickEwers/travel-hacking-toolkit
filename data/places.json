@@ -2316,6 +2316,36 @@
       "google_place_id": "ChIJxf0Y6lVUQ1MRzcPqGqezKCA",
       "google_type": "car_repair",
       "address": "1825 N Montana Ave, Helena, MT 59601, USA"
+    },
+    {
+      "id": "the-penny-black-asoke",
+      "name": "The Penny Black Asoke",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Sukhumvit 21 Rd (Asok), at the Soi Cowboy end, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.737028,
+      "lng": 100.5615594,
+      "gmaps_query": "The Penny Black Asoke Bangkok",
+      "coords_precision": "exact",
+      "notes": "Live-music bar by Soi Cowboy; listings describe a live band nightly and reasonably priced drinks. Google rating 4.7 from about 1,600 reviews. You called it 'Black Penny'.",
+      "tags": [
+        "bar",
+        "live-music",
+        "soi-cowboy",
+        "asok",
+        "sukhumvit"
+      ],
+      "hours": "Listings conflict: live music from 18:00 per one, Fridays 19:00-01:00 per another. Check before going.",
+      "sources": [
+        "https://www.yellowpages.co.th/lp/pennyblack",
+        "https://gurulist.net/en/bangkok/soi-cowboy"
+      ],
+      "visited": null,
+      "added": "2026-11-12",
+      "starred": false,
+      "google_type": "night_club",
+      "google_maps_url": "https://maps.google.com/?cid=8014656051790792170"
     }
   ]
 }
