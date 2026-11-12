@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>
+<Style id="cat-nightclub"><IconStyle><color>ff3c3b0b</color></IconStyle></Style>
 <Style id="cat-bar"><IconStyle><color>ff4f5114</color></IconStyle></Style>
 <Style id="cat-rooftop-bar"><IconStyle><color>ff64661d</color></IconStyle></Style>
 <Style id="cat-restaurant"><IconStyle><color>ff7c7a2a</color></IconStyle></Style>
 <Style id="cat-social-restaurant"><IconStyle><color>ff706b22</color></IconStyle></Style>
+<Style id="cat-street-food"><IconStyle><color>ff8e8f3b</color></IconStyle></Style>
 <Style id="cat-cafe"><IconStyle><color>ffa0a355</color></IconStyle></Style>
 <Style id="cat-market"><IconStyle><color>ff84964f</color></IconStyle></Style>
 <Style id="cat-mall"><IconStyle><color>ff9dae6f</color></IconStyle></Style>
@@ -16,6 +18,20 @@
 <Style id="cat-sight"><IconStyle><color>ff9c8e63</color></IconStyle></Style>
 <Style id="cat-destination"><IconStyle><color>ffa2a08b</color></IconStyle></Style>
 <Style id="cat-other"><IconStyle><color>ffb8b7a9</color></IconStyle></Style>
+<Folder><name>Nightclub</name>
+<Placemark><name>GOT Bangkok</name><styleUrl>#cat-nightclub</styleUrl><description>Nightclub
+97 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110
+Club on Sukhumvit 24 pitched as the hottest nightlife spot right now and a place to meet people; one reel says to dress in a colour code on Thursdays. About 1,000 THB+ per person, 7 PM to 3 AM.
+https://www.google.com/maps/search/?api=1&amp;query=GOT%20Bangkok&amp;query_place_id=ChIJ6VzCdgCf4jARkcvAJ90K9fs</description><Point><coordinates>100.5663225,13.7221705,0</coordinates></Point></Placemark>
+<Placemark><name>MIRA CLUB BANGKOK</name><styleUrl>#cat-nightclub</styleUrl><description>Nightclub
+19 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110
+Red-lit club on Sukhumvit 11 that the reel calls the hottest club in Thailand right now.
+https://www.google.com/maps/search/?api=1&amp;query=MIRA%20CLUB%20BANGKOK&amp;query_place_id=ChIJ46lNIG2f4jAR63rNwzA6U1Y</description><Point><coordinates>100.5564524,13.7429081,0</coordinates></Point></Placemark>
+<Placemark><name>Pink Bangkok (Staybridge Suites Sukhumvit)</name><styleUrl>#cat-nightclub</styleUrl><description>Nightclub
+Staybridge Suites Bangkok Sukhumvit, 89/8-9 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110
+Afro night by @pink.bangkok at the Staybridge Suites on Sukhumvit 24.
+https://www.google.com/maps/search/?api=1&amp;query=Pink%20Bangkok%20%28Staybridge%20Suites%20Sukhumvit%29&amp;query_place_id=ChIJB0p22Kuf4jAR743ZZu4Kzmk</description><Point><coordinates>100.567502,13.7249877,0</coordinates></Point></Placemark>
+</Folder>
 <Folder><name>Bar</name>
 <Placemark><name>TICTACTOE Bangkok</name><styleUrl>#cat-bar</styleUrl><description>Bar
 5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110
@@ -80,6 +96,10 @@ https://www.google.com/maps/place/1G+(%E3%83%AF%E3%83%B3%E3%82%B8%E3%83%BC)/data
 Japan, 〒604-8023 Kyoto, Nakagyo Ward, Bizenjimachō, 309- 4 HKビル ３Ｆ
 Research Reddit
 https://www.google.com/maps/place/kazubar/data=!4m2!3m1!1s0x60010894e7fabebf:0x24c7155036c99985</description><Point><coordinates>135.769831,35.005856,0</coordinates></Point></Placemark>
+<Placemark><name>Don't Open The Fridge</name><styleUrl>#cat-bar</styleUrl><description>Bar
+26/4 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110
+Speakeasy you enter through a fridge door; one reel calls it among the coolest bars in the city.
+https://www.google.com/maps/search/?api=1&amp;query=Don%27t%20Open%20The%20Fridge&amp;query_place_id=ChIJxzg-EcGf4jARoOp3PwuD2eI</description><Point><coordinates>100.5568853,13.7446308,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Rooftop bar</name>
 <Placemark><name>Sky View 360</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
@@ -90,6 +110,14 @@ https://www.google.com/maps/place/Sky+View+360/data=!4m2!3m1!1s0x30e29918a027f5f
 92 Central Park Offices Building, Unit No.HH4401 44th Floor, ถ. พระรามที่ 4 แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand
 New roof top bar recommended by Jacky
 https://www.google.com/maps/place/AETHER+BKK/data=!4m2!3m1!1s0x30e29f48726b7a41:0xc39c03e056a3f443</description><Point><coordinates>100.536943,13.728482,0</coordinates></Point></Placemark>
+<Placemark><name>Unculture Silom Rooftop Bar</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
+36-38 Naradhiwat Rajanagarindra Rd, Si Lom, Bang Rak, Bangkok 10500
+Bar with close-up views of passing BTS trains; tagged as @unculture.bkk.
+https://www.google.com/maps/search/?api=1&amp;query=Unculture%20Silom%20Rooftop%20Bar&amp;query_place_id=ChIJEc_x3gWZ4jARUu81t7ELjg0</description><Point><coordinates>100.5280185,13.7256334,0</coordinates></Point></Placemark>
+<Placemark><name>Akara Sky Hanuman Bangkok</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
+58th-61st floor, One City Centre, 548 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330
+Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list.
+https://www.google.com/maps/search/?api=1&amp;query=Akara%20Sky%20Hanuman%20Bangkok&amp;query_place_id=ChIJkxdwWiyf4jARdUV1zHHjqlo</description><Point><coordinates>100.5462515,13.7420325,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Restaurant</name>
 <Placemark><name>Thong Smith</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
@@ -116,6 +144,22 @@ https://www.google.com/maps/place/RUTUBO%E7%87%BB%E8%A3%BD%E5%B7%A5%E5%A0%B4/dat
 <Placemark><name>Fat Daddy's Smokehouse</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
 1913 S Kihei Rd, Kihei, HI 96753, USA
 https://www.google.com/maps/place/Fat+Daddy's+Smokehouse/data=!4m2!3m1!1s0x7954d0735bcf9ac7:0x3e576d3c1d5443ed</description><Point><coordinates>-156.451948,20.731945,0</coordinates></Point></Placemark>
+<Placemark><name>Baia Bangkok</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+Pipa Hotel, 16 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110
+Italian restaurant with a party atmosphere; the reel shows a free Aperol offer.
+https://www.google.com/maps/search/?api=1&amp;query=Baia%20Bangkok&amp;query_place_id=ChIJu7_6De2f4jARZIVt8z-FiRI</description><Point><coordinates>100.5567902,13.7429938,0</coordinates></Point></Placemark>
+<Placemark><name>Copper Beyond Buffet Gaysorn Amarin</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+3rd floor, Gaysorn Amarin, 502 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330
+International all-you-can-eat buffet with seafood, sushi and grill; the Premium Foie Gras package was 2,099 THB net per person via Hungry Hub.
+https://www.google.com/maps/search/?api=1&amp;query=Copper%20Beyond%20Buffet%20Gaysorn%20Amarin&amp;query_place_id=ChIJO8MKjW2f4jARj37d2JR3l8c</description><Point><coordinates>100.5413349,13.7436938,0</coordinates></Point></Placemark>
+<Placemark><name>Haidilao Hotpot (Central Rama 9)</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+7th floor, Central Rama 9, Rama IX Rd, Huai Khwang, Bangkok 10310
+Hot pot that's still serving at 2 AM.
+https://www.google.com/maps/search/?api=1&amp;query=Haidilao%20Hotpot%20%28Central%20Rama%209%29&amp;query_place_id=ChIJdTCD0Fmf4jAR3Haq_ZjU3nM</description><Point><coordinates>100.5663428,13.7580056,0</coordinates></Point></Placemark>
+<Placemark><name>Barbeque Nation</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+2nd floor, Hyatt Regency Bangkok Sukhumvit, 1 Soi Sukhumvit 13, Khlong Toei Nuea, Watthana, Bangkok 10110
+All-you-can-eat Indian buffet for 399 baht.
+https://www.google.com/maps/search/?api=1&amp;query=Barbeque%20Nation&amp;query_place_id=ChIJ30tae3yf4jAR_WbjoMm70a0</description><Point><coordinates>100.5568102,13.7397499,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Social restaurant</name>
 <Placemark><name>SEENSPACE Thong Lo</name><styleUrl>#cat-social-restaurant</styleUrl><description>Social restaurant
@@ -125,11 +169,49 @@ https://www.google.com/maps/place/SEENSPACE+Thong+Lo/data=!4m2!3m1!1s0x30e29e534
 335 Soi Akkhara Phatsadu, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/The+Commons+Thonglor/data=!4m2!3m1!1s0x30e29e5308ac9299:0x9f57d66e4104958d</description><Point><coordinates>100.582232,13.735135,0</coordinates></Point></Placemark>
 </Folder>
+<Folder><name>Street food</name>
+<Placemark><name>Raan Jay Fai</name><styleUrl>#cat-street-food</styleUrl><description>Street food
+327 Maha Chai Rd, Samran Rat, Phra Nakhon, Bangkok 10200
+Michelin-starred street-food stall run by Jay Fai, who cooks in ski goggles; the crab omelette is the signature.
+https://www.google.com/maps/search/?api=1&amp;query=Raan%20Jay%20Fai&amp;query_place_id=ChIJaxq89xaZ4jARQtKhE1uqq9c</description><Point><coordinates>100.5048189,13.7525912,0</coordinates></Point></Placemark>
+</Folder>
 <Folder><name>Café</name>
 <Placemark><name>GHEE GELATO BAR Silom Soi 7 (3rd floor)</name><styleUrl>#cat-cafe</styleUrl><description>Café
 55 Thanon Naradhiwat Rajanagarindra, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 Friend of Wray’s shop (1 of two locations)
 https://www.google.com/maps/place/GHEE+GELATO+BAR+Silom+Soi+7+(3rd+floor)/data=!4m2!3m1!1s0x30e299c80838e537:0x71bbe54898f66e0d</description><Point><coordinates>100.528849,13.72584,0</coordinates></Point></Placemark>
+<Placemark><name>Capybara Coffee Bangkok Ekkamai</name><styleUrl>#cat-cafe</styleUrl><description>Café
+2nd floor, Union Space, 30 Sukhumvit 61, Khlong Tan Nuea, Watthana, Bangkok 10110
+Animal cafe in Ekkamai with capybaras; billed as the cutest cafe in Bangkok.
+https://www.google.com/maps/search/?api=1&amp;query=Capybara%20Coffee%20Bangkok%20Ekkamai&amp;query_place_id=ChIJu7cHFOmf4jAR_Ou1AtB1mPg</description><Point><coordinates>100.5834827,13.7243597,0</coordinates></Point></Placemark>
+<Placemark><name>Café Amazon Experience</name><styleUrl>#cat-cafe</styleUrl><description>Café
+Ari, Samsen Nai, Phaya Thai, Bangkok 10400
+Flagship Café Amazon in Ari, saved as a cafe to visit.
+https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20Amazon%20Experience&amp;query_place_id=ChIJh9xVTwCf4jARa0z9Ree4D_s</description><Point><coordinates>100.5445442,13.7789453,0</coordinates></Point></Placemark>
+<Placemark><name>TrueLove @ Neverland (Husky Cafe)</name><styleUrl>#cat-cafe</styleUrl><description>Café
+153 Soi Ari Samphan 2, Phaya Thai, Bangkok 10400
+Husky cafe in Ari where you pet the dogs; tagged as @neverlandsiberians.
+https://www.google.com/maps/search/?api=1&amp;query=TrueLove%20%40%20Neverland%20%28Husky%20Cafe%29&amp;query_place_id=ChIJvUMXl66e4jARALcMSWimOWU</description><Point><coordinates>100.536068,13.7727506,0</coordinates></Point></Placemark>
+<Placemark><name>Little Wood</name><styleUrl>#cat-cafe</styleUrl><description>Café
+Rama IX Soi 15/1, Bang Kapi, Huai Khwang, Bangkok 10310
+Garden cafe with goats you can feed; two reels call it a favourite, low-stress cafe.
+https://www.google.com/maps/search/?api=1&amp;query=Little%20Wood&amp;query_place_id=ChIJabaCefGf4jARgByXoHcVxWk</description><Point><coordinates>100.5887071,13.7552915,0</coordinates></Point></Placemark>
+<Placemark><name>POP MART Cafe (ICONSIAM)</name><styleUrl>#cat-cafe</styleUrl><description>Café
+ICONSIAM, Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600
+Character-themed cafe at ICONSIAM, suggested for dessert in a one-day must-do list.
+https://www.google.com/maps/search/?api=1&amp;query=POP%20MART%20Cafe%20%28ICONSIAM%29&amp;query_place_id=ChIJsat4KgCZ4jARDRUlunjs0Gs</description><Point><coordinates>100.510544,13.726349,0</coordinates></Point></Placemark>
+<Placemark><name>newstand.</name><styleUrl>#cat-cafe</styleUrl><description>Café
+582 Soi 5, Khlong Tan Nuea, Watthana, Bangkok 10110
+Cafe where you drink coffee in a bed; tagged as @newstandth.
+https://www.google.com/maps/search/?api=1&amp;query=newstand.&amp;query_place_id=ChIJlXLMegKf4jARoxOwr3_hHzQ</description><Point><coordinates>100.6021329,13.7366154,0</coordinates></Point></Placemark>
+<Placemark><name>965 | Bangkok</name><styleUrl>#cat-cafe</styleUrl><description>Café
+965 Soi Wanit 2, Talat Noi, Samphanthawong, Bangkok 10100
+Hidden cafe in a plant-covered old house in Talat Noi.
+https://www.google.com/maps/search/?api=1&amp;query=965%20%7C%20Bangkok&amp;query_place_id=ChIJzyd4esyZ4jARjDlkOpNhnbI</description><Point><coordinates>100.5132529,13.7329645,0</coordinates></Point></Placemark>
+<Placemark><name>% Arabica Bangkok Empire Tower</name><styleUrl>#cat-cafe</styleUrl><description>Café
+Level 55, Empire Tower, 1 South Sathon Rd, Yan Nawa, Sathon, Bangkok 10120
+Coffee on the 55th floor, billed as the best coffee view in Bangkok.
+https://www.google.com/maps/search/?api=1&amp;query=%25%20Arabica%20Bangkok%20Empire%20Tower&amp;query_place_id=ChIJVcDWajif4jARMI0DNmwbITg</description><Point><coordinates>100.5302284,13.7205344,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Market</name>
 <Placemark><name>Chatuchak Weekend Market</name><styleUrl>#cat-market</styleUrl><description>Market
@@ -138,6 +220,10 @@ https://www.google.com/maps/place/Chatuchak+Weekend+Market/data=!4m2!3m1!1s0x30e
 <Placemark><name>ChangChui Creative Park</name><styleUrl>#cat-market</styleUrl><description>Market
 460/8 Sirindhorn Rd, Khwaeng Bang Phlat, Khet Bang Phlat, Krung Thep Maha Nakhon 10700, Thailand
 https://www.google.com/maps/place/ChangChui+Creative+Park/data=!4m2!3m1!1s0x30e29a242f826fdb:0xbd3471938783408f</description><Point><coordinates>100.470607,13.789528,0</coordinates></Point></Placemark>
+<Placemark><name>Pattavikorn Market New Project</name><styleUrl>#cat-market</styleUrl><description>Market
+Nawamin Rd, Khlong Kum, Bueng Kum, Bangkok 10240
+Huge thrift market the poster rates above the better-known 'red building'; keep the whole day free.
+https://www.google.com/maps/search/?api=1&amp;query=Pattavikorn%20Market%20New%20Project&amp;query_place_id=ChIJeU5X7cljHTERBCbz6dFDioY</description><Point><coordinates>100.6528253,13.8158513,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Mall &amp; shopping</name>
 <Placemark><name>Platinum Fashion Mall</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
@@ -149,6 +235,18 @@ https://www.google.com/maps/place/%E0%B8%AB%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%AA%
 <Placemark><name>Various vintage shop</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
 Junction 511 Bang Sue Shopping Center Building Kamphaeng Phet 2 Road Chatuchak Subdistrict, Tuek Daeng 3B132, แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900, Thailand
 https://www.google.com/maps/place/Various+vintage+shop/data=!4m2!3m1!1s0x30e29d83026f8925:0x70f314a1fda6ac84</description><Point><coordinates>100.548029,13.798701,0</coordinates></Point></Placemark>
+<Placemark><name>Chum Chum (Soul Song Wat)</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+1300 Song Wat Rd, Samphanthawong, Bangkok 10100
+Fragrance shop on Song Wat Road where you blend your own personalised perfume; pitched as a gift idea.
+https://www.google.com/maps/search/?api=1&amp;query=Chum%20Chum%20%28Soul%20Song%20Wat%29&amp;query_place_id=ChIJN7jJIgCZ4jAROLw-mKCQpNk</description><Point><coordinates>100.5078955,13.7376619,0</coordinates></Point></Placemark>
+<Placemark><name>Central Village Outlet</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+98 Bang Chalong, Bang Phli, Samut Prakan 10540
+Luxury outlet near the airport with a Christmas Snow Village; tourist perks include up to 50% off with the Welcome Package and VAT refunds. Shuttle bus from CentralWorld.
+https://www.google.com/maps/search/?api=1&amp;query=Central%20Village%20Outlet&amp;query_place_id=ChIJDVO1Ob5dHTERexXu9EM9pcE</description><Point><coordinates>100.7431735,13.6387561,0</coordinates></Point></Placemark>
+<Placemark><name>Terminal 21 Asok</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110
+The 2nd-floor toilets are themed like a red train carriage.
+https://www.google.com/maps/search/?api=1&amp;query=Terminal%2021%20Asok&amp;query_place_id=ChIJuWuZbh6f4jAReZMEm2xxgzM</description><Point><coordinates>100.5604058,13.7379635,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Temple</name>
 <Placemark><name>Meditation Hall (ห้องปฏิบัติสมาธิ)</name><styleUrl>#cat-temple</styleUrl><description>Temple
@@ -200,11 +298,19 @@ https://www.google.com/maps/place/H%C5%8Dkan-ji+Temple+(Yasaka+Pagoda)/data=!4m2
 1-chōme-294 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862, Japan
 Day 1 Kyoto
 https://www.google.com/maps/place/Kiyomizu-dera/data=!4m2!3m1!1s0x600108d385dcfb07:0x62af658650c434ba</description><Point><coordinates>135.784661,34.994666,0</coordinates></Point></Placemark>
+<Placemark><name>Wat Saket (Golden Mount)</name><styleUrl>#cat-temple</styleUrl><description>Temple
+344 Chakkraphatdi Phong Rd, Ban Bat, Pom Prap Sattru Phai, Bangkok 10100
+Time Out's November list flags the Golden Mount temple fair for grazing on food.
+https://www.google.com/maps/search/?api=1&amp;query=Wat%20Saket%20%28Golden%20Mount%29&amp;query_place_id=ChIJP-MtN12Z4jARlEBmga-oF4w</description><Point><coordinates>100.5066745,13.7527691,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Museum &amp; gallery</name>
 <Placemark><name>Mammoth Museum at the Hayden Cabin</name><styleUrl>#cat-museum</styleUrl><description>Museum &amp; gallery
 5489 Sherwin Creek Rd, Mammoth Lakes, CA 93546, USA
 https://www.google.com/maps/place/Mammoth+Museum+at+the+Hayden+Cabin/data=!4m2!3m1!1s0x80960c256ba9cc93:0x170d61e2676aff84</description><Point><coordinates>-118.962826,37.635407,0</coordinates></Point></Placemark>
+<Placemark><name>bit.studio gallery</name><styleUrl>#cat-museum</styleUrl><description>Museum &amp; gallery
+3rd floor, Slowcombo, 126 Soi Chula 50, Wang Mai, Pathum Wan, Bangkok 10330
+Interactive art studio, part of a one-day Bangkok must-do list.
+https://www.google.com/maps/search/?api=1&amp;query=bit.studio%20gallery&amp;query_place_id=ChIJs88pwriZ4jARaStuJpLRuKs</description><Point><coordinates>100.5271182,13.7345401,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Park &amp; nature</name>
 <Placemark><name>Aow June Juea</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
@@ -243,6 +349,14 @@ https://www.google.com/maps/place/Inyo+Craters/data=!4m2!3m1!1s0x8096128d512a84b
 <Placemark><name>Hot Creek Geologic Site (Hot Spring Side)</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
 Unnamed Road, Mammoth Lakes, CA 93546, USA
 https://www.google.com/maps/place/Hot+Creek+Geologic+Site+(Hot+Spring+Side)/data=!4m2!3m1!1s0x8096056d3ce94565:0x19260f7b8c1dfd3c</description><Point><coordinates>-118.832366,37.661764,0</coordinates></Point></Placemark>
+<Placemark><name>Lumphini Park</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+Lumphini, Pathum Wan, Bangkok 10330
+Free outdoor Zumba classes in the park in the evening.
+https://www.google.com/maps/search/?api=1&amp;query=Lumphini%20Park&amp;query_place_id=ChIJG7BL7Saf4jARNmn5AQiyAaw</description><Point><coordinates>100.5416984,13.7314281,0</coordinates></Point></Placemark>
+<Placemark><name>Benjakitti Park</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+Ratchadaphisek Rd, Khlong Toei, Bangkok 10110
+Free Thai Walk Meetup by @thaiworldcommunity: walk, talk and practise Thai, capped at 30 people. The saved post was for Sun 1 Nov, 4:30 to 6 PM; check their page for the next one.
+https://www.google.com/maps/search/?api=1&amp;query=Benjakitti%20Park&amp;query_place_id=ChIJmfMfvBuf4jAR9rugvZd5Lyc</description><Point><coordinates>100.558726,13.7292327,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Spa &amp; massage</name>
 <Placemark><name>ร้านมะผลไม้สีลม (massage, Silom)</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
@@ -252,6 +366,26 @@ https://www.google.com/maps/place/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A1%
 <Placemark><name>Better Day Healthy Massage @Novotel Sukhumvit 20</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
 9 Floor Novotel, 19/9 สุขุมวิท 20 แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110, Thailand
 https://www.google.com/maps/place/Better+Day+Healthy+Massage+@Novotel+Sukhumvit+20/data=!4m2!3m1!1s0x30e29f084aadeae7:0x4eeb637fbc1108fb</description><Point><coordinates>100.564159,13.731512,0</coordinates></Point></Placemark>
+<Placemark><name>THE QLUB</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+8th floor, SILQ Hotel &amp; Residence, 41 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110
+Wellness club at SILQ with a functional training gym, an onsen with four experiences, a pool and Japanese light bites.
+https://www.google.com/maps/search/?api=1&amp;query=THE%20QLUB&amp;query_place_id=ChIJofI6ZMOf4jARkeM_KRju28s</description><Point><coordinates>100.5678479,13.7258471,0</coordinates></Point></Placemark>
+<Placemark><name>Dip Ekkamai - Garden Onsen, Sauna &amp; Ice Bath</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+17 Soi Phatsana 2, Phra Khanong Nuea, Watthana, Bangkok 10110
+Dip's newest location: a garden onsen with pool, just opened in Ekkamai.
+https://www.google.com/maps/search/?api=1&amp;query=Dip%20Ekkamai%20-%20Garden%20Onsen%2C%20Sauna%20%26%20Ice%20Bath&amp;query_place_id=ChIJg28ZD1Gf4jARuwN9PHnjI7U</description><Point><coordinates>100.5870531,13.7255931,0</coordinates></Point></Placemark>
+<Placemark><name>VAYA SPA &amp; CAFE</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+5/9 Soi Phrom Si 1 (Sukhumvit 39), Khlong Tan Nuea, Watthana, Bangkok 10110
+New luxury spa off Sukhumvit 39.
+https://www.google.com/maps/search/?api=1&amp;query=VAYA%20SPA%20%26%20CAFE&amp;query_place_id=ChIJHf_NwLOf4jARrtUTPvNUFZI</description><Point><coordinates>100.5733473,13.7364949,0</coordinates></Point></Placemark>
+<Placemark><name>The Ice Bath Club - Bangkok</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+Unit 101, 1st floor, JLK Tower, Sukhumvit Soi 3, Khlong Toei Nuea, Watthana, Bangkok 10110
+Drop-in cold plunge, ice bucket bath, social sauna and hot bath; communal and no appointment needed.
+https://www.google.com/maps/search/?api=1&amp;query=The%20Ice%20Bath%20Club%20-%20Bangkok&amp;query_place_id=ChIJG802Tpaf4jARdV_fVxNaGvU</description><Point><coordinates>100.5552142,13.7409046,0</coordinates></Point></Placemark>
+<Placemark><name>Alice Massage Nana 4</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+21/6 Soi Sukhumvit 4, Khlong Toei, Bangkok 10110
+Massage and spa on Sukhumvit Soi 4, opposite Hillary 1, from a few hundred baht. This is the shop's own ad.
+https://www.google.com/maps/search/?api=1&amp;query=Alice%20Massage%20Nana%204&amp;query_place_id=ChIJQZyoAACf4jARTwVUbpOEQis</description><Point><coordinates>100.553377,13.7402068,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Hotel</name>
 <Placemark><name>Hotel Tagawa</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
@@ -269,6 +403,14 @@ https://www.google.com/maps/place/Sheraton+Grand+Los+Angeles/data=!4m2!3m1!1s0x8
 <Placemark><name>The Garland</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
 4222 Vineland Ave, North Hollywood, CA 91602, USA
 https://www.google.com/maps/place/The+Garland/data=!4m2!3m1!1s0x80c2be1817c1f19b:0x8876c97dac19591</description><Point><coordinates>-118.369656,34.144949,0</coordinates></Point></Placemark>
+<Placemark><name>KROMO Bangkok, Curio Collection by Hilton</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+525 Sukhumvit Rd (Soi 29), Khlong Toei Nuea, Watthana, Bangkok 10110
+Hotel in the Em District by BTS Phrom Phong, recommended by repeat visitors for the malls and pilates and wellness studios nearby.
+https://www.google.com/maps/search/?api=1&amp;query=KROMO%20Bangkok%2C%20Curio%20Collection%20by%20Hilton&amp;query_place_id=ChIJTZX2Zf2e4jARDbDhAxJw2QE</description><Point><coordinates>100.5653448,13.7339918,0</coordinates></Point></Placemark>
+<Placemark><name>Queensland Hotel</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+Sri Ayutthaya Rd / Phaya Thai Rd, Ratchathewi, Bangkok 10400
+New hotel with skyline views where noodles cost 80 baht and food starts around 3 dollars; has a gym and a pool overlooking the city.
+https://www.google.com/maps/search/?api=1&amp;query=Queensland%20Hotel&amp;query_place_id=ChIJOQfIziyf4jARkEd1ForF9pA</description><Point><coordinates>100.5385556,13.75675,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Activity</name>
 <Placemark><name>Apnea Total Freediving Organisation</name><styleUrl>#cat-activity</styleUrl><description>Activity
@@ -300,6 +442,54 @@ https://www.google.com/maps/place/Tokyo+Joypolis/data=!4m2!3m1!1s0x601889f65e4f3
 Shimonakajima-2 Hozuchō, Kameoka, Kyoto 621-0005, Japan
 From Ryo at base bar
 https://www.google.com/maps/place/Hozugawa+River+Boat+Ride+(Hozugawa+Kudari)/data=!4m2!3m1!1s0x600054c4aef4efe5:0x33dcd3376bf7a157</description><Point><coordinates>135.586859,35.017202,0</coordinates></Point></Placemark>
+<Placemark><name>Topkart Bangkok</name><styleUrl>#cat-activity</styleUrl><description>Activity
+1087/170 Phetchaburi Rd, Makkasan, Ratchathewi, Bangkok 10400
+Outdoor go-kart track in the city, shown lit up at night.
+https://www.google.com/maps/search/?api=1&amp;query=Topkart%20Bangkok&amp;query_place_id=ChIJj5416GGf4jAR9tfl4VRJ8j4</description><Point><coordinates>100.543752,13.7498517,0</coordinates></Point></Placemark>
+<Placemark><name>Rajadamnern Muay Thai Stadium</name><styleUrl>#cat-activity</styleUrl><description>Activity
+8 Ratchadamnoen Nok Rd, Pom Prap Sattru Phai, Bangkok 10100
+Muay Thai fight night, described as one of the best nights out in Bangkok.
+https://www.google.com/maps/search/?api=1&amp;query=Rajadamnern%20Muay%20Thai%20Stadium&amp;query_place_id=ChIJEyraT0CZ4jAREz5xKJKTLDM</description><Point><coordinates>100.5087949,13.7609937,0</coordinates></Point></Placemark>
+<Placemark><name>ICON Cineconic (ICONSIAM)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+ICONSIAM, 299 Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600
+Luxury cinema at ICONSIAM for about 7 dollars: cushioned seats and easy ticketing. Good for hiding from afternoon heat or rain.
+https://www.google.com/maps/search/?api=1&amp;query=ICON%20Cineconic%20%28ICONSIAM%29&amp;query_place_id=ChIJTxKz6bWZ4jARaDADT3-BvUI</description><Point><coordinates>100.509766,13.7273355,0</coordinates></Point></Placemark>
+<Placemark><name>The Bed Cinema by Omazz (SF Central Pattaya)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+6M floor, Central Pattaya, 333/99 Moo 9, Bang Lamung, Chon Buri 20260
+Cinema where you watch from a bed, with 4K picture and Dolby 7.1 sound.
+https://www.google.com/maps/search/?api=1&amp;query=The%20Bed%20Cinema%20by%20Omazz%20%28SF%20Central%20Pattaya%29&amp;query_place_id=ChIJG7-F8gWWAjERjeB5UCQ84ys</description><Point><coordinates>100.8840926,12.9343479,0</coordinates></Point></Placemark>
+<Placemark><name>UOB LIVE</name><styleUrl>#cat-activity</styleUrl><description>Activity
+6th floor, EmSphere, 622 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110
+Concert hall in EmSphere; Time Out's November list flags the LANY show here.
+https://www.google.com/maps/search/?api=1&amp;query=UOB%20LIVE&amp;query_place_id=ChIJlUtepJKf4jARJ1AW7Fh6-EA</description><Point><coordinates>100.5662012,13.7322338,0</coordinates></Point></Placemark>
+<Placemark><name>SkyFlyers (Asiatique)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Asiatique The Riverfront, 2194 Charoen Krung Rd, Wat Phraya Krai, Bang Kho Laem, Bangkok 10120
+Spinning swing tower at Asiatique billed as Asia's tallest; one reel calls it the best 10 dollars spent in Bangkok.
+https://www.google.com/maps/search/?api=1&amp;query=SkyFlyers%20%28Asiatique%29&amp;query_place_id=ChIJs6oYbwCZ4jARZ7-hiM2Ofwc</description><Point><coordinates>100.5016644,13.7040651,0</coordinates></Point></Placemark>
+<Placemark><name>Project Quiet Room (T-One Building)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+20th floor, T-One Building, 8 Sukhumvit Rd (Soi 40), Phra Khanong, Khlong Toei, Bangkok 10110
+Free quiet room with skyline views for a slow day; the location comes from the poster's own comment.
+https://www.google.com/maps/search/?api=1&amp;query=Project%20Quiet%20Room%20%28T-One%20Building%29&amp;query_place_id=ChIJDwVCVCmf4jARncKKjBeC8OE</description><Point><coordinates>100.5804235,13.7223496,0</coordinates></Point></Placemark>
+<Placemark><name>Benchakitti Sports Center</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Building 3, inside Benjakitti Park, 184 Rama IV Rd, Khlong Toei, Bangkok 10110
+Free public gym in the middle of the park: register in the BKK Active app, show the front desk and sign in on paper, then look for building 3.
+https://www.google.com/maps/search/?api=1&amp;query=Benchakitti%20Sports%20Center&amp;query_place_id=ChIJlaP_q0Gf4jARPKZLTj5dtoE</description><Point><coordinates>100.5547603,13.7325235,0</coordinates></Point></Placemark>
+<Placemark><name>Fitness First Club Iconsiam</name><styleUrl>#cat-activity</styleUrl><description>Activity
+7th floor, ICONSIAM, 299 Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600
+The reel's pick for a premium gym with nice views.
+https://www.google.com/maps/search/?api=1&amp;query=Fitness%20First%20Club%20Iconsiam&amp;query_place_id=ChIJOVJW-4aZ4jARymTAdirAXA4</description><Point><coordinates>100.510118,13.72616,0</coordinates></Point></Placemark>
+<Placemark><name>Muscle Factory</name><styleUrl>#cat-activity</styleUrl><description>Activity
+2 Soi Sukhumvit 56 Yaek 3-1, Phra Khanong Tai, Phra Khanong, Bangkok 10260
+The reel's pick for old-school muscle building.
+https://www.google.com/maps/search/?api=1&amp;query=Muscle%20Factory&amp;query_place_id=ChIJ2zp9be2f4jAR1dog6EexzDA</description><Point><coordinates>100.5992545,13.6988693,0</coordinates></Point></Placemark>
+<Placemark><name>Thonglor CrossFit</name><styleUrl>#cat-activity</styleUrl><description>Activity
+74 Soi Sukhumvit 51, Khlong Tan Nuea, Watthana, Bangkok 10110
+The reel's pick for functional training, Hyrox, CrossFit and calisthenics.
+https://www.google.com/maps/search/?api=1&amp;query=Thonglor%20CrossFit&amp;query_place_id=ChIJy_BJV6qf4jARPDVG9gm7ybs</description><Point><coordinates>100.5773162,13.7304496,0</coordinates></Point></Placemark>
+<Placemark><name>Mega HarborLand One Bangkok</name><styleUrl>#cat-activity</styleUrl><description>Activity
+6th floor, One Bangkok, Witthayu Rd, Lumphini, Pathum Wan, Bangkok 10330
+Indoor adventure park on 4 floors over 12.5 m, with a 10 m skyfall and what the reel calls Thailand's longest indoor zipline; for adults and kids.
+https://www.google.com/maps/search/?api=1&amp;query=Mega%20HarborLand%20One%20Bangkok&amp;query_place_id=ChIJ61ArlP-f4jAR00_8GDdZajE</description><Point><coordinates>100.5471677,13.7263047,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Sight &amp; landmark</name>
 <Placemark><name>Sekigahara</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
@@ -318,6 +508,10 @@ https://www.google.com/maps/place/Aqueduct+of+Valens/data=!4m2!3m1!1s0x14cab9a7c
 <Placemark><name>Mammoth Consolidated Mine</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
 Mammoth Consolidated Mine, Mammoth Lakes, CA 93546, USA
 https://www.google.com/maps/place/Mammoth+Consolidated+Mine/data=!4m2!3m1!1s0x80960b85c26d84ed:0x1d6e99440533a78a</description><Point><coordinates>-118.989297,37.594381,0</coordinates></Point></Placemark>
+<Placemark><name>Neilson Hays Library</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+195 Surawong Rd, Suriya Wong, Bang Rak, Bangkok 10500
+Time Out's November list flags the library's book sale.
+https://www.google.com/maps/search/?api=1&amp;query=Neilson%20Hays%20Library&amp;query_place_id=ChIJH1bYY9GY4jAR_FWlfQ5kgek</description><Point><coordinates>100.5231542,13.7270247,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Area &amp; destination</name>
 <Placemark><name>San Blas Islands</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Personal places database. One entry per place. Rendered by places/build.py into places/index.html (map + location-aware cards) and exported to KML/CSV for Google My Maps.",
-    "last_updated": "2026-11-12",
+    "last_updated": "2026-11-11",
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
@@ -22,7 +22,10 @@
       "starred": "true if the user starred it",
       "google_maps_url": "exact Google Maps listing URL (used for Open in Google Maps when present)",
       "google_place_id": "Google Places id the exact coordinates came from",
-      "google_type": "Google's primary type for the place (hint for categorizing)"
+      "google_type": "Google's primary type for the place (hint for categorizing)",
+      "review": "pending | approved; new imports start pending and show on the app's Recently added page (#recent) with Approve / Remove",
+      "review_note": "optional caveat shown on the Recently added page (e.g. uncertain Google match)",
+      "imported_from": "where a batch import came from (google-saved-lists, instagram-saved-bkk)"
     },
     "staleness_days": 3650
   },
@@ -328,7 +331,8 @@
       "hours": "Evening from 19:00 per The Standard; daytime coffee session per Time Out. Sources conflict, check before going.",
       "sources": [
         "https://www.timeout.com/bangkok/bars/tictactoe",
-        "https://thestandard.co/life/tictactoe-bangkok/"
+        "https://thestandard.co/life/tictactoe-bangkok/",
+        "https://www.instagram.com/islandlifewithclaudia/reel/DSAXjOQioMX/"
       ],
       "visited": null,
       "added": "2026-10-31",
@@ -656,7 +660,10 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJNSLCmBWf4jAR1MnEZsa-rZw",
       "google_type": "thai_restaurant",
-      "address": "60 Soi Si Akson, Khwaeng Thung Maha Mek, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand"
+      "address": "60 Soi Si Akson, Khwaeng Thung Maha Mek, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand",
+      "sources": [
+        "https://www.instagram.com/thailandista/reel/DVyAs2LEUam/"
+      ]
     },
     {
       "id": "fatty-s-bar-diner",
@@ -1064,7 +1071,10 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJQXprckif4jARQ_SjVuADnMM",
       "google_type": "cocktail_bar",
-      "address": "92 Central Park Offices Building, Unit No.HH4401 44th Floor, ถ. พระรามที่ 4 แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand"
+      "address": "92 Central Park Offices Building, Unit No.HH4401 44th Floor, ถ. พระรามที่ 4 แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand",
+      "sources": [
+        "https://www.instagram.com/bangkok.rooftops/reel/DfXZaiMBGvg/"
+      ]
     },
     {
       "id": "baan-e-sarn-muangyos",
@@ -2330,6 +2340,1144 @@
       "google_place_id": "ChIJxf0Y6lVUQ1MRzcPqGqezKCA",
       "google_type": "car_repair",
       "address": "1825 N Montana Ave, Helena, MT 59601, USA"
+    },
+    {
+      "id": "got-bangkok",
+      "name": "GOT Bangkok",
+      "category": "nightclub",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "97 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7221705,
+      "lng": 100.5663225,
+      "coords_precision": "exact",
+      "notes": "Club on Sukhumvit 24 pitched as the hottest nightlife spot right now and a place to meet people; one reel says to dress in a colour code on Thursdays. About 1,000 THB+ per person, 7 PM to 3 AM.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/sskurahh/reel/DfhMA5dv6EV/",
+        "https://www.instagram.com/baldbound/reel/DV3FkEREvIK/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJ6VzCdgCf4jARkcvAJ90K9fs",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=GOT%20Bangkok&query_place_id=ChIJ6VzCdgCf4jARkcvAJ90K9fs",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "the-qlub",
+      "name": "THE QLUB",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "8th floor, SILQ Hotel & Residence, 41 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7258471,
+      "lng": 100.5678479,
+      "coords_precision": "exact",
+      "notes": "Wellness club at SILQ with a functional training gym, an onsen with four experiences, a pool and Japanese light bites.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thailandista/reel/DeeQGhUBpdA/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJofI6ZMOf4jARkeM_KRju28s",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=THE%20QLUB&query_place_id=ChIJofI6ZMOf4jARkeM_KRju28s",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "chum-chum-soul-song-wat",
+      "name": "Chum Chum (Soul Song Wat)",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "1300 Song Wat Rd, Samphanthawong, Bangkok 10100",
+      "lat": 13.7376619,
+      "lng": 100.5078955,
+      "coords_precision": "exact",
+      "notes": "Fragrance shop on Song Wat Road where you blend your own personalised perfume; pitched as a gift idea.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thailandista/reel/DerGf4zhhJ8/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJN7jJIgCZ4jAROLw-mKCQpNk",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Chum%20Chum%20%28Soul%20Song%20Wat%29&query_place_id=ChIJN7jJIgCZ4jAROLw-mKCQpNk",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "central-village-outlet",
+      "name": "Central Village Outlet",
+      "category": "mall",
+      "city": "Samut Prakan",
+      "country": "Thailand",
+      "address": "98 Bang Chalong, Bang Phli, Samut Prakan 10540",
+      "lat": 13.6387561,
+      "lng": 100.7431735,
+      "coords_precision": "exact",
+      "notes": "Luxury outlet near the airport with a Christmas Snow Village; tourist perks include up to 50% off with the Welcome Package and VAT refunds. Shuttle bus from CentralWorld.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thailandista/reel/DfO5hGlR_Au/",
+        "https://www.instagram.com/jamseylau/reel/DfUTQPCB4PU/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJDVO1Ob5dHTERexXu9EM9pcE",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Central%20Village%20Outlet&query_place_id=ChIJDVO1Ob5dHTERexXu9EM9pcE",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "kromo-bangkok-curio-collection-by-hilton",
+      "name": "KROMO Bangkok, Curio Collection by Hilton",
+      "category": "hotel",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "525 Sukhumvit Rd (Soi 29), Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7339918,
+      "lng": 100.5653448,
+      "coords_precision": "exact",
+      "notes": "Hotel in the Em District by BTS Phrom Phong, recommended by repeat visitors for the malls and pilates and wellness studios nearby.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/ourworlduntold/reel/DfZ11GMyxtM/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJTZX2Zf2e4jARDbDhAxJw2QE",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=KROMO%20Bangkok%2C%20Curio%20Collection%20by%20Hilton&query_place_id=ChIJTZX2Zf2e4jARDbDhAxJw2QE",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "raan-jay-fai",
+      "name": "Raan Jay Fai",
+      "category": "street-food",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "327 Maha Chai Rd, Samran Rat, Phra Nakhon, Bangkok 10200",
+      "lat": 13.7525912,
+      "lng": 100.5048189,
+      "coords_precision": "exact",
+      "notes": "Michelin-starred street-food stall run by Jay Fai, who cooks in ski goggles; the crab omelette is the signature.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/bangkok.explore/p/Der-djotNst/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJaxq89xaZ4jARQtKhE1uqq9c",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Raan%20Jay%20Fai&query_place_id=ChIJaxq89xaZ4jARQtKhE1uqq9c",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "capybara-coffee-bangkok-ekkamai",
+      "name": "Capybara Coffee Bangkok Ekkamai",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "2nd floor, Union Space, 30 Sukhumvit 61, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7243597,
+      "lng": 100.5834827,
+      "coords_precision": "exact",
+      "notes": "Animal cafe in Ekkamai with capybaras; billed as the cutest cafe in Bangkok.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/new1sh/reel/Dc3SggHzUyg/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJu7cHFOmf4jAR_Ou1AtB1mPg",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Capybara%20Coffee%20Bangkok%20Ekkamai&query_place_id=ChIJu7cHFOmf4jAR_Ou1AtB1mPg",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "queensland-hotel",
+      "name": "Queensland Hotel",
+      "category": "hotel",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Sri Ayutthaya Rd / Phaya Thai Rd, Ratchathewi, Bangkok 10400",
+      "lat": 13.75675,
+      "lng": 100.5385556,
+      "coords_precision": "exact",
+      "notes": "New hotel with skyline views where noodles cost 80 baht and food starts around 3 dollars; has a gym and a pool overlooking the city.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thaiwithfah/reel/DfebTYYAwiB/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJOQfIziyf4jARkEd1ForF9pA",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Queensland%20Hotel&query_place_id=ChIJOQfIziyf4jARkEd1ForF9pA",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "topkart-bangkok",
+      "name": "Topkart Bangkok",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "1087/170 Phetchaburi Rd, Makkasan, Ratchathewi, Bangkok 10400",
+      "lat": 13.7498517,
+      "lng": 100.543752,
+      "coords_precision": "exact",
+      "notes": "Outdoor go-kart track in the city, shown lit up at night.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/zyrah.marieya/reel/DcnVb6uTphU/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJj5416GGf4jAR9tfl4VRJ8j4",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Topkart%20Bangkok&query_place_id=ChIJj5416GGf4jAR9tfl4VRJ8j4",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "café-amazon-experience",
+      "name": "Café Amazon Experience",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Ari, Samsen Nai, Phaya Thai, Bangkok 10400",
+      "lat": 13.7789453,
+      "lng": 100.5445442,
+      "coords_precision": "exact",
+      "notes": "Flagship Café Amazon in Ari, saved as a cafe to visit.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/mahgooblife/reel/De9B07KvW8Z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJh9xVTwCf4jARa0z9Ree4D_s",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Amazon%20Experience&query_place_id=ChIJh9xVTwCf4jARa0z9Ree4D_s",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "mira-club-bangkok",
+      "name": "MIRA CLUB BANGKOK",
+      "category": "nightclub",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "19 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7429081,
+      "lng": 100.5564524,
+      "coords_precision": "exact",
+      "notes": "Red-lit club on Sukhumvit 11 that the reel calls the hottest club in Thailand right now.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/159.9999999999millifresh/reel/DeZaEfxuaES/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJ46lNIG2f4jAR63rNwzA6U1Y",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=MIRA%20CLUB%20BANGKOK&query_place_id=ChIJ46lNIG2f4jAR63rNwzA6U1Y",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "rajadamnern-muay-thai-stadium",
+      "name": "Rajadamnern Muay Thai Stadium",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "8 Ratchadamnoen Nok Rd, Pom Prap Sattru Phai, Bangkok 10100",
+      "lat": 13.7609937,
+      "lng": 100.5087949,
+      "coords_precision": "exact",
+      "notes": "Muay Thai fight night, described as one of the best nights out in Bangkok.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/samzacktyler/reel/DfUOKM0AK1t/",
+        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJEyraT0CZ4jAREz5xKJKTLDM",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Rajadamnern%20Muay%20Thai%20Stadium&query_place_id=ChIJEyraT0CZ4jAREz5xKJKTLDM",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "icon-cineconic-iconsiam",
+      "name": "ICON Cineconic (ICONSIAM)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "ICONSIAM, 299 Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600",
+      "lat": 13.7273355,
+      "lng": 100.509766,
+      "coords_precision": "exact",
+      "notes": "Luxury cinema at ICONSIAM for about 7 dollars: cushioned seats and easy ticketing. Good for hiding from afternoon heat or rain.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/kaitlyn_and_danny/reel/DfOaV5EuJ4n/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJTxKz6bWZ4jARaDADT3-BvUI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=ICON%20Cineconic%20%28ICONSIAM%29&query_place_id=ChIJTxKz6bWZ4jARaDADT3-BvUI",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "the-bed-cinema-by-omazz-sf-central-pattaya",
+      "name": "The Bed Cinema by Omazz (SF Central Pattaya)",
+      "category": "activity",
+      "city": "Pattaya",
+      "country": "Thailand",
+      "address": "6M floor, Central Pattaya, 333/99 Moo 9, Bang Lamung, Chon Buri 20260",
+      "lat": 12.9343479,
+      "lng": 100.8840926,
+      "coords_precision": "building",
+      "notes": "Cinema where you watch from a bed, with 4K picture and Dolby 7.1 sound.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/central_pattaya/p/De6Vh4cGmQ0/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJG7-F8gWWAjERjeB5UCQ84ys",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The%20Bed%20Cinema%20by%20Omazz%20%28SF%20Central%20Pattaya%29&query_place_id=ChIJG7-F8gWWAjERjeB5UCQ84ys",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "neilson-hays-library",
+      "name": "Neilson Hays Library",
+      "category": "sight",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "195 Surawong Rd, Suriya Wong, Bang Rak, Bangkok 10500",
+      "lat": 13.7270247,
+      "lng": 100.5231542,
+      "coords_precision": "exact",
+      "notes": "Time Out's November list flags the library's book sale.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/timeoutbangkok/p/DfJ-yvnE0Up/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJH1bYY9GY4jAR_FWlfQ5kgek",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Neilson%20Hays%20Library&query_place_id=ChIJH1bYY9GY4jAR_FWlfQ5kgek",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "wat-saket-golden-mount",
+      "name": "Wat Saket (Golden Mount)",
+      "category": "temple",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "344 Chakkraphatdi Phong Rd, Ban Bat, Pom Prap Sattru Phai, Bangkok 10100",
+      "lat": 13.7527691,
+      "lng": 100.5066745,
+      "coords_precision": "exact",
+      "notes": "Time Out's November list flags the Golden Mount temple fair for grazing on food.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/timeoutbangkok/p/DfJ-yvnE0Up/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJP-MtN12Z4jARlEBmga-oF4w",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Wat%20Saket%20%28Golden%20Mount%29&query_place_id=ChIJP-MtN12Z4jARlEBmga-oF4w",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "uob-live",
+      "name": "UOB LIVE",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "6th floor, EmSphere, 622 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7322338,
+      "lng": 100.5662012,
+      "coords_precision": "exact",
+      "notes": "Concert hall in EmSphere; Time Out's November list flags the LANY show here.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/timeoutbangkok/p/DfJ-yvnE0Up/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJlUtepJKf4jARJ1AW7Fh6-EA",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=UOB%20LIVE&query_place_id=ChIJlUtepJKf4jARJ1AW7Fh6-EA",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "dip-ekkamai---garden-onsen-sauna-ice-bath",
+      "name": "Dip Ekkamai - Garden Onsen, Sauna & Ice Bath",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "17 Soi Phatsana 2, Phra Khanong Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7255931,
+      "lng": 100.5870531,
+      "coords_precision": "exact",
+      "notes": "Dip's newest location: a garden onsen with pool, just opened in Ekkamai.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/sammarks12/reel/DfO2MBEitwj/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJg28ZD1Gf4jARuwN9PHnjI7U",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Dip%20Ekkamai%20-%20Garden%20Onsen%2C%20Sauna%20%26%20Ice%20Bath&query_place_id=ChIJg28ZD1Gf4jARuwN9PHnjI7U",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "skyflyers-asiatique",
+      "name": "SkyFlyers (Asiatique)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Asiatique The Riverfront, 2194 Charoen Krung Rd, Wat Phraya Krai, Bang Kho Laem, Bangkok 10120",
+      "lat": 13.7040651,
+      "lng": 100.5016644,
+      "coords_precision": "exact",
+      "notes": "Spinning swing tower at Asiatique billed as Asia's tallest; one reel calls it the best 10 dollars spent in Bangkok.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/christian_gido/reel/DfThYXtqt8X/",
+        "https://www.instagram.com/gazizqabbas/reel/DeXHlNCT6oq/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJs6oYbwCZ4jARZ7-hiM2Ofwc",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=SkyFlyers%20%28Asiatique%29&query_place_id=ChIJs6oYbwCZ4jARZ7-hiM2Ofwc",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "truelove-neverland-husky-cafe",
+      "name": "TrueLove @ Neverland (Husky Cafe)",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "153 Soi Ari Samphan 2, Phaya Thai, Bangkok 10400",
+      "lat": 13.7727506,
+      "lng": 100.536068,
+      "coords_precision": "exact",
+      "notes": "Husky cafe in Ari where you pet the dogs; tagged as @neverlandsiberians.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/tayneandmaz/reel/DfcGeHahG2E/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJvUMXl66e4jARALcMSWimOWU",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=TrueLove%20%40%20Neverland%20%28Husky%20Cafe%29&query_place_id=ChIJvUMXl66e4jARALcMSWimOWU",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "vaya-spa-cafe",
+      "name": "VAYA SPA & CAFE",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "5/9 Soi Phrom Si 1 (Sukhumvit 39), Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7364949,
+      "lng": 100.5733473,
+      "coords_precision": "exact",
+      "notes": "New luxury spa off Sukhumvit 39.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/samzacktyler/reel/DaDATbDxi7u/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJHf_NwLOf4jARrtUTPvNUFZI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=VAYA%20SPA%20%26%20CAFE&query_place_id=ChIJHf_NwLOf4jARrtUTPvNUFZI",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "the-ice-bath-club---bangkok",
+      "name": "The Ice Bath Club - Bangkok",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Unit 101, 1st floor, JLK Tower, Sukhumvit Soi 3, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7409046,
+      "lng": 100.5552142,
+      "coords_precision": "exact",
+      "notes": "Drop-in cold plunge, ice bucket bath, social sauna and hot bath; communal and no appointment needed.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/hanseldes/reel/De9bs1kzhx7/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJG802Tpaf4jARdV_fVxNaGvU",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The%20Ice%20Bath%20Club%20-%20Bangkok&query_place_id=ChIJG802Tpaf4jARdV_fVxNaGvU",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "alice-massage-nana-4",
+      "name": "Alice Massage Nana 4",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "21/6 Soi Sukhumvit 4, Khlong Toei, Bangkok 10110",
+      "lat": 13.7402068,
+      "lng": 100.553377,
+      "coords_precision": "exact",
+      "notes": "Massage and spa on Sukhumvit Soi 4, opposite Hillary 1, from a few hundred baht. This is the shop's own ad.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/alice_massage_nana4/reel/DfZQQqcnDHv/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJQZyoAACf4jARTwVUbpOEQis",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Alice%20Massage%20Nana%204&query_place_id=ChIJQZyoAACf4jARTwVUbpOEQis",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "project-quiet-room-t-one-building",
+      "name": "Project Quiet Room (T-One Building)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "20th floor, T-One Building, 8 Sukhumvit Rd (Soi 40), Phra Khanong, Khlong Toei, Bangkok 10110",
+      "lat": 13.7223496,
+      "lng": 100.5804235,
+      "coords_precision": "building",
+      "notes": "Free quiet room with skyline views for a slow day; the location comes from the poster's own comment.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/bangkok_baddie/reel/DfSNnFlpRSe/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJDwVCVCmf4jARncKKjBeC8OE",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Project%20Quiet%20Room%20%28T-One%20Building%29&query_place_id=ChIJDwVCVCmf4jARncKKjBeC8OE",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending",
+      "review_note": "Pin is the T-One Building; Google has no separate listing for the room."
+    },
+    {
+      "id": "baia-bangkok",
+      "name": "Baia Bangkok",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Pipa Hotel, 16 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7429938,
+      "lng": 100.5567902,
+      "coords_precision": "exact",
+      "notes": "Italian restaurant with a party atmosphere; the reel shows a free Aperol offer.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/p.hilyy/reel/De58YjeROiV/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJu7_6De2f4jARZIVt8z-FiRI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Baia%20Bangkok&query_place_id=ChIJu7_6De2f4jARZIVt8z-FiRI",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "copper-beyond-buffet-gaysorn-amarin",
+      "name": "Copper Beyond Buffet Gaysorn Amarin",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "3rd floor, Gaysorn Amarin, 502 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330",
+      "lat": 13.7436938,
+      "lng": 100.5413349,
+      "coords_precision": "exact",
+      "notes": "International all-you-can-eat buffet with seafood, sushi and grill; the Premium Foie Gras package was 2,099 THB net per person via Hungry Hub.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thailandista/reel/DegxpgdBiUX/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJO8MKjW2f4jARj37d2JR3l8c",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Copper%20Beyond%20Buffet%20Gaysorn%20Amarin&query_place_id=ChIJO8MKjW2f4jARj37d2JR3l8c",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "unculture-silom-rooftop-bar",
+      "name": "Unculture Silom Rooftop Bar",
+      "category": "rooftop-bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "36-38 Naradhiwat Rajanagarindra Rd, Si Lom, Bang Rak, Bangkok 10500",
+      "lat": 13.7256334,
+      "lng": 100.5280185,
+      "coords_precision": "exact",
+      "notes": "Bar with close-up views of passing BTS trains; tagged as @unculture.bkk.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/tema_dark/reel/Deet-TvSSlv/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJEc_x3gWZ4jARUu81t7ELjg0",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Unculture%20Silom%20Rooftop%20Bar&query_place_id=ChIJEc_x3gWZ4jARUu81t7ELjg0",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "lumphini-park",
+      "name": "Lumphini Park",
+      "category": "park",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Lumphini, Pathum Wan, Bangkok 10330",
+      "lat": 13.7314281,
+      "lng": 100.5416984,
+      "coords_precision": "exact",
+      "notes": "Free outdoor Zumba classes in the park in the evening.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/javed_clicks/reel/Dc_IKavSF4b/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJG7BL7Saf4jARNmn5AQiyAaw",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Lumphini%20Park&query_place_id=ChIJG7BL7Saf4jARNmn5AQiyAaw",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "haidilao-hotpot-central-rama-9",
+      "name": "Haidilao Hotpot (Central Rama 9)",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "7th floor, Central Rama 9, Rama IX Rd, Huai Khwang, Bangkok 10310",
+      "lat": 13.7580056,
+      "lng": 100.5663428,
+      "coords_precision": "exact",
+      "notes": "Hot pot that's still serving at 2 AM.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/bangkokbyjudy/reel/DezMEISzj-z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJdTCD0Fmf4jAR3Haq_ZjU3nM",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Haidilao%20Hotpot%20%28Central%20Rama%209%29&query_place_id=ChIJdTCD0Fmf4jAR3Haq_ZjU3nM",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "little-wood",
+      "name": "Little Wood",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Rama IX Soi 15/1, Bang Kapi, Huai Khwang, Bangkok 10310",
+      "lat": 13.7552915,
+      "lng": 100.5887071,
+      "coords_precision": "exact",
+      "notes": "Garden cafe with goats you can feed; two reels call it a favourite, low-stress cafe.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/malinandjakob/reel/DdEZ_GDpgEB/",
+        "https://www.instagram.com/egorprolive/reel/De3a71Sy88z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJabaCefGf4jARgByXoHcVxWk",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Little%20Wood&query_place_id=ChIJabaCefGf4jARgByXoHcVxWk",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "bitstudio-gallery",
+      "name": "bit.studio gallery",
+      "category": "museum",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "3rd floor, Slowcombo, 126 Soi Chula 50, Wang Mai, Pathum Wan, Bangkok 10330",
+      "lat": 13.7345401,
+      "lng": 100.5271182,
+      "coords_precision": "exact",
+      "notes": "Interactive art studio, part of a one-day Bangkok must-do list.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJs88pwriZ4jARaStuJpLRuKs",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=bit.studio%20gallery&query_place_id=ChIJs88pwriZ4jARaStuJpLRuKs",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "pop-mart-cafe-iconsiam",
+      "name": "POP MART Cafe (ICONSIAM)",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "ICONSIAM, Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600",
+      "lat": 13.726349,
+      "lng": 100.510544,
+      "coords_precision": "exact",
+      "notes": "Character-themed cafe at ICONSIAM, suggested for dessert in a one-day must-do list.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJsat4KgCZ4jARDRUlunjs0Gs",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=POP%20MART%20Cafe%20%28ICONSIAM%29&query_place_id=ChIJsat4KgCZ4jARDRUlunjs0Gs",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "akara-sky-hanuman-bangkok",
+      "name": "Akara Sky Hanuman Bangkok",
+      "category": "rooftop-bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "58th-61st floor, One City Centre, 548 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330",
+      "lat": 13.7420325,
+      "lng": 100.5462515,
+      "coords_precision": "exact",
+      "notes": "Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJkxdwWiyf4jARdUV1zHHjqlo",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Akara%20Sky%20Hanuman%20Bangkok&query_place_id=ChIJkxdwWiyf4jARdUV1zHHjqlo",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "newstand",
+      "name": "newstand.",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "582 Soi 5, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7366154,
+      "lng": 100.6021329,
+      "coords_precision": "exact",
+      "notes": "Cafe where you drink coffee in a bed; tagged as @newstandth.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/eclairn/reel/DejSTq8PK50/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJlXLMegKf4jARoxOwr3_hHzQ",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=newstand.&query_place_id=ChIJlXLMegKf4jARoxOwr3_hHzQ",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending",
+      "review_note": "Google match is uncertain: the listing has no reviews and the reel gives no address."
+    },
+    {
+      "id": "965-bangkok",
+      "name": "965 | Bangkok",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "965 Soi Wanit 2, Talat Noi, Samphanthawong, Bangkok 10100",
+      "lat": 13.7329645,
+      "lng": 100.5132529,
+      "coords_precision": "exact",
+      "notes": "Hidden cafe in a plant-covered old house in Talat Noi.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/samzacktyler/reel/DfKFcFbgk02/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJzyd4esyZ4jARjDlkOpNhnbI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=965%20%7C%20Bangkok&query_place_id=ChIJzyd4esyZ4jARjDlkOpNhnbI",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "benjakitti-park",
+      "name": "Benjakitti Park",
+      "category": "park",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Ratchadaphisek Rd, Khlong Toei, Bangkok 10110",
+      "lat": 13.7292327,
+      "lng": 100.558726,
+      "coords_precision": "exact",
+      "notes": "Free Thai Walk Meetup by @thaiworldcommunity: walk, talk and practise Thai, capped at 30 people. The saved post was for Sun 1 Nov, 4:30 to 6 PM; check their page for the next one.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/thaiworldcommunity/p/DfHde5IEi2Z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJmfMfvBuf4jAR9rugvZd5Lyc",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Benjakitti%20Park&query_place_id=ChIJmfMfvBuf4jAR9rugvZd5Lyc",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "terminal-21-asok",
+      "name": "Terminal 21 Asok",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7379635,
+      "lng": 100.5604058,
+      "coords_precision": "exact",
+      "notes": "The 2nd-floor toilets are themed like a red train carriage.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/papino_th/reel/DerjlwuTrG_/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJuWuZbh6f4jAReZMEm2xxgzM",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Terminal%2021%20Asok&query_place_id=ChIJuWuZbh6f4jAReZMEm2xxgzM",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "benchakitti-sports-center",
+      "name": "Benchakitti Sports Center",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Building 3, inside Benjakitti Park, 184 Rama IV Rd, Khlong Toei, Bangkok 10110",
+      "lat": 13.7325235,
+      "lng": 100.5547603,
+      "coords_precision": "exact",
+      "notes": "Free public gym in the middle of the park: register in the BKK Active app, show the front desk and sign in on paper, then look for building 3.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/ninanoodlesoup/reel/DeHXwlAT0io/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJlaP_q0Gf4jARPKZLTj5dtoE",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Benchakitti%20Sports%20Center&query_place_id=ChIJlaP_q0Gf4jARPKZLTj5dtoE",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "barbeque-nation",
+      "name": "Barbeque Nation",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "2nd floor, Hyatt Regency Bangkok Sukhumvit, 1 Soi Sukhumvit 13, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7397499,
+      "lng": 100.5568102,
+      "coords_precision": "exact",
+      "notes": "All-you-can-eat Indian buffet for 399 baht.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/_beardedtravels/reel/DerPg4BN80b/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJ30tae3yf4jAR_WbjoMm70a0",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Barbeque%20Nation&query_place_id=ChIJ30tae3yf4jAR_WbjoMm70a0",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "fitness-first-club-iconsiam",
+      "name": "Fitness First Club Iconsiam",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "7th floor, ICONSIAM, 299 Charoen Nakhon Rd, Khlong Ton Sai, Khlong San, Bangkok 10600",
+      "lat": 13.72616,
+      "lng": 100.510118,
+      "coords_precision": "exact",
+      "notes": "The reel's pick for a premium gym with nice views.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/patchadders/reel/Debb8pYTG0z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJOVJW-4aZ4jARymTAdirAXA4",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Fitness%20First%20Club%20Iconsiam&query_place_id=ChIJOVJW-4aZ4jARymTAdirAXA4",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "muscle-factory",
+      "name": "Muscle Factory",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "2 Soi Sukhumvit 56 Yaek 3-1, Phra Khanong Tai, Phra Khanong, Bangkok 10260",
+      "lat": 13.6988693,
+      "lng": 100.5992545,
+      "coords_precision": "exact",
+      "notes": "The reel's pick for old-school muscle building.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/patchadders/reel/Debb8pYTG0z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJ2zp9be2f4jAR1dog6EexzDA",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Muscle%20Factory&query_place_id=ChIJ2zp9be2f4jAR1dog6EexzDA",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "thonglor-crossfit",
+      "name": "Thonglor CrossFit",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "74 Soi Sukhumvit 51, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7304496,
+      "lng": 100.5773162,
+      "coords_precision": "exact",
+      "notes": "The reel's pick for functional training, Hyrox, CrossFit and calisthenics.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/patchadders/reel/Debb8pYTG0z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJy_BJV6qf4jARPDVG9gm7ybs",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Thonglor%20CrossFit&query_place_id=ChIJy_BJV6qf4jARPDVG9gm7ybs",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "pattavikorn-market-new-project",
+      "name": "Pattavikorn Market New Project",
+      "category": "market",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Nawamin Rd, Khlong Kum, Bueng Kum, Bangkok 10240",
+      "lat": 13.8158513,
+      "lng": 100.6528253,
+      "coords_precision": "exact",
+      "notes": "Huge thrift market the poster rates above the better-known 'red building'; keep the whole day free.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/poppymcmulkin/reel/DYYqSXcRW_j/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJeU5X7cljHTERBCbz6dFDioY",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pattavikorn%20Market%20New%20Project&query_place_id=ChIJeU5X7cljHTERBCbz6dFDioY",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "pink-bangkok-staybridge-suites-sukhumvit",
+      "name": "Pink Bangkok (Staybridge Suites Sukhumvit)",
+      "category": "nightclub",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Staybridge Suites Bangkok Sukhumvit, 89/8-9 Soi Sukhumvit 24, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7249877,
+      "lng": 100.567502,
+      "coords_precision": "building",
+      "notes": "Afro night by @pink.bangkok at the Staybridge Suites on Sukhumvit 24.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/bewithbams/reel/DWRIAvKAJMW/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJB0p22Kuf4jAR743ZZu4Kzmk",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pink%20Bangkok%20%28Staybridge%20Suites%20Sukhumvit%29&query_place_id=ChIJB0p22Kuf4jAR743ZZu4Kzmk",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending",
+      "review_note": "Pin is the hotel; Google has no separate listing for Pink Bangkok."
+    },
+    {
+      "id": "dont-open-the-fridge",
+      "name": "Don't Open The Fridge",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "26/4 Soi Sukhumvit 11, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7446308,
+      "lng": 100.5568853,
+      "coords_precision": "exact",
+      "notes": "Speakeasy you enter through a fridge door; one reel calls it among the coolest bars in the city.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/jesszhengg/reel/DWTythFgTEO/",
+        "https://www.instagram.com/gianaarmellini/reel/DVCPh4BkyKf/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJxzg-EcGf4jARoOp3PwuD2eI",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Don%27t%20Open%20The%20Fridge&query_place_id=ChIJxzg-EcGf4jARoOp3PwuD2eI",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending",
+      "review_note": "The second reel (red Coca-Cola fridge entrance) doesn't name the bar; it's attached here as the likely match."
+    },
+    {
+      "id": "mega-harborland-one-bangkok",
+      "name": "Mega HarborLand One Bangkok",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "6th floor, One Bangkok, Witthayu Rd, Lumphini, Pathum Wan, Bangkok 10330",
+      "lat": 13.7263047,
+      "lng": 100.5471677,
+      "coords_precision": "exact",
+      "notes": "Indoor adventure park on 4 floors over 12.5 m, with a 10 m skyfall and what the reel calls Thailand's longest indoor zipline; for adults and kids.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/withlaya/reel/DVs9VNgiaIF/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJ61ArlP-f4jAR00_8GDdZajE",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Mega%20HarborLand%20One%20Bangkok&query_place_id=ChIJ61ArlP-f4jAR00_8GDdZajE",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
+    },
+    {
+      "id": "arabica-bangkok-empire-tower",
+      "name": "% Arabica Bangkok Empire Tower",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Level 55, Empire Tower, 1 South Sathon Rd, Yan Nawa, Sathon, Bangkok 10120",
+      "lat": 13.7205344,
+      "lng": 100.5302284,
+      "coords_precision": "exact",
+      "notes": "Coffee on the 55th floor, billed as the best coffee view in Bangkok.",
+      "tags": [
+        "Instagram saved: Bkk"
+      ],
+      "sources": [
+        "https://www.instagram.com/konnicheewah/reel/DYM-oqVhc0Z/"
+      ],
+      "added": "2026-11-11",
+      "starred": false,
+      "google_place_id": "ChIJVcDWajif4jARMI0DNmwbITg",
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=%25%20Arabica%20Bangkok%20Empire%20Tower&query_place_id=ChIJVcDWajif4jARMI0DNmwbITg",
+      "imported_from": "instagram-saved-bkk",
+      "review": "pending"
     }
   ]
 }

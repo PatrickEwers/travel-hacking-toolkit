@@ -70,6 +70,25 @@
   .litem .name { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .litem .meta { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .ltools { display:flex; gap:6px; padding:8px 14px; align-items:center; }
+  #recent { position:absolute; inset:0; z-index:1004; background:var(--bg); overflow:auto; display:none; padding:calc(var(--safe-t) + 8px) 0 30px; bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
+  #recent.show { display:block; }
+  .rhead { padding:0 16px 8px; }
+  .rhead h1 { margin:0; font-size:24px; font-weight:800; letter-spacing:-.02em; color:var(--brand); }
+  .rfilters { display:flex; gap:6px; padding:0 16px 10px; flex-wrap:wrap; }
+  .rwrap { overflow-x:auto; padding:0 8px; }
+  table.rtable { border-collapse:collapse; width:100%; min-width:860px; font-size:14px; }
+  .rtable th { text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:8px; border-bottom:1px solid var(--line); background:var(--bg2); position:sticky; top:0; }
+  .rtable td { padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .rtable td.rname { font-weight:600; min-width:150px; }
+  .rtable td.ract { white-space:nowrap; }
+  .rtable a { color:var(--brand); }
+  .rtable tr.approved td { background:rgba(11,138,74,.07); }
+  .rtable tr.removed td { opacity:.5; }
+  .rtable tr.removed td.rname { text-decoration:line-through; }
+  .rbadge { display:inline-block; font-size:11px; font-weight:600; padding:1px 7px; border-radius:999px; background:var(--bg2); color:var(--muted); margin-left:6px; vertical-align:1px; }
+  .rbadge.approved { background:#0b8a4a; color:#fff; } .rbadge.removed { background:#b42318; color:#fff; }
+  .rnote { font-size:12px; color:#b25e09; margin-top:4px; }
+  button.ok { background:#0b8a4a; border-color:#0b8a4a; color:#fff; } button.del { color:#b42318; border-color:#b42318; }
   .empty { padding:30px 14px; color:var(--muted); text-align:center; }
   /* ---------- Walkabout mobile layout ---------- */
   :root { --brand:#0f766e; --nav-h:58px; --safe-b:env(safe-area-inset-bottom, 0px); --safe-t:env(safe-area-inset-top, 0px); }
@@ -116,6 +135,7 @@
 <body>
 <div id="map"></div>
 <div id="list"></div>
+<div id="recent"></div>
 <div class="top">
   <div class="bar">
     <input id="q" type="search" enterkeyhint="search" placeholder="Add a place or paste a Maps link" autocomplete="off" autocapitalize="words">
@@ -176,7 +196,7 @@ function allCats() {
   return cats.concat(other); // "Other" always last
 }
 const cat = id => allCats().find(c => c.id === id) || allCats().find(c => c.id === 'other');
-function allPlaces() {
+function everyPlace() {
   const seed = (SEED && SEED.places) || [];
   const ids = new Set(seed.map(p => p.id));
   const over = load(LS.over);
@@ -184,6 +204,7 @@ function allPlaces() {
     .map(p => ({ ...p, ...(over[p.id] || {}) }))
     .map(p => ({ ...p, category: allCats().some(c => c.id === p.category) ? p.category : 'other' }));
 }
+const allPlaces = () => everyPlace().filter(p => p.review !== 'removed');
 const isLocal = id => load(LS.places).some(p => p.id === id);
 function setField(id, field, value) {
   if (isLocal(id)) {
@@ -360,23 +381,61 @@ function renderAll() { renderChips(); renderMap(); if (view === 'list') renderLi
 function setView(v) {
   view = v;
   document.getElementById('list').classList.toggle('show', v === 'list');
+  document.getElementById('recent').classList.toggle('show', v === 'recent');
+  if (v === 'recent') renderRecent();
   document.querySelectorAll('.nav [data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === v));
   close(); renderAll();
   if (v === 'map') setTimeout(() => map.invalidateSize(), 0);
 }
 document.querySelectorAll('.nav [data-nav]').forEach(b => b.onclick = () => b.dataset.nav === 'more' ? showMore() : setView(b.dataset.nav));
 function showMore() {
-  if (view === 'list') setView('map');
+  if (view !== 'map') setView('map');
   open(`<h2>Walkabout</h2>
     <div class="menu">
       <button onclick="showImport()">⬇️ Import from Google Maps</button>
       <button onclick="showExport()">⬆️ Export &amp; save my changes</button>
       <button onclick="location.hash='';setView('list')">☰ All places</button>
+      <button onclick="closeSheet();setView('recent')">🆕 Recently added${pendingCount() ? ' · ' + pendingCount() + ' to review' : ''}</button>
       <button onclick="showInstall()">📲 Add Walkabout to home screen</button>
     </div>
     <div class="meta" style="margin-top:8px">${allPlaces().length} places · ${allCats().length} categories</div>`);
 }
 window.showMore = showMore;
+
+// ---------- recently added: review table with Approve / Remove ----------
+// Imports arrive with review:"pending". Approve / Remove are saved on this device like stars,
+// travel in Export → My changes, and merge_changes.py makes them permanent (Remove deletes the place).
+const reviewable = () => everyPlace().filter(p => p.review).sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.name.localeCompare(b.name));
+const pendingCount = () => reviewable().filter(p => p.review === 'pending').length;
+let recentFilter = 'pending';
+function setReview(id, state) { setField(id, 'review', state); renderRecent(); }
+window.setReview = setReview;
+function renderRecent() {
+  const all = reviewable(), n = s => all.filter(p => p.review === s).length;
+  if (recentFilter === 'pending' && !n('pending')) recentFilter = 'all';
+  const rows = all.filter(p => recentFilter === 'all' || p.review === recentFilter);
+  const host = u => { try { const x = new URL(u); return x.hostname.replace(/^www\./, '') === 'instagram.com' ? 'Instagram' + (/\/reel\//.test(x.pathname) ? ' reel' : ' post') : x.hostname; } catch (e) { return 'source'; } };
+  const tr = p => `<tr class="${esc(p.review)}">
+      <td class="rname">${esc(p.name)}${p.review !== 'pending' ? `<span class="rbadge ${esc(p.review)}">${p.review === 'approved' ? 'Approved' : 'Removed'}</span>` : ''}
+        <div class="meta">${esc(cat(p.category).label)}${p.added ? ' · added ' + esc(p.added) : ''}</div></td>
+      <td>${esc(p.notes || '')}${p.review_note ? `<div class="rnote">⚠ ${esc(p.review_note)}</div>` : ''}</td>
+      <td>${(p.sources || []).map((u, i, a) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(host(u))}${a.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('<br>')}</td>
+      <td>${esc(p.address || '')}</td>
+      <td><a href="${gmaps(p)}" target="_blank" rel="noopener">Google Maps</a><br><a href="#${esc(p.id)}" onclick="event.preventDefault();location.hash='';setView('map');showPlace('${esc(p.id)}')">Pin</a></td>
+      <td class="ract">${p.review === 'pending'
+        ? `<button class="ok" onclick="setReview('${esc(p.id)}','approved')">Approve</button> <button class="del" onclick="setReview('${esc(p.id)}','removed')">Remove</button>`
+        : `<button onclick="setReview('${esc(p.id)}','pending')">Undo</button>`}</td></tr>`;
+  document.getElementById('recent').innerHTML = `
+    <div class="rhead"><h1>Recently added</h1>
+      <div class="meta">${n('pending')} to review · ${n('approved')} approved · ${n('removed')} removed. Open the Google Maps link to confirm the match, then Approve or Remove.
+        Choices are saved on this device; Export → My changes makes them permanent.</div></div>
+    <div class="rfilters">${[['pending','To review'],['approved','Approved'],['removed','Removed'],['all','All']].map(([k, l]) =>
+      `<button class="${recentFilter === k ? 'on' : ''}" data-rf="${k}">${l} ${k === 'all' ? all.length : n(k)}</button>`).join('')}
+      <span style="flex:1"></span><button onclick="showExport()">Export…</button></div>
+    ${rows.length ? `<div class="rwrap"><table class="rtable"><thead><tr><th>Name</th><th>What's said about it</th><th>Source</th><th>Address</th><th>Confirm</th><th></th></tr></thead>
+      <tbody>${rows.map(tr).join('')}</tbody></table></div>` : '<div class="empty">Nothing here.</div>'}`;
+  document.querySelectorAll('#recent [data-rf]').forEach(b => b.onclick = () => { recentFilter = b.dataset.rf; renderRecent(); });
+}
 function showInstall() {
   const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
   open(`<h2>Add to home screen</h2><p>${ios
@@ -554,7 +613,7 @@ function toCSV(ps) {
     .concat(ps.map(p => [p.name, cat(p.category).label, p.starred ? 'yes' : '', p.address, p.city, p.lat, p.lng, p.notes, gmaps(p)].map(q).join(','))).join('\n');
 }
 function showExport() {
-  if (view === 'list') setView('map');
+  if (view !== 'map') setView('map');
   const nChanges = load(LS.places).length + Object.keys(load(LS.over)).length + load(LS.cats).length;
   open(`<h2>Export</h2>
     <div class="row">
@@ -721,6 +780,7 @@ function showImport() {
 renderAll();
 const hash = decodeURIComponent(location.hash.slice(1));
 if (hash === 'list') setView('list');
+else if (hash === 'recent') setView('recent');
 else if (hash === 'import') showImport();
 else if (hash) showPlace(hash);
 </script>

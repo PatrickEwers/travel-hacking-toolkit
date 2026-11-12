@@ -76,6 +76,16 @@ The app saves edits on the device. ☰ List → Export… → "My changes" downl
 `new_categories`. To merge: add new categories first (keep their color), apply edits to matching
 ids, append new places (skip ids that already exist), set `_meta.last_updated`, rebuild.
 
+## Recently added (review queue)
+
+Batch imports (e.g. Instagram saved posts) are written with `"review": "pending"`, the post URLs in
+`sources`, a short `notes` description, and an optional `review_note` caveat (uncertain match, pin on
+the building). The app's **Recently added** page (More → Recently added, deep link `index.html#recent`)
+lists them in a table: name, description, source link, address, Google Maps link, **Approve** /
+**Remove**. Choices are saved on the device and travel in Export → My changes;
+`merge_changes.py` then marks approved places and deletes removed ones. Removed places are hidden
+from the map and list right away on that device.
+
 ## The app (`places/index.html`)
 
 - Map pins colored by category, starred places get a gold ring. Category chips along the top

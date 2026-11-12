@@ -24,9 +24,15 @@ def main(path):
 
     by_id = {p["id"]: p for p in places}
     edited = 0
+    removed = 0
     for pid, fields in ch.get("edits", {}).items():
         if pid in by_id:
             by_id[pid].update({k: v for k, v in fields.items() if k in ("category", "starred")}); edited += 1
+            # review decisions from the Recently added page: Remove deletes the place, Approve keeps it
+            if fields.get("review") == "removed":
+                places.remove(by_id.pop(pid)); removed += 1
+            elif fields.get("review") == "approved":
+                by_id[pid]["review"] = "approved"; by_id[pid].pop("review_note", None)
 
     added = skipped = 0
     seen_urls = {p.get("google_maps_url") for p in places if p.get("google_maps_url")}
@@ -42,7 +48,7 @@ def main(path):
 
     data["_meta"]["last_updated"] = datetime.date.today().isoformat()
     DATA.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
-    print(f"merged: +{added} places ({skipped} duplicates skipped), {edited} edits, +{new_cats} categories")
+    print(f"merged: +{added} places ({skipped} duplicates skipped), {edited} edits ({removed} removed in review), +{new_cats} categories")
     subprocess.run([sys.executable, str(ROOT / "places" / "build.py")], check=True)
 
 if __name__ == "__main__":
