@@ -2438,6 +2438,36 @@
       "google_place_id": "ChIJe-yMw8-Iuk0RVkPFQY3eCz4",
       "google_type": "massage_spa",
       "google_maps_url": "https://maps.google.com/?cid=4470911753370551126"
+    },
+    {
+      "id": "health-land-asoke",
+      "name": "Health Land Asoke",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "55 Sukhumvit 21 Soi 1, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7408647,
+      "lng": 100.5609251,
+      "gmaps_query": "Health Land Asoke Bangkok",
+      "coords_precision": "exact",
+      "notes": "Asok branch of the Health Land spa and massage chain, in a large standalone building off Sukhumvit 21. Google rating 4.2 from about 8,100 reviews.",
+      "tags": [
+        "massage",
+        "spa",
+        "asok",
+        "sukhumvit"
+      ],
+      "hours": "Mon-Tue 09:00-00:00 per Google; other days not checked.",
+      "sources": [
+        "http://www.healthlandspa.com/",
+        "https://maps.app.goo.gl/JQdKvATpMtGsQfbN6"
+      ],
+      "visited": null,
+      "added": "2026-11-12",
+      "starred": false,
+      "google_place_id": "ChIJNz1Q9OSe4jARTFpSkCWBabw",
+      "google_type": "spa",
+      "google_maps_url": "https://maps.google.com/?cid=13576524550020160076"
     }
   ]
 }
