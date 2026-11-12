@@ -27,7 +27,7 @@ def main(path):
     removed = 0
     for pid, fields in ch.get("edits", {}).items():
         if pid in by_id:
-            by_id[pid].update({k: v for k, v in fields.items() if k in ("category", "starred")}); edited += 1
+            by_id[pid].update({k: v for k, v in fields.items() if k in ("category", "starred", "city")}); edited += 1
             # review decisions from the Recently added page: Remove deletes the place, Approve keeps it
             if fields.get("review") == "removed":
                 places.remove(by_id.pop(pid)); removed += 1

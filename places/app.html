@@ -59,6 +59,9 @@
   .gl { display:inline-flex; vertical-align:-3px; }
   .chip .gl svg { width:15px; height:15px; }
   .lgroup h3 .gl svg { width:15px; height:15px; }
+  select.chip.citysel { appearance:none; -webkit-appearance:none; font:inherit; font-size:14px; font-weight:600; color:var(--fg); max-width:170px; text-overflow:ellipsis; }
+  select.chip.citysel.on { background:var(--brand); color:#fff; }
+  .citybtn { min-height:0 !important; padding:6px 10px !important; font-size:14px !important; border-radius:8px; color:var(--muted); }
   /* list view */
   #list { position:absolute; inset:0; z-index:1000; background:var(--bg); overflow:auto; display:none; padding-bottom:30px; }
   #list.show { display:block; }
@@ -275,9 +278,11 @@ function pickCategory(sel, onPick) {
 }
 
 // ---------- state ----------
-const filter = { cats: new Set(), starred: false };
+const filter = { cats: new Set(), starred: false, city: '' };
+try { filter.city = localStorage.getItem('walkabout.city') || ''; } catch (e) {}
+const inCity = p => !filter.city || (p.city || 'Elsewhere') === filter.city;
 let view = 'map', me = null, meMarker = null, nearShownId = null;
-const visible = () => allPlaces().filter(p => (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
+const visible = () => allPlaces().filter(p => inCity(p) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
 
 // ---------- map ----------
 const map = L.map('map', { zoomControl:false }).setView([13.7466, 100.5393], 13); // Bangkok
@@ -317,22 +322,33 @@ function renderMap() {
   if (ps.length && !me && !fitted) { // open on the city with the most places, not the whole world
     const n = {}; ps.forEach(p => { if (p.city) n[p.city] = (n[p.city] || 0) + 1; });
     const top = Object.keys(n).sort((x, y) => n[y] - n[x])[0];
-    const home = top ? ps.filter(p => p.city === top) : ps;
+    const home = filter.city ? ps : top ? ps.filter(p => p.city === top) : ps;
     map.fitBounds(L.latLngBounds(home.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom:15 }); fitted = true;
   }
 }
 
 // ---------- chips (filter + legend) ----------
 function renderChips() {
-  const ps = allPlaces();
+  const every = allPlaces();
+  const nCity = {}; every.forEach(p => { const c = p.city || 'Elsewhere'; nCity[c] = (nCity[c] || 0) + 1; });
+  if (filter.city && !nCity[filter.city]) filter.city = '';
+  const cities = Object.keys(nCity).sort((x, y) => nCity[y] - nCity[x] || x.localeCompare(y));
+  const ps = every.filter(inCity);
   const counts = {}; ps.forEach(p => counts[p.category] = (counts[p.category] || 0) + 1);
   const nStar = ps.filter(p => p.starred).length;
   const cats = allCats().filter(c => counts[c.id]);
   document.getElementById('chips').innerHTML =
+    `<select class="chip citysel ${filter.city ? 'on' : ''}" id="citysel" aria-label="City"><option value="">All cities</option>${cities.map(c =>
+      `<option value="${esc(c)}" ${c === filter.city ? 'selected' : ''}>${esc(c)} (${nCity[c]})</option>`).join('')}</select>` +
     `<button class="chip ${!filter.cats.size && !filter.starred ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
     `<button class="chip ${filter.starred ? 'on' : ''}" data-k="star">★ Starred ${nStar}</button>` +
     cats.map(c => `<button class="chip ${filter.cats.has(c.id) ? 'on' : ''}" data-k="${esc(c.id)}">${glyph(c, 'currentColor')} ${esc(c.label)} ${counts[c.id]}</button>`).join('');
-  document.querySelectorAll('#chips .chip').forEach(b => b.onclick = () => {
+  document.getElementById('citysel').onchange = e => {
+    filter.city = e.target.value; try { localStorage.setItem('walkabout.city', filter.city); } catch (err) {}
+    filter.cats.clear(); close(); renderAll();
+    const here = visible(); if (here.length) map.fitBounds(L.latLngBounds(here.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom:15 });
+  };
+  document.querySelectorAll('#chips button.chip').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     if (k === 'all') { filter.cats.clear(); filter.starred = false; }
     else if (k === 'star') filter.starred = !filter.starred;
@@ -460,6 +476,12 @@ function toggleStar(id) {
   renderAll(); if (shownId === id && sheet.classList.contains('show')) showPlace(id, shownHere, true);
 }
 window.toggleStar = toggleStar;
+window.editCity = id => {
+  const p = allPlaces().find(x => x.id === id);
+  const v = prompt('Which city is this place in? (e.g. Bangkok)', p.city || filter.city || 'Bangkok');
+  if (v == null) return;
+  setField(id, 'city', v.trim()); renderAll(); showPlace(id, shownHere, true);
+};
 function showPlace(id, isHere, keepView) {
   const p = allPlaces().find(x => x.id === id); if (!p) return;
   shownId = id; shownHere = !!isHere;
@@ -470,7 +492,8 @@ function showPlace(id, isHere, keepView) {
     <h2><span class="dot" style="background:${c.color};width:12px;height:12px"></span>${esc(p.name)}
       <button class="star ${p.starred ? 'is' : ''}" onclick="toggleStar('${esc(p.id)}')" title="Star">${p.starred ? '★' : '☆'}</button></h2>
     <div class="row" style="margin-top:4px"><select class="inline" id="p-cat" data-prev="${esc(p.category)}">${catOptions(p.category)}</select>
-      <span class="meta">${p.city ? esc(p.city) : ''}${d ? ' · ' + d : ''}</span></div>
+      <button class="citybtn" onclick="editCity('${esc(p.id)}')" title="Change city">${p.city ? esc(p.city) : 'Set city'} ✎</button>
+      <span class="meta">${d}</span></div>
     ${p.address ? `<div class="meta" style="margin-top:6px">${esc(p.address)}</div>` : ''}
     ${p.notes ? `<p>${esc(p.notes)}</p>` : ''}
     ${(p.tags||[]).length && p.imported_from ? `<div class="meta">📋 ${p.tags.map(esc).join(' · ')}</div>` : ''}
