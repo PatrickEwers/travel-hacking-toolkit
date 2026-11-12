@@ -54,6 +54,7 @@ kilometres off: never leave them unresolved when the key is available.
   emoji and a few keywords. Then re-check existing places that belong in it and move them.
 - **When nothing fits and the user didn't name one**, use the closest category and say in one
   line which new category you'd suggest. Don't create categories the user didn't ask for.
+- **Closed places:** when Google's `businessStatus` is `CLOSED_PERMANENTLY` or the user says so, set `"closed": "permanent"`. Keep the place; the app shows a badge.
 - **Stars:** `"starred": true`. Set it when the user says star / favourite / must-go.
 
 ## Importing from Google Maps

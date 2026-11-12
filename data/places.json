@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Personal places database. One entry per place. Rendered by places/build.py into places/index.html (map + location-aware cards) and exported to KML/CSV for Google My Maps.",
-    "last_updated": "2026-11-11",
+    "last_updated": "2026-11-12",
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
@@ -25,7 +25,8 @@
       "google_type": "Google's primary type for the place (hint for categorizing)",
       "review": "pending | approved; new imports start pending and show on the app's Recently added page (#recent) with Approve / Remove",
       "review_note": "optional caveat shown on the Recently added page (e.g. uncertain Google match)",
-      "imported_from": "where a batch import came from (google-saved-lists, instagram-saved-bkk)"
+      "imported_from": "where a batch import came from (google-saved-lists, instagram-saved-bkk)",
+      "closed": "\"permanent\" if the place has closed for good (kept for the memory; shown with a Permanently closed badge)"
     },
     "staleness_days": 3650
   },
@@ -3478,6 +3479,25 @@
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=%25%20Arabica%20Bangkok%20Empire%20Tower&query_place_id=ChIJVcDWajif4jARMI0DNmwbITg",
       "imported_from": "instagram-saved-bkk",
       "review": "pending"
+    },
+    {
+      "id": "nagisa-snack-bar-karaoke",
+      "name": "Nagisa Snack bar & Karaoke",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "1st Floor, Young Place Building, Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.740484,
+      "lng": 100.565446,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/2bDJfeao6aTkLcWc7",
+      "google_place_id": "ChIJffOyopWf4jAR2Pe0vfToRG4",
+      "google_type": "bar",
+      "closed": "permanent",
+      "notes": "The place my Thai friend once brought me to because she manages the bar.",
+      "tags": [],
+      "starred": false,
+      "added": "2026-11-12"
     }
   ]
 }

@@ -62,6 +62,8 @@
   select.chip.citysel { appearance:none; -webkit-appearance:none; font:inherit; font-size:14px; font-weight:600; color:var(--fg); max-width:170px; text-overflow:ellipsis; }
   select.chip.citysel.on { background:var(--brand); color:#fff; }
   .citybtn { min-height:0 !important; padding:6px 10px !important; font-size:14px !important; border-radius:8px; color:var(--muted); }
+  .closed { display:inline-block; padding:2px 8px; border-radius:6px; background:#f3d9d6; color:#8a2c22; font-size:12px; font-weight:600; }
+  .pin.gone { opacity:.55; filter:grayscale(1); }
   /* list view */
   #list { position:absolute; inset:0; z-index:1000; background:var(--bg); overflow:auto; display:none; padding-bottom:30px; }
   #list.show { display:block; }
@@ -313,7 +315,7 @@ try {
 } catch (e) { rasterFallback(); }
 const layer = L.layerGroup().addTo(map);
 const pinIcon = p => { const c = cat(p.category); return L.divIcon({ className:'', iconSize:[30,30], iconAnchor:[15,30],
-  html:`<div class="pin-wrap"><div class="pin ${p.starred ? 'starred' : ''}" style="background:${c.color}">${glyph(c)}</div></div>` }); };
+  html:`<div class="pin-wrap"><div class="pin ${p.starred ? 'starred' : ''} ${p.closed ? 'gone' : ''}" style="background:${c.color}">${glyph(c)}</div></div>` }); };
 let fitted = false;
 function renderMap() {
   layer.clearLayers();
@@ -366,7 +368,7 @@ function renderList() {
   const byDist = (a, b) => (a.d ?? 0) - (b.d ?? 0) || byName(a, b);
   const item = p => { const c = cat(p.category); return `<div class="litem" data-id="${esc(p.id)}">
       <div class="ic" style="background:${c.color}">${glyph(c)}</div>
-      <div class="body"><div class="name">${esc(p.name)}</div>
+      <div class="body"><div class="name">${esc(p.name)}</div>${p.closed ? '<span class="closed">Permanently closed</span>' : ''}
         <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div></div>
       <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button></div>`; };
   let body;
@@ -494,6 +496,7 @@ function showPlace(id, isHere, keepView) {
     <div class="row" style="margin-top:4px"><select class="inline" id="p-cat" data-prev="${esc(p.category)}">${catOptions(p.category)}</select>
       <button class="citybtn" onclick="editCity('${esc(p.id)}')" title="Change city">${p.city ? esc(p.city) : 'Set city'} ✎</button>
       <span class="meta">${d}</span></div>
+    ${p.closed ? '<div style="margin-top:8px"><span class="closed">Permanently closed</span></div>' : ''}
     ${p.address ? `<div class="meta" style="margin-top:6px">${esc(p.address)}</div>` : ''}
     ${p.notes ? `<p>${esc(p.notes)}</p>` : ''}
     ${(p.tags||[]).length && p.imported_from ? `<div class="meta">📋 ${p.tags.map(esc).join(' · ')}</div>` : ''}
