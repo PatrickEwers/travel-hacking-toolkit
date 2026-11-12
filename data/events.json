@@ -1,0 +1,1790 @@
+{
+  "_meta": {
+    "description": "Events worth going to during a trip. Rendered by places/build_events.py into places/events-data.js for the Walkabout Events tab (month calendar + list). Found and refreshed by the events routine in places/EVENTS.md.",
+    "last_updated": "2026-11-12",
+    "staleness_days": 3650,
+    "trip": {
+      "city": "Bangkok",
+      "country": "Thailand",
+      "start": "2026-11-19",
+      "end": "2027-01-12",
+      "timezone": "Asia/Bangkok",
+      "source": "Google Calendar: 'Patrick in Bangkok'"
+    },
+    "scoring": "score = number of distinct goal ids in goals[] (0-6). Each type below is one goal; an event's type is the goal it serves best, goals[] lists every goal it genuinely serves.",
+    "schema": {
+      "id": "kebab-case unique id",
+      "title": "event name",
+      "type": "primary type: id from types[]",
+      "goals": "list of ids from types[]; every goal the event genuinely serves, including its type. Drives the score.",
+      "date": "YYYY-MM-DD, one-off events (first day if multi-day). Exactly one of date / recurring.",
+      "end_date": "YYYY-MM-DD, multi-day events and exhibitions only",
+      "recurring": "{freq:'weekly', weekdays:['tue']} | {freq:'monthly', nth:1..4 or -1 (last), weekday:'fri'} | {freq:'daily'}; optional from / until (YYYY-MM-DD, default: trip dates) and except: [dates]",
+      "time": "HH:MM start, Bangkok time, or null",
+      "end_time": "HH:MM or null",
+      "venue": "venue name",
+      "area": "neighbourhood",
+      "address": "street address",
+      "lat": "optional",
+      "lng": "optional",
+      "place_id": "optional id from data/places.json when the venue is a saved place (adds 'Show on map')",
+      "price": "as listed, e.g. 'Free', '300 THB incl. 1 drink'",
+      "organizer": "host or group",
+      "url": "event or group page the facts came from",
+      "notes": "what it is, why go, caveats (RSVP, sells out)",
+      "confidence": "confirmed = a listing for this exact date was seen (page or search result) | likely = recurring or annual pattern with recent evidence",
+      "added": "YYYY-MM-DD first saved",
+      "verified": "YYYY-MM-DD last checked against the source"
+    }
+  },
+  "types": [
+    {
+      "id": "thai",
+      "label": "Speak Thai",
+      "goal": "Speaking Thai",
+      "color": "#f08c00",
+      "icon": "🗣️"
+    },
+    {
+      "id": "builders",
+      "label": "Meet builders",
+      "goal": "New friends & people building interesting things",
+      "color": "#4263eb",
+      "icon": "🛠️"
+    },
+    {
+      "id": "travelers",
+      "label": "Travelers & expats",
+      "goal": "Meeting other travelers",
+      "color": "#0ca678",
+      "icon": "🌍"
+    },
+    {
+      "id": "sports",
+      "label": "Sports & active",
+      "goal": "Sports",
+      "color": "#e03131",
+      "icon": "🏃"
+    },
+    {
+      "id": "mind",
+      "label": "Mind",
+      "goal": "Mentally enriching",
+      "color": "#9c36b5",
+      "icon": "🧠"
+    },
+    {
+      "id": "party",
+      "label": "Party",
+      "goal": "Partying",
+      "color": "#e64980",
+      "icon": "🎉"
+    }
+  ],
+  "events": [
+    {
+      "id": "bangkok-sabai-saturday-hash-house-harriers-bssh3",
+      "title": "Bangkok Sabai Saturday Hash House Harriers (BSSH3)",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "venue": "Varies (outskirts of Bangkok)",
+      "organizer": "Bangkok Sabai Saturday Hash House Harriers",
+      "url": "https://www.meetup.com/bangkok-weekend-walk-run-adventure-group",
+      "notes": "Saturday hash walk/run on trails on the outskirts of Bangkok followed by the traditional circle and beers; long-running expat-heavy club (bus bookings via bangkoksaturdayhash.com). The last dated listing seen was April 2026, so confirm the week's run site and start time on the club site.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "sp-pickleball-club-weekly-open-play",
+      "title": "SP Pickleball Club - weekly open play",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "mon",
+          "wed",
+          "thu",
+          "sat"
+        ]
+      },
+      "price": "170 THB per session (Feb 2026 listing)",
+      "organizer": "SP Pickleball Club",
+      "url": "https://reclub.co/m/NWBUBI",
+      "notes": "Recurring 3-hour open-play sessions on 3 courts listed on Reclub for Monday, Wednesday, Thursday and Saturday; a Feb-2026 Monday listing was 170 THB per person. Cheap, low-commitment way to get games - session times vary by day, so check each Reclub listing.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "sterling-24-pickleball-in-bangkok-open-play",
+      "title": "Sterling 24 PickleBall'in Bangkok - open play",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "wed",
+          "thu"
+        ]
+      },
+      "venue": "Sterling Sport and Wellness (Sukhumvit 24)",
+      "area": "Phrom Phong",
+      "address": "109 Sukhumvit 24 Alley, Khlong Tan, Khlong Toei, Bangkok",
+      "organizer": "Sterling 24 PickleBall'in Bangkok",
+      "url": "https://reclub.co/clubs/@pickleballin-bangkok",
+      "notes": "Big pickleball community (2,800+ members, 285 activities on Reclub) with all-levels afternoon open play on Wednesdays and a Thursday late-night open play at Sterling Sport & Wellness, plus advanced sparring sessions. Listings seen were dated May 2026; book the session in the Reclub app.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "wat-mahathat-daily-english-vipassana-meditation-classes-sect",
+      "title": "Wat Mahathat - daily English vipassana meditation classes (Section 5)",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "recurring": {
+        "freq": "daily"
+      },
+      "venue": "Wat Mahathat Yuwaratrangsarit, Section 5 (International Buddhist Meditation Centre)",
+      "area": "Rattanakosin / Tha Phra Chan",
+      "address": "3 Maha Rat Rd, Phra Nakhon, Bangkok",
+      "price": "Donation",
+      "organizer": "Wat Mahathat",
+      "url": "https://templestairway.com/temples/wat-mahathat",
+      "notes": "Drop-in guided vipassana with English-speaking monks at the International Buddhist Meditation Centre near the Grand Palace, donation-based; third-party listings show three sessions a day through late 2026. Exact session times were not seen - confirm on site; wear modest (ideally white) clothing.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-runners-tuesday-morning-social-run",
+      "title": "Bangkok Runners - Tuesday morning social run",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue"
+        ]
+      },
+      "time": "06:30",
+      "venue": "Benjakitti Park",
+      "area": "Asok / Khlong Toei",
+      "lat": 13.73,
+      "lng": 100.558,
+      "price": "Free",
+      "organizer": "Bangkok Runners (Meetup)",
+      "url": "https://www.meetup.com/bangkok-runners/",
+      "notes": "Free weekly social-pace run around Benjakitti Park with a mixed expat/local crowd; Meetup lists it as 'every week on Tuesday', meeting at the park gate nearest Asok BTS (a June-2026 guide says north end by the car park). Postponed for rain and cancelled/walk-only when PM2.5 is high - check the Meetup chat.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "sabai-run-club-weekend-community-run",
+      "title": "Sabai Run Club - weekend community run",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sun"
+        ]
+      },
+      "time": "07:15",
+      "venue": "Benjakitti Park area (cafe near QSNCC)",
+      "area": "Khlong Toei",
+      "price": "Free",
+      "organizer": "Sabai Run Club",
+      "url": "https://prommer.net/en/training/running/clubs/bangkok/",
+      "notes": "Relaxed free community run; the June-2026 guide lists Sunday 07:15 near Queen Sirikit Convention Center/Benjakitti, while Time Out describes Saturday runs rotating between parks - so the day is not settled. The club also posts one-off events on Luma (luma.com/h3jy37nm); check its Instagram before going.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "royal-international-pickleball-club-saturday-open-play",
+      "title": "Royal International Pickleball Club - Saturday open play",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "time": "08:30",
+      "end_time": "11:00",
+      "venue": "Club46",
+      "organizer": "Royal International Pickleball Club",
+      "url": "https://www.pickleheads.com/groups/royal-international-pickleball-club",
+      "notes": "Saturday-morning open play at Club46 welcoming beginners and experienced players alike. Pickleheads lists 08:30-11:00 while Reclub lists 09:00-11:00, so check the current session before turning up.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "ai-engineers-meetup-bangkok-weekly-saturday-coffee-hands-on-",
+      "title": "AI Engineers Meetup Bangkok (weekly Saturday coffee/hands-on session)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "time": "10:00",
+      "end_time": "13:00",
+      "venue": "SCBX NEXT TECH, 4th floor, Siam Paragon",
+      "area": "Siam",
+      "address": "Siam Paragon, 991 Rama I Rd, Pathum Wan, Bangkok",
+      "lat": 13.7462,
+      "lng": 100.5347,
+      "url": "https://allai.events/event/ai-engineers-meetup-bangkok",
+      "notes": "Informal hands-on coders' meetup on recent AI tools. Listing says it runs every Saturday until 26 Dec 2026; individual in-window dates were not seen listed one by one, so check before going.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-digital-nomads-monday-co-working-day",
+      "title": "Bangkok Digital Nomads Monday co-working day",
+      "type": "travelers",
+      "goals": [
+        "builders",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "mon"
+        ]
+      },
+      "time": "10:00",
+      "end_time": "17:00",
+      "organizer": "Bangkok Digital Nomads / Not Your Office",
+      "url": "https://www.meetup.com/bangkok-digital-nomads/",
+      "notes": "Work-alongside day with other remote workers and founders ('Not Your Business club' with Not Your Office). Caveat: the host cafe changes roughly monthly and no in-window date was seen, so check Meetup for the current venue.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "start-thai-from-zero-tuesday-beginner-thai-session",
+      "title": "Start Thai from Zero (Tuesday beginner Thai session)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue"
+        ]
+      },
+      "time": "13:30",
+      "end_time": "14:30",
+      "venue": "Eleven Ratio (coffee shop)",
+      "area": "Chitlom",
+      "organizer": "Bangkok Cultural Exchange Meetup (Kru Fai)",
+      "url": "https://www.meetup.com/th-th/bangkok-cultural-exchange-meetup/events/mqjvxtyjcnbkc/",
+      "notes": "Small weekly beginner Thai session run by private teacher Kru Fai; the Meetup series is listed as repeating every Tuesday until 22 Dec 2026. Caveat: the 27 Oct session was marked cancelled, so check the listing/RSVP before going.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-language-experience-by-sila-thai-english-exchange-wi",
+      "title": "Bangkok Language Experience by Sila (Thai-English exchange with games)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "time": "14:00",
+      "venue": "Luka Cafe",
+      "area": "Silom / Bang Rak",
+      "address": "3 Thanon Pan, Bang Rak",
+      "organizer": "Sila",
+      "url": "https://www.meetup.com/bangkok-language-experience-by-sila/",
+      "notes": "Saturday afternoon Thai-English exchange with games, all levels welcome, on the 3rd floor of Luka near the Myanmar Embassy; listings seen for 19 Sep and 3 Oct 2026. Caveat: no in-window date was seen and one Aug 2026 session was at Chapter Market, so check Meetup (LINE: sila555).",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "sunday-language-exchange-thai-english",
+      "title": "Sunday Language Exchange (Thai-English)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sun"
+        ]
+      },
+      "time": "14:00",
+      "venue": "McDonald's, Sathorn Nakhon Tower",
+      "area": "Sathorn",
+      "organizer": "Bangkok Cultural Exchange Meetup (Kru Fai)",
+      "url": "https://www.meetup.com/th-th/bangkok-cultural-exchange-meetup/events/fdnrwtyjcgbjc/",
+      "notes": "Thai and English speakers split time between both languages; sessions were listed for 1 and 8 Nov 2026 at 14:00. Caveat: an older series listing showed an end date of 31 May 2026, so verify the next date on Meetup.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "thai-reading-meetup-at-gateway-ekkamai",
+      "title": "Thai Reading meetup at Gateway Ekkamai",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "time": "16:30",
+      "end_time": "18:30",
+      "venue": "Gateway Ekkamai, Food Lounge 4F",
+      "area": "Ekkamai",
+      "lat": 13.719,
+      "lng": 100.5853,
+      "organizer": "Bangkok Cultural Exchange Meetup (Kru Fai)",
+      "url": "https://www.meetup.com/bangkok-cultural-exchange-meetup/",
+      "notes": "Thai reading practice at the Food Lounge on the 4th floor of Gateway Ekkamai; a session was listed for Sat 7 Nov 2026. Caveat: one listing says weekly 16:30-18:30, another says every 2 weeks 16:00-17:30, so confirm with the organizer (Line/WhatsApp on the group page).",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "walk-learn-thai-benchakitti-park",
+      "title": "Walk & Learn Thai (Benchakitti Park)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sun"
+        ]
+      },
+      "time": "17:00",
+      "venue": "Benchakitti Park",
+      "area": "Asok / Khlong Toei",
+      "lat": 13.7295,
+      "lng": 100.5585,
+      "organizer": "Wellnista - Wellness & Connect community BKK",
+      "url": "https://www.meetup.com/th-th/wellnista-wellness-connect-community-bkk/events/zkmrztykccbgc/",
+      "notes": "Weekly Sunday park walk combining light exercise with Thai practice; Thai speakers are explicitly invited to come and teach. Listings seen for 11 Oct and 1 Nov 2026 and a 24 Jan 2027 instance exists, so the series spans the window, but confirm the specific Sunday on Meetup.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lumpini-running-club-evening-social-runs",
+      "title": "Lumpini Running Club - evening social runs",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue",
+          "thu"
+        ]
+      },
+      "time": "17:45",
+      "venue": "Lumpini Park, Gate 4",
+      "area": "Silom",
+      "lat": 13.7314,
+      "lng": 100.5414,
+      "price": "Free",
+      "organizer": "Lumpini Running Club",
+      "url": "https://www.meetup.com/lumpini-running-club",
+      "notes": "All-levels evening social run in Lumpini Park, Tuesdays and Thursdays 17:45 from Gate 4 (BTS Sala Daeng / MRT Silom exit 1) per a guide verified June 2026. Easy way to meet runners after work; confirm the week's run on Meetup first.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lian-thai-language-culture-exchange-practice-thai-with-wini-",
+      "title": "Lian Thai Language & Culture Exchange (Practice Thai with Wini & friends)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "travelers",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "wed"
+        ]
+      },
+      "time": "18:00",
+      "end_time": "20:00",
+      "venue": "Bake Brother Cafe, Terminal 21 Asok 5F",
+      "area": "Asok",
+      "address": "Terminal 21 Asok, Soi Sukhumvit 19",
+      "lat": 13.7377,
+      "lng": 100.5604,
+      "price": "150 THB",
+      "organizer": "Lian Thai (Wini)",
+      "url": "https://www.meetup.com/lianthai/",
+      "notes": "Structured mixed-level Thai practice where locals and internationals meet; an 'Evening Practice Thai w/ Wini and friends' session was listed for Wed 11 Nov 2026 (17:45-20:00). Caveat: usual venue is Bake Brother Cafe at Terminal 21 but the 11 Nov listing appeared tied to Chapter Market (Sukhumvit 26); RSVP via LINE 'hellowini' and beginners should message ahead.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "meet-play-weekly-social-games-icebreakers",
+      "title": "Meet & Play (weekly social games & icebreakers)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "wed"
+        ]
+      },
+      "time": "18:00",
+      "venue": "Coucou Social Game Bar & Cafe",
+      "area": "Ekkamai",
+      "address": "19/1 Ekkamai 12 Alley, Khlong Tan Nuea, Watthana",
+      "price": "80 THB venue fee (unlimited games + snacks)",
+      "organizer": "MEET&PLAY BKK",
+      "url": "https://www.meetup.com/bangkok-meet-play/",
+      "notes": "Weekly icebreaker/social-games night for expats, locals and first-timers; Coucou's own site lists Wednesday Meet & Play at 18:00 (also Thursday 'The Social Guild' 18:00 and Saturday Social Night 19:30). Entry is free but the venue charges 80 THB for unlimited games and snacks.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-digital-nomads-weekly-meetup-thursday-social",
+      "title": "Bangkok Digital Nomads Weekly Meetup (Thursday social)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "builders",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "thu"
+        ]
+      },
+      "time": "18:30",
+      "end_time": "23:00",
+      "venue": "Amber Bar, 34F Wyndham Bangkok Queen Convention Centre (venue rotates)",
+      "area": "Asok / Khlong Toei",
+      "organizer": "Bangkok Digital Nomads (Nomads for Impact)",
+      "url": "https://www.meetup.com/bangkok-digital-nomads/",
+      "notes": "The main weekly nomad/expat/remote-worker social. An aggregator listing shows it every Thursday 1 Oct-31 Dec 2026, 18:30-23:00 at Amber Bar (34F, rooftop views); the group itself says the venue rotates (late Oct was at The Gardens of Dinsor Palace), so check the Meetup page each week.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-football-meetup-drop-in-7-a-side-games",
+      "title": "Bangkok Football Meetup - drop-in 7-a-side games",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue",
+          "thu",
+          "sun"
+        ]
+      },
+      "time": "18:30",
+      "venue": "Pitches beside Punnawithi BTS (varies)",
+      "area": "Punnawithi / Sukhumvit",
+      "price": "180 THB prepaid / 250 THB at the ground",
+      "organizer": "Bangkok Football Meetup",
+      "url": "https://www.meetup.com/bangkokfootballmeetup/",
+      "notes": "Friendly-but-competitive drop-in football for anyone 18+, running since 2019; listings show games by Punnawithi BTS and at academies on Sukhumvit. An undated article gives Tue/Thu/Fri/Sun with '2-3 games a week currently', and no 2026-dated event page was seen - RSVP on Meetup, which is where actual days are posted.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "little-bangkok-sangha-monday-meditation-dhamma-talk-english",
+      "title": "Little Bangkok Sangha - Monday meditation & Dhamma talk (English)",
+      "type": "mind",
+      "goals": [
+        "mind",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "monthly",
+        "nth": 1,
+        "weekday": "mon"
+      },
+      "time": "18:30",
+      "end_time": "20:00",
+      "venue": "Baan Aree Foundation",
+      "area": "Ari",
+      "price": "Free / donation",
+      "organizer": "Little Bangkok Sangha",
+      "url": "https://www.meetup.com/little-bangkok-sangha-meditation-group/",
+      "notes": "English-language Buddhist group: 18:30 meditation, 19:00 Dhamma talk with a guest teacher, by donation. Meetup describes first-Monday (and a broader second-Monday) sessions and 2026 posts place them at Baan Aree; exact in-window dates were not seen, so check littlebang.org or Meetup.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "ai-beers-every-2-3-weeks-check-the-date",
+      "title": "AI & Beers (every 2-3 weeks: check the date)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "thu"
+        ]
+      },
+      "time": "19:00",
+      "end_time": "21:00",
+      "venue": "W District",
+      "area": "Phra Khanong",
+      "organizer": "AI & Beers / The MarTech Collective",
+      "url": "https://createwith.com/cities/bangkok",
+      "notes": "Presentation-free evening of AI builders and users over beers. Not strictly weekly: recent editions were Thursdays 24 Sep, 15 Oct, 29 Oct and 12 Nov 2026 (#11), i.e. every 2-3 weeks; #12 was not yet listed, so check the group's WhatsApp/listing for the next date.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-social-and-language-exchange-make-new-friends",
+      "title": "Bangkok Social and Language Exchange (Make New Friends)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "thai",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "fri"
+        ]
+      },
+      "time": "19:00",
+      "venue": "8855 Restaurant & Bar",
+      "area": "Nana / Sukhumvit Soi 8",
+      "address": "4, 24-25 Soi Sukhumvit 8, Khlong Toei, Bangkok 10110",
+      "url": "https://www.eventbrite.com/e/bangkok-social-and-language-exchange-make-new-friends-tickets-1987419804134",
+      "notes": "Friday-night social / language exchange aimed at newcomers. Caveat: the Eventbrite 'multiple dates' listings seen ran May-July 2026 and no in-window date or price was visible, so check the page first.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "board-games-night-at-the-fcct-the-boring-club",
+      "title": "Board Games Night at the FCCT (The Boring Club)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue"
+        ]
+      },
+      "time": "19:00",
+      "venue": "Foreign Correspondents' Club of Thailand (FCCT)",
+      "area": "Chit Lom",
+      "price": "Free",
+      "organizer": "The Boring Club / FCCT",
+      "url": "https://www.fccthai.com/event/board-games-night",
+      "notes": "Free, open-to-all games night at the Foreign Correspondents' Club (chess, backgammon, Catan, Pandemic) with the bar and restaurant open; draws long-term expats and journalists. Caveat: the FCCT page seen was dated Nov 2025; a current Bangkok board-game calendar still lists it weekly at 19:00.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lingping-club-thai-discussions-level-based-groups",
+      "title": "Lingping Club - Thai Discussions (level-based groups)",
+      "type": "thai",
+      "goals": [
+        "thai",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "thu"
+        ]
+      },
+      "time": "19:00",
+      "venue": "Open House, Central Embassy 6F",
+      "area": "Ploenchit",
+      "address": "Central Embassy, Ploenchit Rd",
+      "lat": 13.7438,
+      "lng": 100.5466,
+      "price": "300 THB per day / 1000 THB per month (first time free)",
+      "organizer": "Lingping Club",
+      "url": "https://www.meetup.com/meetup-group-wwwgopyl/",
+      "notes": "Small level-based Thai discussion groups (max ~6 per group) with a weekly cadence; first visit was advertised as free. Caveat: the latest dated listing seen was Thu 28 May 2026 at Open House Central Embassy and the schedule/venue rotate (also Ram Inthra) - register on lingpingclub.com, not Meetup.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "rajadamnern-world-series-rws-saturday-night-muay-thai",
+      "title": "Rajadamnern World Series (RWS) - Saturday night Muay Thai",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "time": "19:00",
+      "venue": "Rajadamnern Stadium",
+      "area": "Old Town (Ratchadamnoen Nok)",
+      "address": "1 Ratchadamnoen Nok Rd, Pom Prap Sattru Phai, Bangkok",
+      "lat": 13.761,
+      "lng": 100.5087,
+      "price": "approx. 2,000-2,500 THB ringside (reseller guide figure)",
+      "organizer": "Rajadamnern Stadium / RWS",
+      "url": "https://www.rajadamnern.com",
+      "notes": "Rajadamnern Stadium runs fights seven nights a week, with the flagship Rajadamnern World Series on Saturdays (doors ~18:00, show 19:00) and Petchyindee on Thursdays. No Nov/Dec 2026 card was found published (monthly schedule goes out on the stadium's Instagram around the 1st), so buy on the official site and ignore reseller mark-ups.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "social-games-night-at-coucou",
+      "title": "Social & Games Night at Coucou",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "tue"
+        ]
+      },
+      "time": "19:00",
+      "venue": "Coucou Social Game Bar & Cafe",
+      "area": "Ekkamai",
+      "address": "19/1 Ekkamai 12 Alley, Khlong Tan Nuea, Watthana",
+      "price": "Free",
+      "organizer": "Bangkok Expat, Digital Nomads and Thai People Meetup",
+      "url": "https://www.meetup.com/bangkok-digital-nomads-meetup/",
+      "notes": "Free Tuesday social and light board games in English, friendly to first-timers; listed for 3 and 10 Nov 2026 at 19:00. Later dates were not visible, and the venue may charge a small games fee.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-expats-digital-nomads-thai-people-meetup-sunday-soci",
+      "title": "Bangkok Expats & Digital Nomads & Thai People Meetup (Sunday social)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "thai",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sun"
+        ]
+      },
+      "time": "19:30",
+      "venue": "Robin Hood Pub",
+      "area": "Phrom Phong",
+      "address": "Sukhumvit Road, Phrom Phong",
+      "price": "Free",
+      "organizer": "Bangkok Expat, Digital Nomads and Thai People Meetup",
+      "url": "https://www.meetup.com/bangkok-digital-nomads-meetup/",
+      "notes": "Free casual Sunday pub social that explicitly welcomes Thai people, so there is some chance to use Thai as well. A session was listed for Sun 8 Nov 2026 at 19:30; in-window dates were not visible, so confirm on Meetup.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "one-lumpinee-one-friday-fights-muay-thai",
+      "title": "ONE Lumpinee / ONE Friday Fights (Muay Thai)",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "fri"
+        ],
+        "until": "2026-12-18"
+      },
+      "time": "19:30",
+      "venue": "Lumpinee Boxing Stadium",
+      "area": "Ram Intra",
+      "address": "Ram Intra Rd, Anusawari, Bang Khen, Bangkok",
+      "lat": 13.867,
+      "lng": 100.609,
+      "price": "approx. 1,000-5,000 THB",
+      "organizer": "ONE Championship",
+      "url": "https://muaythaitickets.com/?p=15007",
+      "notes": "Weekly ONE Championship Muay Thai card at Lumpinee Stadium; listings seen for ONE Lumpinee 179 (20 Nov), 180 (27 Nov), 181 (4 Dec), 182 (11 Dec) and 183 (18 Dec 2026), 19:30 start. Spectator event; a Sept-2026 guide quotes tiers of roughly 1,000 / 2,500 / 3,500 / 5,000 THB ringside - no dates seen after 18 Dec. Dated cards were seen through 18 Dec only.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "weekly-nomad-board-games-night",
+      "title": "Weekly Nomad Board Games Night",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "builders"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "fri"
+        ]
+      },
+      "time": "19:30",
+      "end_time": "23:00",
+      "venue": "Chapter Market",
+      "area": "Phrom Phong / Sukhumvit 26",
+      "address": "Sukhumvit 26, Khlong Toei",
+      "price": "Free entry, 100 THB minimum spend",
+      "organizer": "Bangkok Digital Nomads",
+      "url": "https://www.bangkok-comedy.com/board-game-nights-bangkok",
+      "notes": "Friday board-game night run by Bangkok Digital Nomads; easy low-pressure way to meet nomads and expats. Listed weekly through 25 Dec 2026 (a 13 Nov 2026 session was on Meetup); free entry with a 100 THB minimum spend.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "pub-quiz-at-the-deck-bkk-quiz-masters",
+      "title": "Pub Quiz at The Deck (BKK Quiz Masters)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "mind",
+        "party"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "thu"
+        ]
+      },
+      "time": "19:45",
+      "venue": "The Deck Bangkok",
+      "area": "Asok / Sukhumvit Soi 20",
+      "address": "15/1 Sukhumvit Soi 20",
+      "price": "Free",
+      "organizer": "BKK Quiz Masters",
+      "url": "https://www.timeout.com/bangkok/things-to-do/quiz-theme-night",
+      "notes": "Free-to-enter Thursday pub quiz, easy to join a team as a solo traveller; BK Magazine covered it in Sep 2026 (1st prize 1,000 THB, 2nd 500 THB in 'deck dollars'). Start time 19:45 comes from an undated Time Out listing, so confirm with the venue (095 239 0805).",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "polyglots-in-bangkok-monthly-meeting",
+      "title": "Polyglots in Bangkok - Monthly Meeting",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "thai",
+        "mind"
+      ],
+      "recurring": {
+        "freq": "monthly",
+        "nth": 2,
+        "weekday": "thu"
+      },
+      "time": "20:00",
+      "venue": "Bourbon Street Restaurant and Oyster Bar",
+      "area": "Ekkamai",
+      "address": "Sukhumvit 63 (Ekamai)",
+      "organizer": "Polyglots in Bangkok",
+      "url": "https://www.meetup.com/polyglots-in-bangkok/",
+      "notes": "Long-running monthly gathering of language lovers (good place to find Thai speakers and serious learners). Meetup lists Thu 10 Dec 2026 and Thu 14 Jan 2027 at 20:00 (the latter is 2 days after the window); venue is ~5 min walk from BTS Ekkamai.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-club-crawl-bangkok-social-nights",
+      "title": "Bangkok Club Crawl (Bangkok Social Nights)",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "fri",
+          "sat"
+        ]
+      },
+      "time": "21:30",
+      "venue": "Meeting point near Phrom Phong (pin sent on the day)",
+      "area": "Phrom Phong / Thonglor",
+      "price": "approx. US$45-50 via resellers",
+      "organizer": "Bangkok Social Nights",
+      "url": "https://www.meetup.com/bangkok-social-nights/",
+      "notes": "Guided club crawl across 4 venues, billed as the group's weekly signature night and running Friday and/or Saturday from about 21:30 around Phrom Phong/Thonglor with welcome shots and group entry. Very traveller-heavy; needs minimum 5 people, smart dress for men, ID required, and some venues add a 300-500 THB door fee on special nights.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-art-biennale-2026-angels-mara-2026-11-19",
+      "title": "Bangkok Art Biennale 2026 - 'Angels & Mara'",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2027-01-12",
+      "venue": "Multiple venues (BACC, Wat Arun, Wat Pho, Museum Siam, One Bangkok, etc.)",
+      "price": "Free (venue entry fees may apply)",
+      "organizer": "Bangkok Art Biennale Foundation",
+      "url": "https://www.bkkartbiennale.com/press/bangkok-art-biennale-2026-announces-further-artists-and-venues",
+      "notes": "Fifth edition of the citywide biennale across ~11 venues (Wat Arun, Wat Pho, Wat Prayoon, Museum Siam, BACC, One Bangkok, CentralWorld and more). Runs 29 Oct 2026 - 28 Feb 2027; dates here are clipped to the window. Reported as free admission, though temples may charge their usual entry; BACC 9th-floor section closes 25 Nov.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "exhibition-a-neighbour-s-memories-of-bacc-nakrob-moonmanas-2026-11-19",
+      "title": "Exhibition: A Neighbour's Memories of BACC - Nakrob Moonmanas",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2026-12-31",
+      "venue": "Bangkok Art and Culture Centre (BACC)",
+      "area": "Siam / Pathum Wan",
+      "address": "939 Rama I Rd, Pathum Wan, Bangkok",
+      "lat": 13.7467,
+      "lng": 100.5303,
+      "organizer": "BACC",
+      "url": "https://www.bacc.or.th/en",
+      "notes": "BACC show by collage artist Nakrob Moonmanas, listed 14 Oct - 31 Dec 2026 (start clipped to window). Easy to combine with the Biennale floors in the same building; BACC is closed Mondays.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "exhibition-continuum-moca-collection-14-contemporary-artists-2026-11-19",
+      "title": "Exhibition: CONTINUUM (MOCA collection + 14 contemporary artists)",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2027-01-12",
+      "venue": "ART Space, Four Seasons Hotel Bangkok at Chao Phraya River",
+      "area": "Charoen Krung / Riverside",
+      "organizer": "MOCA Bangkok / Four Seasons",
+      "url": "https://mocabangkok.com/continuum-%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%A8%E0%B8%B4%E0%B8%A5%E0%B8%9B%E0%B9%8C-en",
+      "notes": "Works from the MOCA collection paired with new pieces by 14 contemporary artists, on the riverside. Runs 16 Oct 2026 - 31 Jan 2027; dates clipped to the window.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "exhibition-sudo-rungu-echoes-of-fire-roby-dwi-antono-2026-11-19",
+      "title": "Exhibition: SUDO RUNGU - Echoes of Fire (Roby Dwi Antono)",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2027-01-03",
+      "venue": "MOCA Bangkok (Museum of Contemporary Art)",
+      "area": "Chatuchak / Lak Si",
+      "address": "499 Kamphaeng Phet 6 Rd, Chatuchak, Bangkok",
+      "lat": 13.853,
+      "lng": 100.5626,
+      "organizer": "MOCA Bangkok",
+      "url": "https://www.mocabangkok.com/collections-exhibitions/temporary-exhibition/",
+      "notes": "Indonesian painter's first solo show in Thailand, at MOCA. Runs 27 Oct 2026 - 3 Jan 2027; start date clipped to the window. Museum admission applies (price not seen).",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "neilson-hays-library-second-hand-book-sale-2026-11-19",
+      "title": "Neilson Hays Library second-hand book sale",
+      "type": "mind",
+      "goals": [
+        "mind",
+        "travelers"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2026-11-22",
+      "venue": "Neilson Hays Library",
+      "area": "Silom / Surawong",
+      "address": "195 Surawong Rd, Bang Rak, Bangkok",
+      "lat": 13.7273,
+      "lng": 100.5226,
+      "price": "Free entry",
+      "organizer": "Neilson Hays Library",
+      "url": "https://www.timeout.com/bangkok/news/neilson-hays-library-secondhand-book-sale-102726",
+      "notes": "Mostly English-language pre-loved books in a 1920s library building; free entry. Sale runs 14-22 Nov (closed 16 Nov); date here is clipped to the window start.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "exhibition-bas-jan-ader-bright-at-midnight-2026-11-19",
+      "title": "Exhibition: Bas Jan Ader - Bright at Midnight",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "end_date": "2027-01-10",
+      "time": "14:00",
+      "end_time": "20:00",
+      "venue": "Bangkok Kunsthalle",
+      "area": "Yaowarat / Pom Prap",
+      "address": "599 Pantachit Alley, Pom Prap Sattru Phai, Bangkok",
+      "price": "Free",
+      "organizer": "Bangkok Kunsthalle",
+      "url": "https://www.timeout.com/bangkok/things-to-do/bright-at-midnight",
+      "notes": "First show of the Dutch conceptual artist in Asia, in a converted printing house that is itself worth seeing. Runs 14 Oct 2026 - 10 Jan 2027 (start clipped to window); free entry, reported open Wed-Sun 14:00-20:00.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "only-devs-bangkok-130-formerly-thaipy-2026-11-19",
+      "title": "Only Devs Bangkok #130 (formerly ThaiPy)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "travelers",
+        "mind"
+      ],
+      "date": "2026-11-19",
+      "time": "18:30",
+      "end_time": "20:30",
+      "venue": "Event Space at The Royal Oak (4th/top floor)",
+      "area": "Phrom Phong",
+      "address": "595/10 Soi Sukhumvit 33/1, Bangkok (BTS Phrom Phong)",
+      "organizer": "Only Devs Bangkok",
+      "url": "https://www.meetup.com/thaipy-bangkok-python-meetup/",
+      "notes": "One of Bangkok's longest-running monthly developer meetups, in English; this edition covers making AI pull requests easier to review and local-first tooling. Listings disagree on the number (#129 vs #130); RSVP on Meetup.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "claude-community-meetup-workshop-building-practical-ai-agent-2026-11-20",
+      "title": "Claude community meetup & workshop (building practical AI agents)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-11-20",
+      "organizer": "Claude community (Bangkok)",
+      "url": "https://createwith.com/tool/claude/events/bangkok",
+      "notes": "Community meetup plus workshop on building and deploying AI agents with Claude. Aggregator listing gives the date only; venue, time and registration link were not shown, so confirm on the listing.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "pangaea-at-aether-bkk-2026-11-20",
+      "title": "Pangaea at AETHER BKK",
+      "type": "party",
+      "goals": [
+        "party"
+      ],
+      "date": "2026-11-20",
+      "venue": "AETHER BKK",
+      "place_id": "aether-bkk",
+      "organizer": "AETHER BKK",
+      "url": "https://www.technoairlines.com/event/pangaea-aether-bkk-2026-11-20",
+      "notes": "UK bass/techno DJ Pangaea (Hessle Audio) booked at the AETHER rooftop lounge. Only an aggregator listing was seen - confirm set time and entry on the venue's channels.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "galleries-nights-2026-new-horizons-2026-11-20",
+      "title": "Galleries' Nights 2026 - 'New Horizons'",
+      "type": "mind",
+      "goals": [
+        "mind",
+        "builders",
+        "party"
+      ],
+      "date": "2026-11-20",
+      "end_date": "2026-11-21",
+      "time": "17:00",
+      "venue": "100+ galleries across Bangkok",
+      "price": "Free",
+      "organizer": "Galleries' Nights Bangkok",
+      "url": "https://www.galleriesnights.com/",
+      "notes": "Two evenings when 100+ galleries and art spaces across Bangkok stay open late with openings and performances; free, and a very social way to meet the creative scene. Each night typically covers different districts - see the official map.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "kolour-15-years-richie-hawtin-nora-en-pure-2026-11-21",
+      "title": "Kolour 15 Years - Richie Hawtin, Nora En Pure",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-11-21",
+      "venue": "Cloud11 (unconfirmed)",
+      "area": "Phra Khanong",
+      "address": "888 Sukhumvit Rd, Phra Khanong Tai, Bangkok",
+      "organizer": "Kolour",
+      "url": "https://www.technoairlines.com/techno-festivals/thailand",
+      "notes": "15th-anniversary party from Kolour, Bangkok's long-running house/techno day-party brand, with Richie Hawtin and Nora En Pure. A resale page places it at 888 Sukhumvit Rd, Phra Khanong (URL slug suggests Cloud11); venue and face-value price not officially confirmed - Kolour normally sells via Megatix.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "loy-krathong-rooftop-pool-party-centara-grand-at-centralworl-2026-11-21",
+      "title": "Loy Krathong Rooftop Pool Party - Centara Grand at CentralWorld",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-11-21",
+      "venue": "Centara Grand at CentralWorld (26F pool deck)",
+      "area": "Ratchaprasong / Chidlom",
+      "lat": 13.7477,
+      "lng": 100.5387,
+      "organizer": "Bangkok Rooftops",
+      "url": "https://www.technoairlines.com/event/loy-krathong-rooftop-pool-party-centara-grand-bangkok-central-world-2026-11-21",
+      "notes": "Loy Krathong edition of the recurring pool party on the 26th-floor pool deck of Centara Grand at CentralWorld. Earlier 2026 editions ran 15:00-22:00 and sold via Megatix (Bangkok Rooftops); time and price for this one were not shown.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lecture-the-role-of-courts-in-culture-archives-law-and-herit-2026-11-21",
+      "title": "Lecture: The Role of Courts in Culture - Archives, Law and Heritage in Cambodia and Thailand",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-21",
+      "time": "14:00",
+      "end_time": "16:00",
+      "venue": "The Siam Society",
+      "area": "Asok",
+      "address": "131 Asok Montri Rd (Sukhumvit 21), Watthana, Bangkok",
+      "lat": 13.7395,
+      "lng": 100.5609,
+      "organizer": "The Siam Society Under Royal Patronage",
+      "url": "https://thesiamsociety.org/",
+      "notes": "Saturday-afternoon scholarly lecture at Bangkok's oldest learned society. Non-members normally pay a small fee at the door (amount not seen).",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "reading-in-the-park-5th-edition-2026-11-21",
+      "title": "Reading in the Park (5th edition)",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-21",
+      "time": "15:30",
+      "end_time": "18:00",
+      "venue": "Main Amphitheatre, Benjakitti Park",
+      "area": "Asok / Khlong Toei",
+      "lat": 13.73,
+      "lng": 100.558,
+      "price": "Free (registration required)",
+      "url": "https://www.timeout.com/bangkok/news/reading-in-the-park-returns-to-benjakitti-110626",
+      "notes": "Hundreds of people reading together in the Benjakitti Park amphitheatre - a quiet, friendly offline afternoon. Free but registration required.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "beginner-ai-workshop-yaru-x-bangkok-ai-builders-meetup-2026-11-23",
+      "title": "Beginner AI workshop - Yaru x Bangkok AI Builders Meetup",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-11-23",
+      "time": "17:00",
+      "venue": "Yaru @ Grande Centre Point Lumphini",
+      "area": "Lumphini / Rama IV",
+      "address": "1188 Rama IV Rd, Bangkok",
+      "price": "$99",
+      "organizer": "Yaru / Bangkok AI Builders Meetup",
+      "url": "https://createwith.com/cities/bangkok",
+      "notes": "Paid beginner AI workshop run by the Bangkok AI Builders Meetup group; more a class than a mixer, but a way into that community. Earlier edition (9 Nov) ran 17:00-19:00; end time for this date not stated.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "loy-krathong-2026-bangkok-riverside-celebrations-2026-11-24",
+      "title": "Loy Krathong 2026 (Bangkok riverside celebrations)",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "mind"
+      ],
+      "date": "2026-11-24",
+      "time": "18:00",
+      "venue": "Five BMA sites (incl. Khlong Prem Prachakorn near Wat Samian Nari); also riverside spots such as ICONSIAM River Park",
+      "area": "Riverside",
+      "price": "Free",
+      "organizer": "Bangkok Metropolitan Administration",
+      "url": "https://www.nationthailand.com/thailand/bangkok/40073104",
+      "notes": "NOTE: Loy Krathong 2026 is NOT before the window - the full-moon night is Tue 24 Nov 2026. Bangkok is hosting festivities at five sites 16-25 Nov with the opening ceremony on 24 Nov at 18:00; the Culture Ministry also planned events at Wat Arun and Songwat Rd on 23-24 Nov. A few sources say 25 Nov, and sky lanterns are banned in the city.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "digitech-asean-thailand-ai-connect-2026-2026-11-25",
+      "title": "DigiTech ASEAN Thailand & AI Connect 2026",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-11-25",
+      "end_date": "2026-11-27",
+      "venue": "IMPACT Exhibition and Convention Center, Halls 7-8",
+      "area": "Muang Thong Thani (Nonthaburi)",
+      "url": "https://www.prnewswire.com/apac/news-releases/digitech-asean-thailand--ai-connect-2026-a-must-attend-platform-for-businesses-to-discover-the-future-of-digital-technology-and-ai-302934673.html",
+      "notes": "Large B2B digital/AI trade show with expert workshops - more corporate than community, and far from the centre (Muang Thong Thani), but a dense room of people working in tech.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "eden-burns-at-aether-bkk-2026-11-26",
+      "title": "Eden Burns at AETHER BKK",
+      "type": "party",
+      "goals": [
+        "party"
+      ],
+      "date": "2026-11-26",
+      "venue": "AETHER BKK",
+      "place_id": "aether-bkk",
+      "organizer": "AETHER BKK",
+      "url": "https://www.technoairlines.com/event/eden-burns-aether-bkk-2026-11-26",
+      "notes": "New Zealand house producer Eden Burns plays the AETHER rooftop lounge on a Thursday. Aggregator listing only - check the venue for times and entry.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lecture-in-the-serenity-of-the-himavanta-forest-what-the-ber-2026-11-26",
+      "title": "Lecture: In the Serenity of the Himavanta Forest - What the Berlin Traiphum Discloses",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-11-26",
+      "time": "19:00",
+      "venue": "The Siam Society",
+      "area": "Asok",
+      "address": "131 Asok Montri Rd (Sukhumvit 21), Watthana, Bangkok",
+      "lat": 13.7395,
+      "lng": 100.5609,
+      "organizer": "The Siam Society Under Royal Patronage",
+      "url": "https://thesiamsociety.org/",
+      "notes": "Evening lecture on a Thai Buddhist cosmology manuscript, in the Society's 4th-floor Lecture Room. Good place to meet long-term expats and Thai scholars.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "together-festival-2026-2026-11-27",
+      "title": "Together Festival 2026",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-11-27",
+      "end_date": "2026-11-28",
+      "organizer": "Together Festival",
+      "url": "https://www.technoairlines.com/techno-festivals/thailand",
+      "notes": "Bangkok's big-room EDM festival, listed for 27-28 November 2026 by one festival aggregator. No official 2026 venue, lineup or ticket page was found (2025 was at BITEC Bangna, about 2,900 THB for 2 days) - verify on togetherfestival.net before planning around it.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "binance-blockchain-week-bangkok-2026-asia-edition-theme-evol-2026-11-28",
+      "title": "Binance Blockchain Week Bangkok 2026 (Asia edition, theme EVOLVE)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-11-28",
+      "end_date": "2026-11-29",
+      "venue": "Queen Sirikit National Convention Center (QSNCC)",
+      "area": "Khlong Toei",
+      "address": "60 Ratchadaphisek Rd, Khlong Toei, Bangkok",
+      "lat": 13.7236,
+      "lng": 100.5591,
+      "price": "Early bird from $19",
+      "organizer": "Binance / Binance TH",
+      "url": "https://www.binanceblockchainweek.com/event/Bangkok2026/Home-1",
+      "notes": "Large two-day crypto conference (CZ, Arthur Hayes, BlackRock, Visa among announced speakers) with lots of side events and founders in town. Early-bird tickets were advertised from $19; one third-party calendar gave different dates, but Binance's own pages say 28-29 Nov.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "tedxthonglor-play-2026-11-28",
+      "title": "TEDxThonglor Play",
+      "type": "mind",
+      "goals": [
+        "mind",
+        "builders"
+      ],
+      "date": "2026-11-28",
+      "area": "Phloen Chit",
+      "address": "1035 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330",
+      "organizer": "TEDxThonglor",
+      "url": "https://www.ted.com/tedx/events/68755",
+      "notes": "Public TEDx event; TED's listing confirms the date and that it is open to the public. Venue name, time and ticket price were not shown.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "amazing-thailand-marathon-bangkok-2026-atmbkk-2026-11-28",
+      "title": "Amazing Thailand Marathon Bangkok 2026 (ATMBKK)",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "date": "2026-11-28",
+      "end_date": "2026-11-29",
+      "time": "04:00",
+      "venue": "MBK Center (half start) / Sanam Luang (full start)",
+      "area": "Siam / Old Town",
+      "price": "approx. 1,500-1,800 THB for the marathon (sold out per one guide)",
+      "organizer": "Tourism Authority of Thailand",
+      "url": "https://www.pattayamail.com/thailandnews/bangkok-marathon-expects-71000-runners-on-november-28-29-570106",
+      "notes": "Ninth edition of Bangkok's biggest road race (~71,000 runners): half marathon Sat 28 Nov at 04:00 from MBK Center, full marathon Sun 29 Nov at 02:00 from Sanam Luang, plus 10K/5K. One runner guide reports 2026 entries are sold out, so this is realistically spectate/cheer or find a transfer bib.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bitcoin-thailand-conference-2026-pioneer-the-builders-are-ga-2026-11-28",
+      "title": "Bitcoin Thailand Conference 2026 - 'Pioneer | The Builders Are Gathering'",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-11-28",
+      "end_date": "2026-11-29",
+      "time": "09:00",
+      "end_time": "18:00",
+      "venue": "Samyan Mitrtown",
+      "area": "Sam Yan",
+      "address": "944 Rama IV Rd, Pathum Wan, Bangkok (MRT Sam Yan)",
+      "lat": 13.734,
+      "lng": 100.5282,
+      "organizer": "Right Shift",
+      "url": "https://www.share2trade.com/news/56397",
+      "notes": "Two days of talks, panels and workshops from Thailand's Bitcoin community (Right Shift), sessions in Thai and English. Paid event; dates and venue come from the organizer's press release, agenda and price from aggregators, so check the official site.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "fcct-britain-thailand-and-a-changing-southeast-asia-conversa-2026-11-30",
+      "title": "FCCT: Britain, Thailand and a changing Southeast Asia - conversation with the new British Ambassador",
+      "type": "mind",
+      "goals": [
+        "mind",
+        "travelers"
+      ],
+      "date": "2026-11-30",
+      "time": "19:00",
+      "venue": "Foreign Correspondents' Club of Thailand (FCCT) clubhouse",
+      "area": "Chit Lom",
+      "address": "Penthouse, Maneeya Center, 518/5 Phloen Chit Rd, Bangkok",
+      "lat": 13.744,
+      "lng": 100.5412,
+      "organizer": "FCCT",
+      "url": "https://www.fccthai.com/events",
+      "notes": "Evening conversation at the Foreign Correspondents' Club clubhouse; FCCT nights draw journalists, diplomats and long-term expats and the bar stays open. Non-member entry fee not seen.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "french-tech-connect-monthly-networking-evening-2026-12-01",
+      "title": "French Tech Connect (monthly networking evening)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "travelers"
+      ],
+      "date": "2026-12-01",
+      "time": "18:00",
+      "end_time": "22:00",
+      "venue": "Le Cafe des Stagiaires",
+      "area": "Sathorn",
+      "price": "Free for the French Tech community (registration)",
+      "organizer": "La French Tech Bangkok",
+      "url": "https://www.french-tech-bangkok.com/",
+      "notes": "Monthly networking evening of La French Tech Bangkok - founders, engineers and expats, international crowd. Listed as free for the French Tech community; register on the site.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-vinyl-junkies-all-star-first-daze-beats-by-krit-su-a-2026-12-01",
+      "title": "Bangkok Vinyl Junkies All Star - First Daze (Beats by Krit Su) at Culture Cafe",
+      "type": "party",
+      "goals": [
+        "party",
+        "mind"
+      ],
+      "date": "2026-12-01",
+      "time": "20:00",
+      "venue": "Culture Cafe",
+      "organizer": "Culture Cafe",
+      "url": "https://www.technoairlines.com/event/first-daze-beats-by-krit-su-presents-bangkok-vinyl-junkies-all-star-culture-cafe-2026-12-01",
+      "notes": "Vinyl-only selector night headlined by Krit Su at Culture Cafe, part of its run of small weekday vinyl sessions (also listed: minimal/techno vinyl sessions on 24 and 25 Nov). Low-key, music-nerd crowd rather than a big club night.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "magic-room-bangkok-with-mano-le-tough-at-aether-bkk-2026-12-02",
+      "title": "Magic Room Bangkok with Mano Le Tough at AETHER BKK",
+      "type": "party",
+      "goals": [
+        "party"
+      ],
+      "date": "2026-12-02",
+      "time": "17:00",
+      "venue": "AETHER BKK",
+      "place_id": "aether-bkk",
+      "organizer": "Magic Room",
+      "url": "https://www.technoairlines.com/event/magic-room-bangkok-aether-mano-le-tough-aether-bkk-2026-12-02",
+      "notes": "Magic Room showcase with Mano Le Tough, Leon (FR), Mo-Shi, Milam, Jirus (MELA) and Rui Tang, starting 17:00 as a sunset-into-night session on the Wednesday before Wonderfruit. Listed only on an aggregator; last year's edition was at a different rooftop, so confirm the venue.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "christmas-concert-vivaldi-s-the-four-seasons-at-neilson-hays-2026-12-02",
+      "title": "Christmas concert: Vivaldi's The Four Seasons at Neilson Hays Library",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-12-02",
+      "time": "19:30",
+      "venue": "Neilson Hays Library",
+      "area": "Silom / Surawong",
+      "address": "195 Surawong Rd, Bang Rak, Bangkok",
+      "lat": 13.7273,
+      "lng": 100.5226,
+      "organizer": "Neilson Hays Library",
+      "url": "https://neilsonhayslibrary.org/events",
+      "notes": "Chamber concert in the library's historic hall. Ticket price not seen; library concerts are small and tend to sell out.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "wonderfruit-2026-2026-12-03",
+      "title": "Wonderfruit 2026",
+      "type": "party",
+      "goals": [
+        "party",
+        "mind",
+        "travelers"
+      ],
+      "date": "2026-12-03",
+      "end_date": "2026-12-07",
+      "venue": "The Fields at Siam Country Club",
+      "area": "Pattaya (Chonburi)",
+      "organizer": "Wonderfruit",
+      "url": "https://wonderfruit.co/faq",
+      "notes": "Thailand's flagship arts, music and sustainability festival at The Fields at Siam Country Club near Pattaya (~150 km from Bangkok), 3-7 December - a week earlier than usual. Round-the-clock stages plus talks, workshops, wellness and art; draws a large international/creative crowd. Tickets and transport/camping need booking ahead.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "lecture-thai-wind-exploring-thai-language-bl-dramas-from-chi-2026-12-03",
+      "title": "Lecture: THAI WIND - Exploring Thai-Language 'BL' Dramas from Chiang Mai and the North",
+      "type": "mind",
+      "goals": [
+        "mind"
+      ],
+      "date": "2026-12-03",
+      "time": "19:00",
+      "venue": "The Siam Society",
+      "area": "Asok",
+      "address": "131 Asok Montri Rd (Sukhumvit 21), Watthana, Bangkok",
+      "lat": 13.7395,
+      "lng": 100.5609,
+      "organizer": "The Siam Society Under Royal Patronage",
+      "url": "https://thesiamsociety.org/lectures/",
+      "notes": "Siam Society evening lecture on contemporary Thai pop culture. The Society runs lectures almost weekly, so check the lectures page for more December/January dates.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "danish-christmas-bazaar-2026-12-05",
+      "title": "Danish Christmas Bazaar",
+      "type": "travelers",
+      "goals": [
+        "travelers"
+      ],
+      "date": "2026-12-05",
+      "time": "11:00",
+      "end_time": "18:00",
+      "venue": "Gaysorn Urban Resort",
+      "area": "Chit Lom / Ratchaprasong",
+      "lat": 13.7449,
+      "lng": 100.5408,
+      "organizer": "Danish Women's Network & Danish Church in Thailand",
+      "url": "https://www.thaiholidayguide.com/events/christmas-in-thailand/",
+      "notes": "Annual expat-community Christmas bazaar (Danish food, gloegg, handmade ornaments) run since 2018; the 2025 edition was on Gaysorn's 19th floor. The 2026 date comes from a single guide, so confirm with the organizers' pages.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "christmas-festival-at-bitec-buri-2026-12-10",
+      "title": "Christmas Festival at BITEC Buri",
+      "type": "travelers",
+      "goals": [
+        "travelers"
+      ],
+      "date": "2026-12-10",
+      "end_date": "2026-12-13",
+      "time": "11:00",
+      "end_time": "22:00",
+      "venue": "BITEC Buri",
+      "area": "Bang Na",
+      "lat": 13.6696,
+      "lng": 100.6103,
+      "price": "Free",
+      "url": "https://www.thaiholidayguide.com/events/christmas-in-thailand/",
+      "notes": "Free Christmas funfair and food market running four days, 11:00-22:00 daily. Dates come from a single travel guide, so check BITEC's event page before going.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "pure-wax-en-culture-vinyl-night-with-dj-mando-feat-vim-at-cu-2026-12-10",
+      "title": "Pure Wax en Culture - vinyl night with DJ Mando feat. VIM at Culture Cafe",
+      "type": "party",
+      "goals": [
+        "party"
+      ],
+      "date": "2026-12-10",
+      "time": "20:00",
+      "venue": "Culture Cafe",
+      "organizer": "Culture Cafe",
+      "url": "https://www.technoairlines.com/event/pure-wax-en-culture-spanish-portugese-vinyl-hero-dj-mando-feat-vim-culture-cafe-2026-12-10",
+      "notes": "Thursday vinyl session at Culture Cafe with DJ Mando and VIM from 20:00. Small-room night; no price was listed.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "big-mountain-village-big-mountain-music-festival-2026-2026-12-12",
+      "title": "Big Mountain Village (Big Mountain Music Festival 2026)",
+      "type": "party",
+      "goals": [
+        "party",
+        "thai"
+      ],
+      "date": "2026-12-12",
+      "end_date": "2026-12-13",
+      "time": "12:00",
+      "venue": "Farm Chokchai 3, Thanarat Road",
+      "area": "Khao Yai (Pak Chong)",
+      "price": "from about 2,000 THB",
+      "organizer": "Big Mountain / GMM",
+      "url": "https://www.timeout.com/bangkok/news/big-mountain-music-festival-gets-a-new-khao-yai-home-081826",
+      "notes": "Thailand's biggest Thai-music festival returns 12-13 December under a new name at a new Khao Yai site (Farm Chokchai 3, Thanarat Road, Pak Chong), doors at noon. Overwhelmingly Thai acts and crowd, so good Thai-language immersion; expect heavy traffic on the two-lane access road and booked-out resorts.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "festive-rooftop-pool-party-centara-grand-at-centralworld-2026-12-12",
+      "title": "Festive Rooftop Pool Party - Centara Grand at CentralWorld",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-12-12",
+      "time": "15:00",
+      "venue": "Centara Grand at CentralWorld (26F pool deck)",
+      "area": "Ratchaprasong / Chidlom",
+      "lat": 13.7477,
+      "lng": 100.5387,
+      "organizer": "Bangkok Rooftops",
+      "url": "https://www.technoairlines.com/event/festive-rooftop-pool-party-centara-grand-bangkok-central-world-2026-12-12",
+      "notes": "Christmas-season edition of the Centara Grand 26th-floor pool party, listed from 15:00 on Sat 12 December. Earlier 2026 editions ran 15:00-22:00 with Megatix tickets; only an aggregator listing exists so far, so confirm with Bangkok Rooftops/Centara.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "romrom-presents-prong-dong-song-at-clutch-warehouse-2026-12-12",
+      "title": "RomRom presents Prong Dong Song at Clutch Warehouse",
+      "type": "party",
+      "goals": [
+        "party"
+      ],
+      "date": "2026-12-12",
+      "time": "15:30",
+      "venue": "Clutch Warehouse Bangkok",
+      "organizer": "RomRom",
+      "url": "https://www.technoairlines.com/event/romrom-presents-prong-dong-song-clutch-warehouse-bangkok-2026-12-12",
+      "notes": "Afternoon-into-night warehouse party from the RomRom crew at Clutch, starting 15:30. No lineup or ticket details were shown on the listing.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "high-season-420-fest-bangkok-island-boat-party-2026-12-12",
+      "title": "High Season 420 Fest - Bangkok Island boat party",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-12-12",
+      "end_date": "2026-12-13",
+      "time": "16:30",
+      "venue": "Bangkok Island (party boat)",
+      "area": "Rama 3 / Chao Phraya River",
+      "address": "Rama 3 Soi 64 (departure point varies by event)",
+      "organizer": "Bangkok Island",
+      "url": "https://www.technoairlines.com/event/high-season-420-fest-12-13-dec-bangkok-island-2026-12-12",
+      "notes": "Two-day (12-13 Dec) party aboard Bangkok Island, the Chao Phraya party boat, from 16:30 with Selecta (ES) on the lineup. Boat parties here typically start around 400-900 THB; price for this one was not listed.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "ai-robotics-hackathon-bangkok-2026-mit-media-lab-x-bangkok-b-2026-12-14",
+      "title": "AI & Robotics Hackathon @ Bangkok 2026 (MIT Media Lab x Bangkok Bank)",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind"
+      ],
+      "date": "2026-12-14",
+      "end_date": "2026-12-18",
+      "venue": "Cloud 11",
+      "area": "Sukhumvit (Punnawithi)",
+      "address": "Cloud 11, Sukhumvit Rd, Bangkok",
+      "organizer": "MIT Media Lab / Bangkok Bank",
+      "url": "https://www.media.mit.edu/events/ai-robotics-hackathon-bangkok-2026/",
+      "notes": "Hackathon with MIT Media Lab faculty and four challenge tracks (incl. Future of Manufacturing, Future of Work), plus a networking reception. MIT lists Mon-Fri 14-18 Dec with three core hack days; eligibility/registration details were not published on the page seen.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "white-party-bangkok-2026-27-10th-anniversary-2026-12-29",
+      "title": "White Party Bangkok 2026/27 (10th anniversary)",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-12-29",
+      "end_date": "2027-01-02",
+      "venue": "TBC (previously Paragon Hall, Siam Paragon)",
+      "area": "Siam",
+      "organizer": "White Party Bangkok",
+      "url": "https://www.gaytravel4u.com/event/white-party-bangkok",
+      "notes": "Asia's largest gay circuit festival over New Year, 29 Dec 2026 - 2 Jan 2027 (one listing says to 3 Jan), six parties with 40,000+ attendees from 130+ countries expected. Venue for 2026 is still shown as TBC (previously Paragon Hall and TRIBE Sky Beach Club); passes and single-party tickets via whitepartybangkok.com sell out.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "iconsiam-amazing-thailand-countdown-2027-2026-12-31",
+      "title": "ICONSIAM Amazing Thailand Countdown 2027",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "party"
+      ],
+      "date": "2026-12-31",
+      "venue": "River Park, ICONSIAM",
+      "area": "Riverside / Khlong San",
+      "lat": 13.7267,
+      "lng": 100.5105,
+      "organizer": "ICONSIAM & Tourism Authority of Thailand",
+      "url": "https://www.tagthai.com/explore/events/p/iconsiamcountdown",
+      "notes": "Riverside New Year's Eve concerts and the Chao Phraya fireworks at ICONSIAM River Park, co-run with the Tourism Authority of Thailand; one listing gives 29-31 Dec 2026 while others mention only 31 Dec. The fireworks are visible free from the riverbank; arrive very early because the area fills up and gets closed off. One listing says 29-31 Dec; others 31 Dec only.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "centralworld-bangkok-countdown-2027-2026-12-31",
+      "title": "centralwOrld Bangkok Countdown 2027",
+      "type": "travelers",
+      "goals": [
+        "travelers",
+        "party"
+      ],
+      "date": "2026-12-31",
+      "venue": "centralwOrld square",
+      "area": "Ratchaprasong / Siam",
+      "lat": 13.7466,
+      "lng": 100.5393,
+      "organizer": "Central Pattana",
+      "url": "https://www.thaipr.net/travel/3777488",
+      "notes": "Bangkok's biggest street countdown ('Times Square of Asia') with live concerts and DJs, announced by Central Pattana in a 12 Nov 2026 press release; past editions were free to enter. Full line-up and timings were not yet confirmed - expect very heavy crowds and early access closures.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "nye-boat-party-bangkok-island-nye-2027-2026-12-31",
+      "title": "NYE Boat Party - Bangkok Island NYE 2027",
+      "type": "party",
+      "goals": [
+        "party",
+        "travelers"
+      ],
+      "date": "2026-12-31",
+      "time": "20:00",
+      "end_time": "01:00",
+      "venue": "Bangkok Island (party boat)",
+      "area": "Chong Nonsi / Chao Phraya River",
+      "price": "2,500 THB early bird (50 tickets) / 3,000 THB online / 3,500 THB door",
+      "organizer": "Bangkok Island",
+      "url": "https://megatix.in.th/events/nye-boat-party",
+      "notes": "New Year's Eve party cruise on the Chao Phraya, 20:00 on 31 Dec to 01:00, putting you on the river for the midnight fireworks; departure listed from Chong Nonsi. Organizer warns it may sell out.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "bangkok-marathon-37th-edition-2027-01-10",
+      "title": "Bangkok Marathon (37th edition)",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "date": "2027-01-10",
+      "time": "00:00",
+      "venue": "Sanam Chai Road (Grand Palace)",
+      "area": "Old Town (Rattanakosin)",
+      "organizer": "Bangkok Marathon (bkkmarathon.com)",
+      "url": "https://www.timeout.com/bangkok/news/bangkok-marathon-071026",
+      "notes": "The classic night-time Bangkok Marathon (since 1981), rescheduled from 8 Nov 2026 to Sun 10 Jan 2027; 42.195K/21.1K/10K/5K starting and finishing on Sanam Chai Road by the Grand Palace. Sources differ on the full-marathon gun time (00:00-01:00) and registration (race.thai.run) officially closed 31 Oct, so confirm on bkkmarathon.com.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    }
+  ]
+}

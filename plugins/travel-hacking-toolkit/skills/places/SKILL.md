@@ -101,3 +101,11 @@ Google has **no public API to write to a user's Google Maps saved lists or My Ma
 - **Share links (works today):** every place has a Google Maps search link that opens the real
   listing, which the recipient can save themselves.
 - **Fully automatic sync** is not possible with Google's APIs. Don't claim otherwise.
+
+## Events tab
+
+Walkabout also has an Events tab (month calendar + list, filterable by type, each event scored by how
+many of the owner's six goals it serves). Data lives in `data/events.json`; the code is separate from
+the places app (`places/events.js`, `places/events.css`, `places/build_events.py`). To find or refresh
+events ("find events in Bangkok", "what's on this week", "update the events"), follow
+`places/EVENTS.md`, then `python3 places/build_events.py --merge found.json`.
