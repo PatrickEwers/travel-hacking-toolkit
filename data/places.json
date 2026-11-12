@@ -5,7 +5,7 @@
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
-      "category": "id from categories[] (auto-assigned; user can override)",
+      "category": "id from categories[]; category colors are shades of one teal family, the app draws a line icon per id",
       "city": "city name",
       "country": "country name",
       "address": "street address incl. floor/unit",
@@ -30,7 +30,7 @@
     {
       "id": "nightclub",
       "label": "Nightclub",
-      "color": "#7b2ff7",
+      "color": "#0b3b3c",
       "icon": "🪩",
       "keywords": [
         "nightclub",
@@ -45,7 +45,7 @@
     {
       "id": "bar",
       "label": "Bar",
-      "color": "#e8590c",
+      "color": "#14514f",
       "icon": "🍸",
       "keywords": [
         "bar",
@@ -65,7 +65,7 @@
     {
       "id": "rooftop-bar",
       "label": "Rooftop bar",
-      "color": "#c2255c",
+      "color": "#1d6664",
       "icon": "🌃",
       "keywords": [
         "rooftop",
@@ -76,7 +76,7 @@
     {
       "id": "restaurant",
       "label": "Restaurant",
-      "color": "#d6336c",
+      "color": "#2a7a7c",
       "icon": "🍽️",
       "keywords": [
         "restaurant",
@@ -105,7 +105,7 @@
     {
       "id": "street-food",
       "label": "Street food",
-      "color": "#f08c00",
+      "color": "#3b8f8e",
       "icon": "🍜",
       "keywords": [
         "street food",
@@ -125,7 +125,7 @@
     {
       "id": "cafe",
       "label": "Café",
-      "color": "#8d5b3a",
+      "color": "#55a3a0",
       "icon": "☕",
       "keywords": [
         "cafe",
@@ -142,7 +142,7 @@
     {
       "id": "market",
       "label": "Market",
-      "color": "#2f9e44",
+      "color": "#4f9684",
       "icon": "🧺",
       "keywords": [
         "market",
@@ -154,7 +154,7 @@
     {
       "id": "mall",
       "label": "Mall & shopping",
-      "color": "#1c7ed6",
+      "color": "#6fae9d",
       "icon": "🛍️",
       "keywords": [
         "mall",
@@ -169,7 +169,7 @@
     {
       "id": "temple",
       "label": "Temple",
-      "color": "#f59f00",
+      "color": "#35606f",
       "icon": "🛕",
       "keywords": [
         "temple",
@@ -183,7 +183,7 @@
     {
       "id": "museum",
       "label": "Museum & gallery",
-      "color": "#5c7cfa",
+      "color": "#4b7786",
       "icon": "🏛️",
       "keywords": [
         "museum",
@@ -195,7 +195,7 @@
     {
       "id": "park",
       "label": "Park & nature",
-      "color": "#37b24d",
+      "color": "#5c9c8a",
       "icon": "🌳",
       "keywords": [
         "park",
@@ -209,7 +209,7 @@
     {
       "id": "spa",
       "label": "Spa & massage",
-      "color": "#12b886",
+      "color": "#8dbdae",
       "icon": "💆",
       "keywords": [
         "spa",
@@ -222,7 +222,7 @@
     {
       "id": "hotel",
       "label": "Hotel",
-      "color": "#495057",
+      "color": "#6c8588",
       "icon": "🏨",
       "keywords": [
         "hotel",
@@ -235,7 +235,7 @@
     {
       "id": "activity",
       "label": "Activity",
-      "color": "#0b7285",
+      "color": "#2f7f77",
       "icon": "🏄",
       "keywords": [
         "activity",
@@ -254,7 +254,7 @@
     {
       "id": "sight",
       "label": "Sight & landmark",
-      "color": "#a61e4d",
+      "color": "#638e9c",
       "icon": "🏰",
       "keywords": [
         "castle",
@@ -271,7 +271,7 @@
     {
       "id": "destination",
       "label": "Area & destination",
-      "color": "#364fc7",
+      "color": "#8ba0a2",
       "icon": "🧭",
       "keywords": [
         "island",
@@ -286,7 +286,7 @@
     {
       "id": "other",
       "label": "Other",
-      "color": "#868e96",
+      "color": "#a9b7b8",
       "icon": "📍",
       "keywords": []
     }

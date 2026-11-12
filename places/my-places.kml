@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>
-<Style id="cat-bar"><IconStyle><color>ff0c59e8</color></IconStyle></Style>
-<Style id="cat-rooftop-bar"><IconStyle><color>ff5c25c2</color></IconStyle></Style>
-<Style id="cat-restaurant"><IconStyle><color>ff6c33d6</color></IconStyle></Style>
-<Style id="cat-cafe"><IconStyle><color>ff3a5b8d</color></IconStyle></Style>
-<Style id="cat-market"><IconStyle><color>ff449e2f</color></IconStyle></Style>
-<Style id="cat-mall"><IconStyle><color>ffd67e1c</color></IconStyle></Style>
-<Style id="cat-temple"><IconStyle><color>ff009ff5</color></IconStyle></Style>
-<Style id="cat-museum"><IconStyle><color>fffa7c5c</color></IconStyle></Style>
-<Style id="cat-park"><IconStyle><color>ff4db237</color></IconStyle></Style>
-<Style id="cat-spa"><IconStyle><color>ff86b812</color></IconStyle></Style>
-<Style id="cat-hotel"><IconStyle><color>ff575049</color></IconStyle></Style>
-<Style id="cat-activity"><IconStyle><color>ff85720b</color></IconStyle></Style>
-<Style id="cat-sight"><IconStyle><color>ff4d1ea6</color></IconStyle></Style>
-<Style id="cat-destination"><IconStyle><color>ffc74f36</color></IconStyle></Style>
-<Style id="cat-other"><IconStyle><color>ff968e86</color></IconStyle></Style>
+<Style id="cat-bar"><IconStyle><color>ff4f5114</color></IconStyle></Style>
+<Style id="cat-rooftop-bar"><IconStyle><color>ff64661d</color></IconStyle></Style>
+<Style id="cat-restaurant"><IconStyle><color>ff7c7a2a</color></IconStyle></Style>
+<Style id="cat-cafe"><IconStyle><color>ffa0a355</color></IconStyle></Style>
+<Style id="cat-market"><IconStyle><color>ff84964f</color></IconStyle></Style>
+<Style id="cat-mall"><IconStyle><color>ff9dae6f</color></IconStyle></Style>
+<Style id="cat-temple"><IconStyle><color>ff6f6035</color></IconStyle></Style>
+<Style id="cat-museum"><IconStyle><color>ff86774b</color></IconStyle></Style>
+<Style id="cat-park"><IconStyle><color>ff8a9c5c</color></IconStyle></Style>
+<Style id="cat-spa"><IconStyle><color>ffaebd8d</color></IconStyle></Style>
+<Style id="cat-hotel"><IconStyle><color>ff88856c</color></IconStyle></Style>
+<Style id="cat-activity"><IconStyle><color>ff777f2f</color></IconStyle></Style>
+<Style id="cat-sight"><IconStyle><color>ff9c8e63</color></IconStyle></Style>
+<Style id="cat-destination"><IconStyle><color>ffa2a08b</color></IconStyle></Style>
+<Style id="cat-other"><IconStyle><color>ffb8b7a9</color></IconStyle></Style>
 <Folder><name>Bar</name>
 <Placemark><name>TICTACTOE Bangkok</name><styleUrl>#cat-bar</styleUrl><description>Bar
 5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110
