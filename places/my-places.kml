@@ -1,10 +1,285 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>
 <Style id="cat-bar"><IconStyle><color>ff0c59e8</color></IconStyle></Style>
+<Style id="cat-rooftop-bar"><IconStyle><color>ff5c25c2</color></IconStyle></Style>
+<Style id="cat-restaurant"><IconStyle><color>ff6c33d6</color></IconStyle></Style>
+<Style id="cat-cafe"><IconStyle><color>ff3a5b8d</color></IconStyle></Style>
+<Style id="cat-market"><IconStyle><color>ff449e2f</color></IconStyle></Style>
+<Style id="cat-mall"><IconStyle><color>ffd67e1c</color></IconStyle></Style>
+<Style id="cat-temple"><IconStyle><color>ff009ff5</color></IconStyle></Style>
+<Style id="cat-museum"><IconStyle><color>fffa7c5c</color></IconStyle></Style>
+<Style id="cat-park"><IconStyle><color>ff4db237</color></IconStyle></Style>
+<Style id="cat-spa"><IconStyle><color>ff86b812</color></IconStyle></Style>
+<Style id="cat-hotel"><IconStyle><color>ff575049</color></IconStyle></Style>
+<Style id="cat-activity"><IconStyle><color>ff85720b</color></IconStyle></Style>
+<Style id="cat-sight"><IconStyle><color>ff4d1ea6</color></IconStyle></Style>
+<Style id="cat-destination"><IconStyle><color>ffc74f36</color></IconStyle></Style>
+<Style id="cat-other"><IconStyle><color>ff968e86</color></IconStyle></Style>
 <Folder><name>Bar</name>
 <Placemark><name>TICTACTOE Bangkok</name><styleUrl>#cat-bar</styleUrl><description>Bar
 5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110
 Social 'dating bar' on EmSphere 5F built for meeting people; one drink order comes with two glasses. Budget roughly 400-1,000 THB. Daytime coffee session (~490 THB incl. two drinks) per Time Out. EmSphere is the mall with the Gourmet Market supermarket on the ground floor, 3-5 min walk from BTS Phrom Phong.
 https://www.google.com/maps/search/?api=1&amp;query=TICTACTOE%20EmSphere%20Bangkok</description><Point><coordinates>100.56611,13.73194,0</coordinates></Point></Placemark>
+<Placemark><name>Revolucion Cocktail</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.google.com/maps/place/Revolucion+Cocktail/data=!4m2!3m1!1s0x30e298cd12b5fcb5:0x19d6cbf8a3244ab1</description><Point><coordinates>100.527587,13.721898,0</coordinates></Point></Placemark>
+<Placemark><name>Tanpopo Snack</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.google.com/maps/place/Tanpopo+Snack/data=!4m2!3m1!1s0x30e29f0147319b43:0x3d879e0565ba4cab</description><Point><coordinates>100.570279,13.728277,0</coordinates></Point></Placemark>
+<Placemark><name>Fatty's Bar &amp; Diner</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.google.com/maps/place/Fatty's+Bar+%26+Diner/data=!4m2!3m1!1s0x30e29e934ee40995:0xd8f6ee6330c960d0</description><Point><coordinates>100.558682,13.75682,0</coordinates></Point></Placemark>
+<Placemark><name>Arcadia Barcade @ Bangkok 2049</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.google.com/maps/place/Arcadia+Barcade+@+Bangkok+2049/data=!4m2!3m1!1s0x30e29fc9213bc1eb:0xf2abecde70a17062</description><Point><coordinates>100.60165,13.723263,0</coordinates></Point></Placemark>
+<Placemark><name>Sugar Ray, You've Just Been Poisoned</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.google.com/maps/place/Sugar+Ray,+You've+Just+Been+Poisoned/data=!4m2!3m1!1s0x30e29e4f6573b7c9:0x949bc359fefed9e4</description><Point><coordinates>100.589541,13.742904,0</coordinates></Point></Placemark>
+<Placemark><name>Cassisbar</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Speaks German!
+https://www.google.com/maps/place/Cassisbar/data=!4m2!3m1!1s0x600108ecac7cf875:0xeee8ddabfd1863a6</description><Point><coordinates>135.771215,35.008387,0</coordinates></Point></Placemark>
+<Placemark><name>ZAZA Pub Kyoto</name><styleUrl>#cat-bar</styleUrl><description>Bar
+https://www.reddit.com/r/japanlife/comments/15kaxls/foreigner_bars_kyoto/?chainedPosts=t3_1hgdg24
+https://www.google.com/maps/place/ZAZA+Pub+Kyoto/data=!4m2!3m1!1s0x60010883810d0529:0x321b293be9e613aa</description><Point><coordinates>135.756622,35.008239,0</coordinates></Point></Placemark>
+<Placemark><name>APOTHECA</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/APOTHECA/data=!4m2!3m1!1s0x6001089140de67b7:0x8bac826e7adff0e7</description><Point><coordinates>135.765265,35.006257,0</coordinates></Point></Placemark>
+<Placemark><name>Bar Base</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/Bar+Base/data=!4m2!3m1!1s0x600108952481ed91:0xcd120e269736ea4d</description><Point><coordinates>135.770171,35.004951,0</coordinates></Point></Placemark>
+<Placemark><name>BEE’S KNEES</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/BEE%E2%80%99S+KNEES/data=!4m2!3m1!1s0x6001089524468891:0xaebe20902be8c3a7</description><Point><coordinates>135.770268,35.005065,0</coordinates></Point></Placemark>
+<Placemark><name>Rocking chair</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/Rocking+chair/data=!4m2!3m1!1s0x600108be07c7eeab:0xa2b13a7bd9877577</description><Point><coordinates>135.766424,35.000956,0</coordinates></Point></Placemark>
+<Placemark><name>Scotch &amp; Branch</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/Scotch+%26+Branch+%E3%82%B9%E3%82%B3%E3%83%83%E3%83%81%E3%82%A2%E3%83%B3%E3%83%89%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%EF%BC%88whisky,+cocktail,%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC,+%E3%82%AB%E3%82%AF%E3%83%86%E3%83%AB%EF%BC%89/data=!4m2!3m1!1s0x6001097209340217:0xa4932d704956a26e</description><Point><coordinates>135.812939,35.031863,0</coordinates></Point></Placemark>
+<Placemark><name>Mayday coffee&amp;bar</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/Mayday+coffee%26bar/data=!4m2!3m1!1s0x600107fdaa8b5f81:0x4241ff20eeb3e4e5</description><Point><coordinates>135.749859,35.040589,0</coordinates></Point></Placemark>
+<Placemark><name>Monday</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/Monday/data=!4m2!3m1!1s0x6001070a259acd69:0xa927cd2e8a33f164</description><Point><coordinates>135.712468,35.008233,0</coordinates></Point></Placemark>
+<Placemark><name>1G (ワンジー)</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/
+https://www.google.com/maps/place/1G+(%E3%83%AF%E3%83%B3%E3%82%B8%E3%83%BC)/data=!4m2!3m1!1s0x6001091c236ca965:0x119a491f043c8f03</description><Point><coordinates>135.793354,35.018674,0</coordinates></Point></Placemark>
+<Placemark><name>kazubar</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Research Reddit
+https://www.google.com/maps/place/kazubar/data=!4m2!3m1!1s0x60010894e7fabebf:0x24c7155036c99985</description><Point><coordinates>135.769838,35.005754,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Rooftop bar</name>
+<Placemark><name>Sky View 360</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
+Cheap roof top bar
+https://www.google.com/maps/place/Sky+View+360/data=!4m2!3m1!1s0x30e29918a027f5fb:0x340927fe98125d10</description><Point><coordinates>100.506987,13.742806,0</coordinates></Point></Placemark>
+<Placemark><name>AETHER BKK</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
+New roof top bar recommended by Jacky
+https://www.google.com/maps/place/AETHER+BKK/data=!4m2!3m1!1s0x30e29f48726b7a41:0xc39c03e056a3f443</description><Point><coordinates>100.540227,13.70969,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Restaurant</name>
+<Placemark><name>Thong Smith</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+https://www.google.com/maps/place/Thong+Smith/data=!4m2!3m1!1s0x30e29f571e7e5fd3:0x8f868a9c23e3a362</description><Point><coordinates>100.538215,13.692552,0</coordinates></Point></Placemark>
+<Placemark><name>Khao Tom Jay Suay</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+Amazing Thai food that you’ve never go into on your own unless you know it’s so good
+https://www.google.com/maps/place/Khao+Tom+Jay+Suay/data=!4m2!3m1!1s0x30e29923c685932f:0xf27b8a581fa577c2</description><Point><coordinates>100.510832,13.742325,0</coordinates></Point></Placemark>
+<Placemark><name>Baan E-sarn Muangyos</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+The place I had dinner with Bryan and Jacky!
+https://www.google.com/maps/place/Baan+E-sarn+Muangyos/data=!4m2!3m1!1s0x30e29efc5d198187:0x2f1244b911a2b296</description><Point><coordinates>100.566776,13.737238,0</coordinates></Point></Placemark>
+<Placemark><name>RUTUBO Smokehouse (燻製工場)</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+Research Resort
+https://www.google.com/maps/place/RUTUBO%E7%87%BB%E8%A3%BD%E5%B7%A5%E5%A0%B4/data=!4m2!3m1!1s0x6001099a1c9a1ba3:0x83611b27cbfdb924</description><Point><coordinates>135.814,35.049225,0</coordinates></Point></Placemark>
+<Placemark><name>Fat Daddy's Smokehouse</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+https://www.google.com/maps/place/Fat+Daddy's+Smokehouse/data=!4m2!3m1!1s0x7954d0735bcf9ac7:0x3e576d3c1d5443ed</description><Point><coordinates>-156.451932,20.732265,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Café</name>
+<Placemark><name>GHEE GELATO BAR Silom Soi 7 (3rd floor)</name><styleUrl>#cat-cafe</styleUrl><description>Café
+Friend of Wray’s shop (1 of two locations)
+https://www.google.com/maps/place/GHEE+GELATO+BAR+Silom+Soi+7+(3rd+floor)/data=!4m2!3m1!1s0x30e299c80838e537:0x71bbe54898f66e0d</description><Point><coordinates>100.5305,13.7262,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Market</name>
+<Placemark><name>Chatuchak Weekend Market</name><styleUrl>#cat-market</styleUrl><description>Market
+https://www.google.com/maps/place/Chatuchak+Weekend+Market/data=!4m2!3m1!1s0x30e29c14e883f8dd:0x91f191d784b87d4b</description><Point><coordinates>100.548576,13.800848,0</coordinates></Point></Placemark>
+<Placemark><name>ChangChui Creative Park</name><styleUrl>#cat-market</styleUrl><description>Market
+https://www.google.com/maps/place/ChangChui+Creative+Park/data=!4m2!3m1!1s0x30e29a242f826fdb:0xbd3471938783408f</description><Point><coordinates>100.469895,13.789244,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Mall &amp; shopping</name>
+<Placemark><name>Platinum Fashion Mall</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+https://www.google.com/maps/place/Platinum+Fashion+Mall/data=!4m2!3m1!1s0x30e29ecf3f7d7a67:0x33a8397a3fc06439</description><Point><coordinates>100.539453,13.750203,0</coordinates></Point></Placemark>
+<Placemark><name>St. Louis Triangle Pillows, Soi Sathorn 11</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+https://www.google.com/maps/place/%E0%B8%AB%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A1+%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B8%95%E0%B9%8C%E0%B8%AB%E0%B8%A5%E0%B8%B8%E0%B8%A2%E0%B8%AA%E0%B9%8C,+ST.+Louis+Triangle+Pillows+at+Soi+Sathorn+11/data=!4m2!3m1!1s0x30e299f1b6b0a257:0x88c5e55464767c48</description><Point><coordinates>100.5275,13.715,0</coordinates></Point></Placemark>
+<Placemark><name>SEENSPACE Thong Lo</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+https://www.google.com/maps/place/SEENSPACE+Thong+Lo/data=!4m2!3m1!1s0x30e29e53412e0751:0x3e12ff1f98f9d393</description><Point><coordinates>100.581439,13.733559,0</coordinates></Point></Placemark>
+<Placemark><name>The Commons Thonglor</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+https://www.google.com/maps/place/The+Commons+Thonglor/data=!4m2!3m1!1s0x30e29e5308ac9299:0x9f57d66e4104958d</description><Point><coordinates>100.582334,13.734935,0</coordinates></Point></Placemark>
+<Placemark><name>Various vintage shop</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+https://www.google.com/maps/place/Various+vintage+shop/data=!4m2!3m1!1s0x30e29d83026f8925:0x70f314a1fda6ac84</description><Point><coordinates>100.610727,13.819751,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Temple</name>
+<Placemark><name>Meditation Hall (ห้องปฏิบัติสมาธิ)</name><styleUrl>#cat-temple</styleUrl><description>Temple
+https://www.google.com/maps/place/%E0%B8%AB%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%98%E0%B8%B4/data=!4m2!3m1!1s0x311de7002b271855:0x776cb0f5de010a07</description><Point><coordinates>100.93568,14.636256,0</coordinates></Point></Placemark>
+<Placemark><name>Knowing Buddha Foundation</name><styleUrl>#cat-temple</styleUrl><description>Temple
+https://www.google.com/maps/place/%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%99%E0%B8%B4%E0%B8%98%E0%B8%B4%E0%B9%82%E0%B8%99%E0%B8%AD%E0%B8%B4%E0%B9%89%E0%B8%87+%E0%B8%9A%E0%B8%B8%E0%B8%94%E0%B8%94%E0%B9%89%E0%B8%B2+%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%81%E0%B8%9B%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%99%E0%B8%B2+%7C+Knowing+Buddha+%0AFoundation,+Bangkok/data=!4m2!3m1!1s0x30e29f21e761539b:0x7b756b725694aca2</description><Point><coordinates>100.551654,13.729438,0</coordinates></Point></Placemark>
+<Placemark><name>Tōdai-ji</name><styleUrl>#cat-temple</styleUrl><description>Temple
+https://www.google.com/maps/place/T%C5%8Ddai-ji/data=!4m2!3m1!1s0x600139907a0876dd:0xf890ac3f9dd53c8f</description><Point><coordinates>135.839253,34.686918,0</coordinates></Point></Placemark>
+<Placemark><name>Honnō-ji Temple</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Death place of oda n.
+https://www.google.com/maps/place/Honn%C5%8D-ji+Temple/data=!4m2!3m1!1s0x60010892669b1d01:0x1e8dd6d6f4093ae6</description><Point><coordinates>135.768285,35.010328,0</coordinates></Point></Placemark>
+<Placemark><name>Fushimi Inari Taisha</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Day 4
+https://www.google.com/maps/place/Fushimi+Inari+Taisha/data=!4m2!3m1!1s0x60010f153d2e6d21:0x7b1aca1c753ae2e9</description><Point><coordinates>135.772125,34.966838,0</coordinates></Point></Placemark>
+<Placemark><name>Enryaku-ji Temple</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Oda nobuyaga vs warrior monks
+https://www.google.com/maps/place/Enryaku-ji+Temple/data=!4m2!3m1!1s0x60010a1ba3cd2c33:0x905dfd00687fc995</description><Point><coordinates>135.834056,35.074269,0</coordinates></Point></Placemark>
+<Placemark><name>Higashiyama Jisho-ji</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Kyoto day 2
+https://www.google.com/maps/place/Higashiyama+Jisho-ji/data=!4m2!3m1!1s0x600109050b426fe1:0x258aca1ce888abc9</description><Point><coordinates>135.798249,35.026879,0</coordinates></Point></Placemark>
+<Placemark><name>Okazaki Shrine</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Kyoto day 2
+https://www.google.com/maps/place/Okazaki+Shrine/data=!4m2!3m1!1s0x600108e21740e2a9:0xc21db7b9de148653</description><Point><coordinates>135.789069,35.016864,0</coordinates></Point></Placemark>
+<Placemark><name>Kinkaku-ji</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Kyoto day 2
+https://www.google.com/maps/place/Kinkaku-ji/data=!4m2!3m1!1s0x6001a820c0eb46bd:0xee4272b1c22645f</description><Point><coordinates>135.729389,35.038992,0</coordinates></Point></Placemark>
+<Placemark><name>Nanzen-ji</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Kyoto Day 2
+https://www.google.com/maps/place/Nanzen-ji/data=!4m2!3m1!1s0x600109217397fbfd:0x38b339a4c7e7004d</description><Point><coordinates>135.793764,35.011379,0</coordinates></Point></Placemark>
+<Placemark><name>Yasaka Shrine</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Kyoto Day 1
+https://www.google.com/maps/place/Yasaka+Shrine/data=!4m2!3m1!1s0x60010879a010eca9:0xc77ac89d5a241ae9</description><Point><coordinates>135.77855,35.00365,0</coordinates></Point></Placemark>
+<Placemark><name>Hōkan-ji Temple (Yasaka Pagoda)</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Day 1 Kyoto
+https://www.google.com/maps/place/H%C5%8Dkan-ji+Temple+(Yasaka+Pagoda)/data=!4m2!3m1!1s0x600108c560f8c421:0xb1cb2441e0223549</description><Point><coordinates>135.779226,34.998554,0</coordinates></Point></Placemark>
+<Placemark><name>Kiyomizu-dera</name><styleUrl>#cat-temple</styleUrl><description>Temple
+Day 1 Kyoto
+https://www.google.com/maps/place/Kiyomizu-dera/data=!4m2!3m1!1s0x600108d385dcfb07:0x62af658650c434ba</description><Point><coordinates>135.784953,34.994835,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Museum &amp; gallery</name>
+<Placemark><name>Mammoth Museum at the Hayden Cabin</name><styleUrl>#cat-museum</styleUrl><description>Museum &amp; gallery
+https://www.google.com/maps/place/Mammoth+Museum+at+the+Hayden+Cabin/data=!4m2!3m1!1s0x80960c256ba9cc93:0x170d61e2676aff84</description><Point><coordinates>-118.962838,37.635422,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Park &amp; nature</name>
+<Placemark><name>Aow June Juea</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Aow+June+Juea/data=!4m2!3m1!1s0x3055a14d0d777b11:0x2ec980d7d40ab0db</description><Point><coordinates>99.82521,10.026321,0</coordinates></Point></Placemark>
+<Placemark><name>Denali Viewpoint South</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Denali+Viewpoint+South/data=!4m2!3m1!1s0x56ce837c0db30431:0xe2a311dbbfcc48d2</description><Point><coordinates>-150.240487,62.592946,0</coordinates></Point></Placemark>
+<Placemark><name>Koishikawa Korakuen</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Koishikawa+Korakuen/data=!4m2!3m1!1s0x60188c4646de5005:0x1b220216ae23c25e</description><Point><coordinates>139.74899,35.705368,0</coordinates></Point></Placemark>
+<Placemark><name>Hamarikyu Gardens</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Hamarikyu+Gardens/data=!4m2!3m1!1s0x60188bdcbaa0f7c1:0x9b4a9ebdf898381a</description><Point><coordinates>139.763298,35.662546,0</coordinates></Point></Placemark>
+<Placemark><name>Honl’s Beach</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Honl%E2%80%99s+Beach/data=!4m2!3m1!1s0x79540f0343ac426d:0x96655ba9adaab3f5</description><Point><coordinates>-155.988165,19.628436,0</coordinates></Point></Placemark>
+<Placemark><name>Kahalu’u Beach Park</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Kahalu%E2%80%99u+Beach+Park/data=!4m2!3m1!1s0x795405f10abb0f6b:0xfb4f19feb886521c</description><Point><coordinates>-155.967491,19.577358,0</coordinates></Point></Placemark>
+<Placemark><name>La'aloa Beach Park (aka Magic Sands)</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/La'aloa+Beach+Park+(aka+Magic+Sands)/data=!4m2!3m1!1s0x79540f5d1f529ed5:0xc2b3ffd9b0c1b1e7</description><Point><coordinates>-155.972378,19.596043,0</coordinates></Point></Placemark>
+<Placemark><name>Nara Park</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Nara+Park/data=!4m2!3m1!1s0x60013996bd8c6061:0xf96cacf357447456</description><Point><coordinates>135.843377,34.685401,0</coordinates></Point></Placemark>
+<Placemark><name>Parque Comfama Guatapé</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Parque+Comfama+Guatap%C3%A9/data=!4m2!3m1!1s0x8e441d1869439265:0x526445afa778d852</description><Point><coordinates>-75.179051,6.228817,0</coordinates></Point></Placemark>
+<Placemark><name>Earthquake Fault</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Earthquake+Fault/data=!4m2!3m1!1s0x80960d0a898c7f87:0x144012bc379fa41</description><Point><coordinates>-119.000504,37.653338,0</coordinates></Point></Placemark>
+<Placemark><name>Inyo Craters</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Inyo+Craters/data=!4m2!3m1!1s0x8096128d512a84b7:0x943d076d477aafb</description><Point><coordinates>-119.010704,37.69154,0</coordinates></Point></Placemark>
+<Placemark><name>Hot Creek Geologic Site (Hot Spring Side)</name><styleUrl>#cat-park</styleUrl><description>Park &amp; nature
+https://www.google.com/maps/place/Hot+Creek+Geologic+Site+(Hot+Spring+Side)/data=!4m2!3m1!1s0x8096056d3ce94565:0x19260f7b8c1dfd3c</description><Point><coordinates>-118.837585,37.691205,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Spa &amp; massage</name>
+<Placemark><name>ร้านมะผลไม้สีลม (massage, Silom)</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+Super amazing massage place
+https://www.google.com/maps/place/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B0%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89%E0%B8%AA%E0%B8%B5%E0%B8%A5%E0%B8%A1/data=!4m2!3m1!1s0x30e29fe0febacdd1:0xcedb5c380bce908f</description><Point><coordinates>100.616533,13.705544,0</coordinates></Point></Placemark>
+<Placemark><name>Better Day Healthy Massage @Novotel Sukhumvit 20</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+https://www.google.com/maps/place/Better+Day+Healthy+Massage+@Novotel+Sukhumvit+20/data=!4m2!3m1!1s0x30e29f084aadeae7:0x4eeb637fbc1108fb</description><Point><coordinates>100.573176,13.718551,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Hotel</name>
+<Placemark><name>Hotel Tagawa</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+https://www.google.com/maps/place/Hotel+Tagawa/data=!4m2!3m1!1s0x601df5b9ea5bbfb1:0x614aa39a63470b42</description><Point><coordinates>138.454888,36.786533,0</coordinates></Point></Placemark>
+<Placemark><name>Shiga Kogen Prince Hotel</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+https://www.google.com/maps/place/Shiga+Kogen+Prince+Hotel/data=!4m2!3m1!1s0x601df384a59aaaab:0xfc243e0c645e27e2</description><Point><coordinates>138.444181,36.727903,0</coordinates></Point></Placemark>
+<Placemark><name>Grand Hyatt Erawan Bangkok</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+https://www.google.com/maps/place/Grand+Hyatt+Erawan+Bangkok/data=!4m2!3m1!1s0x30e29ed0796254fd:0x9e847c23cf565839</description><Point><coordinates>100.540521,13.743277,0</coordinates></Point></Placemark>
+<Placemark><name>Sheraton Grand Los Angeles</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+https://www.google.com/maps/place/Sheraton+Grand+Los+Angeles/data=!4m2!3m1!1s0x80c2c7b41eff1a99:0x3a83d8d3962f288e</description><Point><coordinates>-118.258318,34.047823,0</coordinates></Point></Placemark>
+<Placemark><name>The Garland</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+https://www.google.com/maps/place/The+Garland/data=!4m2!3m1!1s0x80c2be1817c1f19b:0x8876c97dac19591</description><Point><coordinates>-118.37096,34.149447,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Activity</name>
+<Placemark><name>Apnea Total Freediving Organisation</name><styleUrl>#cat-activity</styleUrl><description>Activity
+https://www.google.com/maps/place/Apnea+Total+Freediving+Organisation/data=!4m2!3m1!1s0x3055a1e944ed82ad:0xba9ea86a8443a7c6</description><Point><coordinates>99.830182,10.096734,0</coordinates></Point></Placemark>
+<Placemark><name>Punta Gallinas</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Wing foiling
+https://www.google.com/maps/place/Punta+Gallinas/data=!4m2!3m1!1s0x8e8e6c0a7ad225bd:0x90d8da7c1158c9ba</description><Point><coordinates>-71.668056,12.457778,0</coordinates></Point></Placemark>
+<Placemark><name>Mayapo Beach</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Wing foiling
+https://www.google.com/maps/place/Mayapo+Beach/data=!4m2!3m1!1s0x8e8c875b7568d0c1:0x34c271d6c5ad6e32</description><Point><coordinates>-72.718639,11.644664,0</coordinates></Point></Placemark>
+<Placemark><name>San Gil</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Extreme sports - MTB biking for 50 KM / waterfall rappelling etc.
+https://www.google.com/maps/place/San+Gil/data=!4m2!3m1!1s0x8e69c72715c3eca9:0xa03bfda06440ee00</description><Point><coordinates>-73.13318,6.5577,0</coordinates></Point></Placemark>
+<Placemark><name>La Guajira</name><styleUrl>#cat-activity</styleUrl><description>Activity
+Wing Foiling spot
+https://www.google.com/maps/place/La+Guajira/data=!4m2!3m1!1s0x8e8b8914627238ff:0x22e6d8831a7d9716</description><Point><coordinates>-72.452482,11.464414,0</coordinates></Point></Placemark>
+<Placemark><name>Prawn Fishing 71 (บ่อตกกุ้ง 71)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+https://www.google.com/maps/place/%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%95%E0%B8%81%E0%B8%81%E0%B8%B8%E0%B9%89%E0%B8%87+71+Prawn+Fishing/data=!4m2!3m1!1s0x30e29d43f8a12139:0x6a35ba8bd2d45baf</description><Point><coordinates>100.603188,13.851573,0</coordinates></Point></Placemark>
+<Placemark><name>Tokyo Joypolis</name><styleUrl>#cat-activity</styleUrl><description>Activity
+https://www.google.com/maps/place/Tokyo+Joypolis/data=!4m2!3m1!1s0x601889f65e4f37b9:0x54acae2e02ff1426</description><Point><coordinates>139.775238,35.628705,0</coordinates></Point></Placemark>
+<Placemark><name>Hozugawa River Boat Ride (Hozugawa Kudari)</name><styleUrl>#cat-activity</styleUrl><description>Activity
+From Ryo at base bar
+https://www.google.com/maps/place/Hozugawa+River+Boat+Ride+(Hozugawa+Kudari)/data=!4m2!3m1!1s0x600054c4aef4efe5:0x33dcd3376bf7a157</description><Point><coordinates>135.586974,35.017133,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Sight &amp; landmark</name>
+<Placemark><name>Sekigahara</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+Battlefield
+https://www.google.com/maps/place/Sekigahara/data=!4m2!3m1!1s0x6003cb6d9ef6b4b1:0x3605ec1135bdca9a</description><Point><coordinates>136.45596,35.341415,0</coordinates></Point></Placemark>
+<Placemark><name>Mount Fuji</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+https://www.google.com/maps/place/Mount+Fuji/data=!4m2!3m1!1s0x6019629a42fdc899:0xa6a1fcc916f3a4df</description><Point><coordinates>138.727778,35.360556,0</coordinates></Point></Placemark>
+<Placemark><name>Himeji Castle</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+https://www.google.com/maps/place/Himeji+Castle/data=!4m2!3m1!1s0x3554e003a23324b3:0x7a4f8c2f6eba81b1</description><Point><coordinates>134.693915,34.839444,0</coordinates></Point></Placemark>
+<Placemark><name>Aqueduct of Valens</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+https://www.google.com/maps/place/Aqueduct+of+Valens/data=!4m2!3m1!1s0x14cab9a7c30f71ed:0x35ba713c95477a7a</description><Point><coordinates>28.95555,41.01597,0</coordinates></Point></Placemark>
+<Placemark><name>Mammoth Consolidated Mine</name><styleUrl>#cat-sight</styleUrl><description>Sight &amp; landmark
+https://www.google.com/maps/place/Mammoth+Consolidated+Mine/data=!4m2!3m1!1s0x80960b85c26d84ed:0x1d6e99440533a78a</description><Point><coordinates>-118.989297,37.594381,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Area &amp; destination</name>
+<Placemark><name>San Blas Islands</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/San+Blas+Islands/data=!4m2!3m1!1s0x8e54faf5fbdb641d:0x63414c65f5844d1c</description><Point><coordinates>-78.793344,9.568231,0</coordinates></Point></Placemark>
+<Placemark><name>Capurganá</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Capurgan%C3%A1/data=!4m2!3m1!1s0x8e5122998f674f09:0x47c236bb2cdeb1da</description><Point><coordinates>-77.350123,8.633828,0</coordinates></Point></Placemark>
+<Placemark><name>Maryland</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Maryland/data=!4m2!3m1!1s0x89b64debe9f190df:0xf2af37657655f6b1</description><Point><coordinates>-77.26821,38.80483,0</coordinates></Point></Placemark>
+<Placemark><name>Pohnpei</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Pohnpei/data=!4m2!3m1!1s0x65d9c9a969abdcd5:0x3bebea1f2a916ca9</description><Point><coordinates>158.279317,6.951992,0</coordinates></Point></Placemark>
+<Placemark><name>Naramachi</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Naramachi/data=!4m2!3m1!1s0x6001398b67286423:0x88706ba287ff3ec9</description><Point><coordinates>135.832389,34.676435,0</coordinates></Point></Placemark>
+<Placemark><name>Hakone</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+Onsen Place
+https://www.google.com/maps/place/Hakone/data=!4m2!3m1!1s0x6019a20c60b2dc7b:0x2605bd17ac977b26</description><Point><coordinates>139.047575,35.232484,0</coordinates></Point></Placemark>
+<Placemark><name>Kiyomotocho</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+Kyoto day 1
+https://www.google.com/maps/place/Kiyomotocho/data=!4m2!3m1!1s0x600108c1e46b5e6b:0x12bf57e2c27e81c5</description><Point><coordinates>135.774986,35.005031,0</coordinates></Point></Placemark>
+<Placemark><name>Majuro</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Majuro/data=!4m2!3m1!1s0x650f1c3a45fe909d:0x2397e5094cfda54d</description><Point><coordinates>171.266667,7.066667,0</coordinates></Point></Placemark>
+<Placemark><name>Kwajalein</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Kwajalein/data=!4m2!3m1!1s0x65aeba1bdf4fcbd9:0xa428045186f42c97</description><Point><coordinates>167.728089,8.730834,0</coordinates></Point></Placemark>
+<Placemark><name>Chuuk</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Chuuk/data=!4m2!3m1!1s0x66678f2c7353c6a3:0xadd913be58dd8b3a</description><Point><coordinates>151.424561,7.274934,0</coordinates></Point></Placemark>
+<Placemark><name>Puerto de Carti</name><styleUrl>#cat-destination</styleUrl><description>Area &amp; destination
+https://www.google.com/maps/place/Puerto+de+Carti/data=!4m2!3m1!1s0x8e54ea2b92487dd5:0x305657f4e9bc62be</description><Point><coordinates>-78.978059,9.455008,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Other</name>
+<Placemark><name>Baan Suan Sathon</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/Baan+Suan+Sathon/data=!4m2!3m1!1s0x30e29f1598c22235:0x9cadbec666c4c9d4</description><Point><coordinates>100.553409,13.714109,0</coordinates></Point></Placemark>
+<Placemark><name>Cl. 21 #3-71</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/Cl.+21+%233-71/data=!4m2!3m1!1s0x8e3f99a2f797bed7:0xf18bb955a2d9ce54</description><Point><coordinates>-74.068068,4.604898,0</coordinates></Point></Placemark>
+<Placemark><name>Dropped pin (Michigan)</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/search/42.6583002,-83.294678</description><Point><coordinates>-83.294678,42.6583,0</coordinates></Point></Placemark>
+<Placemark><name>The Laughing Tiger</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/The+Laughing+Tiger/data=!4m2!3m1!1s0x30e29f8b442bf58f:0x9990408375d34531</description><Point><coordinates>100.596239,13.690782,0</coordinates></Point></Placemark>
+<Placemark><name>839 S Hill St</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/839+S+Hill+St/data=!4m2!3m1!1s0x80c2c7ca734910bd:0xa2d16acee2b429ee</description><Point><coordinates>-118.257017,34.043745,0</coordinates></Point></Placemark>
+<Placemark><name>734 S Spring St</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/734+S+Spring+St/data=!4m2!3m1!1s0x80c2c7cacce27195:0x5141bb2c02e9c1fe</description><Point><coordinates>-118.252784,34.043428,0</coordinates></Point></Placemark>
+<Placemark><name>Argent Shijo</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/Argent+Shijo/data=!4m2!3m1!1s0x6001089698469387:0x39b7de3334907785</description><Point><coordinates>135.765812,35.004408,0</coordinates></Point></Placemark>
+<Placemark><name>Antonio B. Won Pat International Airport</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/Antonio+B.+Won+Pat+International+Airport/data=!4m2!3m1!1s0x671f82b0860a153d:0x971b4be40b4e879d</description><Point><coordinates>144.799231,13.486953,0</coordinates></Point></Placemark>
+<Placemark><name>Mobile Mechanic MT</name><styleUrl>#cat-other</styleUrl><description>Other
+https://www.google.com/maps/place/Mobile+Mechanic+MT/data=!4m2!3m1!1s0x53454756b5a17f6d:0x672f0f1b5d81c48d</description><Point><coordinates>-111.079205,45.779026,0</coordinates></Point></Placemark>
+<Placemark><name>Independence Automotive LLC</name><styleUrl>#cat-other</styleUrl><description>Other
+Eric is great
+https://www.google.com/maps/place/Independence+Automotive+LLC/data=!4m2!3m1!1s0x53435455ea18fdc5:0x2028b3a71aeac3cd</description><Point><coordinates>-112.019709,46.603538,0</coordinates></Point></Placemark>
 </Folder>
 </Document></kml>

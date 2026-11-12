@@ -267,7 +267,12 @@ function renderMap() {
   layer.clearLayers();
   const ps = visible();
   ps.forEach(p => L.marker([p.lat, p.lng], { icon:pinIcon(p), title:p.name, zIndexOffset:p.starred ? 500 : 0 }).addTo(layer).on('click', () => showPlace(p.id)));
-  if (ps.length && !me && !fitted) { map.fitBounds(L.latLngBounds(ps.map(p => [p.lat, p.lng])).pad(0.3), { maxZoom:15 }); fitted = true; }
+  if (ps.length && !me && !fitted) { // open on the city with the most places, not the whole world
+    const n = {}; ps.forEach(p => { if (p.city) n[p.city] = (n[p.city] || 0) + 1; });
+    const top = Object.keys(n).sort((x, y) => n[y] - n[x])[0];
+    const home = top ? ps.filter(p => p.city === top) : ps;
+    map.fitBounds(L.latLngBounds(home.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom:15 }); fitted = true;
+  }
 }
 
 // ---------- chips (filter + legend) ----------
@@ -303,6 +308,11 @@ function renderList() {
       <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button></div>`; };
   let body;
   if (!ps.length) body = `<div class="empty">No places match this filter.</div>`;
+  else if (sortBy === 'city') {
+    const n = {}; ps.forEach(p => { const c = p.city || 'Elsewhere'; (n[c] = n[c] || []).push(p); });
+    body = Object.keys(n).sort((x, y) => n[y].length - n[x].length || x.localeCompare(y)).map(c =>
+      `<div class="lgroup"><h3>${esc(c)}${n[c][0].country && c !== 'Elsewhere' ? ', ' + esc(n[c][0].country) : ''} · ${n[c].length}</h3>${n[c].sort(byName).map(item).join('')}</div>`).join('');
+  }
   else if (sortBy === 'category') {
     body = allCats().map(c => { const g = ps.filter(p => p.category === c.id).sort(byName); return g.length ?
       `<div class="lgroup"><h3><span class="dot" style="background:${c.color}"></span>${c.icon} ${esc(c.label)} · ${g.length}</h3>${g.map(item).join('')}</div>` : ''; }).join('');
@@ -310,7 +320,7 @@ function renderList() {
   const topH = document.querySelector('.top').offsetHeight;
   el.innerHTML = `<div style="height:${topH}px"></div><div class="lbrand">Walkabout</div>
     <div class="ltools"><span class="meta">Sort</span>
-      <select class="inline" id="sort">${[['category','By category'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="inline" id="sort">${[['category','By category'],['city','By city'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
       <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>${body}`;
   el.querySelectorAll('.lgroup h3').forEach(h => h.style.top = topH + 'px');
   el.querySelectorAll('.litem').forEach(r => r.onclick = e => { if (e.target.dataset.star) return; showPlace(r.dataset.id); });
@@ -378,6 +388,8 @@ function showPlace(id, isHere, keepView) {
       <span class="meta">${p.city ? esc(p.city) : ''}${d ? ' · ' + d : ''}</span></div>
     ${p.address ? `<div class="meta" style="margin-top:6px">${esc(p.address)}</div>` : ''}
     ${p.notes ? `<p>${esc(p.notes)}</p>` : ''}
+    ${(p.tags||[]).length && p.imported_from ? `<div class="meta">📋 ${p.tags.map(esc).join(' · ')}</div>` : ''}
+    ${p.coords_precision === 'approximate' ? '<div class="meta">📍 Pin is approximate. “Open in Google Maps” goes to the exact place.</div>' : ''}
     ${p.hours ? `<div class="meta">🕒 ${esc(p.hours)}</div>` : ''}
     ${(p.sources||[]).length ? `<div class="meta">${p.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(new URL(u).hostname)}</a>`).join(' · ')}</div>` : ''}
     <div class="row">

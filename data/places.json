@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Personal places database. One entry per place. Rendered by places/build.py into places/index.html (map + location-aware cards) and exported to KML/CSV for Google My Maps.",
-    "last_updated": "2026-10-31",
+    "last_updated": "2026-11-12",
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
@@ -13,13 +13,14 @@
       "lng": "decimal longitude",
       "coords_precision": "exact | building | approximate",
       "notes": "why it's worth going, what to order, tips",
-      "tags": "free-form list",
+      "tags": "free-form list; imported places carry the names of the Google lists they came from",
       "hours": "opening hours as known (verify)",
       "sources": "URLs used to identify the place",
       "visited": "YYYY-MM-DD or null",
       "added": "YYYY-MM-DD",
       "gmaps_query": "optional: text Google Maps should search for the share link (defaults to name + address)",
-      "starred": "true if the user starred it"
+      "starred": "true if the user starred it",
+      "google_maps_url": "exact Google Maps listing URL (used for Open in Google Maps when present)"
     },
     "staleness_days": 3650
   },
@@ -230,6 +231,57 @@
       ]
     },
     {
+      "id": "activity",
+      "label": "Activity",
+      "color": "#0b7285",
+      "icon": "🏄",
+      "keywords": [
+        "activity",
+        "diving",
+        "freediving",
+        "surf",
+        "foiling",
+        "kayak",
+        "boat ride",
+        "fishing",
+        "climbing",
+        "arcade",
+        "theme park"
+      ]
+    },
+    {
+      "id": "sight",
+      "label": "Sight & landmark",
+      "color": "#a61e4d",
+      "icon": "🏰",
+      "keywords": [
+        "castle",
+        "monument",
+        "landmark",
+        "ruins",
+        "aqueduct",
+        "battlefield",
+        "palace",
+        "tower",
+        "bridge"
+      ]
+    },
+    {
+      "id": "destination",
+      "label": "Area & destination",
+      "color": "#364fc7",
+      "icon": "🧭",
+      "keywords": [
+        "island",
+        "islands",
+        "town",
+        "village",
+        "neighbourhood",
+        "neighborhood",
+        "district"
+      ]
+    },
+    {
       "id": "other",
       "label": "Other",
       "color": "#868e96",
@@ -265,6 +317,1715 @@
       "visited": null,
       "added": "2026-10-31",
       "starred": false
+    },
+    {
+      "id": "platinum-fashion-mall",
+      "name": "Platinum Fashion Mall",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.750203,
+      "lng": 100.539453,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Platinum+Fashion+Mall/data=!4m2!3m1!1s0x30e29ecf3f7d7a67:0x33a8397a3fc06439",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "revolucion-cocktail",
+      "name": "Revolucion Cocktail",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.721898,
+      "lng": 100.527587,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Revolucion+Cocktail/data=!4m2!3m1!1s0x30e298cd12b5fcb5:0x19d6cbf8a3244ab1",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "ghee-gelato-bar-silom-soi-7-3rd-floor",
+      "name": "GHEE GELATO BAR Silom Soi 7 (3rd floor)",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.7262,
+      "lng": 100.5305,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/GHEE+GELATO+BAR+Silom+Soi+7+(3rd+floor)/data=!4m2!3m1!1s0x30e299c80838e537:0x71bbe54898f66e0d",
+      "notes": "Friend of Wray’s shop (1 of two locations)",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "meditation-hall",
+      "name": "Meditation Hall (ห้องปฏิบัติสมาธิ)",
+      "category": "temple",
+      "city": "Saraburi",
+      "country": "Thailand",
+      "lat": 14.636256,
+      "lng": 100.93568,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/%E0%B8%AB%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%98%E0%B8%B4/data=!4m2!3m1!1s0x311de7002b271855:0x776cb0f5de010a07",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "tanpopo-snack",
+      "name": "Tanpopo Snack",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.728277,
+      "lng": 100.570279,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Tanpopo+Snack/data=!4m2!3m1!1s0x30e29f0147319b43:0x3d879e0565ba4cab",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "st-louis-triangle-pillows-soi-sathorn-11",
+      "name": "St. Louis Triangle Pillows, Soi Sathorn 11",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.715,
+      "lng": 100.5275,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/%E0%B8%AB%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A1+%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B8%95%E0%B9%8C%E0%B8%AB%E0%B8%A5%E0%B8%B8%E0%B8%A2%E0%B8%AA%E0%B9%8C,+ST.+Louis+Triangle+Pillows+at+Soi+Sathorn+11/data=!4m2!3m1!1s0x30e299f1b6b0a257:0x88c5e55464767c48",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "knowing-buddha-foundation",
+      "name": "Knowing Buddha Foundation",
+      "category": "temple",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.729438,
+      "lng": 100.551654,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%99%E0%B8%B4%E0%B8%98%E0%B8%B4%E0%B9%82%E0%B8%99%E0%B8%AD%E0%B8%B4%E0%B9%89%E0%B8%87+%E0%B8%9A%E0%B8%B8%E0%B8%94%E0%B8%94%E0%B9%89%E0%B8%B2+%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%81%E0%B8%9B%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%99%E0%B8%B2+%7C+Knowing+Buddha+%0AFoundation,+Bangkok/data=!4m2!3m1!1s0x30e29f21e761539b:0x7b756b725694aca2",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "seenspace-thong-lo",
+      "name": "SEENSPACE Thong Lo",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.733559,
+      "lng": 100.581439,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/SEENSPACE+Thong+Lo/data=!4m2!3m1!1s0x30e29e53412e0751:0x3e12ff1f98f9d393",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "the-commons-thonglor",
+      "name": "The Commons Thonglor",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.734935,
+      "lng": 100.582334,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/The+Commons+Thonglor/data=!4m2!3m1!1s0x30e29e5308ac9299:0x9f57d66e4104958d",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "various-vintage-shop",
+      "name": "Various vintage shop",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.819751,
+      "lng": 100.610727,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Various+vintage+shop/data=!4m2!3m1!1s0x30e29d83026f8925:0x70f314a1fda6ac84",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "chatuchak-weekend-market",
+      "name": "Chatuchak Weekend Market",
+      "category": "market",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.800848,
+      "lng": 100.548576,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Chatuchak+Weekend+Market/data=!4m2!3m1!1s0x30e29c14e883f8dd:0x91f191d784b87d4b",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "changchui-creative-park",
+      "name": "ChangChui Creative Park",
+      "category": "market",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.789244,
+      "lng": 100.469895,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/ChangChui+Creative+Park/data=!4m2!3m1!1s0x30e29a242f826fdb:0xbd3471938783408f",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "aow-june-juea",
+      "name": "Aow June Juea",
+      "category": "park",
+      "city": "Koh Tao",
+      "country": "Thailand",
+      "lat": 10.026321,
+      "lng": 99.82521,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Aow+June+Juea/data=!4m2!3m1!1s0x3055a14d0d777b11:0x2ec980d7d40ab0db",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "apnea-total-freediving-organisation",
+      "name": "Apnea Total Freediving Organisation",
+      "category": "activity",
+      "city": "Koh Tao",
+      "country": "Thailand",
+      "lat": 10.096734,
+      "lng": 99.830182,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Apnea+Total+Freediving+Organisation/data=!4m2!3m1!1s0x3055a1e944ed82ad:0xba9ea86a8443a7c6",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "thong-smith",
+      "name": "Thong Smith",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.692552,
+      "lng": 100.538215,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Thong+Smith/data=!4m2!3m1!1s0x30e29f571e7e5fd3:0x8f868a9c23e3a362",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "baan-suan-sathon",
+      "name": "Baan Suan Sathon",
+      "category": "other",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.714109,
+      "lng": 100.553409,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Baan+Suan+Sathon/data=!4m2!3m1!1s0x30e29f1598c22235:0x9cadbec666c4c9d4",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "fatty-s-bar-diner",
+      "name": "Fatty's Bar & Diner",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.75682,
+      "lng": 100.558682,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Fatty's+Bar+%26+Diner/data=!4m2!3m1!1s0x30e29e934ee40995:0xd8f6ee6330c960d0",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "arcadia-barcade-bangkok-2049",
+      "name": "Arcadia Barcade @ Bangkok 2049",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.723263,
+      "lng": 100.60165,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Arcadia+Barcade+@+Bangkok+2049/data=!4m2!3m1!1s0x30e29fc9213bc1eb:0xf2abecde70a17062",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "sugar-ray-you-ve-just-been-poisoned",
+      "name": "Sugar Ray, You've Just Been Poisoned",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.742904,
+      "lng": 100.589541,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Sugar+Ray,+You've+Just+Been+Poisoned/data=!4m2!3m1!1s0x30e29e4f6573b7c9:0x949bc359fefed9e4",
+      "tags": [
+        "Bangkok's best",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "san-blas-islands",
+      "name": "San Blas Islands",
+      "category": "destination",
+      "city": "San Blas",
+      "country": "Panama",
+      "lat": 9.568231,
+      "lng": -78.793344,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/San+Blas+Islands/data=!4m2!3m1!1s0x8e54faf5fbdb641d:0x63414c65f5844d1c",
+      "tags": [
+        "Bangkok's best",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "capurgana",
+      "name": "Capurganá",
+      "category": "destination",
+      "city": "Capurganá",
+      "country": "Colombia",
+      "lat": 8.633828,
+      "lng": -77.350123,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Capurgan%C3%A1/data=!4m2!3m1!1s0x8e5122998f674f09:0x47c236bb2cdeb1da",
+      "tags": [
+        "Bangkok's best",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "cl-21-3-71",
+      "name": "Cl. 21 #3-71",
+      "category": "other",
+      "city": "Bogotá",
+      "country": "Colombia",
+      "lat": 4.604898,
+      "lng": -74.068068,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Cl.+21+%233-71/data=!4m2!3m1!1s0x8e3f99a2f797bed7:0xf18bb955a2d9ce54",
+      "tags": [
+        "Bangkok's best",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "denali-viewpoint-south",
+      "name": "Denali Viewpoint South",
+      "category": "park",
+      "city": "Denali",
+      "country": "USA",
+      "lat": 62.592946,
+      "lng": -150.240487,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Denali+Viewpoint+South/data=!4m2!3m1!1s0x56ce837c0db30431:0xe2a311dbbfcc48d2",
+      "tags": [
+        "Bangkok's best",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "dropped-pin-michigan",
+      "name": "Dropped pin (Michigan)",
+      "category": "other",
+      "city": "Michigan",
+      "country": "USA",
+      "lat": 42.6583,
+      "lng": -83.294678,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/search/42.6583002,-83.294678",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "maryland",
+      "name": "Maryland",
+      "category": "destination",
+      "city": "Maryland",
+      "country": "USA",
+      "lat": 38.80483,
+      "lng": -77.26821,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Maryland/data=!4m2!3m1!1s0x89b64debe9f190df:0xf2af37657655f6b1",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "khao-tom-jay-suay",
+      "name": "Khao Tom Jay Suay",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.742325,
+      "lng": 100.510832,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Khao+Tom+Jay+Suay/data=!4m2!3m1!1s0x30e29923c685932f:0xf27b8a581fa577c2",
+      "notes": "Amazing Thai food that you’ve never go into on your own unless you know it’s so good",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "massage-silom",
+      "name": "ร้านมะผลไม้สีลม (massage, Silom)",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.705544,
+      "lng": 100.616533,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A1%E0%B8%B0%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89%E0%B8%AA%E0%B8%B5%E0%B8%A5%E0%B8%A1/data=!4m2!3m1!1s0x30e29fe0febacdd1:0xcedb5c380bce908f",
+      "notes": "Super amazing massage place",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "pohnpei",
+      "name": "Pohnpei",
+      "category": "destination",
+      "city": "Pohnpei",
+      "country": "Micronesia",
+      "lat": 6.951992,
+      "lng": 158.279317,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Pohnpei/data=!4m2!3m1!1s0x65d9c9a969abdcd5:0x3bebea1f2a916ca9",
+      "tags": [
+        "Great spas and massages",
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "better-day-healthy-massage-novotel-sukhumvit-20",
+      "name": "Better Day Healthy Massage @Novotel Sukhumvit 20",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.718551,
+      "lng": 100.573176,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Better+Day+Healthy+Massage+@Novotel+Sukhumvit+20/data=!4m2!3m1!1s0x30e29f084aadeae7:0x4eeb637fbc1108fb",
+      "tags": [
+        "Great spas and massages"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "punta-gallinas",
+      "name": "Punta Gallinas",
+      "category": "activity",
+      "city": "La Guajira",
+      "country": "Colombia",
+      "lat": 12.457778,
+      "lng": -71.668056,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Punta+Gallinas/data=!4m2!3m1!1s0x8e8e6c0a7ad225bd:0x90d8da7c1158c9ba",
+      "notes": "Wing foiling",
+      "tags": [
+        "Places of Special Activity"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mayapo-beach",
+      "name": "Mayapo Beach",
+      "category": "activity",
+      "city": "La Guajira",
+      "country": "Colombia",
+      "lat": 11.644664,
+      "lng": -72.718639,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mayapo+Beach/data=!4m2!3m1!1s0x8e8c875b7568d0c1:0x34c271d6c5ad6e32",
+      "notes": "Wing foiling",
+      "tags": [
+        "Places of Special Activity"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "san-gil",
+      "name": "San Gil",
+      "category": "activity",
+      "city": "San Gil",
+      "country": "Colombia",
+      "lat": 6.5577,
+      "lng": -73.13318,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/San+Gil/data=!4m2!3m1!1s0x8e69c72715c3eca9:0xa03bfda06440ee00",
+      "notes": "Extreme sports - MTB biking for 50 KM / waterfall rappelling etc.",
+      "tags": [
+        "Places of Special Activity"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "la-guajira",
+      "name": "La Guajira",
+      "category": "activity",
+      "city": "La Guajira",
+      "country": "Colombia",
+      "lat": 11.464414,
+      "lng": -72.452482,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/La+Guajira/data=!4m2!3m1!1s0x8e8b8914627238ff:0x22e6d8831a7d9716",
+      "notes": "Wing Foiling spot",
+      "tags": [
+        "Places of Special Activity"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "the-laughing-tiger",
+      "name": "The Laughing Tiger",
+      "category": "other",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.690782,
+      "lng": 100.596239,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/The+Laughing+Tiger/data=!4m2!3m1!1s0x30e29f8b442bf58f:0x9990408375d34531",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "sky-view-360",
+      "name": "Sky View 360",
+      "category": "rooftop-bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.742806,
+      "lng": 100.506987,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Sky+View+360/data=!4m2!3m1!1s0x30e29918a027f5fb:0x340927fe98125d10",
+      "notes": "Cheap roof top bar",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "aether-bkk",
+      "name": "AETHER BKK",
+      "category": "rooftop-bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.70969,
+      "lng": 100.540227,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/AETHER+BKK/data=!4m2!3m1!1s0x30e29f48726b7a41:0xc39c03e056a3f443",
+      "notes": "New roof top bar recommended by Jacky",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "baan-e-sarn-muangyos",
+      "name": "Baan E-sarn Muangyos",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.737238,
+      "lng": 100.566776,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Baan+E-sarn+Muangyos/data=!4m2!3m1!1s0x30e29efc5d198187:0x2f1244b911a2b296",
+      "notes": "The place I had dinner with Bryan and Jacky!",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "prawn-fishing-71-71",
+      "name": "Prawn Fishing 71 (บ่อตกกุ้ง 71)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.851573,
+      "lng": 100.603188,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%95%E0%B8%81%E0%B8%81%E0%B8%B8%E0%B9%89%E0%B8%87+71+Prawn+Fishing/data=!4m2!3m1!1s0x30e29d43f8a12139:0x6a35ba8bd2d45baf",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "koishikawa-korakuen",
+      "name": "Koishikawa Korakuen",
+      "category": "park",
+      "city": "Tokyo",
+      "country": "Japan",
+      "lat": 35.705368,
+      "lng": 139.74899,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Koishikawa+Korakuen/data=!4m2!3m1!1s0x60188c4646de5005:0x1b220216ae23c25e",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hamarikyu-gardens",
+      "name": "Hamarikyu Gardens",
+      "category": "park",
+      "city": "Tokyo",
+      "country": "Japan",
+      "lat": 35.662546,
+      "lng": 139.763298,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Hamarikyu+Gardens/data=!4m2!3m1!1s0x60188bdcbaa0f7c1:0x9b4a9ebdf898381a",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hotel-tagawa",
+      "name": "Hotel Tagawa",
+      "category": "hotel",
+      "city": "Shiga Kogen",
+      "country": "Japan",
+      "lat": 36.786533,
+      "lng": 138.454888,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Hotel+Tagawa/data=!4m2!3m1!1s0x601df5b9ea5bbfb1:0x614aa39a63470b42",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "shiga-kogen-prince-hotel",
+      "name": "Shiga Kogen Prince Hotel",
+      "category": "hotel",
+      "city": "Shiga Kogen",
+      "country": "Japan",
+      "lat": 36.727903,
+      "lng": 138.444181,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Shiga+Kogen+Prince+Hotel/data=!4m2!3m1!1s0x601df384a59aaaab:0xfc243e0c645e27e2",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "tokyo-joypolis",
+      "name": "Tokyo Joypolis",
+      "category": "activity",
+      "city": "Tokyo",
+      "country": "Japan",
+      "lat": 35.628705,
+      "lng": 139.775238,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Tokyo+Joypolis/data=!4m2!3m1!1s0x601889f65e4f37b9:0x54acae2e02ff1426",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "honls-beach",
+      "name": "Honl’s Beach",
+      "category": "park",
+      "city": "Kailua-Kona",
+      "country": "USA",
+      "lat": 19.628436,
+      "lng": -155.988165,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Honl%E2%80%99s+Beach/data=!4m2!3m1!1s0x79540f0343ac426d:0x96655ba9adaab3f5",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kahaluu-beach-park",
+      "name": "Kahalu’u Beach Park",
+      "category": "park",
+      "city": "Kailua-Kona",
+      "country": "USA",
+      "lat": 19.577358,
+      "lng": -155.967491,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Kahalu%E2%80%99u+Beach+Park/data=!4m2!3m1!1s0x795405f10abb0f6b:0xfb4f19feb886521c",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "la-aloa-beach-park-aka-magic-sands",
+      "name": "La'aloa Beach Park (aka Magic Sands)",
+      "category": "park",
+      "city": "Kailua-Kona",
+      "country": "USA",
+      "lat": 19.596043,
+      "lng": -155.972378,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/La'aloa+Beach+Park+(aka+Magic+Sands)/data=!4m2!3m1!1s0x79540f5d1f529ed5:0xc2b3ffd9b0c1b1e7",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "grand-hyatt-erawan-bangkok",
+      "name": "Grand Hyatt Erawan Bangkok",
+      "category": "hotel",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.743277,
+      "lng": 100.540521,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Grand+Hyatt+Erawan+Bangkok/data=!4m2!3m1!1s0x30e29ed0796254fd:0x9e847c23cf565839",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "sheraton-grand-los-angeles",
+      "name": "Sheraton Grand Los Angeles",
+      "category": "hotel",
+      "city": "Los Angeles",
+      "country": "USA",
+      "lat": 34.047823,
+      "lng": -118.258318,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Sheraton+Grand+Los+Angeles/data=!4m2!3m1!1s0x80c2c7b41eff1a99:0x3a83d8d3962f288e",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "839-s-hill-st",
+      "name": "839 S Hill St",
+      "category": "other",
+      "city": "Los Angeles",
+      "country": "USA",
+      "lat": 34.043745,
+      "lng": -118.257017,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/839+S+Hill+St/data=!4m2!3m1!1s0x80c2c7ca734910bd:0xa2d16acee2b429ee",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "734-s-spring-st",
+      "name": "734 S Spring St",
+      "category": "other",
+      "city": "Los Angeles",
+      "country": "USA",
+      "lat": 34.043428,
+      "lng": -118.252784,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/734+S+Spring+St/data=!4m2!3m1!1s0x80c2c7cacce27195:0x5141bb2c02e9c1fe",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "cassisbar",
+      "name": "Cassisbar",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.008387,
+      "lng": 135.771215,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Cassisbar/data=!4m2!3m1!1s0x600108ecac7cf875:0xeee8ddabfd1863a6",
+      "notes": "Speaks German!",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hozugawa-river-boat-ride-hozugawa-kudari",
+      "name": "Hozugawa River Boat Ride (Hozugawa Kudari)",
+      "category": "activity",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.017133,
+      "lng": 135.586974,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Hozugawa+River+Boat+Ride+(Hozugawa+Kudari)/data=!4m2!3m1!1s0x600054c4aef4efe5:0x33dcd3376bf7a157",
+      "notes": "From Ryo at base bar",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "zaza-pub-kyoto",
+      "name": "ZAZA Pub Kyoto",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.008239,
+      "lng": 135.756622,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/ZAZA+Pub+Kyoto/data=!4m2!3m1!1s0x60010883810d0529:0x321b293be9e613aa",
+      "notes": "https://www.reddit.com/r/japanlife/comments/15kaxls/foreigner_bars_kyoto/?chainedPosts=t3_1hgdg24",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "apotheca",
+      "name": "APOTHECA",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.006257,
+      "lng": 135.765265,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/APOTHECA/data=!4m2!3m1!1s0x6001089140de67b7:0x8bac826e7adff0e7",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "bar-base",
+      "name": "Bar Base",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.004951,
+      "lng": 135.770171,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Bar+Base/data=!4m2!3m1!1s0x600108952481ed91:0xcd120e269736ea4d",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "bees-knees",
+      "name": "BEE’S KNEES",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.005065,
+      "lng": 135.770268,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/BEE%E2%80%99S+KNEES/data=!4m2!3m1!1s0x6001089524468891:0xaebe20902be8c3a7",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "rocking-chair",
+      "name": "Rocking chair",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.000956,
+      "lng": 135.766424,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Rocking+chair/data=!4m2!3m1!1s0x600108be07c7eeab:0xa2b13a7bd9877577",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "rutubo-smokehouse",
+      "name": "RUTUBO Smokehouse (燻製工場)",
+      "category": "restaurant",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.049225,
+      "lng": 135.814,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/RUTUBO%E7%87%BB%E8%A3%BD%E5%B7%A5%E5%A0%B4/data=!4m2!3m1!1s0x6001099a1c9a1ba3:0x83611b27cbfdb924",
+      "notes": "Research Resort",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "scotch-branch",
+      "name": "Scotch & Branch",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.031863,
+      "lng": 135.812939,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Scotch+%26+Branch+%E3%82%B9%E3%82%B3%E3%83%83%E3%83%81%E3%82%A2%E3%83%B3%E3%83%89%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%EF%BC%88whisky,+cocktail,%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC,+%E3%82%AB%E3%82%AF%E3%83%86%E3%83%AB%EF%BC%89/data=!4m2!3m1!1s0x6001097209340217:0xa4932d704956a26e",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mayday-coffee-bar",
+      "name": "Mayday coffee&bar",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.040589,
+      "lng": 135.749859,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mayday+coffee%26bar/data=!4m2!3m1!1s0x600107fdaa8b5f81:0x4241ff20eeb3e4e5",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "monday",
+      "name": "Monday",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.008233,
+      "lng": 135.712468,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Monday/data=!4m2!3m1!1s0x6001070a259acd69:0xa927cd2e8a33f164",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "1g",
+      "name": "1G (ワンジー)",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.018674,
+      "lng": 135.793354,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/1G+(%E3%83%AF%E3%83%B3%E3%82%B8%E3%83%BC)/data=!4m2!3m1!1s0x6001091c236ca965:0x119a491f043c8f03",
+      "notes": "Reddit research: https://www.reddit.com/r/Kyoto/comments/1hgdg24/bar_recommendations/",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kazubar",
+      "name": "kazubar",
+      "category": "bar",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.005754,
+      "lng": 135.769838,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/kazubar/data=!4m2!3m1!1s0x60010894e7fabebf:0x24c7155036c99985",
+      "notes": "Research Reddit",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "naramachi",
+      "name": "Naramachi",
+      "category": "destination",
+      "city": "Nara",
+      "country": "Japan",
+      "lat": 34.676435,
+      "lng": 135.832389,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Naramachi/data=!4m2!3m1!1s0x6001398b67286423:0x88706ba287ff3ec9",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "todai-ji",
+      "name": "Tōdai-ji",
+      "category": "temple",
+      "city": "Nara",
+      "country": "Japan",
+      "lat": 34.686918,
+      "lng": 135.839253,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/T%C5%8Ddai-ji/data=!4m2!3m1!1s0x600139907a0876dd:0xf890ac3f9dd53c8f",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "nara-park",
+      "name": "Nara Park",
+      "category": "park",
+      "city": "Nara",
+      "country": "Japan",
+      "lat": 34.685401,
+      "lng": 135.843377,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Nara+Park/data=!4m2!3m1!1s0x60013996bd8c6061:0xf96cacf357447456",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "argent-shijo",
+      "name": "Argent Shijo",
+      "category": "other",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.004408,
+      "lng": 135.765812,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Argent+Shijo/data=!4m2!3m1!1s0x6001089698469387:0x39b7de3334907785",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "sekigahara",
+      "name": "Sekigahara",
+      "category": "sight",
+      "city": "Sekigahara",
+      "country": "Japan",
+      "lat": 35.341415,
+      "lng": 136.45596,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Sekigahara/data=!4m2!3m1!1s0x6003cb6d9ef6b4b1:0x3605ec1135bdca9a",
+      "notes": "Battlefield",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mount-fuji",
+      "name": "Mount Fuji",
+      "category": "sight",
+      "city": "Mount Fuji",
+      "country": "Japan",
+      "lat": 35.360556,
+      "lng": 138.727778,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mount+Fuji/data=!4m2!3m1!1s0x6019629a42fdc899:0xa6a1fcc916f3a4df",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hakone",
+      "name": "Hakone",
+      "category": "destination",
+      "city": "Hakone",
+      "country": "Japan",
+      "lat": 35.232484,
+      "lng": 139.047575,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Hakone/data=!4m2!3m1!1s0x6019a20c60b2dc7b:0x2605bd17ac977b26",
+      "notes": "Onsen Place",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "honno-ji-temple",
+      "name": "Honnō-ji Temple",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.010328,
+      "lng": 135.768285,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Honn%C5%8D-ji+Temple/data=!4m2!3m1!1s0x60010892669b1d01:0x1e8dd6d6f4093ae6",
+      "notes": "Death place of oda n.",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "himeji-castle",
+      "name": "Himeji Castle",
+      "category": "sight",
+      "city": "Himeji",
+      "country": "Japan",
+      "lat": 34.839444,
+      "lng": 134.693915,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Himeji+Castle/data=!4m2!3m1!1s0x3554e003a23324b3:0x7a4f8c2f6eba81b1",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "fushimi-inari-taisha",
+      "name": "Fushimi Inari Taisha",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 34.966838,
+      "lng": 135.772125,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Fushimi+Inari+Taisha/data=!4m2!3m1!1s0x60010f153d2e6d21:0x7b1aca1c753ae2e9",
+      "notes": "Day 4",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "enryaku-ji-temple",
+      "name": "Enryaku-ji Temple",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.074269,
+      "lng": 135.834056,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Enryaku-ji+Temple/data=!4m2!3m1!1s0x60010a1ba3cd2c33:0x905dfd00687fc995",
+      "notes": "Oda nobuyaga vs warrior monks",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "higashiyama-jisho-ji",
+      "name": "Higashiyama Jisho-ji",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.026879,
+      "lng": 135.798249,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Higashiyama+Jisho-ji/data=!4m2!3m1!1s0x600109050b426fe1:0x258aca1ce888abc9",
+      "notes": "Kyoto day 2",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "okazaki-shrine",
+      "name": "Okazaki Shrine",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.016864,
+      "lng": 135.789069,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Okazaki+Shrine/data=!4m2!3m1!1s0x600108e21740e2a9:0xc21db7b9de148653",
+      "notes": "Kyoto day 2",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kinkaku-ji",
+      "name": "Kinkaku-ji",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.038992,
+      "lng": 135.729389,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Kinkaku-ji/data=!4m2!3m1!1s0x6001a820c0eb46bd:0xee4272b1c22645f",
+      "notes": "Kyoto day 2",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "nanzen-ji",
+      "name": "Nanzen-ji",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.011379,
+      "lng": 135.793764,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Nanzen-ji/data=!4m2!3m1!1s0x600109217397fbfd:0x38b339a4c7e7004d",
+      "notes": "Kyoto Day 2",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kiyomotocho",
+      "name": "Kiyomotocho",
+      "category": "destination",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.005031,
+      "lng": 135.774986,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Kiyomotocho/data=!4m2!3m1!1s0x600108c1e46b5e6b:0x12bf57e2c27e81c5",
+      "notes": "Kyoto day 1",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "yasaka-shrine",
+      "name": "Yasaka Shrine",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 35.00365,
+      "lng": 135.77855,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Yasaka+Shrine/data=!4m2!3m1!1s0x60010879a010eca9:0xc77ac89d5a241ae9",
+      "notes": "Kyoto Day 1",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hokan-ji-temple-yasaka-pagoda",
+      "name": "Hōkan-ji Temple (Yasaka Pagoda)",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 34.998554,
+      "lng": 135.779226,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/H%C5%8Dkan-ji+Temple+(Yasaka+Pagoda)/data=!4m2!3m1!1s0x600108c560f8c421:0xb1cb2441e0223549",
+      "notes": "Day 1 Kyoto",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kiyomizu-dera",
+      "name": "Kiyomizu-dera",
+      "category": "temple",
+      "city": "Kyoto",
+      "country": "Japan",
+      "lat": 34.994835,
+      "lng": 135.784953,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Kiyomizu-dera/data=!4m2!3m1!1s0x600108d385dcfb07:0x62af658650c434ba",
+      "notes": "Day 1 Kyoto",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "antonio-b-won-pat-international-airport",
+      "name": "Antonio B. Won Pat International Airport",
+      "category": "other",
+      "city": "Guam",
+      "country": "Guam",
+      "lat": 13.486953,
+      "lng": 144.799231,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Antonio+B.+Won+Pat+International+Airport/data=!4m2!3m1!1s0x671f82b0860a153d:0x971b4be40b4e879d",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "majuro",
+      "name": "Majuro",
+      "category": "destination",
+      "city": "Majuro",
+      "country": "Marshall Islands",
+      "lat": 7.066667,
+      "lng": 171.266667,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Majuro/data=!4m2!3m1!1s0x650f1c3a45fe909d:0x2397e5094cfda54d",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "kwajalein",
+      "name": "Kwajalein",
+      "category": "destination",
+      "city": "Kwajalein",
+      "country": "Marshall Islands",
+      "lat": 8.730834,
+      "lng": 167.728089,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Kwajalein/data=!4m2!3m1!1s0x65aeba1bdf4fcbd9:0xa428045186f42c97",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "chuuk",
+      "name": "Chuuk",
+      "category": "destination",
+      "city": "Chuuk",
+      "country": "Micronesia",
+      "lat": 7.274934,
+      "lng": 151.424561,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Chuuk/data=!4m2!3m1!1s0x66678f2c7353c6a3:0xadd913be58dd8b3a",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "aqueduct-of-valens",
+      "name": "Aqueduct of Valens",
+      "category": "sight",
+      "city": "Istanbul",
+      "country": "Türkiye",
+      "lat": 41.01597,
+      "lng": 28.95555,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Aqueduct+of+Valens/data=!4m2!3m1!1s0x14cab9a7c30f71ed:0x35ba713c95477a7a",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "parque-comfama-guatape",
+      "name": "Parque Comfama Guatapé",
+      "category": "park",
+      "city": "Guatapé",
+      "country": "Colombia",
+      "lat": 6.228817,
+      "lng": -75.179051,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Parque+Comfama+Guatap%C3%A9/data=!4m2!3m1!1s0x8e441d1869439265:0x526445afa778d852",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "puerto-de-carti",
+      "name": "Puerto de Carti",
+      "category": "destination",
+      "city": "San Blas",
+      "country": "Panama",
+      "lat": 9.455008,
+      "lng": -78.978059,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Puerto+de+Carti/data=!4m2!3m1!1s0x8e54ea2b92487dd5:0x305657f4e9bc62be",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "the-garland",
+      "name": "The Garland",
+      "category": "hotel",
+      "city": "Los Angeles",
+      "country": "USA",
+      "lat": 34.149447,
+      "lng": -118.37096,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/The+Garland/data=!4m2!3m1!1s0x80c2be1817c1f19b:0x8876c97dac19591",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "earthquake-fault",
+      "name": "Earthquake Fault",
+      "category": "park",
+      "city": "Mammoth Lakes",
+      "country": "USA",
+      "lat": 37.653338,
+      "lng": -119.000504,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Earthquake+Fault/data=!4m2!3m1!1s0x80960d0a898c7f87:0x144012bc379fa41",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "inyo-craters",
+      "name": "Inyo Craters",
+      "category": "park",
+      "city": "Mammoth Lakes",
+      "country": "USA",
+      "lat": 37.69154,
+      "lng": -119.010704,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Inyo+Craters/data=!4m2!3m1!1s0x8096128d512a84b7:0x943d076d477aafb",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "hot-creek-geologic-site-hot-spring-side",
+      "name": "Hot Creek Geologic Site (Hot Spring Side)",
+      "category": "park",
+      "city": "Mammoth Lakes",
+      "country": "USA",
+      "lat": 37.691205,
+      "lng": -118.837585,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Hot+Creek+Geologic+Site+(Hot+Spring+Side)/data=!4m2!3m1!1s0x8096056d3ce94565:0x19260f7b8c1dfd3c",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mammoth-museum-at-the-hayden-cabin",
+      "name": "Mammoth Museum at the Hayden Cabin",
+      "category": "museum",
+      "city": "Mammoth Lakes",
+      "country": "USA",
+      "lat": 37.635422,
+      "lng": -118.962838,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mammoth+Museum+at+the+Hayden+Cabin/data=!4m2!3m1!1s0x80960c256ba9cc93:0x170d61e2676aff84",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mammoth-consolidated-mine",
+      "name": "Mammoth Consolidated Mine",
+      "category": "sight",
+      "city": "Mammoth Lakes",
+      "country": "USA",
+      "lat": 37.594381,
+      "lng": -118.989297,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mammoth+Consolidated+Mine/data=!4m2!3m1!1s0x80960b85c26d84ed:0x1d6e99440533a78a",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "fat-daddy-s-smokehouse",
+      "name": "Fat Daddy's Smokehouse",
+      "category": "restaurant",
+      "city": "Maui",
+      "country": "USA",
+      "lat": 20.732265,
+      "lng": -156.451932,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Fat+Daddy's+Smokehouse/data=!4m2!3m1!1s0x7954d0735bcf9ac7:0x3e576d3c1d5443ed",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "mobile-mechanic-mt",
+      "name": "Mobile Mechanic MT",
+      "category": "other",
+      "city": "Bozeman",
+      "country": "USA",
+      "lat": 45.779026,
+      "lng": -111.079205,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Mobile+Mechanic+MT/data=!4m2!3m1!1s0x53454756b5a17f6d:0x672f0f1b5d81c48d",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
+    },
+    {
+      "id": "independence-automotive-llc",
+      "name": "Independence Automotive LLC",
+      "category": "other",
+      "city": "Helena",
+      "country": "USA",
+      "lat": 46.603538,
+      "lng": -112.019709,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://www.google.com/maps/place/Independence+Automotive+LLC/data=!4m2!3m1!1s0x53435455ea18fdc5:0x2028b3a71aeac3cd",
+      "notes": "Eric is great",
+      "tags": [
+        "Want to go"
+      ],
+      "starred": false,
+      "added": "2026-11-12",
+      "imported_from": "google-saved-lists"
     }
   ]
 }
