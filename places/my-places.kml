@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>
+<Style id="cat-nightclub"><IconStyle><color>fff72f7b</color></IconStyle></Style>
 <Style id="cat-bar"><IconStyle><color>ff0c59e8</color></IconStyle></Style>
 <Style id="cat-rooftop-bar"><IconStyle><color>ff5c25c2</color></IconStyle></Style>
 <Style id="cat-restaurant"><IconStyle><color>ff6c33d6</color></IconStyle></Style>
@@ -15,6 +16,12 @@
 <Style id="cat-sight"><IconStyle><color>ff4d1ea6</color></IconStyle></Style>
 <Style id="cat-destination"><IconStyle><color>ffc74f36</color></IconStyle></Style>
 <Style id="cat-other"><IconStyle><color>ff968e86</color></IconStyle></Style>
+<Folder><name>Nightclub</name>
+<Placemark><name>APT 101 Club</name><styleUrl>#cat-nightclub</styleUrl><description>Nightclub
+3rd Floor, 233 Sukhumvit Rd, Khlong Toei Nuea, Watthana, Bangkok 10110
+Nightclub on the 3rd floor at 233 Sukhumvit Road, between Nana and Asok. Google rating 4.7 from about 1,000 reviews.
+https://maps.google.com/?cid=11694982698015530578</description><Point><coordinates>100.5590861,13.7385325,0</coordinates></Point></Placemark>
+</Folder>
 <Folder><name>Bar</name>
 <Placemark><name>TICTACTOE Bangkok</name><styleUrl>#cat-bar</styleUrl><description>Bar
 5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110

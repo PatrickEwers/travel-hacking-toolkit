@@ -2468,6 +2468,36 @@
       "google_place_id": "ChIJNz1Q9OSe4jARTFpSkCWBabw",
       "google_type": "spa",
       "google_maps_url": "https://maps.google.com/?cid=13576524550020160076"
+    },
+    {
+      "id": "apt-101-club",
+      "name": "APT 101 Club",
+      "category": "nightclub",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "3rd Floor, 233 Sukhumvit Rd, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7385325,
+      "lng": 100.5590861,
+      "gmaps_query": "APT 101 Club Bangkok",
+      "coords_precision": "exact",
+      "notes": "Nightclub on the 3rd floor at 233 Sukhumvit Road, between Nana and Asok. Google rating 4.7 from about 1,000 reviews.",
+      "tags": [
+        "nightclub",
+        "asok",
+        "nana",
+        "sukhumvit"
+      ],
+      "hours": "Tue-Sun 20:00-02:00, closed Monday, per Google.",
+      "sources": [
+        "https://www.apt101club.com/",
+        "https://maps.app.goo.gl/ENMxsLPT7hTSXDiT7"
+      ],
+      "visited": null,
+      "added": "2026-11-12",
+      "starred": false,
+      "google_place_id": "ChIJ30Iy7SOf4jARUh6OGc3sTKI",
+      "google_type": "night_club",
+      "google_maps_url": "https://maps.google.com/?cid=11694982698015530578"
     }
   ]
 }
