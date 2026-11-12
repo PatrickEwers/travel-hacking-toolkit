@@ -103,6 +103,20 @@
       ]
     },
     {
+      "id": "social-restaurant",
+      "label": "Social restaurant",
+      "color": "#226b70",
+      "icon": "🍻",
+      "keywords": [
+        "social restaurant",
+        "community mall",
+        "food hall",
+        "communal dining",
+        "the commons",
+        "seenspace"
+      ]
+    },
+    {
       "id": "street-food",
       "label": "Street food",
       "color": "#3b8f8e",
@@ -467,7 +481,7 @@
     {
       "id": "seenspace-thong-lo",
       "name": "SEENSPACE Thong Lo",
-      "category": "mall",
+      "category": "social-restaurant",
       "city": "Bangkok",
       "country": "Thailand",
       "lat": 13.733422,
@@ -487,7 +501,7 @@
     {
       "id": "the-commons-thonglor",
       "name": "The Commons Thonglor",
-      "category": "mall",
+      "category": "social-restaurant",
       "city": "Bangkok",
       "country": "Thailand",
       "lat": 13.735135,

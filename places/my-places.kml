@@ -3,6 +3,7 @@
 <Style id="cat-bar"><IconStyle><color>ff4f5114</color></IconStyle></Style>
 <Style id="cat-rooftop-bar"><IconStyle><color>ff64661d</color></IconStyle></Style>
 <Style id="cat-restaurant"><IconStyle><color>ff7c7a2a</color></IconStyle></Style>
+<Style id="cat-social-restaurant"><IconStyle><color>ff706b22</color></IconStyle></Style>
 <Style id="cat-cafe"><IconStyle><color>ffa0a355</color></IconStyle></Style>
 <Style id="cat-market"><IconStyle><color>ff84964f</color></IconStyle></Style>
 <Style id="cat-mall"><IconStyle><color>ff9dae6f</color></IconStyle></Style>
@@ -116,6 +117,14 @@ https://www.google.com/maps/place/RUTUBO%E7%87%BB%E8%A3%BD%E5%B7%A5%E5%A0%B4/dat
 1913 S Kihei Rd, Kihei, HI 96753, USA
 https://www.google.com/maps/place/Fat+Daddy's+Smokehouse/data=!4m2!3m1!1s0x7954d0735bcf9ac7:0x3e576d3c1d5443ed</description><Point><coordinates>-156.451948,20.731945,0</coordinates></Point></Placemark>
 </Folder>
+<Folder><name>Social restaurant</name>
+<Placemark><name>SEENSPACE Thong Lo</name><styleUrl>#cat-social-restaurant</styleUrl><description>Social restaurant
+251/1 Soi Thong Lo 13, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/SEENSPACE+Thong+Lo/data=!4m2!3m1!1s0x30e29e53412e0751:0x3e12ff1f98f9d393</description><Point><coordinates>100.581383,13.733422,0</coordinates></Point></Placemark>
+<Placemark><name>The Commons Thonglor</name><styleUrl>#cat-social-restaurant</styleUrl><description>Social restaurant
+335 Soi Akkhara Phatsadu, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/The+Commons+Thonglor/data=!4m2!3m1!1s0x30e29e5308ac9299:0x9f57d66e4104958d</description><Point><coordinates>100.582232,13.735135,0</coordinates></Point></Placemark>
+</Folder>
 <Folder><name>Café</name>
 <Placemark><name>GHEE GELATO BAR Silom Soi 7 (3rd floor)</name><styleUrl>#cat-cafe</styleUrl><description>Café
 55 Thanon Naradhiwat Rajanagarindra, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
@@ -137,12 +146,6 @@ https://www.google.com/maps/place/Platinum+Fashion+Mall/data=!4m2!3m1!1s0x30e29e
 <Placemark><name>St. Louis Triangle Pillows, Soi Sathorn 11</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
 12,14,16 Soi Chan 18/7, intersection 28, แขวงทุ่งวัดดอน เขตสาทร กรุงเทพมหานคร 10120, Thailand
 https://www.google.com/maps/place/%E0%B8%AB%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A1+%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B8%95%E0%B9%8C%E0%B8%AB%E0%B8%A5%E0%B8%B8%E0%B8%A2%E0%B8%AA%E0%B9%8C,+ST.+Louis+Triangle+Pillows+at+Soi+Sathorn+11/data=!4m2!3m1!1s0x30e299f1b6b0a257:0x88c5e55464767c48</description><Point><coordinates>100.527169,13.713025,0</coordinates></Point></Placemark>
-<Placemark><name>SEENSPACE Thong Lo</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
-251/1 Soi Thong Lo 13, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
-https://www.google.com/maps/place/SEENSPACE+Thong+Lo/data=!4m2!3m1!1s0x30e29e53412e0751:0x3e12ff1f98f9d393</description><Point><coordinates>100.581383,13.733422,0</coordinates></Point></Placemark>
-<Placemark><name>The Commons Thonglor</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
-335 Soi Akkhara Phatsadu, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
-https://www.google.com/maps/place/The+Commons+Thonglor/data=!4m2!3m1!1s0x30e29e5308ac9299:0x9f57d66e4104958d</description><Point><coordinates>100.582232,13.735135,0</coordinates></Point></Placemark>
 <Placemark><name>Various vintage shop</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
 Junction 511 Bang Sue Shopping Center Building Kamphaeng Phet 2 Road Chatuchak Subdistrict, Tuek Daeng 3B132, แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900, Thailand
 https://www.google.com/maps/place/Various+vintage+shop/data=!4m2!3m1!1s0x30e29d83026f8925:0x70f314a1fda6ac84</description><Point><coordinates>100.548029,13.798701,0</coordinates></Point></Placemark>
