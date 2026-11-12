@@ -293,6 +293,10 @@ https://www.google.com/maps/place/Sheraton+Grand+Los+Angeles/data=!4m2!3m1!1s0x8
 <Placemark><name>The Garland</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
 4222 Vineland Ave, North Hollywood, CA 91602, USA
 https://www.google.com/maps/place/The+Garland/data=!4m2!3m1!1s0x80c2be1817c1f19b:0x8876c97dac19591</description><Point><coordinates>-118.369656,34.144949,0</coordinates></Point></Placemark>
+<Placemark><name>14 Place Sukhumvit Suites</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+14/2 Soi Phraek Samakkhi (off Sukhumvit Soi 14), Khlong Toei, Bangkok 10110
+Serviced-suite hotel off Sukhumvit Soi 14, a short walk from Asok BTS / Sukhumvit MRT. Google rating 4.4 from 260 reviews. The shared link had a 4-night stay from 27 Nov 2026 selected.
+https://maps.google.com/?cid=17766315324205191373</description><Point><coordinates>100.5596238,13.7365316,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Activity</name>
 <Placemark><name>Apnea Total Freediving Organisation</name><styleUrl>#cat-activity</styleUrl><description>Activity
