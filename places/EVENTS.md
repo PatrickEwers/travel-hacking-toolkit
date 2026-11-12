@@ -24,11 +24,14 @@ goal it genuinely serves. **Score = number of goals served (1 to 6).** Don't pad
 1. **Read** `data/events.json`: trip dates, existing events, `verified` dates.
 2. **Search** each type for the window from today (or trip start) to trip end. Run the six searches in
    parallel. Sources that work for Bangkok:
-   - meetups: meetup.com, lu.ma/bangkok, eventbrite.com, createwith.com/cities/bangkok, allai.events
+   - meetups: meetup.com, luma.com/bangkok, eventbrite.com, createwith.com/cities/bangkok, allai.events
    - tickets and nightlife: ra.co, ticketmelon.com, eventpop.me, megatix.in.th, technoairlines.com, siam2nite.com
    - editorial: Time Out Bangkok, BK Magazine, Bangkok Post, nationthailand.com
    - talks and culture: thesiamsociety.org, neilsonhayslibrary.org, fccthai.com, bacc.or.th, mocabangkok.com
    - sport: Bangkok Runners / Lumpini Running Club on Meetup, reclub.co, thai.run, rajadamnern.com
+   Fetch pages with curl (the environment allows these hosts). Still closed to this container:
+   ra.co and bacc.or.th (site-level 403), Facebook (login). Facebook events need Claude in Chrome
+   in a session on the owner's computer; merge its JSON output the same way.
 3. **Never invent.** Every event needs a `url` you saw it on. Unknown time, price or venue stays null.
    `confidence: "confirmed"` only when a listing for that exact date was seen; recurring meetups whose
    in-window dates aren't listed yet are `"likely"`. Sold-out or registration-closed events: leave out,

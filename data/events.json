@@ -83,6 +83,30 @@
   ],
   "events": [
     {
+      "id": "sabai-run-club-weekend-community-run",
+      "title": "Sabai Run Club - weekend community run",
+      "type": "sports",
+      "goals": [
+        "sports",
+        "travelers"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ]
+      },
+      "venue": "Benjakitti Park area (cafe near QSNCC)",
+      "area": "Khlong Toei",
+      "price": "Free",
+      "organizer": "Sabai Run Club",
+      "url": "https://luma.com/sabairunclub",
+      "notes": "Community run club, active on Luma with mostly Saturday-morning events; no fixed weekly time or meeting point is published, so check the club page for that week.",
+      "confidence": "likely",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
       "id": "sterling-24-pickleball-in-bangkok-open-play",
       "title": "Sterling 24 PickleBall'in Bangkok - open play",
       "type": "sports",
@@ -106,27 +130,6 @@
       "organizer": "Sterling 24 PickleBall'in Bangkok",
       "url": "https://reclub.co/clubs/@pickleballin-bangkok",
       "notes": "Reclub club with 4,852 members and 869 activities; upcoming weekly open play at Sterling Sport & Wellness includes Thu 14:00 Afternoon Open Play (400 THB), Fri 15:00 Open Play (400 THB), Fri 20:00 Open Play Social, Sun 12:00 Advanced Open Play 3.0+, Sun 20:00 Open Play+ (450 THB) and Mon 10:00 Open Play, each 2 hours. Sessions also include drills and DUPR mini tournaments; join the specific meet in Reclub, as some fill up and waitlist.",
-      "confidence": "likely",
-      "added": "2026-11-12",
-      "verified": "2026-11-12"
-    },
-    {
-      "id": "wat-mahathat-daily-english-vipassana-meditation-classes-sect",
-      "title": "Wat Mahathat - daily English vipassana meditation classes (Section 5)",
-      "type": "mind",
-      "goals": [
-        "mind"
-      ],
-      "recurring": {
-        "freq": "daily"
-      },
-      "venue": "Wat Mahathat Yuwaratrangsarit, Section 5 (International Buddhist Meditation Centre)",
-      "area": "Rattanakosin / Tha Phra Chan",
-      "address": "3 Maha Rat Rd, Phra Nakhon, Bangkok",
-      "price": "Donation",
-      "organizer": "Wat Mahathat",
-      "url": "https://templestairway.com/temples/wat-mahathat",
-      "notes": "Drop-in guided vipassana with English-speaking monks at the International Buddhist Meditation Centre near the Grand Palace, donation-based; third-party listings show three sessions a day through late 2026. Exact session times were not seen - confirm on site; wear modest (ideally white) clothing.",
       "confidence": "likely",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -160,26 +163,24 @@
       "verified": "2026-11-12"
     },
     {
-      "id": "sabai-run-club-weekend-community-run",
-      "title": "Sabai Run Club - weekend community run",
-      "type": "sports",
+      "id": "wat-mahathat-daily-english-vipassana-meditation-classes-sect",
+      "title": "Wat Mahathat - daily English vipassana meditation classes (Section 5)",
+      "type": "mind",
       "goals": [
-        "sports",
-        "travelers"
+        "mind"
       ],
       "recurring": {
-        "freq": "weekly",
-        "weekdays": [
-          "sun"
-        ]
+        "freq": "daily"
       },
-      "time": "07:15",
-      "venue": "Benjakitti Park area (cafe near QSNCC)",
-      "area": "Khlong Toei",
-      "price": "Free",
-      "organizer": "Sabai Run Club",
-      "url": "https://prommer.net/en/training/running/clubs/bangkok/",
-      "notes": "Relaxed free community run; the June-2026 guide lists Sunday 07:15 near Queen Sirikit Convention Center/Benjakitti, while Time Out describes Saturday runs rotating between parks - so the day is not settled. The club also posts one-off events on Luma (luma.com/h3jy37nm); check its Instagram before going.",
+      "time": "08:00",
+      "end_time": "10:30",
+      "venue": "Wat Mahathat Yuwaratrangsarit, Vipassana Meditation Center (Section 5)",
+      "area": "Rattanakosin / Tha Phra Chan",
+      "address": "3 Maha Rat Road, Phra Nakhon, Bangkok 10200",
+      "price": "Free (donation-based)",
+      "organizer": "Wat Mahathat",
+      "url": "https://templestairway.com/temples/wat-mahathat",
+      "notes": "Temple Stairway lists two guided English sessions (not three): morning 08:00-10:30 and afternoon 13:00-15:30, offered 'almost every day', day practice only, donation-based, bookable per session on that site. Legs and shoulders must be covered (white welcome, not mandatory); no lunch provided; the timetable can vary with teacher availability.",
       "confidence": "likely",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -468,6 +469,34 @@
       "verified": "2026-11-12"
     },
     {
+      "id": "rajadamnern-world-series-rws-saturday-night-muay-thai",
+      "title": "Rajadamnern World Series (RWS) - Saturday night Muay Thai",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "sat"
+        ],
+        "until": "2027-03-27"
+      },
+      "time": "18:00",
+      "venue": "Rajadamnern Stadium",
+      "area": "Old Town (Ratchadamnoen Nok)",
+      "address": "1 Ratchadamnoen Nok Rd, Pom Prap Sattru Phai, Bangkok",
+      "lat": 13.761,
+      "lng": 100.5087,
+      "price": "roughly 1,000-4,500 THB depending on tier and card (guide figure)",
+      "organizer": "Rajadamnern Stadium / RWS",
+      "url": "https://rajadamnern.com/tickets/",
+      "notes": "Official ticket page lists RWS every Saturday with gates at 18:00 (first-bout time not shown), 7 bouts of 3 rounds; dated cards seen for 21 and 28 Nov, 5, 12, 19 and 26 Dec 2026 (26 Dec is billed 'Rajadamnern 81 Anniversary'), 2 and 9 Jan 2027, and on weekly to 27 Mar 2027. Prices were not shown on the pages opened; tickets are sold via Ticketmelon.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
       "id": "meet-play-weekly-social-games-icebreakers",
       "title": "Weekly Meet & Play Night (social games & icebreakers)",
       "type": "travelers",
@@ -581,6 +610,34 @@
       "verified": "2026-11-12"
     },
     {
+      "id": "one-lumpinee-one-friday-fights-muay-thai",
+      "title": "ONE Lumpinee / ONE Friday Fights (Muay Thai)",
+      "type": "sports",
+      "goals": [
+        "sports"
+      ],
+      "recurring": {
+        "freq": "weekly",
+        "weekdays": [
+          "fri"
+        ],
+        "until": "2026-12-18"
+      },
+      "time": "18:30",
+      "venue": "Lumpinee Boxing Stadium",
+      "area": "Ram Intra",
+      "address": "6 Ram Inthra Rd, Anusawari, Bang Khen, Bangkok 10220",
+      "lat": 13.867,
+      "lng": 100.609,
+      "price": "roughly 1,000 THB grandstand up to several times that ringside (guide figure)",
+      "organizer": "ONE Championship",
+      "url": "https://www.onefc.com/events/",
+      "notes": "ONE's official schedule lists ONE Friday Fights 179-183 (each paired with 'The Inner Circle') at Lumpinee Stadium on 20 and 27 Nov and 4, 11 and 18 Dec 2026, starting 18:30 Bangkok time; no Friday card is listed after 18 Dec. ONE Fight Night 50 is also listed at Lumpinee on Sat 19 Dec at 09:00; ticket prices were not on the page (sold via Thai Ticket Major).",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
       "id": "ai-beers-every-2-3-weeks-check-the-date",
       "title": "AI & Beers (every 2-3 weeks: check the date)",
       "type": "builders",
@@ -598,9 +655,10 @@
       "end_time": "21:00",
       "venue": "W District",
       "area": "Phra Khanong",
+      "address": "W District, Sukhumvit Rd, Phra Khanong Nuea, Watthana, Bangkok",
       "organizer": "AI & Beers / The MarTech Collective",
-      "url": "https://createwith.com/cities/bangkok",
-      "notes": "Presentation-free evening of AI builders and users over beers. Not strictly weekly: recent editions were Thursdays 24 Sep, 15 Oct, 29 Oct and 12 Nov 2026 (#11), i.e. every 2-3 weeks; #12 was not yet listed, so check the group's WhatsApp/listing for the next date.",
+      "url": "https://www.meetup.com/ai-and-beers-bangkok/",
+      "notes": "Presentation-free evening of AI builders and users over beers, 19:00-21:00 at W District. Not weekly: the Meetup group shows Thursdays 3 Sep, 24 Sep, 15 Oct, 29 Oct and 12 Nov 2026 (#11), i.e. every 2-3 weeks; no later date (#12) was listed on 12 Nov, so check the Meetup group for the next one.",
       "confidence": "likely",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -661,33 +719,6 @@
       "verified": "2026-11-12"
     },
     {
-      "id": "rajadamnern-world-series-rws-saturday-night-muay-thai",
-      "title": "Rajadamnern World Series (RWS) - Saturday night Muay Thai",
-      "type": "sports",
-      "goals": [
-        "sports"
-      ],
-      "recurring": {
-        "freq": "weekly",
-        "weekdays": [
-          "sat"
-        ]
-      },
-      "time": "19:00",
-      "venue": "Rajadamnern Stadium",
-      "area": "Old Town (Ratchadamnoen Nok)",
-      "address": "1 Ratchadamnoen Nok Rd, Pom Prap Sattru Phai, Bangkok",
-      "lat": 13.761,
-      "lng": 100.5087,
-      "price": "roughly 1,000-4,500 THB depending on tier and card (guide figure)",
-      "organizer": "Rajadamnern Stadium / RWS",
-      "url": "https://www.thaiholidayguide.com/watch-muay-thai-fights-thailand/",
-      "notes": "A guide dated 8 Oct 2026 says Rajadamnern Stadium runs fights every night, with Saturday being the Rajadamnern World Series (three-round bouts, open scoring, the most produced night) and gates at 18:00 on Saturdays. No dated Nov/Dec 2026 card was seen and the official site rajadamnern.com could not be opened, so the 19:00 start is unverified - check the week's card before going.",
-      "confidence": "likely",
-      "added": "2026-11-12",
-      "verified": "2026-11-12"
-    },
-    {
       "id": "social-games-night-at-coucou",
       "title": "Social & Games Night at Coucou",
       "type": "travelers",
@@ -741,34 +772,6 @@
       "organizer": "Bangkok Expat, Digital Nomads and Thai People Meetup",
       "url": "https://www.meetup.com/bangkok-digital-nomads-meetup/events/317343928/",
       "notes": "Casual Sunday pub social, 19:30-21:30, upstairs near the pool table at Robin Hood Pub by EmQuartier / BTS Phrom Phong; Thai people are explicitly welcomed. Events are posted one week at a time (25 Oct, 1, 8 and 15 Nov 2026 are listed), so no in-window date was visible yet; no fee is mentioned on the page.",
-      "confidence": "likely",
-      "added": "2026-11-12",
-      "verified": "2026-11-12"
-    },
-    {
-      "id": "one-lumpinee-one-friday-fights-muay-thai",
-      "title": "ONE Lumpinee / ONE Friday Fights (Muay Thai)",
-      "type": "sports",
-      "goals": [
-        "sports"
-      ],
-      "recurring": {
-        "freq": "weekly",
-        "weekdays": [
-          "fri"
-        ],
-        "until": "2026-12-18"
-      },
-      "time": "19:30",
-      "venue": "Lumpinee Boxing Stadium",
-      "area": "Ram Intra",
-      "address": "6 Ram Inthra Rd, Anusawari, Bang Khen, Bangkok 10220",
-      "lat": 13.867,
-      "lng": 100.609,
-      "price": "roughly 1,000 THB grandstand up to several times that ringside (guide figure)",
-      "organizer": "ONE Championship",
-      "url": "https://www.thaiholidayguide.com/watch-muay-thai-fights-thailand/",
-      "notes": "A guide dated 8 Oct 2026 says Friday nights at Lumpinee Boxing Stadium belong to ONE Championship (Muay Thai, kickboxing and MMA) with an early-evening start, about 30 minutes' drive north of downtown. The specific card dates (20 Nov to 18 Dec) and the 19:30 start came from a ticket reseller page that could not be opened, so they are unverified - check the week's card first.",
       "confidence": "likely",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -1041,8 +1044,8 @@
       "price": "Free",
       "organizer": "Galleries' Nights Bangkok",
       "url": "https://www.galleriesnights.com/",
-      "notes": "Two evenings when 100+ galleries and art spaces across Bangkok stay open late with openings and performances; free, and a very social way to meet the creative scene. Each night typically covers different districts - see the official map.",
-      "confidence": "likely",
+      "notes": "Official site: Galleries' Nights Bangkok on 20-21 November 2026, 100+ galleries and 200+ artists, free admission. Friday 20 Nov covers Silom, Sathorn and Riverside; Saturday 21 Nov covers Ari, Pathumwan and Sukhumvit. The 'New Horizons' theme and the 17:00 start were not shown on the page.",
+      "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
     },
@@ -1292,11 +1295,11 @@
       "address": "60 Ratchadaphisek Rd, Khlong Toei, Bangkok",
       "lat": 13.7236,
       "lng": 100.5591,
-      "price": "Early bird from $19",
+      "price": "Early bird $29 (full price $129)",
       "organizer": "Binance / Binance TH",
       "url": "https://www.binanceblockchainweek.com/event/Bangkok2026/Home-1",
-      "notes": "Large two-day crypto conference (CZ, Arthur Hayes, BlackRock, Visa among announced speakers) with lots of side events and founders in town. Early-bird tickets were advertised from $19; one third-party calendar gave different dates, but Binance's own pages say 28-29 Nov.",
-      "confidence": "likely",
+      "notes": "Official page: Binance Blockchain Week 2026 Asia edition at QSNCC on 28-29 November, theme EVOLVE, in partnership with Binance TH. Limited early-bird tickets were on sale at $29 against a full price of $129; the speaker list is on a separate page that was not checked.",
+      "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
     },
@@ -1313,8 +1316,8 @@
       "address": "1035 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330",
       "organizer": "TEDxThonglor",
       "url": "https://www.ted.com/tedx/events/68755",
-      "notes": "Public TEDx event; TED's listing confirms the date and that it is open to the public. Venue name, time and ticket price were not shown.",
-      "confidence": "likely",
+      "notes": "TED's listing: TEDxThonglor Play on 28 November 2026 in Bangkok, format TEDxPlay, open to the public, organiser address 1035 Phloen Chit Rd. Venue name, start time and ticket price are not shown.",
+      "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
     },
@@ -1333,7 +1336,7 @@
       "price": "approx. 1,500-1,800 THB for the marathon (sold out per one guide)",
       "organizer": "Tourism Authority of Thailand",
       "url": "https://www.timeout.com/bangkok/news/the-amazing-thailand-marathon-061826",
-      "notes": "Time Out (18 Jun 2026) puts the race over two days at Sanam Luang: half marathon on Sat 28 Nov, then the full marathon, 10 km mini and 4.5 km family run on Sun 29 Nov, on closed roads through central Bangkok. Start times, fees and the reported sell-out were not on the page (sign-ups opened 1 July), so the listed start time and price are unverified.",
+      "notes": "Time Out (18 Jun 2026) puts the race over two days at Sanam Luang: half marathon on Sat 28 Nov, then the full marathon, 10 km mini and 4.5 km family run on Sun 29 Nov, on closed roads through central Bangkok. Start times, fees and the reported sell-out are not on the page (sign-ups opened 1 July) and the official site could not be opened, so the listed start time and price are unverified.",
       "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -1357,8 +1360,8 @@
       "lng": 100.5282,
       "organizer": "Right Shift",
       "url": "https://www.share2trade.com/news/56397",
-      "notes": "Two days of talks, panels and workshops from Thailand's Bitcoin community (Right Shift), sessions in Thai and English. Paid event; dates and venue come from the organizer's press release, agenda and price from aggregators, so check the official site.",
-      "confidence": "likely",
+      "notes": "Right Shift's announcement (16 Jun 2026) gives 28-29 November 2026 at Samyan Mitrtown for the third Bitcoin Thailand Conference, built around five content pillars with Thai Bitcoin speakers. The article does not state session hours, language or ticket price, so the 09:00-18:00 times are unverified.",
+      "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
     },
@@ -1697,11 +1700,12 @@
       ],
       "date": "2026-12-29",
       "end_date": "2027-01-03",
-      "venue": "Multiple venues in Bangkok (not listed)",
+      "time": "19:30",
+      "venue": "Paragon Hall (Siam Paragon); also The River Club and NEX Hall",
       "area": "Siam",
       "organizer": "White Party Bangkok",
-      "url": "https://www.technoairlines.com/festival/white-party-bangkok-thailand-2026",
-      "notes": "An aggregator festival page (updated Oct 2026) lists White Party Bangkok's tenth anniversary from 29 December 2026 to 3 January 2027: six events across venues in Bangkok, with 40,000+ people from 130+ countries expected. Venues and prices are not given; tickets (single events and festival passes) are sold on whitepartybangkok.com, which could not be opened to check.",
+      "url": "https://whitepartybangkok.com/",
+      "notes": "Official site: 10th-anniversary festival of 6 events from 29 Dec 2026 to 3 Jan 2027; the four night parties are at Paragon Hall with doors at 19:30 (arrive before 21:00, especially on New Year's Eve), the Jock Ball pool party is at The River Club 15:00-midnight and the Beef Ball closing party at NEX Hall from 21:00. Tickets are sold via Eventpop (All Night Parties passes in GA/VIP, single nights available); prices and per-event dates were not shown on the pages opened.",
       "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
@@ -1721,8 +1725,8 @@
       "lng": 100.5105,
       "organizer": "ICONSIAM & Tourism Authority of Thailand",
       "url": "https://www.tagthai.com/explore/events/p/iconsiamcountdown",
-      "notes": "Riverside New Year's Eve concerts and the Chao Phraya fireworks at ICONSIAM River Park, co-run with the Tourism Authority of Thailand; one listing gives 29-31 Dec 2026 while others mention only 31 Dec. The fireworks are visible free from the riverbank; arrive very early because the area fills up and gets closed off. One listing says 29-31 Dec; others 31 Dec only.",
-      "confidence": "likely",
+      "notes": "TAGTHAi's listing gives 31 December 2026 only (no 29-31 Dec range) and says 'Event details for 2026 will be released soon'; the organisers named are TAT, Bangkok Metropolitan Administration, the Marine Department and the Thai Chamber of Commerce. The rest of the page is last year's ticket promotion, so line-up, timings and access rules are not yet published.",
+      "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"
     },
@@ -1741,7 +1745,7 @@
       "lng": 100.5393,
       "organizer": "Central Pattana",
       "url": "https://www.thaipr.net/travel/3777488",
-      "notes": "Bangkok's biggest street countdown ('Times Square of Asia') with live concerts and DJs, announced by Central Pattana in a 12 Nov 2026 press release; past editions were free to enter. Full line-up and timings were not yet confirmed - expect very heavy crowds and early access closures.",
+      "notes": "Central Pattana press release dated 11 Nov 2026 announces centralwOrld Bangkok Countdown 2027 at Ratchaprasong ('The Original Countdown', 'Times Square of Asia') with artists and a light-and-sound production, alongside Thailand Countdown 2027 at Central malls nationwide. The release states no date, start time, line-up or entry terms.",
       "confidence": "likely",
       "added": "2026-11-12",
       "verified": "2026-11-12"
