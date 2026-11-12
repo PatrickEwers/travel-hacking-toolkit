@@ -7,9 +7,9 @@
       "city": "Bangkok",
       "country": "Thailand",
       "start": "2026-11-19",
-      "end": "2027-01-12",
+      "end": "2027-01-20",
       "timezone": "Asia/Bangkok",
-      "source": "Google Calendar: 'Patrick in Bangkok'"
+      "source": "Google Calendar: 'Patrick in Bangkok' (Nov 19 - Jan 12); window extended to Jan 20 on the owner's request"
     },
     "scoring": "score = number of distinct goal ids in goals[] (0-6). Each type below is one goal; an event's type is the goal it serves best, goals[] lists every goal it genuinely serves.",
     "schema": {
@@ -866,7 +866,7 @@
         "mind"
       ],
       "date": "2026-11-19",
-      "end_date": "2027-01-12",
+      "end_date": "2027-02-28",
       "venue": "11 main venues across Bangkok (incl. Wat Arun, Wat Pho, BACC, One Bangkok and malls around Siam)",
       "price": "Free biennale admission (individual venue admission rules and hours apply)",
       "organizer": "Bangkok Art Biennale Foundation",
@@ -905,7 +905,7 @@
         "mind"
       ],
       "date": "2026-11-19",
-      "end_date": "2027-01-12",
+      "end_date": "2027-01-31",
       "venue": "Four Seasons Hotel Bangkok ART Space by MOCA BANGKOK",
       "area": "Charoen Krung / Riverside",
       "organizer": "MOCA Bangkok / Four Seasons",
@@ -1769,6 +1769,29 @@
       "organizer": "Bangkok Island",
       "url": "https://megatix.in.th/events/nye-boat-party",
       "notes": "Megatix lists the NYE boat party for Thu 31 Dec 2026: check-in 20:00, departure 21:00, return 01:00, a 4-hour Chao Phraya cruise with DJs, light buffet and a welcome drink, timed for the midnight fireworks; 20+ only. The page says boarding is at Ratchawong Pier while the venue block shows Rama 3 Soi 64, so confirm the pier; the organiser expects it to sell out.",
+      "confidence": "confirmed",
+      "added": "2026-11-12",
+      "verified": "2026-11-12"
+    },
+    {
+      "id": "french-tech-talk-january-2027-2027-01-05",
+      "title": "French Tech Talk - January 2027",
+      "type": "builders",
+      "goals": [
+        "builders",
+        "mind",
+        "travelers"
+      ],
+      "date": "2027-01-05",
+      "time": "18:00",
+      "end_time": "21:00",
+      "venue": "Common Ground G Tower",
+      "area": "Rama 9",
+      "address": "Common Ground, G Tower (Rama 9)",
+      "price": "Free (register; membership is free)",
+      "organizer": "La French Tech Bangkok",
+      "url": "https://french-tech-bangkok.com/events/french-tech-talk-january-2027-topic-coming-soon",
+      "notes": "Monthly talk with live Q&A and networking with founders, investors and tech people from the French-Thai ecosystem. Speaker and topic are not announced yet. The page's street address reads Sukhumvit 31 while the text says G Tower, Rama 9: check the venue when you register.",
       "confidence": "confirmed",
       "added": "2026-11-12",
       "verified": "2026-11-12"

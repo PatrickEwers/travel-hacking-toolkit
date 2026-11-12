@@ -1,7 +1,7 @@
 # Walkabout events routine
 
 Finds events for the trip in `data/events.json → _meta.trip` (currently Bangkok, 2026-11-19 to
-2027-01-12) and keeps the Events tab current. Run it weekly while the trip is on; new listings for
+2027-01-20) and keeps the Events tab current. Run it weekly while the trip is on; new listings for
 meetups and club nights usually appear only 1 to 3 weeks ahead.
 
 ## Goals and types
@@ -53,7 +53,7 @@ goal it genuinely serves. **Score = number of goals served (1 to 6).** Don't pad
 - `data/events.json` source of truth (trip, types, events)
 - `places/build_events.py` validate, merge, build
 - `places/events-data.js` generated; loaded by the app
-- `places/events.js`, `places/events.css` the Events tab (calendar, list, type filter, detail sheet)
+- `places/events.js`, `places/events.css` the Events tab (day / week / month calendar, list, one-off vs recurring and type filters, detail sheet)
 - `places/app.html` only carries the nav button and the `events.js` script tag
 
 Deep link: `index.html#events`.

@@ -104,7 +104,7 @@ Google has **no public API to write to a user's Google Maps saved lists or My Ma
 
 ## Events tab
 
-Walkabout also has an Events tab (month calendar + list, filterable by type, each event scored by how
+Walkabout also has an Events tab (day / week / month calendar + list, filterable by type and by one-off vs recurring, each event scored by how
 many of the owner's six goals it serves). Data lives in `data/events.json`; the code is separate from
 the places app (`places/events.js`, `places/events.css`, `places/build_events.py`). To find or refresh
 events ("find events in Bangkok", "what's on this week", "update the events"), follow
