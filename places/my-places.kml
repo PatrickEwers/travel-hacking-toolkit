@@ -384,5 +384,9 @@ https://www.google.com/maps/place/Mobile+Mechanic+MT/data=!4m2!3m1!1s0x53454756b
 1825 N Montana Ave, Helena, MT 59601, USA
 Eric is great
 https://www.google.com/maps/place/Independence+Automotive+LLC/data=!4m2!3m1!1s0x53435455ea18fdc5:0x2028b3a71aeac3cd</description><Point><coordinates>-112.01992,46.603475,0</coordinates></Point></Placemark>
+<Placemark><name>Pinned spot, Sukhumvit Soi 23</name><styleUrl>#cat-other</styleUrl><description>Other
+Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110 (dropped pin)
+Added from a shared Google Maps dropped pin, which carries coordinates but no place name. Within about 20 m: Essen, Pork Soup &amp; Rice Sukhumvit 23, CRAFT (Sukhumvit 23), The Clubhouse sports bar. Rename and recategorise once you say which one it is.
+https://www.google.com/maps/search/?api=1&amp;query=13.738327,100.563043</description><Point><coordinates>100.563043,13.738327,0</coordinates></Point></Placemark>
 </Folder>
 </Document></kml>
