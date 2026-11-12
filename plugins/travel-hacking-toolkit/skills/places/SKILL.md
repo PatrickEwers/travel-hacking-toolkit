@@ -33,6 +33,14 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
 5. **Reply** with a one-row table (name, category, address, coords precision) and the Google Maps
    share link: `https://www.google.com/maps/search/?api=1&query=<url-encoded gmaps_query>`.
 
+## Exact pins (Google Places)
+
+After adding or importing places, run `python3 places/resolve_google_places.py` then
+`python3 places/build.py`. It needs the Places API key (network secret for places.googleapis.com,
+header `X-Goog-Api-Key`). It sets exact `lat`/`lng`, `google_place_id`, `google_type` (use it to
+check your category) and fills a missing `address`. Coordinates decoded from list URLs alone can be
+kilometres off: never leave them unresolved when the key is available.
+
 ## Categories
 
 `data/places.json → categories[]` is the scheme: `id`, `label`, `color` (map pin color), `icon`
