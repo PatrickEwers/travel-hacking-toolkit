@@ -2377,29 +2377,37 @@
       "google_maps_url": "https://maps.google.com/?cid=9235910412369035555"
     },
     {
-      "id": "pinned-spot-sukhumvit-23",
-      "name": "Pinned spot, Sukhumvit Soi 23",
-      "category": "other",
+      "id": "craft-sukhumvit-23",
+      "name": "CRAFT (Sukhumvit 23)",
+      "category": "bar",
       "city": "Bangkok",
       "country": "Thailand",
-      "address": "Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110 (dropped pin)",
-      "lat": 13.738327,
-      "lng": 100.563043,
+      "address": "16 Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7382489,
+      "lng": 100.5631244,
+      "gmaps_query": "CRAFT Sukhumvit 23 Bangkok",
       "coords_precision": "exact",
-      "notes": "Added from a shared Google Maps dropped pin, which carries coordinates but no place name. Within about 20 m: Essen, Pork Soup & Rice Sukhumvit 23, CRAFT (Sukhumvit 23), The Clubhouse sports bar. Rename and recategorise once you say which one it is.",
+      "notes": "Craft-beer garden on Sukhumvit Soi 23, a short walk from Soi Cowboy and Asok BTS / Sukhumvit MRT. Google rating 4.1 from about 1,600 reviews.",
       "tags": [
+        "bar",
+        "craft-beer",
+        "beer-garden",
         "soi-23",
         "asok",
-        "sukhumvit",
-        "dropped-pin"
+        "sukhumvit"
       ],
+      "hours": "Mon-Thu 15:00-00:00, Fri 15:00-01:00, Sat 12:00-01:00, Sun 12:00-00:00 per Google.",
       "sources": [
+        "https://craft23.com/",
+        "https://maps.app.goo.gl/7MKW7SD2yuDcWaXQ7",
         "https://maps.app.goo.gl/9HyQZRBLXLafniep6"
       ],
       "visited": null,
       "added": "2026-11-12",
       "starred": false,
-      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=13.738327,100.563043"
+      "google_place_id": "ChIJOX58TeOe4jARjRv2PZkv3jo",
+      "google_type": "beer_garden",
+      "google_maps_url": "https://maps.google.com/?cid=4241880234245626765"
     }
   ]
 }
