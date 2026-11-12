@@ -1,15 +1,15 @@
 ---
 name: places
-description: Personal places database with a location-aware map. Add a place by just its name ("add TICTACTOE", "I went to X, save it", "log this bar"), auto-identify it via web search, write it to data/places.json, rebuild the Bangkok/world map, and produce Google Maps share links plus KML/CSV for Google My Maps. Use for "my places", "save this spot", "add a place", "places map", "share location", "send someone the Google Maps link".
+description: Walkabout, the personal places database with a location-aware mobile map. Add a place by just its name ("add TICTACTOE", "I went to X, save it", "log this bar"), auto-identify it via web search, write it to data/places.json, rebuild the Bangkok/world map, and produce Google Maps share links plus KML/CSV for Google My Maps. Use for "my places", "save this spot", "add a place", "places map", "share location", "send someone the Google Maps link".
 category: destinations
 summary: Saved places database, location-aware map, Google Maps share links, My Maps export.
 api_key: None (free)
 license: MIT
 ---
 
-# Places
+# Places (Walkabout)
 
-The user's own database of places they've been or want to go. Lives in `data/places.json`.
+Walkabout is the app name. The user's own database of places they've been or want to go. Lives in `data/places.json`.
 `places/build.py` turns it into `places/index.html` (a single-file map app), `places/my-places.kml`
 and `places/my-places.csv`.
 

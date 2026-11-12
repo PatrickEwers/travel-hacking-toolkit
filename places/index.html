@@ -2,8 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>My Places</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Walkabout</title>
+<meta name="description" content="Walkabout: your places on a map, with a heads-up when you're standing at one.">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Walkabout">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
@@ -60,6 +69,46 @@
   .litem .meta { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .ltools { display:flex; gap:6px; padding:8px 14px; align-items:center; }
   .empty { padding:30px 14px; color:var(--muted); text-align:center; }
+  /* ---------- Walkabout mobile layout ---------- */
+  :root { --brand:#0f766e; --nav-h:58px; --safe-b:env(safe-area-inset-bottom, 0px); --safe-t:env(safe-area-inset-top, 0px); }
+  html, body { overscroll-behavior:none; -webkit-tap-highlight-color:transparent; font-size:16px; }
+  body { position:fixed; inset:0; overflow:hidden; }
+  button { min-height:40px; touch-action:manipulation; }
+  .top { padding:calc(var(--safe-t) + 8px) 12px 0; }
+  .bar { align-items:center; }
+  .bar input { font-size:16px; height:46px; padding:0 16px; border-radius:23px; box-shadow:0 2px 10px rgba(0,0,0,.15); border-color:transparent; }
+  .bar #go { width:46px; height:46px; padding:0; border-radius:50%; font-size:24px; line-height:1; box-shadow:0 2px 10px rgba(0,0,0,.2); background:var(--brand); border-color:var(--brand); }
+  .chips { padding:8px 0 6px; margin:0 -12px; padding-left:12px; padding-right:12px; }
+  .chip { min-height:34px; font-size:14px; padding:6px 12px; box-shadow:0 1px 6px rgba(0,0,0,.12); border-color:transparent; white-space:nowrap; flex:none; }
+  .chip.on { background:var(--fg); color:var(--bg); box-shadow:none; }
+  .nav { position:fixed; left:0; right:0; bottom:0; z-index:1003; height:calc(var(--nav-h) + var(--safe-b)); padding-bottom:var(--safe-b);
+         display:grid; grid-template-columns:repeat(4, 1fr); background:var(--bg); border-top:1px solid var(--line); }
+  .nav button { border:0; border-radius:0; background:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+                font-size:20px; color:var(--muted); padding:4px 0; min-height:0; }
+  .nav button span { font-size:11px; font-weight:500; }
+  .nav button.on { color:var(--brand); }
+  .nav button.tracking { color:var(--accent); }
+  .sheet { left:0; right:0; bottom:calc(var(--nav-h) + var(--safe-b)); border-radius:18px 18px 0 0; border-width:1px 0 0; max-height:68%;
+           padding:22px 16px 16px; box-shadow:0 -4px 20px rgba(0,0,0,.18); overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
+  .sheet::before { content:""; position:absolute; top:7px; left:50%; width:38px; height:5px; margin-left:-19px; border-radius:3px; background:var(--line); }
+  .sheet .x { position:absolute; top:10px; right:10px; width:32px; height:32px; min-height:0; padding:0; border-radius:50%; border:0; background:var(--bg2); color:var(--muted); font-size:15px; }
+  .sheet h2 { font-size:20px; padding-right:36px; }
+  .sheet .row button, .sheet .row a button { min-height:44px; padding:10px 14px; font-size:15px; }
+  .sheet .row a { flex:1 1 auto; } .sheet .row a button { width:100%; }
+  .star { min-width:44px; min-height:44px; font-size:26px; }
+  label input, label select, label textarea, select.inline { font-size:16px; min-height:44px; }
+  #list { bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
+  .litem { min-height:64px; padding:10px 8px 10px 16px; }
+  .litem .ic { width:38px; height:38px; font-size:18px; }
+  .lbrand { padding:4px 16px 0; font-size:28px; font-weight:800; letter-spacing:-.02em; color:var(--brand); }
+  .leaflet-bottom { bottom:calc(var(--nav-h) + var(--safe-b)); }
+  .leaflet-control-attribution { font-size:10px; }
+  .menu button { display:flex; width:100%; align-items:center; gap:12px; min-height:52px; border:0; border-bottom:1px solid var(--line); border-radius:0; background:none; font-size:16px; text-align:left; padding:0 4px; }
+  .menu button:last-child { border-bottom:0; }
+  @media (min-width:720px) {
+    .sheet { left:12px; right:auto; width:400px; bottom:calc(var(--nav-h) + 12px); border-radius:18px; border-width:1px; }
+    .top { right:auto; width:440px; }
+  }
 </style>
 </head>
 <body>
@@ -67,14 +116,18 @@
 <div id="list"></div>
 <div class="top">
   <div class="bar">
-    <input id="q" placeholder="Add a place by name, or paste a Google Maps link" autocomplete="off">
-    <button class="primary" id="go">Add</button>
-    <button id="locate" title="Track my location">◎</button>
-    <button id="view" title="Switch between map and list">List</button>
+    <input id="q" type="search" enterkeyhint="search" placeholder="Add a place or paste a Maps link" autocomplete="off" autocapitalize="words">
+    <button class="primary" id="go" aria-label="Add place">＋</button>
   </div>
   <div class="chips" id="chips"></div>
 </div>
 <div class="sheet" id="sheet"></div>
+<nav class="nav">
+  <button data-nav="map" class="on" aria-label="Map"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span>Map</span></button>
+  <button data-nav="list" aria-label="List"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><span>List</span></button>
+  <button id="locate" aria-label="Near me"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Near me</span></button>
+  <button data-nav="more" aria-label="More"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>More</span></button>
+</nav>
 
 <script>
 const SEED = {"categories": [{"id": "nightclub", "label": "Nightclub", "color": "#7b2ff7", "icon": "🪩", "keywords": ["nightclub", "club", "disco", "dance club", "edm", "techno", "live music venue"]}, {"id": "bar", "label": "Bar", "color": "#e8590c", "icon": "🍸", "keywords": ["bar", "pub", "cocktail", "speakeasy", "beer", "wine bar", "lounge", "taproom", "brewery", "whisky", "gin bar", "sake bar"]}, {"id": "rooftop-bar", "label": "Rooftop bar", "color": "#c2255c", "icon": "🌃", "keywords": ["rooftop", "sky bar", "skybar"]}, {"id": "restaurant", "label": "Restaurant", "color": "#d6336c", "icon": "🍽️", "keywords": ["restaurant", "bistro", "dining", "eatery", "steakhouse", "omakase", "izakaya", "kitchen", "grill", "sushi", "ramen", "pizza", "bbq", "barbecue", "thai food", "pad thai", "seafood", "brasserie", "trattoria", "diner", "canteen"]}, {"id": "street-food", "label": "Street food", "color": "#f08c00", "icon": "🍜", "keywords": ["street food", "food stall", "noodle", "hawker", "food court", "street stall", "khao", "boat noodle", "som tam", "moo ping", "satay", "dim sum"]}, {"id": "cafe", "label": "Café", "color": "#8d5b3a", "icon": "☕", "keywords": ["cafe", "café", "coffee", "bakery", "tea", "dessert", "roastery", "patisserie", "brunch"]}, {"id": "market", "label": "Market", "color": "#2f9e44", "icon": "🧺", "keywords": ["market", "night market", "floating market", "bazaar"]}, {"id": "mall", "label": "Mall & shopping", "color": "#1c7ed6", "icon": "🛍️", "keywords": ["mall", "shopping", "department store", "plaza", "boutique", "shop", "supermarket"]}, {"id": "temple", "label": "Temple", "color": "#f59f00", "icon": "🛕", "keywords": ["temple", "wat", "shrine", "pagoda", "church", "mosque"]}, {"id": "museum", "label": "Museum & gallery", "color": "#5c7cfa", "icon": "🏛️", "keywords": ["museum", "gallery", "exhibition", "art space"]}, {"id": "park", "label": "Park & nature", "color": "#37b24d", "icon": "🌳", "keywords": ["park", "garden", "nature", "beach", "lake", "viewpoint"]}, {"id": "spa", "label": "Spa & massage", "color": "#12b886", "icon": "💆", "keywords": ["spa", "massage", "wellness", "sauna", "onsen"]}, {"id": "hotel", "label": "Hotel", "color": "#495057", "icon": "🏨", "keywords": ["hotel", "hostel", "resort", "guesthouse", "inn"]}, {"id": "other", "label": "Other", "color": "#868e96", "icon": "📍", "keywords": []}], "places": [{"id": "tictactoe-bangkok", "name": "TICTACTOE Bangkok", "category": "bar", "city": "Bangkok", "country": "Thailand", "address": "5th floor, EmSphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110", "lat": 13.73194, "lng": 100.56611, "gmaps_query": "TICTACTOE EmSphere Bangkok", "coords_precision": "building", "notes": "Social 'dating bar' on EmSphere 5F built for meeting people; one drink order comes with two glasses. Budget roughly 400-1,000 THB. Daytime coffee session (~490 THB incl. two drinks) per Time Out. EmSphere is the mall with the Gourmet Market supermarket on the ground floor, 3-5 min walk from BTS Phrom Phong.", "tags": ["bar", "social", "mall", "phrom-phong", "sukhumvit"], "hours": "Evening from 19:00 per The Standard; daytime coffee session per Time Out. Sources conflict, check before going.", "sources": ["https://www.timeout.com/bangkok/bars/tictactoe", "https://thestandard.co/life/tictactoe-bangkok/"], "visited": null, "added": "2026-10-31", "starred": false}]};
@@ -255,7 +308,7 @@ function renderList() {
       `<div class="lgroup"><h3><span class="dot" style="background:${c.color}"></span>${c.icon} ${esc(c.label)} · ${g.length}</h3>${g.map(item).join('')}</div>` : ''; }).join('');
   } else body = ps.sort(sortBy === 'distance' ? byDist : byName).map(item).join('');
   const topH = document.querySelector('.top').offsetHeight;
-  el.innerHTML = `<div style="height:${topH}px"></div>
+  el.innerHTML = `<div style="height:${topH}px"></div><div class="lbrand">Walkabout</div>
     <div class="ltools"><span class="meta">Sort</span>
       <select class="inline" id="sort">${[['category','By category'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
       <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>${body}`;
@@ -271,15 +324,40 @@ function renderAll() { renderChips(); renderMap(); if (view === 'list') renderLi
 function setView(v) {
   view = v;
   document.getElementById('list').classList.toggle('show', v === 'list');
-  document.getElementById('view').textContent = v === 'list' ? 'Map' : 'List';
+  document.querySelectorAll('.nav [data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === v));
   close(); renderAll();
+  if (v === 'map') setTimeout(() => map.invalidateSize(), 0);
 }
-document.getElementById('view').onclick = () => setView(view === 'list' ? 'map' : 'list');
+document.querySelectorAll('.nav [data-nav]').forEach(b => b.onclick = () => b.dataset.nav === 'more' ? showMore() : setView(b.dataset.nav));
+function showMore() {
+  if (view === 'list') setView('map');
+  open(`<h2>Walkabout</h2>
+    <div class="menu">
+      <button onclick="showImport()">⬇️ Import from Google Maps</button>
+      <button onclick="showExport()">⬆️ Export &amp; save my changes</button>
+      <button onclick="location.hash='';setView('list')">☰ All places</button>
+      <button onclick="showInstall()">📲 Add Walkabout to home screen</button>
+    </div>
+    <div class="meta" style="margin-top:8px">${allPlaces().length} places · ${allCats().length} categories</div>`);
+}
+window.showMore = showMore;
+function showInstall() {
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  open(`<h2>Add to home screen</h2><p>${ios
+    ? 'In Safari, tap the <b>Share</b> button (square with arrow), then <b>Add to Home Screen</b>.'
+    : 'In Chrome, tap the <b>⋮</b> menu, then <b>Add to Home screen</b> or <b>Install app</b>.'}</p>
+    <div class="meta">Walkabout then opens full-screen like an app, and keeps your location permission.</div>`);
+}
+window.showInstall = showInstall;
 
 // ---------- place card ----------
 const sheet = document.getElementById('sheet');
-const open = html => { sheet.innerHTML = html; sheet.classList.add('show'); };
+const open = html => { sheet.innerHTML = '<button class="x" onclick="closeSheet()" aria-label="Close">✕</button>' + html; sheet.classList.add('show'); sheet.scrollTop = 0; };
 const close = () => sheet.classList.remove('show');
+window.closeSheet = close;
+let touchY = null;
+sheet.addEventListener('touchstart', e => { touchY = sheet.scrollTop <= 0 ? e.touches[0].clientY : null; }, { passive:true });
+sheet.addEventListener('touchend', e => { if (touchY != null && e.changedTouches[0].clientY - touchY > 70) close(); touchY = null; }, { passive:true });
 map.on('click', close);
 let shownId = null, shownHere = false;
 function toggleStar(id) {
@@ -309,7 +387,10 @@ function showPlace(id, isHere, keepView) {
       ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : ''}
     </div>`);
   pickCategory(document.getElementById('p-cat'), cid => { setField(p.id, 'category', cid); renderAll(); showPlace(p.id, isHere, true); });
-  if (view === 'map') map.panTo([p.lat, p.lng]);
+  if (view === 'map') { // keep the pin visible above the bottom sheet
+    const pt = map.project([p.lat, p.lng], map.getZoom()).add([0, Math.min(sheet.offsetHeight, innerHeight * 0.6) / 2]);
+    map.panTo(map.unproject(pt, map.getZoom()));
+  }
 }
 window.sharePlace = async id => {
   const p = allPlaces().find(x => x.id === id);
@@ -333,9 +414,13 @@ function onPos(pos) {
   } else nearShownId = null;
   if (view === 'list') renderList();
 }
+let tracking = false;
 function startTracking() {
-  if (!navigator.geolocation) return alert('Geolocation not available in this browser');
-  navigator.geolocation.watchPosition(onPos, e => alert('Location: ' + e.message), { enableHighAccuracy:true, maximumAge:15000 });
+  if (tracking) { if (me) { if (view === 'list') setView('map'); map.setView([me.lat, me.lng], Math.max(map.getZoom(), 16)); } return; }
+  if (!navigator.geolocation) return alert('Location is not available in this browser');
+  tracking = true; document.getElementById('locate').classList.add('tracking');
+  navigator.geolocation.watchPosition(onPos, e => { tracking = false; document.getElementById('locate').classList.remove('tracking'); alert('Location: ' + e.message); },
+    { enableHighAccuracy:true, maximumAge:15000 });
 }
 document.getElementById('locate').onclick = startTracking;
 if (navigator.permissions) navigator.permissions.query({ name:'geolocation' }).then(s => { if (s.state === 'granted') startTracking(); });
@@ -419,7 +504,7 @@ function download(name, mime, body) {
 const kmlColor = hex => 'ff' + hex.slice(5,7) + hex.slice(3,5) + hex.slice(1,3); // KML is aabbggrr
 function toKML(ps) {
   const used = allCats().filter(c => ps.some(p => p.category === c.id));
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>My Places</name>\n` +
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Walkabout</name>\n` +
     used.map(c => `<Style id="cat-${esc(c.id)}"><IconStyle><color>${kmlColor(c.color)}</color></IconStyle></Style>`).join('\n') + '\n' +
     used.map(c => `<Folder><name>${esc(c.label)}</name>\n` + ps.filter(p => p.category === c.id).map(p =>
       `<Placemark><name>${esc((p.starred ? '★ ' : '') + p.name)}</name><styleUrl>#cat-${esc(c.id)}</styleUrl><description>${esc([c.label, p.address, p.notes, gmaps(p)].filter(Boolean).join('\n'))}</description><Point><coordinates>${p.lng},${p.lat},0</coordinates></Point></Placemark>`).join('\n') + `\n</Folder>`).join('\n') +
@@ -441,9 +526,9 @@ function showExport() {
     </div>
     <div class="meta" style="margin-top:8px">New places, stars, category changes and new categories are saved on this device only.
       Export “My changes” and give the file to Claude to make them permanent for every device.</div>`);
-  document.getElementById('x-kml').onclick = () => download('my-places.kml', 'application/vnd.google-earth.kml+xml', toKML(allPlaces()));
-  document.getElementById('x-csv').onclick = () => download('my-places.csv', 'text/csv', toCSV(allPlaces()));
-  document.getElementById('x-json').onclick = () => download('my-places-changes.json', 'application/json',
+  document.getElementById('x-kml').onclick = () => download('walkabout.kml', 'application/vnd.google-earth.kml+xml', toKML(allPlaces()));
+  document.getElementById('x-csv').onclick = () => download('walkabout.csv', 'text/csv', toCSV(allPlaces()));
+  document.getElementById('x-json').onclick = () => download('walkabout-changes.json', 'application/json',
     JSON.stringify({ exported: new Date().toISOString(), new_places: load(LS.places), edits: load(LS.over), new_categories: load(LS.cats) }, null, 2));
 }
 
