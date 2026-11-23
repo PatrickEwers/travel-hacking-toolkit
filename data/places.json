@@ -3737,6 +3737,28 @@
       "starred": false,
       "visited": "2026-11-19",
       "added": "2026-11-23"
+    },
+    {
+      "id": "jam-hostel-bangkok",
+      "name": "Jam Hostel Bangkok",
+      "category": "hotel",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "9 Phra Sumen Rd, Chana Songkhram, Phra Nakhon, Bangkok 10200",
+      "lat": 13.7632934,
+      "lng": 100.4969167,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/YHtQhdtQpb7cyzDn7",
+      "google_type": "hostel",
+      "notes": "The hostel with the Chinese-Thai owner who does the tours.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/YHtQhdtQpb7cyzDn7",
+        "http://www.jamhostelbangkok.com/"
+      ],
+      "source": "manual",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }

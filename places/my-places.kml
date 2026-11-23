@@ -431,6 +431,10 @@ https://www.google.com/maps/search/?api=1&amp;query=KROMO%20Bangkok%2C%20Curio%2
 Sri Ayutthaya Rd / Phaya Thai Rd, Ratchathewi, Bangkok 10400
 New hotel with skyline views where noodles cost 80 baht and food starts around 3 dollars; has a gym and a pool overlooking the city.
 https://www.google.com/maps/search/?api=1&amp;query=Queensland%20Hotel&amp;query_place_id=ChIJOQfIziyf4jARkEd1ForF9pA</description><Point><coordinates>100.5385556,13.75675,0</coordinates></Point></Placemark>
+<Placemark><name>Jam Hostel Bangkok</name><styleUrl>#cat-hotel</styleUrl><description>Hotel
+9 Phra Sumen Rd, Chana Songkhram, Phra Nakhon, Bangkok 10200
+The hostel with the Chinese-Thai owner who does the tours.
+https://maps.app.goo.gl/YHtQhdtQpb7cyzDn7</description><Point><coordinates>100.4969167,13.7632934,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Activity</name>
 <Placemark><name>Apnea Total Freediving Organisation</name><styleUrl>#cat-activity</styleUrl><description>Activity
