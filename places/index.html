@@ -588,7 +588,7 @@ function addForm(seed) {
     <div class="row"><button class="star" id="f-star" title="Star">☆</button><span class="meta">Pin: ${seed.lat.toFixed(5)}, ${seed.lng.toFixed(5)} — drag the marker to adjust</span></div>
     <div class="row"><button class="primary" id="f-save">Save</button><button onclick="cancelAdd()">Cancel</button></div>`);
   const tmp = L.marker([seed.lat, seed.lng], { draggable:true }).addTo(map);
-  map.setView([seed.lat, seed.lng], 17);
+  try { map.setView([seed.lat, seed.lng], 17); } catch (e) {}
   const sel = document.getElementById('f-cat');
   let touched = false;
   pickCategory(sel, cid => { touched = true; sel.innerHTML = catOptions(cid); sel.dataset.prev = cid; document.getElementById('f-auto').textContent = ''; });
@@ -717,11 +717,16 @@ async function logHere(fixed) {
       <div class="meta">Allow location for Walkabout in your browser settings, then try again.</div>
       <div class="row"><button class="primary" onclick="logHere()">Try again</button></div>`);
   }
-  map.setView([pos.lat, pos.lng], 18);
+  try { map.setView([pos.lat, pos.lng], 18); } catch (e) {} // the basemap may still be loading; the lookup does not need it
   const radius = Math.round(Math.max(60, Math.min((pos.acc || 30) * 1.5, 150)));
-  open(`<h2>Log this place</h2><div class="meta">Got your position (±${Math.round(pos.acc || 0)} m). Looking up what is here…</div>`);
-  const [pois, geo] = await Promise.all([nearbyPOIs(pos, radius), reverseGeo(pos)]);
-  showCandidates(pos, pois, geo, radius);
+  try {
+    open(`<h2>Log this place</h2><div class="meta">Got your position (±${Math.round(pos.acc || 0)} m). Looking up what is here…</div>`);
+    const [pois, geo] = await Promise.all([nearbyPOIs(pos, radius), reverseGeo(pos)]);
+    showCandidates(pos, pois, geo, radius);
+  } catch (e) {
+    open(`<h2>Log this place</h2><p>Something went wrong while looking up this spot.</p><div class="meta">${esc(e && e.message || e)}</div>
+      <div class="row"><button class="primary" onclick="logHere()">Try again</button></div>`);
+  }
 }
 window.logHere = logHere;
 function showCandidates(pos, pois, geo, radius) {
