@@ -77,6 +77,20 @@
   .ltools { display:flex; gap:6px; padding:8px 14px; align-items:center; }
   #recent { position:absolute; inset:0; z-index:1004; background:var(--bg); overflow:auto; display:none; padding:calc(var(--safe-t) + 8px) 0 30px; bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
   #recent.show { display:block; }
+  #trips { position:absolute; inset:0; z-index:1004; background:var(--bg); overflow:auto; display:none; padding:calc(var(--safe-t) + 8px) 0 30px; bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
+  #trips.show { display:block; }
+  .tcard { margin:0 16px 10px; padding:14px; border:1px solid var(--line); border-radius:14px; cursor:pointer; }
+  .tcard b { font-size:17px; } .tbar { height:6px; border-radius:3px; background:var(--bg2); margin-top:8px; overflow:hidden; } .tbar i { display:block; height:100%; background:var(--brand); }
+  .titem { display:flex; align-items:center; gap:10px; min-height:56px; padding:6px 8px 6px 16px; border-bottom:1px solid var(--line); }
+  .titem input[type=checkbox] { width:26px; height:26px; flex:none; accent-color:var(--brand); }
+  .titem .tb { flex:1; min-width:0; cursor:pointer; } .titem .tb .nm { font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .titem.done .nm { text-decoration:line-through; color:var(--muted); }
+  .titem .tx { min-height:36px; width:36px; padding:0; border:0; background:none; color:var(--muted); font-size:16px; flex:none; }
+  .tadd { display:flex; gap:8px; padding:12px 16px; } .tadd input { flex:1; min-width:0; font-size:16px; min-height:44px; padding:0 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--fg); }
+  .trow { display:flex; gap:8px; padding:0 16px 10px; flex-wrap:wrap; }
+  .pick { display:flex; align-items:center; gap:12px; min-height:52px; border-bottom:1px solid var(--line); cursor:pointer; font-size:16px; }
+  .pick span.ck { width:26px; height:26px; border-radius:7px; border:2px solid var(--line); display:flex; align-items:center; justify-content:center; color:#fff; flex:none; }
+  .pick.on span.ck { background:var(--brand); border-color:var(--brand); }
   .rhead { padding:0 16px 8px; }
   .rhead h1 { margin:0; font-size:24px; font-weight:800; letter-spacing:-.02em; color:var(--brand); }
   .rfilters { display:flex; gap:6px; padding:0 16px 10px; flex-wrap:wrap; }
@@ -164,6 +178,7 @@
 <div id="map"></div>
 <div id="list"></div>
 <div id="recent"></div>
+<div id="trips"></div>
 <div class="top">
   <div class="bar">
     <input id="q" type="search" enterkeyhint="search" placeholder="Add a place or paste a Maps link" autocomplete="off" autocapitalize="words">
@@ -184,7 +199,7 @@
 <script>
 const SEED = /*__PLACES__*/null;
 const NEAR_METERS = 120;
-const LS = { places:'myplaces.local.v1', over:'myplaces.overrides.v1', cats:'myplaces.cats.v1' };
+const LS = { places:'myplaces.local.v1', over:'myplaces.overrides.v1', cats:'myplaces.cats.v1', trips:'walkabout.trips.v1' };
 // One-family palette: every category is a shade of the same deep teal; a single-colour line icon tells them apart.
 const GLYPHS = {
   nightclub:'<path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
@@ -290,6 +305,74 @@ const STATUSES = { identified:'Identified', 'want-to-go':'Want to go', visited:'
 const statusOf = p => STATUSES[p.status] ? p.status : p.visited ? 'visited' : 'identified';
 window.setStatus = (id, st) => { setField(id, 'status', st); renderAll(); if (shownId === id && sheet.classList.contains('show')) showPlace(id, shownHere, true); };
 
+// ---------- trip lists: temporary checklists of places and to-dos for one trip (saved on this device) ----------
+const tripById = id => load(LS.trips).find(t => t.id === id);
+const tripPlaceIds = id => new Set(((tripById(id) || {}).items || []).filter(i => i.id).map(i => i.id));
+const tripsWith = pid => load(LS.trips).filter(t => t.items.some(i => i.id === pid)).length;
+const saveTrip = t => store(LS.trips, load(LS.trips).map(x => x.id === t.id ? t : x));
+let openTrip = '';
+function newTrip(thenAddPlace) {
+  const name = (prompt('Name of the trip list (e.g. "Bangkok, December" or "Similan dive trip")') || '').trim();
+  if (!name) return null;
+  const t = { id: slug(name) + '-' + Date.now().toString(36).slice(-4), name, created: new Date().toISOString().slice(0, 10), items: thenAddPlace ? [{ id: thenAddPlace, done: false }] : [] };
+  store(LS.trips, load(LS.trips).concat(t)); return t;
+}
+window.pickTrip = pid => {
+  const p = allPlaces().find(x => x.id === pid); if (!p) return;
+  const here = shownHere, trips = load(LS.trips);
+  flowOpen = true;
+  open(`<h2>Add to a trip list</h2><div class="meta">${esc(p.name)}</div>
+    ${trips.map(t => `<div class="pick ${t.items.some(i => i.id === pid) ? 'on' : ''}" data-t="${esc(t.id)}"><span class="ck">✓</span><span>${esc(t.name)}</span></div>`).join('')}
+    ${trips.length ? '' : '<p class="meta">No trip lists yet. Create one for the trip you are on.</p>'}
+    <div class="row"><button class="primary" id="pt-new">＋ New trip list</button><button id="pt-done">Done</button></div>`);
+  sheet.querySelectorAll('.pick').forEach(el => el.onclick = () => {
+    const t = tripById(el.dataset.t), has = t.items.some(i => i.id === pid);
+    t.items = has ? t.items.filter(i => i.id !== pid) : t.items.concat({ id: pid, done: false }); saveTrip(t); pickTrip(pid);
+  });
+  document.getElementById('pt-new').onclick = () => { if (newTrip(pid)) pickTrip(pid); };
+  document.getElementById('pt-done').onclick = () => showPlace(pid, here, true);
+};
+function renderTrips() {
+  const el = document.getElementById('trips'), trips = load(LS.trips), t = openTrip && tripById(openTrip);
+  if (!t) {
+    el.innerHTML = `<div class="rhead"><h1>Trip lists</h1><div class="meta">A checklist of what you want to do on one trip. Add places from their card (🧳 Trip list), or type your own to-dos. Saved on this device.</div></div>
+      <div class="trow"><button class="primary" id="t-new">＋ New trip list</button></div>
+      ${trips.map(x => { const n = x.items.length, d = x.items.filter(i => i.done).length; return `<div class="tcard" data-t="${esc(x.id)}"><b>${esc(x.name)}</b>
+        <div class="meta">${d} of ${n} done${x.created ? ' · created ' + esc(x.created) : ''}</div><div class="tbar"><i style="width:${n ? Math.round(d / n * 100) : 0}%"></i></div></div>`; }).join('')
+        || '<div class="empty">No trip lists yet.</div>'}`;
+    document.getElementById('t-new').onclick = () => { const n = newTrip(); if (n) { openTrip = n.id; renderTrips(); } };
+    el.querySelectorAll('.tcard').forEach(c => c.onclick = () => { openTrip = c.dataset.t; renderTrips(); });
+    return;
+  }
+  const places = allPlaces(), n = t.items.length, d = t.items.filter(i => i.done).length;
+  const row = (it, i) => { const p = it.id && places.find(x => x.id === it.id);
+    if (it.id && !p) return '';
+    return `<div class="titem ${it.done ? 'done' : ''}"><input type="checkbox" data-i="${i}" ${it.done ? 'checked' : ''} aria-label="Done">
+      <div class="tb" ${p ? `data-p="${esc(p.id)}"` : ''}><div class="nm">${esc(p ? p.name : it.text)}</div>
+        ${p ? `<div class="meta">${esc(cat(p.category).label)}${p.city ? ' · ' + esc(p.city) : ''}${me ? ' · ' + fmtDist(dist(me, p)) : ''}</div>` : '<div class="meta">To-do</div>'}</div>
+      <button class="tx" data-x="${i}" aria-label="Take off the list">✕</button></div>`; };
+  const order = t.items.map((it, i) => [it, i]).sort((x, y) => x[0].done - y[0].done);
+  el.innerHTML = `<div class="rhead"><button id="t-back" style="margin-bottom:6px">‹ All trip lists</button><h1>${esc(t.name)}</h1>
+      <div class="meta">${d} of ${n} done</div><div class="tbar"><i style="width:${n ? Math.round(d / n * 100) : 0}%"></i></div></div>
+    <div class="trow"><button class="primary" id="t-map">Show on map</button><button id="t-ren">Rename</button><button class="del" id="t-del">Delete list</button></div>
+    ${order.map(([it, i]) => row(it, i)).join('') || '<div class="empty">Nothing on this list yet. Open a place and tap 🧳 Trip list, or add a to-do below.</div>'}
+    <div class="tadd"><input id="t-text" placeholder="Add a to-do (e.g. Thai massage, buy SIM)" enterkeyhint="done"><button id="t-add">Add</button></div>`;
+  document.getElementById('t-back').onclick = () => { openTrip = ''; renderTrips(); };
+  document.getElementById('t-map').onclick = () => { filter.trip = t.id; filter.city = ''; filter.status = ''; filter.cats.clear(); filter.starred = false; setView('map');
+    const here = visible(); if (here.length) map.fitBounds(L.latLngBounds(here.map(p => [p.lat, p.lng])).pad(0.2), { maxZoom:15 }); };
+  document.getElementById('t-ren').onclick = () => { const v = (prompt('Rename this trip list', t.name) || '').trim(); if (v) { t.name = v; saveTrip(t); renderTrips(); } };
+  document.getElementById('t-del').onclick = () => { if (!confirm(`Delete the trip list “${t.name}”?\n\nThe places themselves stay in Walkabout.`)) return;
+    store(LS.trips, load(LS.trips).filter(x => x.id !== t.id)); if (filter.trip === t.id) filter.trip = ''; openTrip = ''; renderTrips(); };
+  el.querySelectorAll('input[type=checkbox]').forEach(c => c.onchange = () => { const it = t.items[+c.dataset.i]; it.done = c.checked; saveTrip(t);
+    if (it.id && c.checked) setField(it.id, 'status', 'visited'); // ticking a place off marks it visited
+    renderTrips(); });
+  el.querySelectorAll('[data-x]').forEach(b => b.onclick = () => { t.items.splice(+b.dataset.x, 1); saveTrip(t); renderTrips(); });
+  el.querySelectorAll('[data-p]').forEach(b => b.onclick = () => { setView('map'); showPlace(b.dataset.p); });
+  const add = () => { const v = document.getElementById('t-text').value.trim(); if (!v) return; t.items.push({ text: v, done: false }); saveTrip(t); renderTrips(); };
+  document.getElementById('t-add').onclick = add;
+  document.getElementById('t-text').onkeydown = e => { if (e.key === 'Enter') add(); };
+}
+
 // ---------- helpers ----------
 const gq = p => p.gmaps_query || [p.name, p.address || p.city].filter(Boolean).join(', ');
 const gmaps = p => p.google_maps_url || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(gq(p));
@@ -315,11 +398,11 @@ function pickCategory(sel, onPick) {
 }
 
 // ---------- state ----------
-const filter = { cats: new Set(), starred: false, city: '', status: '' };
+const filter = { cats: new Set(), starred: false, city: '', status: '', trip: '' };
 try { filter.city = localStorage.getItem('walkabout.city') || ''; } catch (e) {}
 const inCity = p => !filter.city || (p.city || 'Elsewhere') === filter.city;
 let view = 'map', me = null, meMarker = null, nearShownId = null;
-const inStatus = p => !filter.status || statusOf(p) === filter.status;
+const inStatus = p => (!filter.status || statusOf(p) === filter.status) && (!filter.trip || tripPlaceIds(filter.trip).has(p.id));
 const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
 
 // ---------- map ----------
@@ -379,6 +462,7 @@ function renderChips() {
   document.getElementById('chips').innerHTML =
     `<select class="chip citysel ${filter.city ? 'on' : ''}" id="citysel" aria-label="City"><option value="">All cities</option>${cities.map(c =>
       `<option value="${esc(c)}" ${c === filter.city ? 'selected' : ''}>${esc(c)} (${nCity[c]})</option>`).join('')}</select>` +
+    (filter.trip && tripById(filter.trip) ? `<button class="chip on" data-k="trip">🧳 ${esc(tripById(filter.trip).name)} ✕</button>` : '') +
     `<select class="chip statsel ${filter.status ? 'on' : ''}" id="statsel" aria-label="Status"><option value="">Any status</option>${Object.keys(STATUSES).map(k =>
       `<option value="${k}" ${k === filter.status ? 'selected' : ''}>${STATUSES[k]} (${nStat[k] || 0})</option>`).join('')}</select>` +
     `<button class="chip ${!filter.cats.size && !filter.starred ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
@@ -392,7 +476,8 @@ function renderChips() {
   document.getElementById('statsel').onchange = e => { filter.status = e.target.value; close(); renderAll(); };
   document.querySelectorAll('#chips button.chip').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
-    if (k === 'all') { filter.cats.clear(); filter.starred = false; }
+    if (k === 'trip') filter.trip = '';
+    else if (k === 'all') { filter.cats.clear(); filter.starred = false; }
     else if (k === 'star') filter.starred = !filter.starred;
     else filter.cats.has(k) ? filter.cats.delete(k) : filter.cats.add(k);
     renderAll();
@@ -474,6 +559,8 @@ function setView(v) {
   view = v;
   document.getElementById('list').classList.toggle('show', v === 'list');
   document.getElementById('recent').classList.toggle('show', v === 'recent');
+  document.getElementById('trips').classList.toggle('show', v === 'trips');
+  if (v === 'trips') renderTrips();
   if (v === 'recent') renderRecent();
   document.querySelectorAll('.nav [data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === v));
   close(); renderAll();
@@ -484,6 +571,7 @@ function showMore() {
   if (view !== 'map') setView('map');
   open(`<h2>Walkabout</h2>
     <div class="menu">
+      <button onclick="closeSheet();openTrip='';setView('trips')">🧳 Trip lists${load(LS.trips).length ? ' · ' + load(LS.trips).length : ''}</button>
       <button onclick="logHere()">📍 Log the place I'm at</button>
       <button onclick="showImport()">⬇️ Import from Google Maps</button>
       <button onclick="showExport()">⬆️ Export &amp; save my changes</button>
@@ -595,6 +683,7 @@ function showPlace(id, isHere, keepView) {
       <a href="${gmaps(p)}" target="_blank" rel="noopener"><button class="primary">Open in Google Maps</button></a>
       <a href="${gdirections(p)}" target="_blank" rel="noopener"><button>Directions</button></a>
       <button onclick="sharePlace('${esc(p.id)}')">Share</button>
+      <button onclick="pickTrip('${esc(p.id)}')">🧳 Trip list${tripsWith(p.id) ? ' · ' + tripsWith(p.id) : ''}</button>
       <button onclick="editPlace('${esc(p.id)}')">✎ Edit</button>
       ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : `<button class="del" onclick="hidePlace('${esc(p.id)}')">Remove</button>`}
     </div>`);
@@ -931,7 +1020,7 @@ function showExport() {
   document.getElementById('x-kml').onclick = () => download('walkabout.kml', 'application/vnd.google-earth.kml+xml', toKML(allPlaces()));
   document.getElementById('x-csv').onclick = () => download('walkabout.csv', 'text/csv', toCSV(allPlaces()));
   document.getElementById('x-json').onclick = () => download('walkabout-changes.json', 'application/json',
-    JSON.stringify({ exported: new Date().toISOString(), new_places: load(LS.places), edits: load(LS.over), new_categories: load(LS.cats) }, null, 2));
+    JSON.stringify({ exported: new Date().toISOString(), new_places: load(LS.places), edits: load(LS.over), new_categories: load(LS.cats), trip_lists: load(LS.trips) }, null, 2));
 }
 
 // ---------- import from Google Takeout ----------
@@ -1086,6 +1175,7 @@ renderAll();
 const hash = decodeURIComponent(location.hash.slice(1));
 if (hash === 'list') setView('list');
 else if (hash === 'recent') setView('recent');
+else if (hash === 'trips') setView('trips');
 else if (hash === 'import') showImport();
 else if (hash === 'log') logHere();
 else if (/^log@-?\d+(\.\d+)?,-?\d+(\.\d+)?$/.test(hash)) { const [la, lo] = hash.slice(4).split(',').map(Number); logHere({ lat:la, lng:lo, acc:20 }); }

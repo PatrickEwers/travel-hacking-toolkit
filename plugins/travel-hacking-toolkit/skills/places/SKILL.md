@@ -115,6 +115,9 @@ from the map and list right away on that device.
 - ✎ Edit on any place card changes name, address, comment (`notes`, with a Dictate button) and the Google Maps
   link; edits are saved on the device and `merge_changes.py` applies them from Export → My changes.
 - In the List view, swiping a row to the left reveals Remove (with an Undo toast).
+- Trip lists (More → Trip lists, deep link `#trips`, 🧳 Trip list on a place card): temporary per-trip checklists of
+  places and free-text to-dos, saved on the device (`walkabout.trips.v1`) and included in Export → My changes as
+  `trip_lists` (backup only; not merged into data/places.json). Ticking a place off sets its status to visited.
 - Remove on any place card hides it on the device (undo: More → Recently added → Removed); it travels in
   Export → My changes as `review: "removed"` and `merge_changes.py` then deletes the place.
 - Deep link: `index.html#<place-id>` opens that place.
