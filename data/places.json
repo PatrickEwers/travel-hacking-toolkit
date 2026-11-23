@@ -4239,7 +4239,9 @@
       "google_type": "bicycle rental service",
       "notes": "Bike rental place that lets you ride around the huge park area of this undeveloped part of Bangkok. The original idea of doing this I got from Cassandra.",
       "hours": "Open until 6 PM",
-      "tags": [],
+      "tags": [
+        "superlocal"
+      ],
       "sources": [
         "https://maps.app.goo.gl/m3zdLMupXcSVWGB36"
       ],
