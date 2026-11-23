@@ -4356,6 +4356,30 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "1981-soul-and-sold",
+      "name": "1981 Soul&Sold",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "49 Ramkhamhaeng Rd, Hua Mak, Bang Kapi, Bangkok 10240",
+      "lat": 13.7523902,
+      "lng": 100.609812,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/1981+Soul%26Sold/@13.7523902,100.609812,17z/data=!4m6!3m5!1s0x30e29fe3e1a58491:0x3e566733b154039c!8m2!3d13.7523902!4d100.609812!16s%2Fg%2F11z0gbc0h8",
+      "google_type": "Shopping mall",
+      "notes": "Vintage-themed mall in the renovated former The Mall Ramkhamhaeng: 1980s decor and music, vintage clothing and collectibles stalls, old cars and a tower of retro TVs.\n\nFrom the reel comments: the food hall downstairs is good and cheap; the cool vintage pieces are pricey.",
+      "hours": "Daily 11 AM–10 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DfmfSVuKW2H/",
+        "https://www.google.com/maps/place/1981+Soul%26Sold/@13.7523902,100.609812,17z/data=!4m6!3m5!1s0x30e29fe3e1a58491:0x3e566733b154039c!8m2!3d13.7523902!4d100.609812!16s%2Fg%2F11z0gbc0h8"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }

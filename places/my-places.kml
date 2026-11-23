@@ -293,6 +293,12 @@ https://www.google.com/maps/search/?api=1&amp;query=Central%20Village%20Outlet&a
 88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110
 The 2nd-floor toilets are themed like a red train carriage.
 https://www.google.com/maps/search/?api=1&amp;query=Terminal%2021%20Asok&amp;query_place_id=ChIJuWuZbh6f4jAReZMEm2xxgzM</description><Point><coordinates>100.5604058,13.7379635,0</coordinates></Point></Placemark>
+<Placemark><name>1981 Soul&amp;Sold</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+49 Ramkhamhaeng Rd, Hua Mak, Bang Kapi, Bangkok 10240
+Vintage-themed mall in the renovated former The Mall Ramkhamhaeng: 1980s decor and music, vintage clothing and collectibles stalls, old cars and a tower of retro TVs.
+
+From the reel comments: the food hall downstairs is good and cheap; the cool vintage pieces are pricey.
+https://www.google.com/maps/place/1981+Soul%26Sold/@13.7523902,100.609812,17z/data=!4m6!3m5!1s0x30e29fe3e1a58491:0x3e566733b154039c!8m2!3d13.7523902!4d100.609812!16s%2Fg%2F11z0gbc0h8</description><Point><coordinates>100.609812,13.7523902,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Temple</name>
 <Placemark><name>Meditation Hall (ห้องปฏิบัติสมาธิ)</name><styleUrl>#cat-temple</styleUrl><description>Temple
