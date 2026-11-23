@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Personal places database. One entry per place. Rendered by places/build.py into places/index.html (map + location-aware cards) and exported to KML/CSV for Google My Maps.",
-    "last_updated": "2026-11-12",
+    "last_updated": "2026-11-23",
     "schema": {
       "id": "kebab-case unique id",
       "name": "display name",
@@ -3126,19 +3126,20 @@
       "lat": 13.7420325,
       "lng": 100.5462515,
       "coords_precision": "exact",
-      "notes": "Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list.",
+      "notes": "Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list. Recommended by the two Thai girls we met at Above Eleven.",
       "tags": [
         "Instagram saved: Bkk"
       ],
       "sources": [
-        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/"
+        "https://www.instagram.com/adrianwidjy/reel/Dc2Viaxo0bD/",
+        "https://maps.app.goo.gl/AxSvGnn94jRfXgHfA"
       ],
       "added": "2026-11-11",
       "starred": false,
       "google_place_id": "ChIJkxdwWiyf4jARdUV1zHHjqlo",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Akara%20Sky%20Hanuman%20Bangkok&query_place_id=ChIJkxdwWiyf4jARdUV1zHHjqlo",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "approved"
     },
     {
       "id": "newstand",
@@ -3498,6 +3499,28 @@
       "tags": [],
       "starred": false,
       "added": "2026-11-12"
+    },
+    {
+      "id": "xiao-yu-new-bar-karaoke",
+      "name": "เสียว อวี่ (Xiao Yu) New Bar",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "424 Maitri Chit Rd, Pom Prap, Pom Prap Sattru Phai, Bangkok 10100",
+      "lat": 13.7399375,
+      "lng": 100.5144375,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://maps.app.goo.gl/FM7SArAckFC39jcWA",
+      "google_type": "bar",
+      "notes": "Karaoke bar near Hua Lamphong where we met the young filmmakers; a crowd of Gen Zs singing Gen X songs.",
+      "tags": [
+        "Bangkok's best"
+      ],
+      "sources": [
+        "https://maps.app.goo.gl/FM7SArAckFC39jcWA"
+      ],
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }

@@ -104,6 +104,10 @@ https://www.google.com/maps/search/?api=1&amp;query=Don%27t%20Open%20The%20Fridg
 1st Floor, Young Place Building, Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110
 The place my Thai friend once brought me to because she manages the bar.
 https://maps.app.goo.gl/2bDJfeao6aTkLcWc7</description><Point><coordinates>100.565446,13.740484,0</coordinates></Point></Placemark>
+<Placemark><name>เสียว อวี่ (Xiao Yu) New Bar</name><styleUrl>#cat-bar</styleUrl><description>Bar
+424 Maitri Chit Rd, Pom Prap, Pom Prap Sattru Phai, Bangkok 10100
+Karaoke bar near Hua Lamphong where we met the young filmmakers; a crowd of Gen Zs singing Gen X songs.
+https://maps.app.goo.gl/FM7SArAckFC39jcWA</description><Point><coordinates>100.5144375,13.7399375,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Rooftop bar</name>
 <Placemark><name>Sky View 360</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
@@ -120,7 +124,7 @@ Bar with close-up views of passing BTS trains; tagged as @unculture.bkk.
 https://www.google.com/maps/search/?api=1&amp;query=Unculture%20Silom%20Rooftop%20Bar&amp;query_place_id=ChIJEc_x3gWZ4jARUu81t7ELjg0</description><Point><coordinates>100.5280185,13.7256334,0</coordinates></Point></Placemark>
 <Placemark><name>Akara Sky Hanuman Bangkok</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
 58th-61st floor, One City Centre, 548 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330
-Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list.
+Rooftop with interactive exhibits, bar and food, the evening stop in a one-day must-do list. Recommended by the two Thai girls we met at Above Eleven.
 https://www.google.com/maps/search/?api=1&amp;query=Akara%20Sky%20Hanuman%20Bangkok&amp;query_place_id=ChIJkxdwWiyf4jARdUV1zHHjqlo</description><Point><coordinates>100.5462515,13.7420325,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Restaurant</name>
