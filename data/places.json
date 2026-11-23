@@ -3981,6 +3981,29 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "the-deck-bangkok",
+      "name": "The Deck Bangkok",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "15 Soi Sukhumvit 20, Khlong Toei, Bangkok 10110",
+      "lat": 13.7321766,
+      "lng": 100.5639919,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/vboY1kVB2Cjw1iHu8",
+      "google_type": "restaurant",
+      "notes": "The restaurant where Shannon and her crew went with me after the female leadership summit. I had also been there before, for a meetup with an entrepreneurial focus.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/vboY1kVB2Cjw1iHu8",
+        "https://thedeckbkk.com/"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }

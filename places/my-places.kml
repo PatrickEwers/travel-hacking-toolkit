@@ -180,6 +180,10 @@ https://maps.app.goo.gl/vRiVqXEzze7UwxtQA</description><Point><coordinates>100.5
 87 Soi Ekkamai 3, Khlong Tan Nuea, Watthana, Bangkok 10110
 Restaurant where I had lunch with Nick from Switzerland.
 https://maps.app.goo.gl/4YDHjBDTHVHH5orE9</description><Point><coordinates>100.5856092,13.7299814,0</coordinates></Point></Placemark>
+<Placemark><name>The Deck Bangkok</name><styleUrl>#cat-restaurant</styleUrl><description>Restaurant
+15 Soi Sukhumvit 20, Khlong Toei, Bangkok 10110
+The restaurant where Shannon and her crew went with me after the female leadership summit. I had also been there before, for a meetup with an entrepreneurial focus.
+https://maps.app.goo.gl/vboY1kVB2Cjw1iHu8</description><Point><coordinates>100.5639919,13.7321766,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Social restaurant</name>
 <Placemark><name>SEENSPACE Thong Lo</name><styleUrl>#cat-social-restaurant</styleUrl><description>Social restaurant
