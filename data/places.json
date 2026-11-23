@@ -4224,6 +4224,29 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "m-bike-bang-kachao",
+      "name": "M-BIKE (Bang Kachao bike rental)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Bang Kachao pier, Phra Pradaeng District, Samut Prakan 10130 (right off the ferry from Khlong Toei Nok Pier)",
+      "lat": 13.7040582,
+      "lng": 100.5627399,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/m3zdLMupXcSVWGB36",
+      "google_type": "bicycle rental service",
+      "notes": "Bike rental place that lets you ride around the huge park area of this undeveloped part of Bangkok. The original idea of doing this I got from Cassandra.",
+      "hours": "Open until 6 PM",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/m3zdLMupXcSVWGB36"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
