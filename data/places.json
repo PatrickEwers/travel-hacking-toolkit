@@ -4456,6 +4456,32 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "rsc-ratchaphruek-sports-club",
+      "name": "RSC Ratchaphruek Sports Club (neon pickleball)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "289/1 Phran Nok-Phutthamonthon Sai 4 Rd, Thonburi side, Bangkok",
+      "lat": 13.7514053,
+      "lng": 100.4295458,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/RSC+Ratchaphruek+Sports+Club/data=!4m7!3m6!1s0x30e2972c9f0d9e51:0xf14320ce19d4714a!8m2!3d13.7514053!4d100.4295458!16s%2Fg%2F11ykxt_85s",
+      "google_type": "Sports club",
+      "notes": "Pickleball and padel club on the Thonburi side. The reel shows its neon glow-in-the-dark pickleball nights.\n\nThe neon nights were a limited run: 30-31 Oct and 1, 6, 7, 8 Nov 2026, so they are over. Regular courts book online or via Line @rsc.th; ask them whether neon nights return.",
+      "hours": "Open until midnight (pickleball courts until 1 AM)",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DfCfeuUTLhO/",
+        "https://www.instagram.com/rsc.th/",
+        "https://www.google.com/maps/place/RSC+Ratchaphruek+Sports+Club/data=!4m7!3m6!1s0x30e2972c9f0d9e51:0xf14320ce19d4714a!8m2!3d13.7514053!4d100.4295458!16s%2Fg%2F11ykxt_85s",
+        "https://www.rsportsclub.com/"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
