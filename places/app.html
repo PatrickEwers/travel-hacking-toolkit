@@ -436,7 +436,14 @@ window.showMore = showMore;
 const reviewable = () => everyPlace().filter(p => p.review).sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.name.localeCompare(b.name));
 const pendingCount = () => reviewable().filter(p => p.review === 'pending').length;
 let recentFilter = 'pending';
-function setReview(id, state) { setField(id, 'review', state); renderRecent(); }
+function setReview(id, state) {
+  const seedP = ((SEED && SEED.places) || []).find(p => p.id === id);
+  if (state === 'pending' && seedP && !seedP.review) { // undo of a Remove on a place that was never in the review queue: just drop the override
+    const over = load(LS.over);
+    if (over[id]) { delete over[id].review; if (!Object.keys(over[id]).length) delete over[id]; store(LS.over, over); }
+  } else setField(id, 'review', state);
+  renderRecent();
+}
 window.setReview = setReview;
 function renderRecent() {
   const all = reviewable(), n = s => all.filter(p => p.review === s).length;
@@ -518,7 +525,7 @@ function showPlace(id, isHere, keepView) {
       <a href="${gmaps(p)}" target="_blank" rel="noopener"><button class="primary">Open in Google Maps</button></a>
       <a href="${gdirections(p)}" target="_blank" rel="noopener"><button>Directions</button></a>
       <button onclick="sharePlace('${esc(p.id)}')">Share</button>
-      ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : ''}
+      ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : `<button class="del" onclick="hidePlace('${esc(p.id)}')">Remove</button>`}
     </div>`);
   pickCategory(document.getElementById('p-cat'), cid => { setField(p.id, 'category', cid); renderAll(); showPlace(p.id, isHere, true); });
   if (view === 'map') { // keep the pin visible above the bottom sheet
@@ -532,6 +539,13 @@ window.sharePlace = async id => {
   if (navigator.share) { try { await navigator.share({ title:p.name, text, url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
   await navigator.clipboard.writeText(`${p.name}\n${url}`);
   alert('Google Maps link copied');
+};
+// Remove a place that came from the shared database: hidden on this device right away (undo under More → Recently added → Removed),
+// deleted for good when Export → My changes is merged.
+window.hidePlace = id => {
+  const p = allPlaces().find(x => x.id === id); if (!p) return;
+  if (!confirm(`Remove “${p.name}” from Walkabout?\n\nYou can undo this under More → Recently added → Removed.`)) return;
+  setField(id, 'review', 'removed'); close(); renderAll();
 };
 window.removePlace = id => { store(LS.places, load(LS.places).filter(p => p.id !== id)); close(); renderAll(); };
 
