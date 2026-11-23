@@ -26,7 +26,8 @@
       "review": "pending | approved; new imports start pending and show on the app's Recently added page (#recent) with Approve / Remove",
       "review_note": "optional caveat shown on the Recently added page (e.g. uncertain Google match)",
       "imported_from": "where a batch import came from (google-saved-lists, instagram-saved-bkk)",
-      "closed": "\"permanent\" if the place has closed for good (kept for the memory; shown with a Permanently closed badge)"
+      "closed": "\"permanent\" if the place has closed for good (kept for the memory; shown with a Permanently closed badge)",
+      "source": "where the place was found: instagram (found in an Instagram post; the post links are in sources) | google-import (came with the Google Maps saved-lists import) | manual (entered by hand or added through Claude) | gps-log (logged on the spot in the app)"
     },
     "staleness_days": 3650
   },
@@ -340,7 +341,8 @@
       "starred": false,
       "google_place_id": "ChIJU--Zqzaf4jARQChx-6Fsk4o",
       "google_type": "bar",
-      "google_maps_url": "https://maps.google.com/?cid=9985444241774553152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "google_maps_url": "https://maps.google.com/?cid=9985444241774553152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+      "source": "manual"
     },
     {
       "id": "platinum-fashion-mall",
@@ -360,7 +362,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJZ3p9P8-e4jAROWTAP3o5qDM",
       "google_type": "shopping_mall",
-      "address": "222, Khwaeng Thanon Phetchaburi, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand"
+      "address": "222, Khwaeng Thanon Phetchaburi, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand",
+      "source": "google-import"
     },
     {
       "id": "revolucion-cocktail",
@@ -380,7 +383,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJtfy1Es2Y4jARsUoko_jL1hk",
       "google_type": "cocktail_bar",
-      "address": "No. 981 Holiday Inn Silom Hotel, Room 6, 11 Silom Rd, แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand"
+      "address": "No. 981 Holiday Inn Silom Hotel, Room 6, 11 Silom Rd, แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand",
+      "source": "google-import"
     },
     {
       "id": "ghee-gelato-bar-silom-soi-7-3rd-floor",
@@ -401,7 +405,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJN-U4CMiZ4jARDW72mEjlu3E",
       "google_type": "ice_cream_shop",
-      "address": "55 Thanon Naradhiwat Rajanagarindra, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand"
+      "address": "55 Thanon Naradhiwat Rajanagarindra, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand",
+      "source": "google-import"
     },
     {
       "id": "meditation-hall",
@@ -421,7 +426,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJVRgnKwDnHTERBwoB3vWwbHc",
       "google_type": "health",
-      "address": "MX2F+55F, Song Khon, Kaeng Khoi District, Saraburi 18110, Thailand"
+      "address": "MX2F+55F, Song Khon, Kaeng Khoi District, Saraburi 18110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "tanpopo-snack",
@@ -441,7 +447,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJQ5sxRwGf4jARq0y6ZQWehz0",
       "google_type": "bar",
-      "address": "28 Soi Sukhumvit 69, แขวงคลองตัน Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "28 Soi Sukhumvit 69, แขวงคลองตัน Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "st-louis-triangle-pillows-soi-sathorn-11",
@@ -461,7 +468,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJV6KwtvGZ4jARSHx2ZFTlxYg",
       "google_type": "gift_shop",
-      "address": "12,14,16 Soi Chan 18/7, intersection 28, แขวงทุ่งวัดดอน เขตสาทร กรุงเทพมหานคร 10120, Thailand"
+      "address": "12,14,16 Soi Chan 18/7, intersection 28, แขวงทุ่งวัดดอน เขตสาทร กรุงเทพมหานคร 10120, Thailand",
+      "source": "google-import"
     },
     {
       "id": "knowing-buddha-foundation",
@@ -481,7 +489,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJm1Nh5yGf4jARoqyUVnJrdXs",
       "google_type": "association_or_organization",
-      "address": "462, 12 Soi On Nut 8, Khwaeng Suan Luang, Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand"
+      "address": "462, 12 Soi On Nut 8, Khwaeng Suan Luang, Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand",
+      "source": "google-import"
     },
     {
       "id": "seenspace-thong-lo",
@@ -501,7 +510,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJUQcuQVOe4jARk9P5mB__Ej4",
       "google_type": "community_center",
-      "address": "251/1 Soi Thong Lo 13, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "251/1 Soi Thong Lo 13, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "the-commons-thonglor",
@@ -521,7 +531,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJmZKsCFOe4jARjZUEQW7WV58",
       "google_type": "community_center",
-      "address": "335 Soi Akkhara Phatsadu, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "335 Soi Akkhara Phatsadu, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "various-vintage-shop",
@@ -541,7 +552,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJJYlvAoOd4jARhKym_aEU83A",
       "google_type": "clothing_store",
-      "address": "Junction 511 Bang Sue Shopping Center Building Kamphaeng Phet 2 Road Chatuchak Subdistrict, Tuek Daeng 3B132, แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900, Thailand"
+      "address": "Junction 511 Bang Sue Shopping Center Building Kamphaeng Phet 2 Road Chatuchak Subdistrict, Tuek Daeng 3B132, แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900, Thailand",
+      "source": "google-import"
     },
     {
       "id": "chatuchak-weekend-market",
@@ -561,7 +573,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ3fiD6BSc4jARS324hNeR8ZE",
       "google_type": "market",
-      "address": "587, 10 Kamphaeng Phet 2 Rd, Khwaeng Chatuchak, Khet Chatuchak, Krung Thep Maha Nakhon 10900, Thailand"
+      "address": "587, 10 Kamphaeng Phet 2 Rd, Khwaeng Chatuchak, Khet Chatuchak, Krung Thep Maha Nakhon 10900, Thailand",
+      "source": "google-import"
     },
     {
       "id": "changchui-creative-park",
@@ -581,7 +594,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ22-CLySa4jARj0CDh5NxNL0",
       "google_type": "market",
-      "address": "460/8 Sirindhorn Rd, Khwaeng Bang Phlat, Khet Bang Phlat, Krung Thep Maha Nakhon 10700, Thailand"
+      "address": "460/8 Sirindhorn Rd, Khwaeng Bang Phlat, Khet Bang Phlat, Krung Thep Maha Nakhon 10700, Thailand",
+      "source": "google-import"
     },
     {
       "id": "aow-june-juea",
@@ -601,7 +615,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJEXt3DU2hVTAR27AK1NeAyS4",
       "google_type": "tourist_attraction",
-      "address": "Ko Tao, Ko Pha-ngan District, Surat Thani 84280, Thailand"
+      "address": "Ko Tao, Ko Pha-ngan District, Surat Thani 84280, Thailand",
+      "source": "google-import"
     },
     {
       "id": "apnea-total-freediving-organisation",
@@ -621,7 +636,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJrYLtROmhVTARxqdDhGqonro",
       "google_type": "sports_activity_location",
-      "address": "9, 224, Tambon Ko Tao, Amphoe Ko Pha-ngan, Chang Wat Surat Thani 84360, Thailand"
+      "address": "9, 224, Tambon Ko Tao, Amphoe Ko Pha-ngan, Chang Wat Surat Thani 84360, Thailand",
+      "source": "google-import"
     },
     {
       "id": "thong-smith",
@@ -641,7 +657,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ019-Hlef4jARYqPjI5yKho8",
       "google_type": "noodle_shop",
-      "address": "693 ชั้น 7 Sukhumvit Rd, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "693 ชั้น 7 Sukhumvit Rd, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "baan-suan-sathon",
@@ -664,7 +681,8 @@
       "address": "60 Soi Si Akson, Khwaeng Thung Maha Mek, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand",
       "sources": [
         "https://www.instagram.com/thailandista/reel/DVyAs2LEUam/"
-      ]
+      ],
+      "source": "google-import"
     },
     {
       "id": "fatty-s-bar-diner",
@@ -684,7 +702,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJlQnkTpOe4jAR0GDJMGPu9tg",
       "google_type": "diner",
-      "address": "598, 66 Thanon Asok - Din Daeng, Khwaeng Din Daeng, Khet Din Daeng, Krung Thep Maha Nakhon 10400, Thailand"
+      "address": "598, 66 Thanon Asok - Din Daeng, Khwaeng Din Daeng, Khet Din Daeng, Krung Thep Maha Nakhon 10400, Thailand",
+      "source": "google-import"
     },
     {
       "id": "arcadia-barcade-bangkok-2049",
@@ -704,7 +723,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ68E7Icmf4jARYnChcN7sq_I",
       "google_type": "bar",
-      "address": "1112/91-93, Soi Sukhumvit Plus 1, Khwaeng Phra Khanong, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "1112/91-93, Soi Sukhumvit Plus 1, Khwaeng Phra Khanong, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "sugar-ray-you-ve-just-been-poisoned",
@@ -725,7 +745,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJybdzZU-e4jAR5Nn-_lnDm5Q",
       "google_type": "cocktail_bar",
-      "address": "2 Soi Sukhumvit 24, Khwaeng Khlong Tan, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "2 Soi Sukhumvit 24, Khwaeng Khlong Tan, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "san-blas-islands",
@@ -746,7 +767,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJHWTb-_X6VI4RHE2E9WVMQWM",
       "google_type": "archipelago",
-      "address": "San Blas Islands, Guna Yala Comarca, Panama"
+      "address": "San Blas Islands, Guna Yala Comarca, Panama",
+      "source": "google-import"
     },
     {
       "id": "capurgana",
@@ -767,7 +789,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJCU9nj5kiUY4R2rHeLLs2wkc",
       "google_type": "locality",
-      "address": "Capurganá, Acandí, Choco, Colombia"
+      "address": "Capurganá, Acandí, Choco, Colombia",
+      "source": "google-import"
     },
     {
       "id": "cl-21-3-71",
@@ -785,7 +808,8 @@
       ],
       "starred": false,
       "added": "2026-11-12",
-      "imported_from": "google-saved-lists"
+      "imported_from": "google-saved-lists",
+      "source": "google-import"
     },
     {
       "id": "denali-viewpoint-south",
@@ -806,7 +830,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJMQSzDXyDzlYR0kjMv9sRo-I",
       "google_type": "scenic_spot",
-      "address": "Parks Hwy, Trapper Creek, AK 99683, USA"
+      "address": "Parks Hwy, Trapper Creek, AK 99683, USA",
+      "source": "google-import"
     },
     {
       "id": "dropped-pin-michigan",
@@ -823,7 +848,8 @@
       ],
       "starred": false,
       "added": "2026-11-12",
-      "imported_from": "google-saved-lists"
+      "imported_from": "google-saved-lists",
+      "source": "google-import"
     },
     {
       "id": "maryland",
@@ -843,7 +869,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ35Dx6etNtokRsfZVdmU3r_I",
       "google_type": "administrative_area_level_1",
-      "address": "Maryland, USA"
+      "address": "Maryland, USA",
+      "source": "google-import"
     },
     {
       "id": "khao-tom-jay-suay",
@@ -864,7 +891,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJL5OFxiOZ4jARwnelH1iKe_I",
       "google_type": "restaurant",
-      "address": "547 Phlap Phla Chai Rd, Khwaeng Pom Prap, Khet Pom Prap Sattru Phai, Krung Thep Maha Nakhon 10100, Thailand"
+      "address": "547 Phlap Phla Chai Rd, Khwaeng Pom Prap, Khet Pom Prap Sattru Phai, Krung Thep Maha Nakhon 10100, Thailand",
+      "source": "google-import"
     },
     {
       "id": "massage-silom",
@@ -885,7 +913,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ0c26_uCf4jARj5DOCzhc284",
       "google_type": "wholesaler",
-      "address": "PGGJ+544, Soi Silom 5, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand"
+      "address": "PGGJ+544, Soi Silom 5, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand",
+      "source": "google-import"
     },
     {
       "id": "pohnpei",
@@ -906,7 +935,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ1dyraanJ2WURqWyRKh_q6zs",
       "google_type": "island",
-      "address": "Pohnpei, Micronesia"
+      "address": "Pohnpei, Micronesia",
+      "source": "google-import"
     },
     {
       "id": "better-day-healthy-massage-novotel-sukhumvit-20",
@@ -926,7 +956,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ5-qtSgif4jAR-wgRvH9j604",
       "google_type": "massage_spa",
-      "address": "9 Floor Novotel, 19/9 สุขุมวิท 20 แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110, Thailand"
+      "address": "9 Floor Novotel, 19/9 สุขุมวิท 20 แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "punta-gallinas",
@@ -947,7 +978,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJvSXSegpsjo4RuslYEXza2JA",
       "google_type": "natural_feature",
-      "address": "Punta Gallinas, Uribia, La Guajira, Colombia"
+      "address": "Punta Gallinas, Uribia, La Guajira, Colombia",
+      "source": "google-import"
     },
     {
       "id": "mayapo-beach",
@@ -968,7 +1000,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJwdBodVuHjI4RMm6txdZxwjQ",
       "google_type": "brunch_restaurant",
-      "address": "Unnamed Road, Manaure, La Guajira, Colombia"
+      "address": "Unnamed Road, Manaure, La Guajira, Colombia",
+      "source": "google-import"
     },
     {
       "id": "san-gil",
@@ -989,7 +1022,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJqezDFSfHaY4RAO5AZKD9O6A",
       "google_type": "locality",
-      "address": "San Gil, Santander, Colombia"
+      "address": "San Gil, Santander, Colombia",
+      "source": "google-import"
     },
     {
       "id": "la-guajira",
@@ -1010,7 +1044,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ_zhyYhSJi44RFpd9GoPY5iI",
       "google_type": "administrative_area_level_1",
-      "address": "La Guajira, Colombia"
+      "address": "La Guajira, Colombia",
+      "source": "google-import"
     },
     {
       "id": "the-laughing-tiger",
@@ -1030,7 +1065,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJj_UrRIuf4jARMUXTdYNAkJk",
       "google_type": "bistro",
-      "address": "593 17-18 Soi Sukhumvit 33/1, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "593 17-18 Soi Sukhumvit 33/1, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "sky-view-360",
@@ -1051,7 +1087,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ-_UnoBiZ4jAREF0SmP4nCTQ",
       "google_type": "bar",
-      "address": "25th Floor Grand China Bangkok 215 Yaowarat Rd, Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand"
+      "address": "25th Floor Grand China Bangkok 215 Yaowarat Rd, Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand",
+      "source": "google-import"
     },
     {
       "id": "aether-bkk",
@@ -1075,7 +1112,8 @@
       "address": "92 Central Park Offices Building, Unit No.HH4401 44th Floor, ถ. พระรามที่ 4 แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500, Thailand",
       "sources": [
         "https://www.instagram.com/bangkok.rooftops/reel/DfXZaiMBGvg/"
-      ]
+      ],
+      "source": "google-import"
     },
     {
       "id": "baan-e-sarn-muangyos",
@@ -1096,7 +1134,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJh4EZXfye4jARlrKiEblEEi8",
       "google_type": "thai_restaurant",
-      "address": "Sukhumvit 31, Khwaeng Khlong Toei Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand"
+      "address": "Sukhumvit 31, Khwaeng Khlong Toei Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand",
+      "source": "google-import"
     },
     {
       "id": "prawn-fishing-71-71",
@@ -1116,7 +1155,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJOSGh-EOd4jARr1vU0ou6NWo",
       "google_type": "restaurant",
-      "address": "3 Soi Sangkhom Songkhro 16, Lane 9, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand"
+      "address": "3 Soi Sangkhom Songkhro 16, Lane 9, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand",
+      "source": "google-import"
     },
     {
       "id": "koishikawa-korakuen",
@@ -1136,7 +1176,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJBVDeRkaMGGARXsIjrhYCIhs",
       "google_type": "garden",
-      "address": "1-chōme-6-6 Kōraku, Bunkyo City, Tokyo 112-0004, Japan"
+      "address": "1-chōme-6-6 Kōraku, Bunkyo City, Tokyo 112-0004, Japan",
+      "source": "google-import"
     },
     {
       "id": "hamarikyu-gardens",
@@ -1156,7 +1197,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJwfegutyLGGARGjiY-L2eSps",
       "google_type": "garden",
-      "address": "1-1 Hamarikyūteien, Chuo City, Tokyo 104-0046, Japan"
+      "address": "1-1 Hamarikyūteien, Chuo City, Tokyo 104-0046, Japan",
+      "source": "google-import"
     },
     {
       "id": "hotel-tagawa",
@@ -1176,7 +1218,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJsb9b6rn1HWARQgtHY5qjSmE",
       "google_type": "hotel",
-      "address": "11700-96 Yomase, Yamanouchi, Shimotakai District, Nagano 381-0405, Japan"
+      "address": "11700-96 Yomase, Yamanouchi, Shimotakai District, Nagano 381-0405, Japan",
+      "source": "google-import"
     },
     {
       "id": "shiga-kogen-prince-hotel",
@@ -1196,7 +1239,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJq6qapYTzHWAR4ideZAw-JPw",
       "google_type": "hotel",
-      "address": "Japan, 〒381-0401 Nagano, Shimotakai District, Yamanouchi, 下高井郡山ノ内町 焼額山"
+      "address": "Japan, 〒381-0401 Nagano, Shimotakai District, Yamanouchi, 下高井郡山ノ内町 焼額山",
+      "source": "google-import"
     },
     {
       "id": "tokyo-joypolis",
@@ -1216,7 +1260,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJuTdPXvaJGGARJhT_Ai6urFQ",
       "google_type": "amusement_park",
-      "address": "Japan, 〒135-0091 Tokyo, Minato City, Daiba, 1-chōme−6−１ DECKS Tokyo Beach, 3F～5F"
+      "address": "Japan, 〒135-0091 Tokyo, Minato City, Daiba, 1-chōme−6−１ DECKS Tokyo Beach, 3F～5F",
+      "source": "google-import"
     },
     {
       "id": "honls-beach",
@@ -1236,7 +1281,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJbUKsQwMPVHkR9bOqralbZZY",
       "google_type": "beach",
-      "address": "Honl’s Beach, Kailua-Kona, HI 96740, USA"
+      "address": "Honl’s Beach, Kailua-Kona, HI 96740, USA",
+      "source": "google-import"
     },
     {
       "id": "kahaluu-beach-park",
@@ -1256,7 +1302,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJaw-7CvEFVHkRHFKGuP4ZT_s",
       "google_type": "park",
-      "address": "78-6702 Ali‘i Dr, Kailua-Kona, HI 96740, USA"
+      "address": "78-6702 Ali‘i Dr, Kailua-Kona, HI 96740, USA",
+      "source": "google-import"
     },
     {
       "id": "la-aloa-beach-park-aka-magic-sands",
@@ -1276,7 +1323,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ1Z5SH10PVHkR57HBsNn_s8I",
       "google_type": "tourist_attraction",
-      "address": "Ali'i Drive, Kailua-Kona, HI 96740, USA"
+      "address": "Ali'i Drive, Kailua-Kona, HI 96740, USA",
+      "source": "google-import"
     },
     {
       "id": "grand-hyatt-erawan-bangkok",
@@ -1296,7 +1344,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ_VRiedCe4jAROVhWzyN8hJ4",
       "google_type": "hotel",
-      "address": "494 Thanon Ratchadamri, Khwaeng Lumphini, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand"
+      "address": "494 Thanon Ratchadamri, Khwaeng Lumphini, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand",
+      "source": "google-import"
     },
     {
       "id": "sheraton-grand-los-angeles",
@@ -1316,7 +1365,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJmRr_HrTHwoARjigvltPYgzo",
       "google_type": "hotel",
-      "address": "711 S Hope St, Los Angeles, CA 90017, USA"
+      "address": "711 S Hope St, Los Angeles, CA 90017, USA",
+      "source": "google-import"
     },
     {
       "id": "839-s-hill-st",
@@ -1336,7 +1386,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJvRBJc8rHwoAR7im04s5q0aI",
       "google_type": "premise",
-      "address": "839 S Hill St, Los Angeles, CA 90014, USA"
+      "address": "839 S Hill St, Los Angeles, CA 90014, USA",
+      "source": "google-import"
     },
     {
       "id": "734-s-spring-st",
@@ -1356,7 +1407,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJlXHizMrHwoAR_sHpAiy7QVE",
       "google_type": "subpremise",
-      "address": "734 S Spring St, Los Angeles, CA 90014, USA"
+      "address": "734 S Spring St, Los Angeles, CA 90014, USA",
+      "source": "google-import"
     },
     {
       "id": "cassisbar",
@@ -1377,7 +1429,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJdfh8rOwIAWARpmMY_avd6O4",
       "google_type": "bar",
-      "address": "Japan, 〒604-8017 Kyoto, Nakagyo Ward, Zaimokuchō, １８８−３ 四階"
+      "address": "Japan, 〒604-8017 Kyoto, Nakagyo Ward, Zaimokuchō, １８８−３ 四階",
+      "source": "google-import"
     },
     {
       "id": "hozugawa-river-boat-ride-hozugawa-kudari",
@@ -1398,7 +1451,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ5e_0rsRUAGARV6H3azfT3DM",
       "google_type": "tourist_attraction",
-      "address": "Shimonakajima-2 Hozuchō, Kameoka, Kyoto 621-0005, Japan"
+      "address": "Shimonakajima-2 Hozuchō, Kameoka, Kyoto 621-0005, Japan",
+      "source": "google-import"
     },
     {
       "id": "zaza-pub-kyoto",
@@ -1419,7 +1473,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJKQUNgYMIAWARqhPm6TspGzI",
       "google_type": "pub",
-      "address": "71-25 Daikokuchō, Nakagyo Ward, Kyoto, 604-8031, Japan"
+      "address": "71-25 Daikokuchō, Nakagyo Ward, Kyoto, 604-8031, Japan",
+      "source": "google-import"
     },
     {
       "id": "apotheca",
@@ -1440,7 +1495,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJt2feQJEIAWAR5_Dfem6CrIs",
       "google_type": "bar",
-      "address": "Japan, 〒604-8063 Kyoto, Nakagyo Ward, Aburayachō, １４５ 洋燈館 4F"
+      "address": "Japan, 〒604-8063 Kyoto, Nakagyo Ward, Aburayachō, １４５ 洋燈館 4F",
+      "source": "google-import"
     },
     {
       "id": "bar-base",
@@ -1461,7 +1517,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJke2BJJUIAWARTeo2lyYOEs0",
       "google_type": "bar",
-      "address": "Japan, 〒604-8024 Kyoto, Nakagyo Ward, Kamiyachō, 紙屋町366 麗峰会館1-3"
+      "address": "Japan, 〒604-8024 Kyoto, Nakagyo Ward, Kamiyachō, 紙屋町366 麗峰会館1-3",
+      "source": "google-import"
     },
     {
       "id": "bees-knees",
@@ -1482,7 +1539,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJkYhGJJUIAWARp8PoK5Agvq4",
       "google_type": "bar",
-      "address": "Japan, 〒604-8024 Kyoto, Nakagyo Ward, Kamiyachō, ３６４ マツヤビル 1F"
+      "address": "Japan, 〒604-8024 Kyoto, Nakagyo Ward, Kamiyachō, ３６４ マツヤビル 1F",
+      "source": "google-import"
     },
     {
       "id": "rocking-chair",
@@ -1503,7 +1561,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJq-7HB74IAWARd3WH2Xs6saI",
       "google_type": "bar",
-      "address": "434-2 Tachibanachō, Shimogyo Ward, Kyoto, 600-8044, Japan"
+      "address": "434-2 Tachibanachō, Shimogyo Ward, Kyoto, 600-8044, Japan",
+      "source": "google-import"
     },
     {
       "id": "rutubo-smokehouse",
@@ -1524,7 +1583,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJoxuaHJoJAWARJLn9yycbYYM",
       "google_type": "manufacturer",
-      "address": "125 Sagarimatsuchō, Shimogyo Ward, Kyoto, 606-8392, Japan"
+      "address": "125 Sagarimatsuchō, Shimogyo Ward, Kyoto, 606-8392, Japan",
+      "source": "google-import"
     },
     {
       "id": "scotch-branch",
@@ -1545,7 +1605,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJFwI0CXIJAWARbqJWSXAtk6Q",
       "google_type": "cocktail_bar",
-      "address": "Japan, 〒604-8066 Kyoto, Nakagyo Ward, Iseyachō, 354番地1 伽羅ビル 1階 奥（電話ボックス"
+      "address": "Japan, 〒604-8066 Kyoto, Nakagyo Ward, Iseyachō, 354番地1 伽羅ビル 1階 奥（電話ボックス",
+      "source": "google-import"
     },
     {
       "id": "mayday-coffee-bar",
@@ -1566,7 +1627,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJgV-Lqv0HAWAR5eSz7iD_QUI",
       "google_type": "bar",
-      "address": "47-2 Murasakino Unrininchō, Kita Ward, Kyoto, 603-8214, Japan"
+      "address": "47-2 Murasakino Unrininchō, Kita Ward, Kyoto, 603-8214, Japan",
+      "source": "google-import"
     },
     {
       "id": "monday",
@@ -1587,7 +1649,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJac2aJQoHAWARZPEzii7NJ6k",
       "google_type": "bar_and_grill",
-      "address": "644 Tōzaitawarayachō, Kamigyo Ward, Kyoto, 602-8294, Japan"
+      "address": "644 Tōzaitawarayachō, Kamigyo Ward, Kyoto, 602-8294, Japan",
+      "source": "google-import"
     },
     {
       "id": "1g",
@@ -1608,7 +1671,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJZalsIxwJAWARA488BB9JmhE",
       "google_type": "bar",
-      "address": "Japan, 〒604-8244 Kyoto, Nakagyo Ward, Motohonnōjichō, ３８８ 1階 奥の冷蔵庫の扉"
+      "address": "Japan, 〒604-8244 Kyoto, Nakagyo Ward, Motohonnōjichō, ３８８ 1階 奥の冷蔵庫の扉",
+      "source": "google-import"
     },
     {
       "id": "kazubar",
@@ -1629,7 +1693,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJv77655QIAWARhZnJNlAVxyQ",
       "google_type": "bar",
-      "address": "Japan, 〒604-8023 Kyoto, Nakagyo Ward, Bizenjimachō, 309- 4 HKビル ３Ｆ"
+      "address": "Japan, 〒604-8023 Kyoto, Nakagyo Ward, Bizenjimachō, 309- 4 HKビル ３Ｆ",
+      "source": "google-import"
     },
     {
       "id": "naramachi",
@@ -1649,7 +1714,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJI2QoZ4s5AWARyT7_h6JrcIg",
       "google_type": "neighborhood",
-      "address": "Naramachi, Nara, Japan"
+      "address": "Naramachi, Nara, Japan",
+      "source": "google-import"
     },
     {
       "id": "todai-ji",
@@ -1669,7 +1735,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ3XYIepA5AWARjzzVnT-skPg",
       "google_type": "buddhist_temple",
-      "address": "406-1 Zōshichō, Nara, 630-8587, Japan"
+      "address": "406-1 Zōshichō, Nara, 630-8587, Japan",
+      "source": "google-import"
     },
     {
       "id": "nara-park",
@@ -1689,7 +1756,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJYWCMvZY5AWARVnREV_OsbPk",
       "google_type": "park",
-      "address": "Nara, Japan"
+      "address": "Nara, Japan",
+      "source": "google-import"
     },
     {
       "id": "argent-shijo",
@@ -1709,7 +1777,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJh5NGmJYIAWARhXeQNDPetzk",
       "google_type": "premise",
-      "address": "Argent Shijo, 516 Masuyachō, Nakagyo Ward, Kyoto, 604-8053, Japan"
+      "address": "Argent Shijo, 516 Masuyachō, Nakagyo Ward, Kyoto, 604-8053, Japan",
+      "source": "google-import"
     },
     {
       "id": "sekigahara",
@@ -1730,7 +1799,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJsbT2nm3LA2ARmsq9NRHsBTY",
       "google_type": "locality",
-      "address": "Sekigahara, Fuwa District, Gifu, Japan"
+      "address": "Sekigahara, Fuwa District, Gifu, Japan",
+      "source": "google-import"
     },
     {
       "id": "mount-fuji",
@@ -1750,7 +1820,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJmcj9QppiGWAR36TzFsn8oaY",
       "google_type": "mountain_peak",
-      "address": "Mount Fuji, Kitayama, Fujinomiya, Shizuoka 418-0112, Japan"
+      "address": "Mount Fuji, Kitayama, Fujinomiya, Shizuoka 418-0112, Japan",
+      "source": "google-import"
     },
     {
       "id": "hakone",
@@ -1771,7 +1842,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJe9yyYAyiGWARJnuXrBe9BSY",
       "google_type": "locality",
-      "address": "Hakone, Ashigarashimo District, Kanagawa, Japan"
+      "address": "Hakone, Ashigarashimo District, Kanagawa, Japan",
+      "source": "google-import"
     },
     {
       "id": "honno-ji-temple",
@@ -1792,7 +1864,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJAR2bZpIIAWAR5joJ9NbWjR4",
       "google_type": "buddhist_temple",
-      "address": "522 Shimohonnōjimaechō, Nakagyo Ward, Kyoto, 604-8091, Japan"
+      "address": "522 Shimohonnōjimaechō, Nakagyo Ward, Kyoto, 604-8091, Japan",
+      "source": "google-import"
     },
     {
       "id": "himeji-castle",
@@ -1812,7 +1885,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJsyQzogPgVDURsYG6bi-MT3o",
       "google_type": "castle",
-      "address": "68 Honmachi, Himeji, Hyogo 670-0012, Japan"
+      "address": "68 Honmachi, Himeji, Hyogo 670-0012, Japan",
+      "source": "google-import"
     },
     {
       "id": "fushimi-inari-taisha",
@@ -1833,7 +1907,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJIW0uPRUPAWAR6eI6dRzKGns",
       "google_type": "shinto_shrine",
-      "address": "68 Fukakusa Yabunouchichō, Fushimi Ward, Kyoto, 612-0882, Japan"
+      "address": "68 Fukakusa Yabunouchichō, Fushimi Ward, Kyoto, 612-0882, Japan",
+      "source": "google-import"
     },
     {
       "id": "enryaku-ji-temple",
@@ -1854,7 +1929,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJMyzNoxsKAWARlcl_aAD9XZA",
       "google_type": "buddhist_temple",
-      "address": "4220 Sakamotohonmachi, Otsu, Shiga 520-0116, Japan"
+      "address": "4220 Sakamotohonmachi, Otsu, Shiga 520-0116, Japan",
+      "source": "google-import"
     },
     {
       "id": "higashiyama-jisho-ji",
@@ -1875,7 +1951,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ4W9CCwUJAWARyauI6BzKiiU",
       "google_type": "buddhist_temple",
-      "address": "2 Ginkakujichō, Sakyo Ward, Kyoto, 606-8402, Japan"
+      "address": "2 Ginkakujichō, Sakyo Ward, Kyoto, 606-8402, Japan",
+      "source": "google-import"
     },
     {
       "id": "okazaki-shrine",
@@ -1896,7 +1973,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJqeJAF-IIAWARU4YU3rm3HcI",
       "google_type": "shinto_shrine",
-      "address": "Japan, 〒606-8332 Kyoto, Sakyo Ward, Okazaki Higashitennōchō, ５１番地"
+      "address": "Japan, 〒606-8332 Kyoto, Sakyo Ward, Okazaki Higashitennōchō, ５１番地",
+      "source": "google-import"
     },
     {
       "id": "kinkaku-ji",
@@ -1917,7 +1995,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJvUbrwCCoAWARX2QiHCsn5A4",
       "google_type": "buddhist_temple",
-      "address": "1 Kinkakujichō, Kita Ward, Kyoto, 603-8361, Japan"
+      "address": "1 Kinkakujichō, Kita Ward, Kyoto, 603-8361, Japan",
+      "source": "google-import"
     },
     {
       "id": "nanzen-ji",
@@ -1938,7 +2017,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ_fuXcyEJAWARTQDnx6Q5szg",
       "google_type": "buddhist_temple",
-      "address": "86 Nanzenji Fukuchichō, Sakyo Ward, Kyoto, 606-8435, Japan"
+      "address": "86 Nanzenji Fukuchichō, Sakyo Ward, Kyoto, 606-8435, Japan",
+      "source": "google-import"
     },
     {
       "id": "kiyomotocho",
@@ -1959,7 +2039,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJa15r5MEIAWARxYF-wuJXvxI",
       "google_type": "sublocality_level_2",
-      "address": "Kiyomotocho, Higashiyama Ward, Kyoto, 605-0084, Japan"
+      "address": "Kiyomotocho, Higashiyama Ward, Kyoto, 605-0084, Japan",
+      "source": "google-import"
     },
     {
       "id": "yasaka-shrine",
@@ -1980,7 +2061,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJqewQoHkIAWAR6RokWp3Iesc",
       "google_type": "shinto_shrine",
-      "address": "625 Gionmachi Kitagawa, Higashiyama Ward, Kyoto, 605-0073, Japan"
+      "address": "625 Gionmachi Kitagawa, Higashiyama Ward, Kyoto, 605-0073, Japan",
+      "source": "google-import"
     },
     {
       "id": "hokan-ji-temple-yasaka-pagoda",
@@ -2001,7 +2083,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJIcT4YMUIAWARSTUi4EEky7E",
       "google_type": "buddhist_temple",
-      "address": "京都市東山区清水, 388 Yasaka Kamimachi, Higashiyama Ward, Kyoto, 605-0862, Japan"
+      "address": "京都市東山区清水, 388 Yasaka Kamimachi, Higashiyama Ward, Kyoto, 605-0862, Japan",
+      "source": "google-import"
     },
     {
       "id": "kiyomizu-dera",
@@ -2022,7 +2105,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJB_vchdMIAWARujTEUIZlr2I",
       "google_type": "buddhist_temple",
-      "address": "1-chōme-294 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862, Japan"
+      "address": "1-chōme-294 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862, Japan",
+      "source": "google-import"
     },
     {
       "id": "antonio-b-won-pat-international-airport",
@@ -2042,7 +2126,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJPRUKhrCCH2cRnYdOC-RLG5c",
       "google_type": "international_airport",
-      "address": "355 Chalan Pasaheru B224-A, Tamuning, 96913, Guam"
+      "address": "355 Chalan Pasaheru B224-A, Tamuning, 96913, Guam",
+      "source": "google-import"
     },
     {
       "id": "majuro",
@@ -2062,7 +2147,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJnZD-RTocD2URTaX9TAnllyM",
       "google_type": "colloquial_area",
-      "address": "Majuro, Majuro Atoll, RMI"
+      "address": "Majuro, Majuro Atoll, RMI",
+      "source": "google-import"
     },
     {
       "id": "kwajalein",
@@ -2079,7 +2165,8 @@
       ],
       "starred": false,
       "added": "2026-11-12",
-      "imported_from": "google-saved-lists"
+      "imported_from": "google-saved-lists",
+      "source": "google-import"
     },
     {
       "id": "chuuk",
@@ -2099,7 +2186,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJo8ZTcyyPZ2YROovdWL4T2a0",
       "google_type": "administrative_area_level_1",
-      "address": "Chuuk, Micronesia"
+      "address": "Chuuk, Micronesia",
+      "source": "google-import"
     },
     {
       "id": "aqueduct-of-valens",
@@ -2119,7 +2207,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ7XEPw6e5yhQRenpHlTxxujU",
       "google_type": "historical_landmark",
-      "address": "Kalenderhane, 34083 Fatih/İstanbul, Türkiye"
+      "address": "Kalenderhane, 34083 Fatih/İstanbul, Türkiye",
+      "source": "google-import"
     },
     {
       "id": "parque-comfama-guatape",
@@ -2139,7 +2228,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJZZJDaRgdRI4RUth4p69FZFI",
       "google_type": "community_center",
-      "address": "Embalse El Peñol, Km 10, Guatape, Guatapé, Antioquia, Colombia"
+      "address": "Embalse El Peñol, Km 10, Guatape, Guatapé, Antioquia, Colombia",
+      "source": "google-import"
     },
     {
       "id": "puerto-de-carti",
@@ -2159,7 +2249,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ1X1IkivqVI4RvmK86fRXVjA",
       "google_type": "association_or_organization",
-      "address": "F24C+2Q4, Warsobtugua, Guna Yala, Panama"
+      "address": "F24C+2Q4, Warsobtugua, Guna Yala, Panama",
+      "source": "google-import"
     },
     {
       "id": "the-garland",
@@ -2179,7 +2270,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJm_HBFxi-woARkZXB2pdshwg",
       "google_type": "hotel",
-      "address": "4222 Vineland Ave, North Hollywood, CA 91602, USA"
+      "address": "4222 Vineland Ave, North Hollywood, CA 91602, USA",
+      "source": "google-import"
     },
     {
       "id": "earthquake-fault",
@@ -2199,7 +2291,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJh3-MiQoNloARQfp5wysBRAE",
       "google_type": "hiking_area",
-      "address": "7 Minaret Rd, Mammoth Lakes, CA 93546, USA"
+      "address": "7 Minaret Rd, Mammoth Lakes, CA 93546, USA",
+      "source": "google-import"
     },
     {
       "id": "inyo-craters",
@@ -2219,7 +2312,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJt4QqUY0SloAR-6p31HbQQwk",
       "google_type": "historical_landmark",
-      "address": "Mammoth Scenic Loop, Mammoth Lakes, CA 93546, USA"
+      "address": "Mammoth Scenic Loop, Mammoth Lakes, CA 93546, USA",
+      "source": "google-import"
     },
     {
       "id": "hot-creek-geologic-site-hot-spring-side",
@@ -2239,7 +2333,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJZUXpPG0FloARPP0djHsPJhk",
       "google_type": "historical_landmark",
-      "address": "Unnamed Road, Mammoth Lakes, CA 93546, USA"
+      "address": "Unnamed Road, Mammoth Lakes, CA 93546, USA",
+      "source": "google-import"
     },
     {
       "id": "mammoth-museum-at-the-hayden-cabin",
@@ -2259,7 +2354,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJk8ypayUMloARhP9qZ-JhDRc",
       "google_type": "museum",
-      "address": "5489 Sherwin Creek Rd, Mammoth Lakes, CA 93546, USA"
+      "address": "5489 Sherwin Creek Rd, Mammoth Lakes, CA 93546, USA",
+      "source": "google-import"
     },
     {
       "id": "mammoth-consolidated-mine",
@@ -2279,7 +2375,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJ7YRtwoULloARiqczBUSZbh0",
       "google_type": "natural_feature",
-      "address": "Mammoth Consolidated Mine, Mammoth Lakes, CA 93546, USA"
+      "address": "Mammoth Consolidated Mine, Mammoth Lakes, CA 93546, USA",
+      "source": "google-import"
     },
     {
       "id": "fat-daddy-s-smokehouse",
@@ -2299,7 +2396,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJx5rPW3PQVHkR7UNUHTxtVz4",
       "google_type": "barbecue_restaurant",
-      "address": "1913 S Kihei Rd, Kihei, HI 96753, USA"
+      "address": "1913 S Kihei Rd, Kihei, HI 96753, USA",
+      "source": "google-import"
     },
     {
       "id": "mobile-mechanic-mt",
@@ -2319,7 +2417,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJbX-htVZHRVMRjcSBXRsPL2c",
       "google_type": "car_repair",
-      "address": "4419 E Valley Center Rd, Bozeman, MT 59718, USA"
+      "address": "4419 E Valley Center Rd, Bozeman, MT 59718, USA",
+      "source": "google-import"
     },
     {
       "id": "independence-automotive-llc",
@@ -2340,7 +2439,8 @@
       "imported_from": "google-saved-lists",
       "google_place_id": "ChIJxf0Y6lVUQ1MRzcPqGqezKCA",
       "google_type": "car_repair",
-      "address": "1825 N Montana Ave, Helena, MT 59601, USA"
+      "address": "1825 N Montana Ave, Helena, MT 59601, USA",
+      "source": "google-import"
     },
     {
       "id": "got-bangkok",
@@ -2365,7 +2465,8 @@
       "google_place_id": "ChIJ6VzCdgCf4jARkcvAJ90K9fs",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=GOT%20Bangkok&query_place_id=ChIJ6VzCdgCf4jARkcvAJ90K9fs",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "the-qlub",
@@ -2389,7 +2490,8 @@
       "google_place_id": "ChIJofI6ZMOf4jARkeM_KRju28s",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=THE%20QLUB&query_place_id=ChIJofI6ZMOf4jARkeM_KRju28s",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "chum-chum-soul-song-wat",
@@ -2413,7 +2515,8 @@
       "google_place_id": "ChIJN7jJIgCZ4jAROLw-mKCQpNk",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Chum%20Chum%20%28Soul%20Song%20Wat%29&query_place_id=ChIJN7jJIgCZ4jAROLw-mKCQpNk",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "central-village-outlet",
@@ -2438,7 +2541,8 @@
       "google_place_id": "ChIJDVO1Ob5dHTERexXu9EM9pcE",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Central%20Village%20Outlet&query_place_id=ChIJDVO1Ob5dHTERexXu9EM9pcE",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "kromo-bangkok-curio-collection-by-hilton",
@@ -2462,7 +2566,8 @@
       "google_place_id": "ChIJTZX2Zf2e4jARDbDhAxJw2QE",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=KROMO%20Bangkok%2C%20Curio%20Collection%20by%20Hilton&query_place_id=ChIJTZX2Zf2e4jARDbDhAxJw2QE",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "raan-jay-fai",
@@ -2486,7 +2591,8 @@
       "google_place_id": "ChIJaxq89xaZ4jARQtKhE1uqq9c",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Raan%20Jay%20Fai&query_place_id=ChIJaxq89xaZ4jARQtKhE1uqq9c",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "capybara-coffee-bangkok-ekkamai",
@@ -2510,7 +2616,8 @@
       "google_place_id": "ChIJu7cHFOmf4jAR_Ou1AtB1mPg",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Capybara%20Coffee%20Bangkok%20Ekkamai&query_place_id=ChIJu7cHFOmf4jAR_Ou1AtB1mPg",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "queensland-hotel",
@@ -2534,7 +2641,8 @@
       "google_place_id": "ChIJOQfIziyf4jARkEd1ForF9pA",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Queensland%20Hotel&query_place_id=ChIJOQfIziyf4jARkEd1ForF9pA",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "topkart-bangkok",
@@ -2558,7 +2666,8 @@
       "google_place_id": "ChIJj5416GGf4jAR9tfl4VRJ8j4",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Topkart%20Bangkok&query_place_id=ChIJj5416GGf4jAR9tfl4VRJ8j4",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "café-amazon-experience",
@@ -2582,7 +2691,8 @@
       "google_place_id": "ChIJh9xVTwCf4jARa0z9Ree4D_s",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Amazon%20Experience&query_place_id=ChIJh9xVTwCf4jARa0z9Ree4D_s",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "mira-club-bangkok",
@@ -2606,7 +2716,8 @@
       "google_place_id": "ChIJ46lNIG2f4jAR63rNwzA6U1Y",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=MIRA%20CLUB%20BANGKOK&query_place_id=ChIJ46lNIG2f4jAR63rNwzA6U1Y",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "rajadamnern-muay-thai-stadium",
@@ -2631,7 +2742,8 @@
       "google_place_id": "ChIJEyraT0CZ4jAREz5xKJKTLDM",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Rajadamnern%20Muay%20Thai%20Stadium&query_place_id=ChIJEyraT0CZ4jAREz5xKJKTLDM",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "icon-cineconic-iconsiam",
@@ -2655,7 +2767,8 @@
       "google_place_id": "ChIJTxKz6bWZ4jARaDADT3-BvUI",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=ICON%20Cineconic%20%28ICONSIAM%29&query_place_id=ChIJTxKz6bWZ4jARaDADT3-BvUI",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "the-bed-cinema-by-omazz-sf-central-pattaya",
@@ -2679,7 +2792,8 @@
       "google_place_id": "ChIJG7-F8gWWAjERjeB5UCQ84ys",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The%20Bed%20Cinema%20by%20Omazz%20%28SF%20Central%20Pattaya%29&query_place_id=ChIJG7-F8gWWAjERjeB5UCQ84ys",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "neilson-hays-library",
@@ -2703,7 +2817,8 @@
       "google_place_id": "ChIJH1bYY9GY4jAR_FWlfQ5kgek",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Neilson%20Hays%20Library&query_place_id=ChIJH1bYY9GY4jAR_FWlfQ5kgek",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "wat-saket-golden-mount",
@@ -2727,7 +2842,8 @@
       "google_place_id": "ChIJP-MtN12Z4jARlEBmga-oF4w",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Wat%20Saket%20%28Golden%20Mount%29&query_place_id=ChIJP-MtN12Z4jARlEBmga-oF4w",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "uob-live",
@@ -2751,7 +2867,8 @@
       "google_place_id": "ChIJlUtepJKf4jARJ1AW7Fh6-EA",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=UOB%20LIVE&query_place_id=ChIJlUtepJKf4jARJ1AW7Fh6-EA",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "dip-ekkamai---garden-onsen-sauna-ice-bath",
@@ -2775,7 +2892,8 @@
       "google_place_id": "ChIJg28ZD1Gf4jARuwN9PHnjI7U",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Dip%20Ekkamai%20-%20Garden%20Onsen%2C%20Sauna%20%26%20Ice%20Bath&query_place_id=ChIJg28ZD1Gf4jARuwN9PHnjI7U",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "skyflyers-asiatique",
@@ -2800,7 +2918,8 @@
       "google_place_id": "ChIJs6oYbwCZ4jARZ7-hiM2Ofwc",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=SkyFlyers%20%28Asiatique%29&query_place_id=ChIJs6oYbwCZ4jARZ7-hiM2Ofwc",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "truelove-neverland-husky-cafe",
@@ -2824,7 +2943,8 @@
       "google_place_id": "ChIJvUMXl66e4jARALcMSWimOWU",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=TrueLove%20%40%20Neverland%20%28Husky%20Cafe%29&query_place_id=ChIJvUMXl66e4jARALcMSWimOWU",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "vaya-spa-cafe",
@@ -2848,7 +2968,8 @@
       "google_place_id": "ChIJHf_NwLOf4jARrtUTPvNUFZI",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=VAYA%20SPA%20%26%20CAFE&query_place_id=ChIJHf_NwLOf4jARrtUTPvNUFZI",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "the-ice-bath-club---bangkok",
@@ -2872,7 +2993,8 @@
       "google_place_id": "ChIJG802Tpaf4jARdV_fVxNaGvU",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The%20Ice%20Bath%20Club%20-%20Bangkok&query_place_id=ChIJG802Tpaf4jARdV_fVxNaGvU",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "alice-massage-nana-4",
@@ -2896,7 +3018,8 @@
       "google_place_id": "ChIJQZyoAACf4jARTwVUbpOEQis",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Alice%20Massage%20Nana%204&query_place_id=ChIJQZyoAACf4jARTwVUbpOEQis",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "project-quiet-room-t-one-building",
@@ -2921,7 +3044,8 @@
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Project%20Quiet%20Room%20%28T-One%20Building%29&query_place_id=ChIJDwVCVCmf4jARncKKjBeC8OE",
       "imported_from": "instagram-saved-bkk",
       "review": "pending",
-      "review_note": "Pin is the T-One Building; Google has no separate listing for the room."
+      "review_note": "Pin is the T-One Building; Google has no separate listing for the room.",
+      "source": "instagram"
     },
     {
       "id": "baia-bangkok",
@@ -2945,7 +3069,8 @@
       "google_place_id": "ChIJu7_6De2f4jARZIVt8z-FiRI",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Baia%20Bangkok&query_place_id=ChIJu7_6De2f4jARZIVt8z-FiRI",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "copper-beyond-buffet-gaysorn-amarin",
@@ -2969,7 +3094,8 @@
       "google_place_id": "ChIJO8MKjW2f4jARj37d2JR3l8c",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Copper%20Beyond%20Buffet%20Gaysorn%20Amarin&query_place_id=ChIJO8MKjW2f4jARj37d2JR3l8c",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "unculture-silom-rooftop-bar",
@@ -2993,7 +3119,8 @@
       "google_place_id": "ChIJEc_x3gWZ4jARUu81t7ELjg0",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Unculture%20Silom%20Rooftop%20Bar&query_place_id=ChIJEc_x3gWZ4jARUu81t7ELjg0",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "lumphini-park",
@@ -3017,7 +3144,8 @@
       "google_place_id": "ChIJG7BL7Saf4jARNmn5AQiyAaw",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Lumphini%20Park&query_place_id=ChIJG7BL7Saf4jARNmn5AQiyAaw",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "haidilao-hotpot-central-rama-9",
@@ -3041,7 +3169,8 @@
       "google_place_id": "ChIJdTCD0Fmf4jAR3Haq_ZjU3nM",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Haidilao%20Hotpot%20%28Central%20Rama%209%29&query_place_id=ChIJdTCD0Fmf4jAR3Haq_ZjU3nM",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "little-wood",
@@ -3066,7 +3195,8 @@
       "google_place_id": "ChIJabaCefGf4jARgByXoHcVxWk",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Little%20Wood&query_place_id=ChIJabaCefGf4jARgByXoHcVxWk",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "bitstudio-gallery",
@@ -3090,7 +3220,8 @@
       "google_place_id": "ChIJs88pwriZ4jARaStuJpLRuKs",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=bit.studio%20gallery&query_place_id=ChIJs88pwriZ4jARaStuJpLRuKs",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "pop-mart-cafe-iconsiam",
@@ -3114,7 +3245,8 @@
       "google_place_id": "ChIJsat4KgCZ4jARDRUlunjs0Gs",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=POP%20MART%20Cafe%20%28ICONSIAM%29&query_place_id=ChIJsat4KgCZ4jARDRUlunjs0Gs",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "akara-sky-hanuman-bangkok",
@@ -3139,7 +3271,8 @@
       "google_place_id": "ChIJkxdwWiyf4jARdUV1zHHjqlo",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Akara%20Sky%20Hanuman%20Bangkok&query_place_id=ChIJkxdwWiyf4jARdUV1zHHjqlo",
       "imported_from": "instagram-saved-bkk",
-      "review": "approved"
+      "review": "approved",
+      "source": "instagram"
     },
     {
       "id": "newstand",
@@ -3164,7 +3297,8 @@
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=newstand.&query_place_id=ChIJlXLMegKf4jARoxOwr3_hHzQ",
       "imported_from": "instagram-saved-bkk",
       "review": "pending",
-      "review_note": "Google match is uncertain: the listing has no reviews and the reel gives no address."
+      "review_note": "Google match is uncertain: the listing has no reviews and the reel gives no address.",
+      "source": "instagram"
     },
     {
       "id": "965-bangkok",
@@ -3188,7 +3322,8 @@
       "google_place_id": "ChIJzyd4esyZ4jARjDlkOpNhnbI",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=965%20%7C%20Bangkok&query_place_id=ChIJzyd4esyZ4jARjDlkOpNhnbI",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "benjakitti-park",
@@ -3212,7 +3347,8 @@
       "google_place_id": "ChIJmfMfvBuf4jAR9rugvZd5Lyc",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Benjakitti%20Park&query_place_id=ChIJmfMfvBuf4jAR9rugvZd5Lyc",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "terminal-21-asok",
@@ -3236,7 +3372,8 @@
       "google_place_id": "ChIJuWuZbh6f4jAReZMEm2xxgzM",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Terminal%2021%20Asok&query_place_id=ChIJuWuZbh6f4jAReZMEm2xxgzM",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "benchakitti-sports-center",
@@ -3260,7 +3397,8 @@
       "google_place_id": "ChIJlaP_q0Gf4jARPKZLTj5dtoE",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Benchakitti%20Sports%20Center&query_place_id=ChIJlaP_q0Gf4jARPKZLTj5dtoE",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "barbeque-nation",
@@ -3284,7 +3422,8 @@
       "google_place_id": "ChIJ30tae3yf4jAR_WbjoMm70a0",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Barbeque%20Nation&query_place_id=ChIJ30tae3yf4jAR_WbjoMm70a0",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "fitness-first-club-iconsiam",
@@ -3308,7 +3447,8 @@
       "google_place_id": "ChIJOVJW-4aZ4jARymTAdirAXA4",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Fitness%20First%20Club%20Iconsiam&query_place_id=ChIJOVJW-4aZ4jARymTAdirAXA4",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "muscle-factory",
@@ -3332,7 +3472,8 @@
       "google_place_id": "ChIJ2zp9be2f4jAR1dog6EexzDA",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Muscle%20Factory&query_place_id=ChIJ2zp9be2f4jAR1dog6EexzDA",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "thonglor-crossfit",
@@ -3356,7 +3497,8 @@
       "google_place_id": "ChIJy_BJV6qf4jARPDVG9gm7ybs",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Thonglor%20CrossFit&query_place_id=ChIJy_BJV6qf4jARPDVG9gm7ybs",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "pattavikorn-market-new-project",
@@ -3380,7 +3522,8 @@
       "google_place_id": "ChIJeU5X7cljHTERBCbz6dFDioY",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pattavikorn%20Market%20New%20Project&query_place_id=ChIJeU5X7cljHTERBCbz6dFDioY",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "pink-bangkok-staybridge-suites-sukhumvit",
@@ -3405,7 +3548,8 @@
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pink%20Bangkok%20%28Staybridge%20Suites%20Sukhumvit%29&query_place_id=ChIJB0p22Kuf4jAR743ZZu4Kzmk",
       "imported_from": "instagram-saved-bkk",
       "review": "pending",
-      "review_note": "Pin is the hotel; Google has no separate listing for Pink Bangkok."
+      "review_note": "Pin is the hotel; Google has no separate listing for Pink Bangkok.",
+      "source": "instagram"
     },
     {
       "id": "dont-open-the-fridge",
@@ -3431,7 +3575,8 @@
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Don%27t%20Open%20The%20Fridge&query_place_id=ChIJxzg-EcGf4jARoOp3PwuD2eI",
       "imported_from": "instagram-saved-bkk",
       "review": "pending",
-      "review_note": "The second reel (red Coca-Cola fridge entrance) doesn't name the bar; it's attached here as the likely match."
+      "review_note": "The second reel (red Coca-Cola fridge entrance) doesn't name the bar; it's attached here as the likely match.",
+      "source": "instagram"
     },
     {
       "id": "mega-harborland-one-bangkok",
@@ -3455,7 +3600,8 @@
       "google_place_id": "ChIJ61ArlP-f4jAR00_8GDdZajE",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Mega%20HarborLand%20One%20Bangkok&query_place_id=ChIJ61ArlP-f4jAR00_8GDdZajE",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "arabica-bangkok-empire-tower",
@@ -3479,7 +3625,8 @@
       "google_place_id": "ChIJVcDWajif4jARMI0DNmwbITg",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=%25%20Arabica%20Bangkok%20Empire%20Tower&query_place_id=ChIJVcDWajif4jARMI0DNmwbITg",
       "imported_from": "instagram-saved-bkk",
-      "review": "pending"
+      "review": "pending",
+      "source": "instagram"
     },
     {
       "id": "nagisa-snack-bar-karaoke",
@@ -3498,7 +3645,8 @@
       "notes": "The place my Thai friend once brought me to because she manages the bar.",
       "tags": [],
       "starred": false,
-      "added": "2026-11-12"
+      "added": "2026-11-12",
+      "source": "manual"
     },
     {
       "id": "xiao-yu-new-bar-karaoke",
@@ -3520,7 +3668,8 @@
         "https://maps.app.goo.gl/FM7SArAckFC39jcWA"
       ],
       "starred": false,
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "source": "manual"
     },
     {
       "id": "siya-massage-on-nut",
@@ -3540,7 +3689,8 @@
         "https://maps.app.goo.gl/5ffS1LDFSE2qfgKU6"
       ],
       "starred": false,
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "source": "manual"
     },
     {
       "id": "kurathai-massage",
@@ -3562,7 +3712,8 @@
         "https://www.kurathaimassage.com/jp"
       ],
       "starred": true,
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "source": "manual"
     }
   ]
 }

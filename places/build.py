@@ -14,6 +14,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "places.json"
 OUT = ROOT / "places"
 
+SOURCE_LABELS = {"instagram": "Instagram find", "google-import": "Google Maps import", "manual": "Manual entry", "gps-log": "Logged on the spot"}
+
 def gmaps(p):
     if p.get("google_maps_url"):
         return p["google_maps_url"]
@@ -62,10 +64,10 @@ def main():
 
     with open(OUT / "my-places.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["name", "category", "starred", "address", "city", "latitude", "longitude", "notes", "google_maps_url"])
+        w.writerow(["name", "category", "starred", "address", "city", "latitude", "longitude", "notes", "google_maps_url", "source"])
         for p in places:
             w.writerow([p["name"], label[p["category"]], "yes" if p.get("starred") else "", p.get("address", ""), p.get("city", ""),
-                        p["lat"], p["lng"], p.get("notes", ""), gmaps(p)])
+                        p["lat"], p["lng"], p.get("notes", ""), gmaps(p), SOURCE_LABELS.get(p.get("source"), "Manual entry")])
 
     print(f"built {len(places)} places -> places/index.html, my-places.kml, my-places.csv")
 

@@ -30,6 +30,10 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
    `added` (today). Set `gmaps_query` to a short string Google Maps resolves to the real listing
    (e.g. `"TICTACTOE EmSphere Bangkok"`).
 4. **Rebuild:** set `_meta.last_updated` to today, then `python3 places/build.py`.
+   Always set `source` (where the place was found): `manual` for a place the user names or sends a
+   Google Maps link for, `instagram` for a find from an Instagram post (put the post URL in `sources`),
+   `google-import` for the Google saved-lists import, `gps-log` only for places logged in the app.
+   The card shows it as "Source: …", the list can be grouped by it, and the CSV has a `source` column.
 5. **Reply** with a one-row table (name, category, address, coords precision) and the Google Maps
    share link: `https://www.google.com/maps/search/?api=1&query=<url-encoded gmaps_query>`.
 
@@ -102,7 +106,7 @@ from the map and list right away on that device.
   `#log@<lat>,<lng>` for given coordinates): takes a GPS fix, looks up named places nearby on
   OpenStreetMap, asks "Is this where you are?" with a Google Maps link to check, then opens the form
   with a Dictate button for the comment and an optional field for the exact Google Maps share link.
-  Saved on the device with `logged_via: "gps"`; it travels in Export → My changes like any new place.
+  Saved on the device with `source: "gps-log"`; it travels in Export → My changes like any new place.
 - Each place: Open in Google Maps, Directions, Share (native share sheet / copies the link).
 - ✎ Edit on any place card changes name, address, comment (`notes`, with a Dictate button) and the Google Maps
   link; edits are saved on the device and `merge_changes.py` applies them from Export → My changes.
