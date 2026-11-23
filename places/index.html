@@ -131,6 +131,14 @@
   .leaflet-control-attribution { font-size:10px; }
   .menu button { display:flex; width:100%; align-items:center; gap:12px; min-height:52px; border:0; border-bottom:1px solid var(--line); border-radius:0; background:none; font-size:16px; text-align:left; padding:0 4px; }
   .menu button:last-child { border-bottom:0; }
+  .bar #logbtn { width:46px; height:46px; padding:0; border-radius:50%; border-color:transparent; background:var(--bg); color:var(--brand); box-shadow:0 2px 10px rgba(0,0,0,.2); display:flex; align-items:center; justify-content:center; flex:none; }
+  .cand { border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin-top:10px; }
+  .cand.best { border-color:var(--brand); border-width:2px; }
+  .cand b { font-size:17px; } .cand a.gl, .result a.gl { font-size:14px; }
+  .cand.saved { cursor:pointer; background:var(--bg2); }
+  .result { display:flex; align-items:center; gap:10px; min-height:52px; } .result > div { flex:1; min-width:0; }
+  .mic { min-height:44px; padding:8px 14px; font-size:15px; border-radius:22px; }
+  .mic.rec { background:#b42318; border-color:#b42318; color:#fff; }
   @media (min-width:720px) {
     .sheet { left:12px; right:auto; width:400px; bottom:calc(var(--nav-h) + 12px); border-radius:18px; border-width:1px; }
     .top { right:auto; width:440px; }
@@ -145,6 +153,7 @@
   <div class="bar">
     <input id="q" type="search" enterkeyhint="search" placeholder="Add a place or paste a Maps link" autocomplete="off" autocapitalize="words">
     <button class="primary" id="go" aria-label="Add place">＋</button>
+    <button id="logbtn" aria-label="Log the place I am at" title="Log the place I'm at"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><path d="M12 6.8v5.4M9.3 9.5h5.4"/></svg></button>
   </div>
   <div class="chips" id="chips"></div>
 </div>
@@ -410,6 +419,7 @@ function showMore() {
   if (view !== 'map') setView('map');
   open(`<h2>Walkabout</h2>
     <div class="menu">
+      <button onclick="logHere()">📍 Log the place I'm at</button>
       <button onclick="showImport()">⬇️ Import from Google Maps</button>
       <button onclick="showExport()">⬆️ Export &amp; save my changes</button>
       <button onclick="location.hash='';setView('list')">☰ All places</button>
@@ -466,7 +476,8 @@ window.showInstall = showInstall;
 // ---------- place card ----------
 const sheet = document.getElementById('sheet');
 const open = html => { sheet.innerHTML = '<button class="x" onclick="closeSheet()" aria-label="Close">✕</button>' + html; sheet.classList.add('show'); sheet.scrollTop = 0; };
-const close = () => sheet.classList.remove('show');
+let flowOpen = false; // true while the log / add-place form is on the sheet
+const close = () => { sheet.classList.remove('show'); flowOpen = false; };
 window.closeSheet = close;
 let touchY = null;
 sheet.addEventListener('touchstart', e => { touchY = sheet.scrollTop <= 0 ? e.touches[0].clientY : null; }, { passive:true });
@@ -486,7 +497,7 @@ window.editCity = id => {
 };
 function showPlace(id, isHere, keepView) {
   const p = allPlaces().find(x => x.id === id); if (!p) return;
-  shownId = id; shownHere = !!isHere;
+  shownId = id; shownHere = !!isHere; flowOpen = false;
   if (view === 'list' && !keepView) setView('map');
   const c = cat(p.category), d = me ? fmtDist(dist(me, p)) + ' away' : '';
   open(`
@@ -533,7 +544,7 @@ function onPos(pos) {
   } else meMarker.setLatLng([me.lat, me.lng]);
   const nearest = allPlaces().map(p => ({ p, d:dist(me, p) })).sort((a,b) => a.d - b.d)[0];
   if (nearest && nearest.d <= NEAR_METERS) {
-    if (nearShownId !== nearest.p.id) { nearShownId = nearest.p.id; showPlace(nearest.p.id, true); if (navigator.vibrate) navigator.vibrate(80); }
+    if (nearShownId !== nearest.p.id && !(flowOpen && sheet.classList.contains('show'))) { nearShownId = nearest.p.id; showPlace(nearest.p.id, true); if (navigator.vibrate) navigator.vibrate(80); }
   } else nearShownId = null;
   if (view === 'list') renderList();
 }
@@ -565,11 +576,15 @@ async function search(q) {
 function addForm(seed) {
   const auto = seed.category || classify({ name: seed.name, osmType: seed.osmType, osmClass: seed.osmClass, text: seed.text });
   if (view === 'list') setView('map');
-  open(`<h2>New place</h2>
-    <label>Name<input id="f-name" value="${esc(seed.name)}"></label>
+  flowOpen = true;
+  open(`<h2>${esc(seed.title || 'New place')}</h2>
+    <label>Name<input id="f-name" value="${esc(seed.name)}" placeholder="Name of the place"></label>
     <label>Category <span id="f-auto">(auto: ${esc(cat(auto).label)})</span><select id="f-cat" data-prev="${esc(auto)}">${catOptions(auto)}</select></label>
     <label>Address / floor<input id="f-addr" value="${esc(seed.address || '')}"></label>
-    <label>Notes<textarea id="f-notes" rows="3" placeholder="What makes it good, what to order"></textarea></label>
+    <label>${seed.logged ? 'What is this place? (your comment)' : 'Notes'}<textarea id="f-notes" rows="3" placeholder="${seed.logged ? 'Why it is worth remembering, who you met, what to order' : 'What makes it good, what to order'}"></textarea></label>
+    <div class="row" style="margin-top:6px"><button class="mic" id="f-mic" type="button">🎤 Dictate</button><span class="meta" id="f-mic-hint" style="flex:1"></span></div>
+    <label>Google Maps link (optional)<input id="f-gurl" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="Paste the share link of the exact listing"></label>
+    ${seed.gcheck ? `<div class="meta" style="margin-top:4px"><a class="gl" href="${esc(seed.gcheck)}" target="_blank" rel="noopener">Check this spot on Google Maps ↗</a></div>` : ''}
     <div class="row"><button class="star" id="f-star" title="Star">☆</button><span class="meta">Pin: ${seed.lat.toFixed(5)}, ${seed.lng.toFixed(5)} — drag the marker to adjust</span></div>
     <div class="row"><button class="primary" id="f-save">Save</button><button onclick="cancelAdd()">Cancel</button></div>`);
   const tmp = L.marker([seed.lat, seed.lng], { draggable:true }).addTo(map);
@@ -585,15 +600,21 @@ function addForm(seed) {
   let starred = false;
   const sb = document.getElementById('f-star');
   sb.onclick = () => { starred = !starred; sb.textContent = starred ? '★' : '☆'; sb.classList.toggle('is', starred); };
-  window.cancelAdd = () => { map.removeLayer(tmp); close(); };
+  const stopMic = wireDictation(document.getElementById('f-mic'), document.getElementById('f-notes'), document.getElementById('f-mic-hint'));
+  if (seed.logged && !seed.name) document.getElementById('f-name').focus();
+  window.cancelAdd = () => { stopMic(); map.removeLayer(tmp); close(); };
   document.getElementById('f-save').onclick = () => {
-    const ll = tmp.getLatLng(), name = document.getElementById('f-name').value.trim();
-    if (!name) return;
+    const ll = tmp.getLatLng(), nameEl = document.getElementById('f-name'), name = nameEl.value.trim();
+    if (!name) { nameEl.focus(); nameEl.style.borderColor = '#b42318'; return; }
+    stopMic();
+    const gurl = document.getElementById('f-gurl').value.trim();
     const today = new Date().toISOString().slice(0,10);
     const p = { id: slug(name) + '-' + Date.now().toString(36).slice(-4), name, category: sel.value === '__new' ? 'other' : sel.value,
       city: seed.city || '', country: seed.country || '', address: document.getElementById('f-addr').value.trim(),
-      lat:+ll.lat.toFixed(6), lng:+ll.lng.toFixed(6), coords_precision:'exact', notes: document.getElementById('f-notes').value.trim(),
+      lat:+ll.lat.toFixed(6), lng:+ll.lng.toFixed(6), coords_precision: seed.precision || 'exact', notes: document.getElementById('f-notes').value.trim(),
       tags:[], sources:[], starred, visited: today, added: today };
+    if (/^https?:\/\//i.test(gurl)) { p.google_maps_url = gurl; p.sources = [gurl]; }
+    if (seed.logged) p.logged_via = 'gps';
     store(LS.places, load(LS.places).concat(p)); map.removeLayer(tmp); document.getElementById('q').value = ''; renderAll(); showPlace(p.id);
   };
 }
@@ -619,6 +640,115 @@ document.getElementById('go').onclick = async () => {
   document.getElementById('use-center').onclick = () => { const c = map.getCenter(); addForm({ name:q, lat:c.lat, lng:c.lng }); };
 };
 document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('go').click(); });
+
+// ---------- dictation (speech-to-text into a textarea) ----------
+function wireDictation(btn, ta, hint) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { btn.style.display = 'none'; hint.textContent = 'To dictate, tap the 🎤 on your keyboard.'; return () => {}; }
+  let rec = null, base = '';
+  const stop = () => { if (rec) { try { rec.stop(); } catch (e) {} } };
+  btn.onclick = () => {
+    if (rec) return stop();
+    rec = new SR(); rec.lang = navigator.language || 'en-US'; rec.interimResults = true; rec.continuous = true;
+    base = ta.value.trim() ? ta.value.trim() + ' ' : '';
+    rec.onresult = e => { let t = ''; for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript + ' ';
+      ta.value = base + t.replace(/\s+/g, ' ').trim(); ta.dispatchEvent(new Event('input')); };
+    rec.onerror = e => { hint.textContent = e.error === 'not-allowed' || e.error === 'service-not-allowed'
+      ? 'Microphone is blocked here. Tap the 🎤 on your keyboard instead.' : 'Dictation stopped. Tap Dictate to continue, or use the keyboard 🎤.'; };
+    rec.onend = () => { rec = null; btn.classList.remove('rec'); btn.textContent = '🎤 Dictate'; if (hint.textContent === 'Listening…') hint.textContent = ''; };
+    try { rec.start(); btn.classList.add('rec'); btn.textContent = '■ Stop'; hint.textContent = 'Listening…'; }
+    catch (e) { rec = null; hint.textContent = 'Dictation is not available. Tap the 🎤 on your keyboard instead.'; }
+  };
+  return stop;
+}
+
+// ---------- log the place I'm at: GPS fix → nearby places → "is this where you are?" → comment ----------
+const OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+const POI_KEYS = ['amenity', 'shop', 'tourism', 'leisure', 'craft', 'office', 'healthcare'];
+const LOG_SAVED_M = 80;
+// Google Maps opened at this exact spot, searching for the name: the link the user checks before confirming.
+const gcheck = (name, pos) => name
+  ? `https://www.google.com/maps/search/${encodeURIComponent(name)}/@${pos.lat.toFixed(6)},${pos.lng.toFixed(6)},19z`
+  : `https://www.google.com/maps/search/?api=1&query=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+const getFix = () => new Promise((res, rej) => {
+  if (!navigator.geolocation) return rej(new Error('location is not available in this browser'));
+  navigator.geolocation.getCurrentPosition(p => res({ lat:p.coords.latitude, lng:p.coords.longitude, acc:p.coords.accuracy }), rej,
+    { enableHighAccuracy:true, timeout:20000, maximumAge:5000 });
+});
+async function fetchJSON(url, opts = {}, ms = 9000) {
+  const ac = new AbortController(), t = setTimeout(() => ac.abort(), ms);
+  try { const r = await fetch(url, { ...opts, signal: ac.signal }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
+  finally { clearTimeout(t); }
+}
+async function nearbyPOIs(pos, radius) { // null = lookup failed, [] = nothing named here
+  const q = `[out:json][timeout:8];nwr(around:${radius},${pos.lat},${pos.lng})[name][~"^(${POI_KEYS.join('|')})$"~"."];out center tags 40;`;
+  for (const ep of OVERPASS) {
+    try {
+      const j = await fetchJSON(ep + '?data=' + encodeURIComponent(q));
+      return (j.elements || []).map(e => {
+        const t = e.tags || {}, lat = e.lat ?? (e.center && e.center.lat), lng = e.lon ?? (e.center && e.center.lon);
+        if (lat == null || lng == null) return null;
+        const en = t['name:en'], local = t.name, key = POI_KEYS.find(k => t[k]);
+        return { name: en && local && en !== local ? `${en} (${local})` : (en || local), search: en || local, lat, lng,
+          osmClass: key, osmType: t[key], kind: String(t[key] || '').replace(/_/g, ' '),
+          address: [[t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), t.level ? 'level ' + t.level : ''].filter(Boolean).join(', '),
+          text: [t.cuisine, t.description, t.amenity, t.shop, t.leisure, t.tourism].filter(Boolean).join(' '), d: dist(pos, { lat, lng }) };
+      }).filter(Boolean).sort((a, b) => a.d - b.d);
+    } catch (e) {}
+  }
+  return null;
+}
+async function reverseGeo(pos) {
+  try {
+    const j = await fetchJSON(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&addressdetails=1&lat=${pos.lat}&lon=${pos.lng}`, { headers:{ 'Accept-Language':'en' } }, 7000);
+    const a = j.address || {};
+    return { address: [[a.house_number, a.road].filter(Boolean).join(' '), a.suburb || a.neighbourhood || a.quarter].filter(Boolean).join(', '),
+      city: a.city || a.town || a.village || a.state || '', country: a.country || '' };
+  } catch (e) { return { address:'', city:'', country:'' }; }
+}
+async function logHere(fixed) {
+  if (view !== 'map') setView('map');
+  flowOpen = true;
+  open('<h2>Log this place</h2><div class="meta">Finding where you are…</div>');
+  let pos;
+  try { pos = fixed || await getFix(); }
+  catch (e) {
+    return open(`<h2>Log this place</h2><p>Could not get your location${e && e.message ? ' (' + esc(e.message) + ')' : ''}.</p>
+      <div class="meta">Allow location for Walkabout in your browser settings, then try again.</div>
+      <div class="row"><button class="primary" onclick="logHere()">Try again</button></div>`);
+  }
+  map.setView([pos.lat, pos.lng], 18);
+  const radius = Math.round(Math.max(60, Math.min((pos.acc || 30) * 1.5, 150)));
+  open(`<h2>Log this place</h2><div class="meta">Got your position (±${Math.round(pos.acc || 0)} m). Looking up what is here…</div>`);
+  const [pois, geo] = await Promise.all([nearbyPOIs(pos, radius), reverseGeo(pos)]);
+  showCandidates(pos, pois, geo, radius);
+}
+window.logHere = logHere;
+function showCandidates(pos, pois, geo, radius) {
+  const saved = allPlaces().map(p => ({ p, d: dist(pos, p) })).filter(x => x.d <= LOG_SAVED_M).sort((a, b) => a.d - b.d).slice(0, 3);
+  const list = (pois || []).slice(0, 8), top = list[0], rest = list.slice(1);
+  const sub = c => [c.kind, fmtDist(c.d) + ' away', c.address].filter(Boolean).map(esc).join(' · ');
+  open(`<h2>${top ? 'Is this where you are?' : 'Log this place'}</h2>
+    <div class="meta">GPS ±${Math.round(pos.acc || 0)} m${geo.address ? ' · ' + esc(geo.address) : ''}${geo.city ? ' · ' + esc(geo.city) : ''}</div>
+    ${saved.map(x => `<div class="cand saved" data-saved="${esc(x.p.id)}"><b>${esc(x.p.name)}</b><div class="meta">Already in Walkabout · ${fmtDist(x.d)} away · tap to open</div></div>`).join('')}
+    ${top ? `<div class="cand best"><b>${esc(top.name)}</b><div class="meta">${sub(top)}</div>
+      <a class="gl" href="${esc(gcheck(top.search, top))}" target="_blank" rel="noopener">Check on Google Maps ↗</a>
+      <div class="row"><button class="primary" id="c-yes">Yes, this is it</button></div></div>` : ''}
+    ${rest.length ? `<div class="meta" style="margin-top:12px">Or one of these nearby:</div>` + rest.map((c, i) => `<div class="result" data-i="${i + 1}"><div><b>${esc(c.name)}</b>
+      <div class="meta">${sub(c)}</div></div><a class="gl" href="${esc(gcheck(c.search, c))}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Google ↗</a></div>`).join('') : ''}
+    ${pois === null ? '<div class="meta" style="margin-top:10px">The place lookup could not be reached. You can still log this spot by name.</div>'
+      : !list.length ? `<div class="meta" style="margin-top:10px">No named place found within ${radius} m. Name it yourself and it is pinned at your position.</div>` : ''}
+    <div class="row"><button id="c-none" class="${top ? '' : 'primary'}">${top ? 'None of these' : 'Name this place'}</button>
+      <a href="${esc(gcheck('', pos))}" target="_blank" rel="noopener"><button>See this spot on Google Maps</button></a></div>`);
+  const pick = c => addForm({ title:'Log this place', logged:true, name:c.name, lat:c.lat, lng:c.lng, address:c.address || geo.address, city:geo.city, country:geo.country,
+    osmType:c.osmType, osmClass:c.osmClass, text:c.text, gcheck:gcheck(c.search, c) });
+  const yes = document.getElementById('c-yes'); if (yes) yes.onclick = () => pick(top);
+  sheet.querySelectorAll('.result').forEach(el => el.onclick = () => pick(list[+el.dataset.i]));
+  sheet.querySelectorAll('[data-saved]').forEach(el => el.onclick = () => showPlace(el.dataset.saved, true));
+  document.getElementById('c-none').onclick = () => addForm({ title:'Log this place', logged:true, name:'', lat:pos.lat, lng:pos.lng, address:geo.address, city:geo.city,
+    country:geo.country, gcheck:gcheck('', pos), precision: (pos.acc || 0) > 25 ? 'approximate' : 'exact' });
+}
+document.getElementById('logbtn').onclick = () => logHere();
 
 // ---------- export ----------
 function download(name, mime, body) {
@@ -802,12 +932,14 @@ function showImport() {
   };
 }
 
-// deep links: #<place-id> opens a place, #list opens the list
+// deep links: #<place-id> opens a place, #list opens the list, #log logs the place you are at, #log@<lat>,<lng> logs given coordinates
 renderAll();
 const hash = decodeURIComponent(location.hash.slice(1));
 if (hash === 'list') setView('list');
 else if (hash === 'recent') setView('recent');
 else if (hash === 'import') showImport();
+else if (hash === 'log') logHere();
+else if (/^log@-?\d+(\.\d+)?,-?\d+(\.\d+)?$/.test(hash)) { const [la, lo] = hash.slice(4).split(',').map(Number); logHere({ lat:la, lng:lo, acc:20 }); }
 else if (hash) showPlace(hash);
 </script>
 </body>

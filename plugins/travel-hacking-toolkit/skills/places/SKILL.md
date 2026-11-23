@@ -98,6 +98,11 @@ from the map and list right away on that device.
 - Add bar: type a name (OpenStreetMap search near the map view), paste a Google Maps link, or
   "use my current location". The category is pre-filled automatically (keywords, then the
   OpenStreetMap place type) and can be changed before saving.
+- Log the place I'm at (pin button next to ＋, More → Log the place I'm at, deep link `#log`, or
+  `#log@<lat>,<lng>` for given coordinates): takes a GPS fix, looks up named places nearby on
+  OpenStreetMap, asks "Is this where you are?" with a Google Maps link to check, then opens the form
+  with a Dictate button for the comment and an optional field for the exact Google Maps share link.
+  Saved on the device with `logged_via: "gps"`; it travels in Export → My changes like any new place.
 - Each place: Open in Google Maps, Directions, Share (native share sheet / copies the link).
 - Deep link: `index.html#<place-id>` opens that place.
 - Location needs HTTPS or localhost: `python3 -m http.server -d places 8000`, or host it.
