@@ -4299,6 +4299,31 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "inside-out-cloud-11",
+      "name": "INSIDE OUT photo exhibition (Cloud 11)",
+      "category": "museum",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Cloud 11, 2nd floor, 888 Sukhumvit Rd, Phra Khanong, Bangkok 10260 (BTS Punnawithi)",
+      "lat": 13.6845287,
+      "lng": 100.6099455,
+      "coords_precision": "building",
+      "google_maps_url": "https://www.google.com/maps/place/Cloud+11/@13.6845287,100.6099455,17z/data=!4m6!3m5!1s0x30e2a141eb9cb9ad:0x19903dd78ff7f25f!8m2!3d13.6845287!4d100.6099455!16s%2Fg%2F11p_1_5txn",
+      "google_type": "shopping mall",
+      "notes": "Public art project: thousands of face portraits covering the Cloud 11 building, collected from more than 2,500 people.\n\nRuns 11 Nov 2026 to 31 Jan 2027. On the 2nd floor there is a photo booth: fill in a short survey, get your portrait taken for free, and they print it at A1 size for free. The building also has vintage shops and other artwork.",
+      "hours": "Cloud 11 open until 10 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/Df3q5PJtS06/",
+        "https://www.google.com/maps/place/Cloud+11/@13.6845287,100.6099455,17z/data=!4m6!3m5!1s0x30e2a141eb9cb9ad:0x19903dd78ff7f25f!8m2!3d13.6845287!4d100.6099455!16s%2Fg%2F11p_1_5txn",
+        "http://www.cloud11bangkok.com/"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
