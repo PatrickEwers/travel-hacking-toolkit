@@ -4405,6 +4405,32 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "punklong-water-bicycle",
+      "name": "Punklong water bicycle (Khlong Bang Luang)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "17 Phetkasem Sai Kao Rd, Khlong Bang Luang (by the Artist House and Wat Kamphaeng Bang Chak), Phasi Charoen, Bangkok",
+      "lat": 13.7304036,
+      "lng": 100.462979,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Punklong/data=!4m7!3m6!1s0x30e2998c8cde7487:0x884018e628bc8353!8m2!3d13.7304036!4d100.462979!16s%2Fg%2F11z9vb4f9j",
+      "google_type": "Tourist attraction",
+      "notes": "Pedal a water bicycle along Khlong Bang Luang past old wooden canal houses, snack boats and a century-old banyan tree. About 25-40 minutes; one bike takes up to 2 people.\n\nPrices from the reel (Sept 2026): 250 baht per bike 10 AM-5:30 PM, 350 baht for the sunset slot 5:30-6:30 PM. The sunset ride goes further because the long-tail boats have stopped. Book via @punklong2026 on Instagram.",
+      "hours": "Daily 10 AM–6 PM, sunset slot to 6:30 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DcveGeADP1X/",
+        "https://www.instagram.com/punklong2026/",
+        "https://www.google.com/maps/place/Punklong/data=!4m7!3m6!1s0x30e2998c8cde7487:0x884018e628bc8353!8m2!3d13.7304036!4d100.462979!16s%2Fg%2F11z9vb4f9j",
+        "https://www.timeout.com/bangkok/things-to-do/pedal-a-free-water-bike-through-bang-luang-canal-past-snack-boats-and-banyan-shade"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
