@@ -258,6 +258,12 @@ https://www.google.com/maps/search/?api=1&amp;query=965%20%7C%20Bangkok&amp;quer
 Level 55, Empire Tower, 1 South Sathon Rd, Yan Nawa, Sathon, Bangkok 10120
 Coffee on the 55th floor, billed as the best coffee view in Bangkok.
 https://www.google.com/maps/search/?api=1&amp;query=%25%20Arabica%20Bangkok%20Empire%20Tower&amp;query_place_id=ChIJVcDWajif4jARMI0DNmwbITg</description><Point><coordinates>100.5302284,13.7205344,0</coordinates></Point></Placemark>
+<Placemark><name>Hong Sieng Kong (ฮงเซียงกง)</name><styleUrl>#cat-cafe</styleUrl><description>Café
+734, 736 Soi Wanit 2, Talat Noi, Samphanthawong, Bangkok 10100
+Riverside cafe in old Chinese buildings in Talat Noi, right on the Chao Phraya: antique furniture, moody corners, plenty of seating by the water. Google reviewers single out the river and sunset views.
+
+You order as you enter. About 12-15 minutes on foot from Ratchawong Pier.
+https://www.google.com/maps/place/Hong+Sieng+Kong/@13.7347953,100.5115915,17z/data=!4m6!3m5!1s0x30e299a0160ccde7:0x2b7dafd1bfe99787!8m2!3d13.7347953!4d100.5115915!16s%2Fg%2F11j6dv6qsn</description><Point><coordinates>100.5115915,13.7347953,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Market</name>
 <Placemark><name>Chatuchak Weekend Market</name><styleUrl>#cat-market</styleUrl><description>Market

@@ -4380,6 +4380,31 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "hong-sieng-kong",
+      "name": "Hong Sieng Kong (ฮงเซียงกง)",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "734, 736 Soi Wanit 2, Talat Noi, Samphanthawong, Bangkok 10100",
+      "lat": 13.7347953,
+      "lng": 100.5115915,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Hong+Sieng+Kong/@13.7347953,100.5115915,17z/data=!4m6!3m5!1s0x30e299a0160ccde7:0x2b7dafd1bfe99787!8m2!3d13.7347953!4d100.5115915!16s%2Fg%2F11j6dv6qsn",
+      "google_type": "Cafe",
+      "notes": "Riverside cafe in old Chinese buildings in Talat Noi, right on the Chao Phraya: antique furniture, moody corners, plenty of seating by the water. Google reviewers single out the river and sunset views.\n\nYou order as you enter. About 12-15 minutes on foot from Ratchawong Pier.",
+      "hours": "Closed Mondays (Google showed it closed Monday midday, reopening Tue 10 AM)",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/Df6j0Ujhdid/",
+        "https://www.google.com/maps/place/Hong+Sieng+Kong/@13.7347953,100.5115915,17z/data=!4m6!3m5!1s0x30e299a0160ccde7:0x2b7dafd1bfe99787!8m2!3d13.7347953!4d100.5115915!16s%2Fg%2F11j6dv6qsn",
+        "http://www.facebook.com/hongsiengkong"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
