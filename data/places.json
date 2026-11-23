@@ -3935,6 +3935,28 @@
       "starred": false,
       "added": "2026-11-23",
       "status": "visited"
+    },
+    {
+      "id": "sabaijai-original-ekkamai",
+      "name": "Sabaijai (Original)",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "87 Soi Ekkamai 3, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7299814,
+      "lng": 100.5856092,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/4YDHjBDTHVHH5orE9",
+      "google_type": "thai_restaurant",
+      "notes": "Restaurant where I had lunch with Nick from Switzerland.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/4YDHjBDTHVHH5orE9"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
