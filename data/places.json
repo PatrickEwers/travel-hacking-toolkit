@@ -4753,6 +4753,31 @@
       "starred": false,
       "added": "2026-11-23",
       "hours": "Usually daily 6 PM–2 AM"
+    },
+    {
+      "id": "zero-latency-emquartier",
+      "name": "Zero Latency VR (EmQuartier)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "4th floor, The Glass Quartier, EmQuartier (inside Bounce), Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110 (BTS Phrom Phong)",
+      "lat": 13.7313521,
+      "lng": 100.5697053,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJa73kwAmf4jARllLeKNsJqFY",
+      "google_place_id": "ChIJa73kwAmf4jARllLeKNsJqFY",
+      "google_type": "VR arcade",
+      "notes": "Free-roam VR: you wear a headset and walk around an open arena with a group, shooting zombies. The reel is the zombie game; Google reviewers name it 'Outbreak' and call it scary. Each game is about 30 minutes.\n\nBest with friends, glasses fit under the headset, and they email you a video of your game afterwards.",
+      "hours": "Mon–Fri 11 AM–8 PM, Sat–Sun 10 AM–8 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DdbRUWPBLLI/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJa73kwAmf4jARllLeKNsJqFY"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
