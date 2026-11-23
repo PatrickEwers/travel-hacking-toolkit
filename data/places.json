@@ -4004,6 +4004,30 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "clutch-bangkok",
+      "name": "Clutch",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "The Warehouse, 2F, 867 Charoen Krung Rd, Samphanthawong, Bangkok 10100",
+      "lat": 13.7337914,
+      "lng": 100.5144552,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/4f7Q39162H2sDCby5",
+      "google_type": "bar",
+      "notes": "Awesome, fun-vibe place that Nick took me to, to meet his Swiss friends.",
+      "hours": "Opens 6 PM (closed Mondays per Google)",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/4f7Q39162H2sDCby5",
+        "https://www.instagram.com/clutchbkk"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
