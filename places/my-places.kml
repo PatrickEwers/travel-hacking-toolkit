@@ -130,6 +130,22 @@ The awesome place that has open mic nights and a very family-style setting, a ve
 
 Open mic: Sundays at 8 PM, weekly and free, per the current Bangkok open-mic listing (checked 23 Nov 2026). Not confirmed by the bar itself: an older guide says Tuesday, so call +66 2 661 3017 before going. Also a jazz jam every Sunday from 4 PM.
 https://maps.app.goo.gl/8eFnkiHwpSf21nfR8</description><Point><coordinates>100.5704458,13.7278441,0</coordinates></Point></Placemark>
+<Placemark><name>The Red Door BKK</name><styleUrl>#cat-bar</styleUrl><description>Bar
+3rd floor, 89/8 Sukhumvit Soi 24, Khlong Tan, Khlong Toei, Bangkok 10110
+Cocktail bar and event venue on Sukhumvit 24. Bangkok Latin Soul (the Bachata On Mondays organisers) run their Tuesday salsa night here: class 8:15–9:15 PM, then a salsa, bachata and kizomba party. 300 baht with the class, 150 baht party only.
+
+This night has changed venue before, so check @bangkoklatinsoul on Instagram first.
+https://www.google.com/maps/place/?q=place_id:ChIJY3NYVwCf4jARCqIpU32iQNI</description><Point><coordinates>100.5674173,13.7250156,0</coordinates></Point></Placemark>
+<Placemark><name>R Bar (Renaissance Bangkok Ratchaprasong)</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Renaissance Bangkok Ratchaprasong Hotel, 518/8 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330 (BTS Chit Lom, exit 2)
+Hotel bar that turns into the 'Salsa On Saturday' Latin party every week: a dance class at 8 PM, then salsa, bachata and kizomba in two rooms until midnight.
+https://www.google.com/maps/place/?q=place_id:ChIJl71Ii9qe4jARs4FSwEGjTE0</description><Point><coordinates>100.5420624,13.7425439,0</coordinates></Point></Placemark>
+<Placemark><name>Havana Social</name><styleUrl>#cat-bar</styleUrl><description>Bar
+Sukhumvit Soi 11 (end of the soi, hidden entrance), Khlong Toei Nuea, Watthana, Bangkok 10110
+Speakeasy-style Cuban bar at the end of Sukhumvit 11 with live Latin music. Salsa Sundays: a free salsa class, then social dancing. Listed at 300 baht entry; a Google reviewer paid 500 baht with a drink.
+
+There is a dress code (long trousers). Google showed it closed Mon–Wed this week.
+https://www.google.com/maps/place/?q=place_id:ChIJPzDk6BGf4jARIn43300IF4Y</description><Point><coordinates>100.5558721,13.7455856,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Rooftop bar</name>
 <Placemark><name>Sky View 360</name><styleUrl>#cat-rooftop-bar</styleUrl><description>Rooftop bar
@@ -270,6 +286,12 @@ Riverside cafe in old Chinese buildings in Talat Noi, right on the Chao Phraya: 
 
 You order as you enter. About 12-15 minutes on foot from Ratchawong Pier.
 https://www.google.com/maps/place/Hong+Sieng+Kong/@13.7347953,100.5115915,17z/data=!4m6!3m5!1s0x30e299a0160ccde7:0x2b7dafd1bfe99787!8m2!3d13.7347953!4d100.5115915!16s%2Fg%2F11j6dv6qsn</description><Point><coordinates>100.5115915,13.7347953,0</coordinates></Point></Placemark>
+<Placemark><name>Eleven Ratio (Thai–English exchange)</name><styleUrl>#cat-cafe</styleUrl><description>Café
+20/3 Soi Ratchadamri 2, Lumphini, Pathum Wan, Bangkok 10330 (BTS Chit Lom)
+Coffee shop where the Bangkok Cultural Exchange Meetup (Kru Fai) runs its weekly Thai–English language exchange: groups by level, half the time in Thai, half in English. A beginner 'Start Thai from Zero' class runs just before it, 1:30–2:30 PM.
+
+Small fee, paid at the cafe. Contact: bkkmeetup@gmail.com.
+https://www.google.com/maps/place/?q=place_id:ChIJNfvQ3Bef4jARc4vKQ0laMAE</description><Point><coordinates>100.5442116,13.7472857,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Market</name>
 <Placemark><name>Chatuchak Weekend Market</name><styleUrl>#cat-market</styleUrl><description>Market
@@ -282,6 +304,12 @@ https://www.google.com/maps/place/ChangChui+Creative+Park/data=!4m2!3m1!1s0x30e2
 Nawamin Rd, Khlong Kum, Bueng Kum, Bangkok 10240
 Huge thrift market the poster rates above the better-known 'red building'; keep the whole day free.
 https://www.google.com/maps/search/?api=1&amp;query=Pattavikorn%20Market%20New%20Project&amp;query_place_id=ChIJeU5X7cljHTERBCbz6dFDioY</description><Point><coordinates>100.6528253,13.8158513,0</coordinates></Point></Placemark>
+<Placemark><name>Chapter Market</name><styleUrl>#cat-market</styleUrl><description>Market
+51 Sukhumvit Soi 26, Khlong Tan, Khlong Toei, Bangkok 10110 (5 min walk from BTS Phrom Phong)
+Small food market on Sukhumvit 26 that hosts community meetups most nights (Chapter Community on Meetup: movie club, art and dinner club and more).
+
+Bangkok Digital Nomads run their Friday board games night here. A Google reviewer also mentions free karaoke on Fridays and a 150 baht paint-and-sip on Thursdays; those two are not confirmed.
+https://www.google.com/maps/place/?q=place_id:ChIJa1OTKImf4jARFnh9KgeHUiQ</description><Point><coordinates>100.5699635,13.7267504,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Mall &amp; shopping</name>
 <Placemark><name>Platinum Fashion Mall</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
@@ -311,6 +339,10 @@ Vintage-themed mall in the renovated former The Mall Ramkhamhaeng: 1980s decor a
 
 From the reel comments: the food hall downstairs is good and cheap; the cool vintage pieces are pricey.
 https://www.google.com/maps/place/1981+Soul%26Sold/@13.7523902,100.609812,17z/data=!4m6!3m5!1s0x30e29fe3e1a58491:0x3e566733b154039c!8m2!3d13.7523902!4d100.609812!16s%2Fg%2F11z0gbc0h8</description><Point><coordinates>100.609812,13.7523902,0</coordinates></Point></Placemark>
+<Placemark><name>Gateway Ekkamai (Read Thai classes)</name><styleUrl>#cat-mall</styleUrl><description>Mall &amp; shopping
+982/22 Sukhumvit Rd, Phra Khanong, Khlong Toei, Bangkok 10110 (BTS Ekkamai)
+Mall at BTS Ekkamai. The Bangkok Cultural Exchange Meetup (Kru Fai) teaches Saturday 'Read Thai' sessions in the Food Lounge on the 4th floor: beginners 3:45–5 PM, intermediate to advanced 5–6 PM. 150 baht, limited seats, book on Meetup.
+https://www.google.com/maps/place/?q=place_id:ChIJ1X5ZN6Wf4jAR13roVJNxRBE</description><Point><coordinates>100.5853477,13.7188994,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Temple</name>
 <Placemark><name>Meditation Hall (ห้องปฏิบัติสมาธิ)</name><styleUrl>#cat-temple</styleUrl><description>Temple
@@ -709,5 +741,11 @@ https://www.google.com/maps/place/Mobile+Mechanic+MT/data=!4m2!3m1!1s0x53454756b
 1825 N Montana Ave, Helena, MT 59601, USA
 Eric is great
 https://www.google.com/maps/place/Independence+Automotive+LLC/data=!4m2!3m1!1s0x53435455ea18fdc5:0x2028b3a71aeac3cd</description><Point><coordinates>-112.01992,46.603475,0</coordinates></Point></Placemark>
+<Placemark><name>True Digital Park</name><styleUrl>#cat-other</styleUrl><description>Other
+101 Sukhumvit Rd, Bang Chak, Phra Khanong, Bangkok 10260 (BTS Punnawithi)
+Tech and startup campus at BTS Punnawithi. Bangkok Digital Nomads hold a weekly co-working Monday here: work alongside other remote workers, low-key and social.
+
+The same group runs a Thursday evening social at a different venue each week; the venue is posted on their Meetup page.
+https://www.google.com/maps/place/?q=place_id:ChIJsRsYadKe4jARdjyYungxDAY</description><Point><coordinates>100.6113255,13.6851839,0</coordinates></Point></Placemark>
 </Folder>
 </Document></kml>

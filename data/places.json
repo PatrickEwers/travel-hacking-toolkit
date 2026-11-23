@@ -4500,6 +4500,259 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "chapter-market",
+      "name": "Chapter Market",
+      "category": "market",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "51 Sukhumvit Soi 26, Khlong Tan, Khlong Toei, Bangkok 10110 (5 min walk from BTS Phrom Phong)",
+      "lat": 13.7267504,
+      "lng": 100.5699635,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJa1OTKImf4jARFnh9KgeHUiQ",
+      "google_place_id": "ChIJa1OTKImf4jARFnh9KgeHUiQ",
+      "google_type": "Food court",
+      "notes": "Small food market on Sukhumvit 26 that hosts community meetups most nights (Chapter Community on Meetup: movie club, art and dinner club and more).\n\nBangkok Digital Nomads run their Friday board games night here. A Google reviewer also mentions free karaoke on Fridays and a 150 baht paint-and-sip on Thursdays; those two are not confirmed.",
+      "events": [
+        {
+          "title": "Nomad Board Games Night (Bangkok Digital Nomads)",
+          "days": [
+            "fri"
+          ],
+          "time": "7:30–11 PM",
+          "note": "free, buy a drink"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.meetup.com/bangkok-digital-nomads/",
+        "https://www.meetup.com/chapter-community-in-bkk/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJa1OTKImf4jARFnh9KgeHUiQ"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Daily 11 AM–midnight"
+    },
+    {
+      "id": "true-digital-park",
+      "name": "True Digital Park",
+      "category": "other",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "101 Sukhumvit Rd, Bang Chak, Phra Khanong, Bangkok 10260 (BTS Punnawithi)",
+      "lat": 13.6851839,
+      "lng": 100.6113255,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJsRsYadKe4jARdjyYungxDAY",
+      "google_place_id": "ChIJsRsYadKe4jARdjyYungxDAY",
+      "google_type": "Event venue",
+      "notes": "Tech and startup campus at BTS Punnawithi. Bangkok Digital Nomads hold a weekly co-working Monday here: work alongside other remote workers, low-key and social.\n\nThe same group runs a Thursday evening social at a different venue each week; the venue is posted on their Meetup page.",
+      "events": [
+        {
+          "title": "Co-Working Monday (Bangkok Digital Nomads)",
+          "days": [
+            "mon"
+          ],
+          "time": "daytime",
+          "note": "exact hours on Meetup"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.meetup.com/bangkok-digital-nomads/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJsRsYadKe4jARdjyYungxDAY"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Daily 10 AM–10 PM"
+    },
+    {
+      "id": "eleven-ratio-coffee",
+      "name": "Eleven Ratio (Thai–English exchange)",
+      "category": "cafe",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "20/3 Soi Ratchadamri 2, Lumphini, Pathum Wan, Bangkok 10330 (BTS Chit Lom)",
+      "lat": 13.7472857,
+      "lng": 100.5442116,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJNfvQ3Bef4jARc4vKQ0laMAE",
+      "google_place_id": "ChIJNfvQ3Bef4jARc4vKQ0laMAE",
+      "google_type": "Coffee shop",
+      "notes": "Coffee shop where the Bangkok Cultural Exchange Meetup (Kru Fai) runs its weekly Thai–English language exchange: groups by level, half the time in Thai, half in English. A beginner 'Start Thai from Zero' class runs just before it, 1:30–2:30 PM.\n\nSmall fee, paid at the cafe. Contact: bkkmeetup@gmail.com.",
+      "events": [
+        {
+          "title": "Thai–English language exchange",
+          "days": [
+            "tue"
+          ],
+          "time": "2:15–4 PM",
+          "note": "small fee"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.meetup.com/bangkok-cultural-exchange-meetup/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJNfvQ3Bef4jARc4vKQ0laMAE"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Mon–Fri 7 AM–4 PM, Sat 9 AM–4 PM, closed Sun"
+    },
+    {
+      "id": "gateway-ekkamai",
+      "name": "Gateway Ekkamai (Read Thai classes)",
+      "category": "mall",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "982/22 Sukhumvit Rd, Phra Khanong, Khlong Toei, Bangkok 10110 (BTS Ekkamai)",
+      "lat": 13.7188994,
+      "lng": 100.5853477,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ1X5ZN6Wf4jAR13roVJNxRBE",
+      "google_place_id": "ChIJ1X5ZN6Wf4jAR13roVJNxRBE",
+      "google_type": "Shopping mall",
+      "notes": "Mall at BTS Ekkamai. The Bangkok Cultural Exchange Meetup (Kru Fai) teaches Saturday 'Read Thai' sessions in the Food Lounge on the 4th floor: beginners 3:45–5 PM, intermediate to advanced 5–6 PM. 150 baht, limited seats, book on Meetup.",
+      "events": [
+        {
+          "title": "Read Thai for beginners",
+          "days": [
+            "sat"
+          ],
+          "time": "3:45–5 PM",
+          "note": "150 baht"
+        },
+        {
+          "title": "Read Thai, intermediate to advanced",
+          "days": [
+            "sat"
+          ],
+          "time": "5–6 PM",
+          "note": "150 baht"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.meetup.com/bangkok-cultural-exchange-meetup/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJ1X5ZN6Wf4jAR13roVJNxRBE"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Daily 10 AM–10 PM"
+    },
+    {
+      "id": "red-door-bkk",
+      "name": "The Red Door BKK",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "3rd floor, 89/8 Sukhumvit Soi 24, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7250156,
+      "lng": 100.5674173,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJY3NYVwCf4jARCqIpU32iQNI",
+      "google_place_id": "ChIJY3NYVwCf4jARCqIpU32iQNI",
+      "google_type": "Cocktail bar",
+      "notes": "Cocktail bar and event venue on Sukhumvit 24. Bangkok Latin Soul (the Bachata On Mondays organisers) run their Tuesday salsa night here: class 8:15–9:15 PM, then a salsa, bachata and kizomba party. 300 baht with the class, 150 baht party only.\n\nThis night has changed venue before, so check @bangkoklatinsoul on Instagram first.",
+      "events": [
+        {
+          "title": "Latin Soul Tuesday (salsa class + party)",
+          "days": [
+            "tue"
+          ],
+          "time": "8:15 PM–midnight",
+          "note": "150–300 baht; confirm venue"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.salsavida.com/event/thailand/bangkok/latin-soul-tuesday-party-at-red-door-bkk/",
+        "https://www.instagram.com/bangkoklatinsoul/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJY3NYVwCf4jARCqIpU32iQNI"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "r-bar-renaissance",
+      "name": "R Bar (Renaissance Bangkok Ratchaprasong)",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Renaissance Bangkok Ratchaprasong Hotel, 518/8 Phloen Chit Rd, Lumphini, Pathum Wan, Bangkok 10330 (BTS Chit Lom, exit 2)",
+      "lat": 13.7425439,
+      "lng": 100.5420624,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJl71Ii9qe4jARs4FSwEGjTE0",
+      "google_place_id": "ChIJl71Ii9qe4jARs4FSwEGjTE0",
+      "google_type": "Bar",
+      "notes": "Hotel bar that turns into the 'Salsa On Saturday' Latin party every week: a dance class at 8 PM, then salsa, bachata and kizomba in two rooms until midnight.",
+      "events": [
+        {
+          "title": "Salsa On Saturday (class + Latin party)",
+          "days": [
+            "sat"
+          ],
+          "time": "8 PM–midnight"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.meetup.com/bangkok-bachata-salsa-kizomba/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJl71Ii9qe4jARs4FSwEGjTE0"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Daily 4 PM–midnight"
+    },
+    {
+      "id": "havana-social",
+      "name": "Havana Social",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Sukhumvit Soi 11 (end of the soi, hidden entrance), Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7455856,
+      "lng": 100.5558721,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/?q=place_id:ChIJPzDk6BGf4jARIn43300IF4Y",
+      "google_place_id": "ChIJPzDk6BGf4jARIn43300IF4Y",
+      "google_type": "Cocktail bar",
+      "notes": "Speakeasy-style Cuban bar at the end of Sukhumvit 11 with live Latin music. Salsa Sundays: a free salsa class, then social dancing. Listed at 300 baht entry; a Google reviewer paid 500 baht with a drink.\n\nThere is a dress code (long trousers). Google showed it closed Mon–Wed this week.",
+      "events": [
+        {
+          "title": "Salsa Sundays (free class + social)",
+          "days": [
+            "sun"
+          ],
+          "time": "from 7:30 PM",
+          "note": "about 300 baht entry"
+        }
+      ],
+      "tags": [],
+      "sources": [
+        "https://www.salsavida.com/?p=25666",
+        "https://www.google.com/maps/place/?q=place_id:ChIJPzDk6BGf4jARIn43300IF4Y"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23",
+      "hours": "Usually daily 6 PM–2 AM"
     }
   ]
 }
