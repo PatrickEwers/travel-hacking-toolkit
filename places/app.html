@@ -526,6 +526,7 @@ function showPlace(id, isHere, keepView) {
     ${p.closed ? '<div style="margin-top:8px"><span class="closed">Permanently closed</span></div>' : ''}
     ${p.address ? `<div class="meta" style="margin-top:6px">${esc(p.address)}</div>` : ''}
     ${p.notes ? `<p>${esc(p.notes)}</p>` : ''}
+    ${p.visited ? `<div class="meta" style="margin-top:6px">✓ Visited ${esc(new Date(p.visited + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' }))}</div>` : ''}
     <div class="meta" style="margin-top:6px">Source: <b>${esc(sourceLabel(p))}</b>${sourceOf(p) === 'instagram' ? (p.sources || []).filter(u => /instagram\.com/.test(u)).map((u, i, a) =>
       ` · <a href="${esc(u)}" target="_blank" rel="noopener">open the post${a.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('') : ''}${p.added ? ' · added ' + esc(p.added) : ''}</div>
     ${(p.tags||[]).length && p.imported_from ? `<div class="meta">📋 ${p.tags.map(esc).join(' · ')}</div>` : ''}

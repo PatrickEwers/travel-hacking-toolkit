@@ -3714,6 +3714,29 @@
       "starred": true,
       "added": "2026-11-23",
       "source": "manual"
+    },
+    {
+      "id": "esaan-nation-sukhumvit-22",
+      "name": "Esaan Nation - Khao Suan Kwang Grilled Chicken @ Sukhumvit 22",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "487 Soi Sukhumvit 22, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7235587,
+      "lng": 100.5648262,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/vRiVqXEzze7UwxtQA",
+      "google_type": "thai_restaurant",
+      "notes": "The second Esaan Nation location. Had dinner here on Thursday 19 Nov 2026 with Adrian, his Turkish friend Tiwa, and Shannon; Todd was there as well.",
+      "hours": "Daily 11:00-03:00 per the owner's Google post (verify)",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/vRiVqXEzze7UwxtQA"
+      ],
+      "source": "manual",
+      "starred": false,
+      "visited": "2026-11-19",
+      "added": "2026-11-23"
     }
   ]
 }
