@@ -4125,6 +4125,30 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "dala38-thonglor-massage",
+      "name": "Dala38 Thonglor Authentic massage",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "840 Sukhumvit Rd, Phra Khanong, Khlong Toei, Bangkok 10110",
+      "lat": 13.7233365,
+      "lng": 100.5795805,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/qvPRerDeD1EsEo4U9",
+      "google_type": "massage spa",
+      "notes": "One of two massage places recommended by Vivian. At the time of adding this, I have not been here yet.",
+      "hours": "Open until 12 AM",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/qvPRerDeD1EsEo4U9",
+        "https://www.thonglordala38massage.com/"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
