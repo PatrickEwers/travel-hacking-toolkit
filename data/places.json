@@ -4078,6 +4078,30 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "funkytown-bangkok",
+      "name": "Funkytown (F*nkytown)",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "1, 39 Sukhumvit 37 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7307175,
+      "lng": 100.5702666,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/npJtdpPkiNaoMxVV7",
+      "google_type": "cocktail bar",
+      "notes": "Place where I met with Nicholas and a bunch of his friends. Very hidden, chill place to meet up with somebody.",
+      "hours": "Opens 5 PM",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/npJtdpPkiNaoMxVV7",
+        "https://www.fnkytown.bar/"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
