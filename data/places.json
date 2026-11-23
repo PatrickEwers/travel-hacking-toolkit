@@ -3541,6 +3541,28 @@
       ],
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "kurathai-massage",
+      "name": "KURATHAI MASSAGE by Club Thailand",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "1/14 Soi Sukhumvit 39, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7311677,
+      "lng": 100.5706483,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/EhrLUMoqWeyEvDVT9",
+      "google_type": "massage_spa",
+      "notes": "My favorite massage place in the Soi 24 area.",
+      "hours": "Opens 10 AM (verify)",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/EhrLUMoqWeyEvDVT9",
+        "https://www.kurathaimassage.com/jp"
+      ],
+      "starred": true,
+      "added": "2026-11-23"
     }
   ]
 }
