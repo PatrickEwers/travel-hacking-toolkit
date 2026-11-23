@@ -13,7 +13,7 @@
       "lng": "decimal longitude",
       "coords_precision": "exact | building | approximate",
       "notes": "why it's worth going, what to order, tips",
-      "tags": "free-form list; imported places carry the names of the Google lists they came from",
+      "tags": "free labels, e.g. superlocal; the app lists and filters by them (Google list names 'Want to go' and 'Instagram saved…' are hidden there)",
       "hours": "opening hours as known (verify)",
       "sources": "URLs used to identify the place",
       "visited": "YYYY-MM-DD or null",
@@ -1187,7 +1187,8 @@
       "coords_precision": "exact",
       "google_maps_url": "https://www.google.com/maps/place/%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%95%E0%B8%81%E0%B8%81%E0%B8%B8%E0%B9%89%E0%B8%87+71+Prawn+Fishing/data=!4m2!3m1!1s0x30e29d43f8a12139:0x6a35ba8bd2d45baf",
       "tags": [
-        "Want to go"
+        "Want to go",
+        "superlocal"
       ],
       "starred": false,
       "added": "2026-11-12",
@@ -4043,9 +4044,35 @@
       "google_type": "sauna",
       "notes": "Super local Thai sauna place that Nick and his buddies often go to. He recommended it, but Billy actually took me there once!",
       "hours": "Open until 12 AM",
-      "tags": [],
+      "tags": [
+        "superlocal"
+      ],
       "sources": [
         "https://www.google.com/maps/place/Carnation+Sauna/@13.7675642,100.5872421,17z/data=!4m6!3m5!1s0x30e29f91a52c62bb:0xf0116907422b4a7b!8m2!3d13.7675642!4d100.5872421!16s%2Fg%2F11p_4k5s1g"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "bloom-bar-sukhumvit-23",
+      "name": "Bloom Bar",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "24/3 Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7397767,
+      "lng": 100.5633146,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Bloom+Bar/@13.7397767,100.5633146,17z/data=!4m6!3m5!1s0x30e29f6462fa6bf5:0x802c8b960a968123!8m2!3d13.7397767!4d100.5633146!16s%2Fg%2F11v67jr342",
+      "google_type": "bar",
+      "notes": "Bar where I met BB, who chatted with me when I walked by.",
+      "hours": "Opens 6 PM",
+      "tags": [],
+      "sources": [
+        "https://www.google.com/maps/place/Bloom+Bar/@13.7397767,100.5633146,17z/data=!4m6!3m5!1s0x30e29f6462fa6bf5:0x802c8b960a968123!8m2!3d13.7397767!4d100.5633146!16s%2Fg%2F11v67jr342",
+        "https://m.facebook.com/61550645740196/"
       ],
       "source": "manual",
       "status": "visited",

@@ -155,6 +155,10 @@
            max-width:calc(100vw - 24px); padding:10px 10px 10px 16px; border-radius:14px; background:#1d1d1f; color:#fff; font-size:15px; box-shadow:0 4px 18px rgba(0,0,0,.35); }
   #toast.show { display:flex; } #toast span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   #toast button { min-height:36px; padding:6px 12px; border:0; border-radius:10px; background:#3a3a3c; color:#fff; font-weight:600; flex:none; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .tags .tag { min-height:32px; padding:4px 10px; border-radius:999px; font-size:13px; font-weight:600; background:var(--bg); color:var(--brand); border:1px solid var(--line); }
+  .tagline { color:var(--brand); font-weight:600; }
+  .ltag { margin:10px 14px 0; font-size:16px; display:flex; align-items:center; gap:8px; } .ltag button { margin-left:auto; min-height:32px; font-size:13px; padding:4px 10px; }
   .seg { display:flex; margin-top:10px; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
   .seg button { flex:1; min-height:44px; border:0; border-radius:0; background:var(--bg); color:var(--fg); font-size:14px; padding:6px 4px; border-right:1px solid var(--line); }
   .seg button:last-child { border-right:0; } .seg button.on { background:var(--brand); color:#fff; font-weight:600; }
@@ -398,11 +402,15 @@ function pickCategory(sel, onPick) {
 }
 
 // ---------- state ----------
-const filter = { cats: new Set(), starred: false, city: '', status: '', trip: '' };
+const filter = { cats: new Set(), starred: false, city: '', status: '', trip: '', tag: '' };
+// Tags: free labels like "superlocal". Google list names that duplicate status or source are hidden from the tag list.
+const HIDDEN_TAGS = /^(want to go$|instagram saved)/i;
+const tagsOf = p => (p.tags || []).filter(t => t && !HIDDEN_TAGS.test(t));
+window.showTag = t => { filter.tag = t; close(); setView('list'); renderAll(); };
 try { filter.city = localStorage.getItem('walkabout.city') || ''; } catch (e) {}
 const inCity = p => !filter.city || (p.city || 'Elsewhere') === filter.city;
 let view = 'map', me = null, meMarker = null, nearShownId = null;
-const inStatus = p => (!filter.status || statusOf(p) === filter.status) && (!filter.trip || tripPlaceIds(filter.trip).has(p.id));
+const inStatus = p => (!filter.status || statusOf(p) === filter.status) && (!filter.trip || tripPlaceIds(filter.trip).has(p.id)) && (!filter.tag || tagsOf(p).includes(filter.tag));
 const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
 
 // ---------- map ----------
@@ -456,6 +464,9 @@ function renderChips() {
   const cities = Object.keys(nCity).sort((x, y) => nCity[y] - nCity[x] || x.localeCompare(y));
   const inC = every.filter(inCity), nStat = {}; inC.forEach(p => { const k = statusOf(p); nStat[k] = (nStat[k] || 0) + 1; });
   const ps = inC.filter(inStatus);
+  const nTag = {}; inC.forEach(p => tagsOf(p).forEach(t => nTag[t] = (nTag[t] || 0) + 1));
+  if (filter.tag && !nTag[filter.tag]) nTag[filter.tag] = 0;
+  const tagNames = Object.keys(nTag).sort((x, y) => x.localeCompare(y));
   const counts = {}; ps.forEach(p => counts[p.category] = (counts[p.category] || 0) + 1);
   const nStar = ps.filter(p => p.starred).length;
   const cats = allCats().filter(c => counts[c.id]);
@@ -465,6 +476,8 @@ function renderChips() {
     (filter.trip && tripById(filter.trip) ? `<button class="chip on" data-k="trip">🧳 ${esc(tripById(filter.trip).name)} ✕</button>` : '') +
     `<select class="chip statsel ${filter.status ? 'on' : ''}" id="statsel" aria-label="Status"><option value="">Any status</option>${Object.keys(STATUSES).map(k =>
       `<option value="${k}" ${k === filter.status ? 'selected' : ''}>${STATUSES[k]} (${nStat[k] || 0})</option>`).join('')}</select>` +
+    (tagNames.length ? `<select class="chip statsel ${filter.tag ? 'on' : ''}" id="tagsel" aria-label="Tag"><option value="">Any tag</option>${tagNames.map(t =>
+      `<option value="${esc(t)}" ${t === filter.tag ? 'selected' : ''}># ${esc(t)} (${nTag[t]})</option>`).join('')}</select>` : '') +
     `<button class="chip ${!filter.cats.size && !filter.starred ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
     `<button class="chip ${filter.starred ? 'on' : ''}" data-k="star">★ Starred ${nStar}</button>` +
     cats.map(c => `<button class="chip ${filter.cats.has(c.id) ? 'on' : ''}" data-k="${esc(c.id)}">${glyph(c, 'currentColor')} ${esc(c.label)} ${counts[c.id]}</button>`).join('');
@@ -474,6 +487,7 @@ function renderChips() {
     const here = visible(); if (here.length) map.fitBounds(L.latLngBounds(here.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom:15 });
   };
   document.getElementById('statsel').onchange = e => { filter.status = e.target.value; close(); renderAll(); };
+  const tagSel = document.getElementById('tagsel'); if (tagSel) tagSel.onchange = e => { filter.tag = e.target.value; close(); renderAll(); };
   document.querySelectorAll('#chips button.chip').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     if (k === 'trip') filter.trip = '';
@@ -494,7 +508,7 @@ function renderList() {
   const item = p => { const c = cat(p.category); return `<div class="litem" data-id="${esc(p.id)}">
       <div class="ic" style="background:${c.color}">${glyph(c)}</div>
       <div class="body"><div class="name"><span class="nm">${esc(p.name)}</span>${statusOf(p) !== 'identified' ? `<span class="st ${statusOf(p)}">${STATUSES[statusOf(p)]}</span>` : ''}</div>${p.closed ? '<span class="closed">Permanently closed</span>' : ''}
-        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div></div>
+        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div>${tagsOf(p).length ? `<div class="meta tagline">${tagsOf(p).map(t => '# ' + esc(t)).join('  ')}</div>` : ''}</div>
       <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button>
       <button class="swipe-del" data-del="${esc(p.id)}" tabindex="-1">Remove</button></div>`; };
   let body;
@@ -514,6 +528,11 @@ function renderList() {
     body = Object.keys(n).sort((x, y) => y.localeCompare(x)).map(k =>
       `<div class="lgroup"><h3>Added ${fmt(k)} · ${n[k].length}</h3>${n[k].sort(byName).map(item).join('')}</div>`).join('');
   }
+  else if (sortBy === 'tag') {
+    const n = {}; ps.forEach(p => { const ts = tagsOf(p); (ts.length ? ts : ['']).forEach(t => (n[t] = n[t] || []).push(p)); });
+    body = Object.keys(n).sort((x, y) => (x === '') - (y === '') || x.localeCompare(y)).map(t =>
+      `<div class="lgroup"><h3>${t ? '# ' + esc(t) : 'No tag'} · ${n[t].length}</h3>${n[t].sort(byName).map(item).join('')}</div>`).join('');
+  }
   else if (sortBy === 'source') {
     body = Object.keys(SOURCES).map(k => { const g = ps.filter(p => sourceOf(p) === k).sort(byName); return g.length ?
       `<div class="lgroup"><h3>${esc(SOURCES[k])} · ${g.length}</h3>${g.map(item).join('')}</div>` : ''; }).join('');
@@ -524,11 +543,13 @@ function renderList() {
   } else body = ps.sort(sortBy === 'distance' ? byDist : byName).map(item).join('');
   const topH = document.querySelector('.top').offsetHeight;
   el.innerHTML = `<div style="height:${topH}px"></div><div class="lbrand">Walkabout</div>
+    ${filter.tag ? `<div class="ltag"><b># ${esc(filter.tag)} things</b> · ${ps.length} <button id="tagclear">Show all ✕</button></div>` : ''}
     <div class="ltools"><span class="meta">Sort</span>
-      <select class="inline" id="sort">${[['category','By category'],['status','By status'],['added','By date added'],['source','By source'],['city','By city'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="inline" id="sort">${[['category','By category'],['status','By status'],['added','By date added'],['source','By source'],['tag','By tag'],['city','By city'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
       <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>
     ${ps.length ? '<div class="meta lhint">Swipe a place to the left to remove it.</div>' : ''}${body}`;
   el.querySelectorAll('.lgroup h3').forEach(h => h.style.top = topH + 'px');
+  const tc = document.getElementById('tagclear'); if (tc) tc.onclick = () => { filter.tag = ''; renderAll(); };
   el.querySelectorAll('.litem').forEach(r => {
     r.onclick = e => {
       if (e.target.dataset.star) return;
@@ -675,7 +696,7 @@ function showPlace(id, isHere, keepView) {
     ${p.visited ? `<div class="meta" style="margin-top:6px">✓ Visited ${esc(new Date(p.visited + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' }))}</div>` : ''}
     <div class="meta" style="margin-top:6px">Source: <b>${esc(sourceLabel(p))}</b>${sourceOf(p) === 'instagram' ? (p.sources || []).filter(u => /instagram\.com/.test(u)).map((u, i, a) =>
       ` · <a href="${esc(u)}" target="_blank" rel="noopener">open the post${a.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('') : ''}${p.added ? ' · added ' + esc(p.added) : ''}</div>
-    ${(p.tags||[]).length && p.imported_from ? `<div class="meta">📋 ${p.tags.map(esc).join(' · ')}</div>` : ''}
+    ${tagsOf(p).length ? `<div class="tags">${tagsOf(p).map(t => `<button class="tag" data-tag="${esc(t)}"># ${esc(t)}</button>`).join('')}</div>` : ''}
     ${p.coords_precision === 'approximate' ? '<div class="meta">📍 Pin is approximate. “Open in Google Maps” goes to the exact place.</div>' : ''}
     ${p.hours ? `<div class="meta">🕒 ${esc(p.hours)}</div>` : ''}
     ${(p.sources||[]).length ? `<div class="meta">${p.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(new URL(u).hostname)}</a>`).join(' · ')}</div>` : ''}
@@ -687,6 +708,7 @@ function showPlace(id, isHere, keepView) {
       <button onclick="editPlace('${esc(p.id)}')">✎ Edit</button>
       ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : `<button class="del" onclick="hidePlace('${esc(p.id)}')">Remove</button>`}
     </div>`);
+  sheet.querySelectorAll('button.tag').forEach(b => b.onclick = () => showTag(b.dataset.tag));
   pickCategory(document.getElementById('p-cat'), cid => { setField(p.id, 'category', cid); renderAll(); showPlace(p.id, isHere, true); });
   if (view === 'map') { // keep the pin visible above the bottom sheet
     const pt = map.project([p.lat, p.lng], map.getZoom()).add([0, Math.min(sheet.offsetHeight, innerHeight * 0.6) / 2]);
@@ -703,6 +725,7 @@ window.editPlace = id => {
     <label>Address / floor<input id="e-addr" value="${esc(p.address || '')}"></label>
     <label>Comment (what this place is, why it matters)<textarea id="e-notes" rows="5">${esc(p.notes || '')}</textarea></label>
     <div class="row" style="margin-top:6px"><button class="mic" id="e-mic" type="button">🎤 Dictate</button><span class="meta" id="e-mic-hint" style="flex:1"></span></div>
+    <label>Tags (separate with commas, e.g. superlocal)<input id="e-tags" autocapitalize="off" autocomplete="off" value="${esc(tagsOf(p).join(', '))}"></label>
     <label>Google Maps link<input id="e-gurl" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="Paste the share link of the exact listing" value="${esc(p.google_maps_url || '')}"></label>
     <div class="row"><button class="primary" id="e-save">Save</button><button id="e-cancel">Cancel</button></div>`);
   const stopMic = wireDictation(document.getElementById('e-mic'), document.getElementById('e-notes'), document.getElementById('e-mic-hint'));
@@ -715,6 +738,9 @@ window.editPlace = id => {
     const gurl = document.getElementById('e-gurl').value.trim();
     if (!gurl || /^https?:\/\//i.test(gurl)) next.google_maps_url = gurl;
     for (const k in next) if ((p[k] || '') !== next[k]) setField(id, k, next[k]);
+    const typed = [...new Set(document.getElementById('e-tags').value.split(',').map(t => t.trim()).filter(Boolean))];
+    const newTags = (p.tags || []).filter(t => HIDDEN_TAGS.test(t)).concat(typed);
+    if (JSON.stringify(newTags) !== JSON.stringify(p.tags || [])) setField(id, 'tags', newTags);
     renderAll(); showPlace(id, here, true);
   };
 };

@@ -95,6 +95,13 @@ lists them in a table: name, description, source link, address, Google Maps link
 `merge_changes.py` then marks approved places and deletes removed ones. Removed places are hidden
 from the map and list right away on that device.
 
+## Tags
+
+`tags[]` holds free labels the user invents ("superlocal"). When the user says "tag this X", append to `tags`.
+The app shows them as tappable `# tag` chips on the card, a tag dropdown in the chip row, a "# tag things" list
+header when filtered, List → Sort → By tag, and a Tags field in Edit (travels in Export → My changes).
+Google list names "Want to go" and "Instagram saved…" stay in `tags` but are hidden from the tag list.
+
 ## The app (`places/index.html`)
 
 - Map pins colored by category, starred places get a gold ring. Category chips along the top
