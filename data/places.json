@@ -4102,6 +4102,29 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "la-malifeta-vermuteria",
+      "name": "La Malifeta Vermuteria",
+      "category": "restaurant",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "943 Song Wat Rd, Samphanthawong, Bangkok 10100",
+      "lat": 13.7380998,
+      "lng": 100.5077693,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/7dEQRLDKbghKhKWM8",
+      "google_type": "Spanish restaurant",
+      "notes": "Spanish dinner place where Tiwa took us. Todd, Carrie, Tiwa and I had a nice meal and saw the Thai equivalent of opera.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/7dEQRLDKbghKhKWM8",
+        "https://www.instagram.com/la_malifeta_vermuteria"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
