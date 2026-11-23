@@ -442,6 +442,10 @@ https://www.google.com/maps/place/Carnation+Sauna/@13.7675642,100.5872421,17z/da
 840 Sukhumvit Rd, Phra Khanong, Khlong Toei, Bangkok 10110
 One of two massage places recommended by Vivian. At the time of adding this, I have not been here yet.
 https://maps.app.goo.gl/qvPRerDeD1EsEo4U9</description><Point><coordinates>100.5795805,13.7233365,0</coordinates></Point></Placemark>
+<Placemark><name>ThongLor Dala massage</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+6, 2 Thong Lo, Khlong Tan Nuea, Watthana, Bangkok 10110
+Second of two massage places recommended by Billy. This one I've been to and can confirm it was good.
+https://maps.app.goo.gl/M6Em9YftbM7C489o6</description><Point><coordinates>100.5796875,13.7254263,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Hotel</name>
 <Placemark><name>Hotel Tagawa</name><styleUrl>#cat-hotel</styleUrl><description>Hotel

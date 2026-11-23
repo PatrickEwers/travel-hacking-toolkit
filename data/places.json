@@ -4149,6 +4149,30 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "thonglor-dala-massage",
+      "name": "ThongLor Dala massage",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "6, 2 Thong Lo, Khlong Tan Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7254263,
+      "lng": 100.5796875,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/M6Em9YftbM7C489o6",
+      "google_type": "massage spa",
+      "notes": "Second of two massage places recommended by Billy. This one I've been to and can confirm it was good.",
+      "hours": "Open until 11:39 PM",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/M6Em9YftbM7C489o6",
+        "https://www.facebook.com/share/18RzpnD1d4/"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
