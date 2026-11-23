@@ -4200,6 +4200,30 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "asoke-sports-club",
+      "name": "Asoke Sports Club",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "48 Soi Sukhumvit 16, Khlong Toei, Bangkok 10110 (11th floor, Foodland building)",
+      "lat": 13.7326571,
+      "lng": 100.5608608,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Asoke+Sports+Club/@13.7326571,100.5608608,17z/data=!4m6!3m5!1s0x30e29fe2a0eabd65:0x8ab31698e0e2695d!8m2!3d13.7326571!4d100.5608608!16s%2Fg%2F11qr2pfgs9",
+      "google_type": "sports complex",
+      "notes": "Great pickleball and beach volleyball spot in the middle of Bangkok. Recommended by Cassandra. We also once met her there, when I sprung a surprise by bringing Tiwa along as well.",
+      "review_note": "Identified from the description (the Maps link sent was Queen Bee's). Confirm this is the right venue.",
+      "tags": [],
+      "sources": [
+        "https://www.google.com/maps/place/Asoke+Sports+Club/@13.7326571,100.5608608,17z/data=!4m6!3m5!1s0x30e29fe2a0eabd65:0x8ab31698e0e2695d!8m2!3d13.7326571!4d100.5608608!16s%2Fg%2F11qr2pfgs9",
+        "https://www.asokesports.club/"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
