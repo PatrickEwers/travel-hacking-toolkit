@@ -4173,6 +4173,33 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "queen-bee-bangkok",
+      "name": "Queen Bee",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "25/9 Sukhumvit 26, Khlong Tan, Khlong Toei, Bangkok 10110 (opposite the DoubleTree by Hilton)",
+      "lat": 13.7278441,
+      "lng": 100.5704458,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/8eFnkiHwpSf21nfR8",
+      "google_type": "bar",
+      "notes": "The awesome place that has open mic nights and a very family-style setting, a very inclusive experience. I've been there once with Nick and we met some Russian people who were very friendly.\n\nOpen mic: Sundays at 8 PM, weekly and free, per the current Bangkok open-mic listing (checked 23 Nov 2026). Not confirmed by the bar itself: an older guide says Tuesday, so call +66 2 661 3017 before going. Also a jazz jam every Sunday from 4 PM.",
+      "hours": "Open until 2 AM",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/8eFnkiHwpSf21nfR8",
+        "http://www.queenbeebangkok.com/",
+        "https://badslava.com/details.php?id=41726",
+        "https://bangkokblonde.com/open-mic-and-jam-nights-in-bangkok/",
+        "https://www.instagram.com/jazzonsukhumvit/"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
