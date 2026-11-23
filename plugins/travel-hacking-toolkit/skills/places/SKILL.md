@@ -104,6 +104,8 @@ from the map and list right away on that device.
   with a Dictate button for the comment and an optional field for the exact Google Maps share link.
   Saved on the device with `logged_via: "gps"`; it travels in Export → My changes like any new place.
 - Each place: Open in Google Maps, Directions, Share (native share sheet / copies the link).
+- ✎ Edit on any place card changes name, address, comment (`notes`, with a Dictate button) and the Google Maps
+  link; edits are saved on the device and `merge_changes.py` applies them from Export → My changes.
 - Remove on any place card hides it on the device (undo: More → Recently added → Removed); it travels in
   Export → My changes as `review: "removed"` and `merge_changes.py` then deletes the place.
 - Deep link: `index.html#<place-id>` opens that place.

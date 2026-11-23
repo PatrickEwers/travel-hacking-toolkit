@@ -525,6 +525,7 @@ function showPlace(id, isHere, keepView) {
       <a href="${gmaps(p)}" target="_blank" rel="noopener"><button class="primary">Open in Google Maps</button></a>
       <a href="${gdirections(p)}" target="_blank" rel="noopener"><button>Directions</button></a>
       <button onclick="sharePlace('${esc(p.id)}')">Share</button>
+      <button onclick="editPlace('${esc(p.id)}')">✎ Edit</button>
       ${isLocal(p.id) ? `<button onclick="removePlace('${esc(p.id)}')">Delete</button>` : `<button class="del" onclick="hidePlace('${esc(p.id)}')">Remove</button>`}
     </div>`);
   pickCategory(document.getElementById('p-cat'), cid => { setField(p.id, 'category', cid); renderAll(); showPlace(p.id, isHere, true); });
@@ -533,6 +534,31 @@ function showPlace(id, isHere, keepView) {
     map.panTo(map.unproject(pt, map.getZoom()));
   }
 }
+// Edit a place's name, address, comment and Google link. Saved on this device like stars; travels in Export → My changes.
+window.editPlace = id => {
+  const p = allPlaces().find(x => x.id === id); if (!p) return;
+  const here = shownHere;
+  flowOpen = true;
+  open(`<h2>Edit place</h2>
+    <label>Name<input id="e-name" value="${esc(p.name)}"></label>
+    <label>Address / floor<input id="e-addr" value="${esc(p.address || '')}"></label>
+    <label>Comment (what this place is, why it matters)<textarea id="e-notes" rows="5">${esc(p.notes || '')}</textarea></label>
+    <div class="row" style="margin-top:6px"><button class="mic" id="e-mic" type="button">🎤 Dictate</button><span class="meta" id="e-mic-hint" style="flex:1"></span></div>
+    <label>Google Maps link<input id="e-gurl" inputmode="url" autocapitalize="off" autocomplete="off" placeholder="Paste the share link of the exact listing" value="${esc(p.google_maps_url || '')}"></label>
+    <div class="row"><button class="primary" id="e-save">Save</button><button id="e-cancel">Cancel</button></div>`);
+  const stopMic = wireDictation(document.getElementById('e-mic'), document.getElementById('e-notes'), document.getElementById('e-mic-hint'));
+  document.getElementById('e-cancel').onclick = () => { stopMic(); showPlace(id, here, true); };
+  document.getElementById('e-save').onclick = () => {
+    const nameEl = document.getElementById('e-name'), name = nameEl.value.trim();
+    if (!name) { nameEl.focus(); nameEl.style.borderColor = '#b42318'; return; }
+    stopMic();
+    const next = { name, address: document.getElementById('e-addr').value.trim(), notes: document.getElementById('e-notes').value.trim() };
+    const gurl = document.getElementById('e-gurl').value.trim();
+    if (!gurl || /^https?:\/\//i.test(gurl)) next.google_maps_url = gurl;
+    for (const k in next) if ((p[k] || '') !== next[k]) setField(id, k, next[k]);
+    renderAll(); showPlace(id, here, true);
+  };
+};
 window.sharePlace = async id => {
   const p = allPlaces().find(x => x.id === id);
   const url = gmaps(p), text = `${p.name}${p.notes ? ' — ' + p.notes.split('. ')[0] : ''}`;
