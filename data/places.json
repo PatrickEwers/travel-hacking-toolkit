@@ -3759,6 +3759,28 @@
       "source": "manual",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "flowhouse-bangkok",
+      "name": "Flowhouse Bangkok",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "A-Square, 120/1 Soi Sukhumvit 26, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "lat": 13.7203545,
+      "lng": 100.5672886,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/AiZUagBZsKuDNazp8",
+      "google_type": "aquatic_center",
+      "notes": "Artificial surf place in the middle of Bangkok. We went there with Bryan and Kirian when they were in Bangkok.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/AiZUagBZsKuDNazp8",
+        "https://flowsurfhousethailand.com/"
+      ],
+      "source": "manual",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
