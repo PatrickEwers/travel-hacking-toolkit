@@ -3521,6 +3521,26 @@
       ],
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "siya-massage-on-nut",
+      "name": "Siya Massage (On Nut)",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Ground floor, U Delight @ Onnut Station condo, Suan Luang, Bangkok 10250",
+      "lat": 13.7111875,
+      "lng": 100.6040625,
+      "coords_precision": "approximate",
+      "google_maps_url": "https://maps.app.goo.gl/5ffS1LDFSE2qfgKU6",
+      "google_type": "spa",
+      "notes": "Massage place of my friend.",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/5ffS1LDFSE2qfgKU6"
+      ],
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
