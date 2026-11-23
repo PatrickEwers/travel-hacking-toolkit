@@ -64,10 +64,10 @@ def main():
 
     with open(OUT / "my-places.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["name", "category", "starred", "address", "city", "latitude", "longitude", "notes", "google_maps_url", "source"])
+        w.writerow(["name", "category", "starred", "address", "city", "latitude", "longitude", "notes", "google_maps_url", "source", "status", "added"])
         for p in places:
             w.writerow([p["name"], label[p["category"]], "yes" if p.get("starred") else "", p.get("address", ""), p.get("city", ""),
-                        p["lat"], p["lng"], p.get("notes", ""), gmaps(p), SOURCE_LABELS.get(p.get("source"), "Manual entry")])
+                        p["lat"], p["lng"], p.get("notes", ""), gmaps(p), SOURCE_LABELS.get(p.get("source"), "Manual entry"), p.get("status", "identified"), p.get("added", "")])
 
     print(f"built {len(places)} places -> places/index.html, my-places.kml, my-places.csv")
 

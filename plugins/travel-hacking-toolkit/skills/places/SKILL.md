@@ -34,6 +34,10 @@ When the user names a place ("add Tichuca", "I went to the bar on the 5th floor 
    Google Maps link for, `instagram` for a find from an Instagram post (put the post URL in `sources`),
    `google-import` for the Google saved-lists import, `gps-log` only for places logged in the app.
    The card shows it as "Source: …", the list can be grouped by it, and the CSV has a `source` column.
+   Always set `status`: `visited` when the user says they went (put a known date in `visited`),
+   `want-to-go` when they say they want to, otherwise `identified`. The card has a three-way
+   Identified / Want to go / Visited switch; the list groups by status, date added and source, and the
+   chip row has a status filter.
 5. **Reply** with a one-row table (name, category, address, coords precision) and the Google Maps
    share link: `https://www.google.com/maps/search/?api=1&query=<url-encoded gmaps_query>`.
 
