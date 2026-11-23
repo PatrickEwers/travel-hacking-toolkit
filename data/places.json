@@ -4249,6 +4249,56 @@
       "status": "identified",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "blue-lane-swim-club",
+      "name": "Blue Lane Swim Club (Benchasiri Park pool)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Public Swimming Pool, Khlong Toei Youth Center, inside Benchasiri Park, Sukhumvit Rd, Khlong Toei, Bangkok 10110",
+      "lat": 13.7293053,
+      "lng": 100.5672903,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Public+Swimming+Pool+Khlong+Toei+Youth+Center/@13.7293053,100.5672903,17z/data=!4m6!3m5!1s0x30e29f03b97308c7:0x6e248c297af559a5!8m2!3d13.7293053!4d100.5672903!16s%2Fg%2F11g6mhc62f",
+      "google_type": "swimming pool",
+      "notes": "Adult swim club, billed in the reel as Bangkok's first swim club. To join, message @bluelaneswimclub on Instagram.\n\nThe pool is the public lap pool in Benchasiri Park. Google reviewers say the pool itself needs a one-time membership (passport copy and two photos).",
+      "review_note": "Pool matched to the reel by look (blue starting blocks, yellow gutter, palms, towers behind), not by a named location. Confirm with the club.",
+      "hours": "Pool open until 7:30 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DgB9XqnzRlq/",
+        "https://www.instagram.com/bluelaneswimclub/",
+        "https://www.google.com/maps/place/Public+Swimming+Pool+Khlong+Toei+Youth+Center/@13.7293053,100.5672903,17z/data=!4m6!3m5!1s0x30e29f03b97308c7:0x6e248c297af559a5!8m2!3d13.7293053!4d100.5672903!16s%2Fg%2F11g6mhc62f"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "ride-on-park",
+      "name": "Ride On Park (snowboard dry slope)",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "78 Soi Sukhumvit 63 (Ekkamai), Bangkok 10110",
+      "lat": 13.7270393,
+      "lng": 100.5857028,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/RIDE+ON+PARK/@13.7270393,100.5857028,17z/data=!4m6!3m5!1s0x30e29f6b63ec42b1:0xb6972696d682d7bd!8m2!3d13.7270393!4d100.5857028!16s%2Fg%2F11p1_zyh5r",
+      "google_type": "gym",
+      "notes": "Indoor snowboard dry slope on a carpet surface that rides like snow.\n\nNovember 2026 promo (through 30 Nov), for people who can already ride the basics: 990 baht per hour Mon-Fri, 1,190 baht Sat-Sun. Walk-ins fine, no booking. Bring your own gear or rent a full set with pads for 650 baht.",
+      "hours": "Open until 10 PM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DgC954UBBtw/",
+        "https://www.google.com/maps/place/RIDE+ON+PARK/@13.7270393,100.5857028,17z/data=!4m6!3m5!1s0x30e29f6b63ec42b1:0xb6972696d682d7bd!8m2!3d13.7270393!4d100.5857028!16s%2Fg%2F11p1_zyh5r"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
