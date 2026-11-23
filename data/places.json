@@ -29,7 +29,8 @@
       "closed": "\"permanent\" if the place has closed for good (kept for the memory; shown with a Permanently closed badge)",
       "source": "where the place was found: instagram (found in an Instagram post; the post links are in sources) | google-import (came with the Google Maps saved-lists import) | manual (entered by hand or added through Claude) | gps-log (logged on the spot in the app)",
       "status": "identified (found, not yet decided) | want-to-go | visited (been there; the date, when known, is in visited)",
-      "recurring": "optional, for regular repeating events: {days:[sun|mon|tue|wed|thu|fri|sat], text:'Every Monday · 8 PM–midnight'}"
+      "recurring": "optional, for regular repeating events: {days:[sun|mon|tue|wed|thu|fri|sat], text:'Every Monday · 8 PM–midnight'}",
+      "events": "optional, events held at this venue: [{title, days:[sun..sat] for weekly or date:'YYYY-MM-DD' for one-off, time, note}]"
     },
     "staleness_days": 3650
   },
@@ -4200,7 +4201,24 @@
       "source": "manual",
       "status": "visited",
       "starred": false,
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "events": [
+        {
+          "title": "Jazz jam",
+          "days": [
+            "sun"
+          ],
+          "time": "from 4 PM"
+        },
+        {
+          "title": "Open mic",
+          "days": [
+            "sun"
+          ],
+          "time": "8 PM",
+          "note": "free; day unconfirmed, call first"
+        }
+      ]
     },
     {
       "id": "asoke-sports-club",

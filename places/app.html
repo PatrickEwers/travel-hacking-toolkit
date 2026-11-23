@@ -79,6 +79,15 @@
   #recent.show { display:block; }
   #trips { position:absolute; inset:0; z-index:1004; background:var(--bg); overflow:auto; display:none; padding:calc(var(--safe-t) + 8px) 0 30px; bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
   #trips.show { display:block; }
+  #events { position:absolute; inset:0; z-index:1004; background:var(--bg); overflow:auto; display:none; padding:calc(var(--safe-t) + 8px) 0 30px; bottom:calc(var(--nav-h) + var(--safe-b)); -webkit-overflow-scrolling:touch; }
+  #events.show { display:block; }
+  .evday { margin:14px 16px 6px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .evday.today { color:var(--brand); }
+  .evnone { margin:0 16px; font-size:14px; color:var(--muted); }
+  .evcard { margin:0 16px 8px; padding:12px 14px; border:1px solid var(--line); border-radius:14px; cursor:pointer; background:var(--card, transparent); }
+  .evcard b { display:block; font-size:16px; }
+  .evcard .when { font-weight:600; color:var(--brand); font-size:14px; margin-top:2px; }
+  .evcard .where { font-size:13px; color:var(--muted); margin-top:2px; }
   .tcard { margin:0 16px 10px; padding:14px; border:1px solid var(--line); border-radius:14px; cursor:pointer; }
   .tcard b { font-size:17px; } .tbar { height:6px; border-radius:3px; background:var(--bg2); margin-top:8px; overflow:hidden; } .tbar i { display:block; height:100%; background:var(--brand); }
   .titem { display:flex; align-items:center; gap:10px; min-height:56px; padding:6px 8px 6px 16px; border-bottom:1px solid var(--line); }
@@ -184,6 +193,7 @@
 <div id="list"></div>
 <div id="recent"></div>
 <div id="trips"></div>
+<div id="events"></div>
 <div class="top">
   <div class="bar">
     <input id="q" type="search" enterkeyhint="search" placeholder="Add a place or paste a Maps link" autocomplete="off" autocapitalize="words">
@@ -197,6 +207,7 @@
 <nav class="nav">
   <button data-nav="map" class="on" aria-label="Map"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span>Map</span></button>
   <button data-nav="list" aria-label="List"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><span>List</span></button>
+  <button data-nav="events" aria-label="Events"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Events</span></button>
   <button id="locate" aria-label="Near me"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Near me</span></button>
   <button data-nav="more" aria-label="More"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>More</span></button>
 </nav>
@@ -414,8 +425,33 @@ let view = 'map', me = null, meMarker = null, nearShownId = null;
 const inStatus = p => (!filter.status || statusOf(p) === filter.status) && (!filter.trip || tripPlaceIds(filter.trip).has(p.id)) && (!filter.tag || tagsOf(p).includes(filter.tag));
 // Regular repeating events: p.recurring = { days:['mon'], text:'Every Monday · …' }
 const DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
-const onToday = p => !!(p.recurring && (p.recurring.days || []).includes(DAYS[new Date().getDay()]));
-const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.events || p.recurring) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
+// p.recurring = the place itself is the event; p.events = [{ title, days:['sun'], time, note, date:'2026-12-05' }] held at a venue
+const ymd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const eventsOf = p => [
+  ...(p.recurring ? [{ title: p.name, days: p.recurring.days || [], text: p.recurring.text, own: true }] : []),
+  ...(p.events || []).map(e => ({ ...e, text: e.text || [e.days && e.days.length ? 'Every ' + e.days.map(d => ({sun:'Sunday',mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday'})[d]).join(' & ') : e.date, e.time, e.note].filter(Boolean).join(' · ') })),
+];
+const evOn = (e, d) => e.date ? e.date === ymd(d) : (e.days || []).includes(DAYS[d.getDay()]);
+const onToday = p => eventsOf(p).some(e => evOn(e, new Date()));
+function renderEvents() {
+  const el = document.getElementById('events'), all = [];
+  allPlaces().forEach(p => eventsOf(p).forEach(e => all.push({ p, e })));
+  const card = ({ p, e }) => `<div class="evcard" data-p="${esc(p.id)}"><b>${esc(e.title)}</b><div class="when">${esc([e.time, e.note].filter(Boolean).join(' · ') || e.text)}</div><div class="where">${e.own ? esc(p.address || p.city || '') : '@ ' + esc(p.name) + (p.city ? ' · ' + esc(p.city) : '')}</div></div>`;
+  let h = `<h2 style="margin:8px 16px 0">Events</h2><div class="evnone" style="margin-top:4px">Next 7 days, from your saved regular and one-off events.</div>`;
+  const t = new Date(); t.setHours(12, 0, 0, 0);
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(t); d.setDate(t.getDate() + i);
+    const todays = all.filter(x => evOn(x.e, d));
+    h += `<div class="evday ${i ? '' : 'today'}">${d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'short' })}${i ? '' : ' · Today'}</div>` + (todays.length ? todays.map(card).join('') : '<div class="evnone">Nothing saved</div>');
+  }
+  const end = new Date(t); end.setDate(t.getDate() + 6);
+  const later = all.filter(x => x.e.date && x.e.date > ymd(end)).sort((a, b) => a.e.date.localeCompare(b.e.date));
+  if (later.length) h += `<div class="evday">Later</div>` + later.map(x => card({ p: x.p, e: { ...x.e, time: [new Date(x.e.date + 'T12:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' }), x.e.time].filter(Boolean).join(' · ') } })).join('');
+  if (!all.length) h += `<div class="evnone" style="margin-top:14px">No events yet.</div>`;
+  el.innerHTML = h;
+  el.querySelectorAll('[data-p]').forEach(b => b.onclick = () => { setView('map'); showPlace(b.dataset.p); });
+}
+const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.events || eventsOf(p).length) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
 
 // ---------- map ----------
 const map = L.map('map', { zoomControl:false }).setView([13.7466, 100.5393], 13); // Bangkok
@@ -484,7 +520,7 @@ function renderChips() {
       `<option value="${esc(t)}" ${t === filter.tag ? 'selected' : ''}># ${esc(t)} (${nTag[t]})</option>`).join('')}</select>` : '') +
     `<button class="chip ${!filter.cats.size && !filter.starred && !filter.events ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
     `<button class="chip ${filter.starred ? 'on' : ''}" data-k="star">★ Starred ${nStar}</button>` +
-    (ps.some(p => p.recurring) || filter.events ? `<button class="chip ${filter.events ? 'on' : ''}" data-k="events">🔁 Regular events ${ps.filter(p => p.recurring).length}</button>` : '') +
+    (ps.some(p => eventsOf(p).length) || filter.events ? `<button class="chip ${filter.events ? 'on' : ''}" data-k="events">🔁 Regular events ${ps.filter(p => eventsOf(p).length).length}</button>` : '') +
     cats.map(c => `<button class="chip ${filter.cats.has(c.id) ? 'on' : ''}" data-k="${esc(c.id)}">${glyph(c, 'currentColor')} ${esc(c.label)} ${counts[c.id]}</button>`).join('');
   document.getElementById('citysel').onchange = e => {
     filter.city = e.target.value; try { localStorage.setItem('walkabout.city', filter.city); } catch (err) {}
@@ -514,7 +550,7 @@ function renderList() {
   const item = p => { const c = cat(p.category); return `<div class="litem" data-id="${esc(p.id)}">
       <div class="ic" style="background:${c.color}">${glyph(c)}</div>
       <div class="body"><div class="name"><span class="nm">${esc(p.name)}</span>${statusOf(p) !== 'identified' ? `<span class="st ${statusOf(p)}">${STATUSES[statusOf(p)]}</span>` : ''}</div>${p.closed ? '<span class="closed">Permanently closed</span>' : ''}
-        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div>${p.recurring ? `<div class="meta tagline">🔁 ${esc(p.recurring.text)}${onToday(p) ? ' · On today' : ''}</div>` : ''}${tagsOf(p).length ? `<div class="meta tagline">${tagsOf(p).map(t => '# ' + esc(t)).join('  ')}</div>` : ''}</div>
+        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div>${eventsOf(p).map(e => `<div class="meta tagline">🔁 ${e.own ? '' : esc(e.title) + ': '}${esc(e.text)}${evOn(e, new Date()) ? ' · On today' : ''}</div>`).join('')}${tagsOf(p).length ? `<div class="meta tagline">${tagsOf(p).map(t => '# ' + esc(t)).join('  ')}</div>` : ''}</div>
       <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button>
       <button class="swipe-del" data-del="${esc(p.id)}" tabindex="-1">Remove</button></div>`; };
   let body;
@@ -587,6 +623,8 @@ function setView(v) {
   document.getElementById('list').classList.toggle('show', v === 'list');
   document.getElementById('recent').classList.toggle('show', v === 'recent');
   document.getElementById('trips').classList.toggle('show', v === 'trips');
+  document.getElementById('events').classList.toggle('show', v === 'events');
+  if (v === 'events') renderEvents();
   if (v === 'trips') renderTrips();
   if (v === 'recent') renderRecent();
   document.querySelectorAll('.nav [data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === v));
@@ -704,7 +742,7 @@ function showPlace(id, isHere, keepView) {
       ` · <a href="${esc(u)}" target="_blank" rel="noopener">open the post${a.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('') : ''}${p.added ? ' · added ' + esc(p.added) : ''}</div>
     ${tagsOf(p).length ? `<div class="tags">${tagsOf(p).map(t => `<button class="tag" data-tag="${esc(t)}"># ${esc(t)}</button>`).join('')}</div>` : ''}
     ${p.coords_precision === 'approximate' ? '<div class="meta">📍 Pin is approximate. “Open in Google Maps” goes to the exact place.</div>' : ''}
-    ${p.recurring ? `<div class="recur">🔁 ${esc(p.recurring.text)}${onToday(p) ? ' <b>· On today</b>' : ''}</div>` : ''}
+    ${eventsOf(p).map(e => `<div class="recur">🔁 ${e.own ? '' : esc(e.title) + ': '}${esc(e.text)}${evOn(e, new Date()) ? ' <b>· On today</b>' : ''}</div>`).join('')}
     ${p.hours ? `<div class="meta">🕒 ${esc(p.hours)}</div>` : ''}
     ${(p.sources||[]).length ? `<div class="meta">${p.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(new URL(u).hostname)}</a>`).join(' · ')}</div>` : ''}
     <div class="row">
@@ -1209,6 +1247,7 @@ const hash = decodeURIComponent(location.hash.slice(1));
 if (hash === 'list') setView('list');
 else if (hash === 'recent') setView('recent');
 else if (hash === 'trips') setView('trips');
+else if (hash === 'events') setView('events');
 else if (hash === 'import') showImport();
 else if (hash === 'log') logHere();
 else if (/^log@-?\d+(\.\d+)?,-?\d+(\.\d+)?$/.test(hash)) { const [la, lo] = hash.slice(4).split(',').map(Number); logHere({ lat:la, lng:lo, acc:20 }); }

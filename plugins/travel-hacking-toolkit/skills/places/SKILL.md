@@ -109,6 +109,11 @@ For a weekly night or class ("add this as a repeating event"), add the place wit
 venue. The app shows a 🔁 line on the card and list row, "On today" on matching weekdays, and a
 "🔁 Regular events" filter chip.
 
+For an event held at a venue that is already a place (open mic at a bar), add
+`"events": [{"title": "Open mic", "days": ["sun"], "time": "8 PM", "note": "free"}]` to that place; use
+`"date": "YYYY-MM-DD"` instead of `days` for a one-off. The **Events** tab (deep link `#events`) lists the next
+7 days plus later one-offs; tapping an event opens its place.
+
 ## The app (`places/index.html`)
 
 - Map pins colored by category, starred places get a gold ring. Category chips along the top
