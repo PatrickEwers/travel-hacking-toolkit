@@ -28,7 +28,8 @@
       "imported_from": "where a batch import came from (google-saved-lists, instagram-saved-bkk)",
       "closed": "\"permanent\" if the place has closed for good (kept for the memory; shown with a Permanently closed badge)",
       "source": "where the place was found: instagram (found in an Instagram post; the post links are in sources) | google-import (came with the Google Maps saved-lists import) | manual (entered by hand or added through Claude) | gps-log (logged on the spot in the app)",
-      "status": "identified (found, not yet decided) | want-to-go | visited (been there; the date, when known, is in visited)"
+      "status": "identified (found, not yet decided) | want-to-go | visited (been there; the date, when known, is in visited)",
+      "recurring": "optional, for regular repeating events: {days:[sun|mon|tue|wed|thu|fri|sat], text:'Every Monday · 8 PM–midnight'}"
     },
     "staleness_days": 3650
   },
@@ -4319,6 +4320,37 @@
         "https://www.instagram.com/reel/Df3q5PJtS06/",
         "https://www.google.com/maps/place/Cloud+11/@13.6845287,100.6099455,17z/data=!4m6!3m5!1s0x30e2a141eb9cb9ad:0x19903dd78ff7f25f!8m2!3d13.6845287!4d100.6099455!16s%2Fg%2F11p_1_5txn",
         "http://www.cloud11bangkok.com/"
+      ],
+      "source": "instagram",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "bachata-on-mondays-hemingways",
+      "name": "Bachata On Mondays (BOM) at Hemingway's",
+      "category": "activity",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "Hemingway's Bangkok, 19 Sukhumvit Soi 11, Khlong Toei Nuea, Watthana, Bangkok 10110",
+      "lat": 13.7429081,
+      "lng": 100.5564524,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Hemingway/@13.7429081,100.5564524,17z/data=!4m6!3m5!1s0x30e29fcad9406d83:0x748bd697ee3872d!8m2!3d13.7429081!4d100.5564524!16s%2Fg%2F11_rs63gh",
+      "google_type": "Western restaurant",
+      "recurring": {
+        "days": [
+          "mon"
+        ],
+        "text": "Every Monday · workshop 8–9 PM, party 9 PM–midnight"
+      },
+      "notes": "Weekly bachata night run by Bangkok Latin Soul: a one-hour workshop, then a social dance party until midnight.\n\nCheck @bangkoklatinsoul on Instagram before going; they post a schedule each week with the price and any cancellations.",
+      "hours": "Hemingway's open until 2 AM",
+      "tags": [],
+      "sources": [
+        "https://www.instagram.com/reel/DgEOK1YzpL-/",
+        "https://www.instagram.com/bangkoklatinsoul/",
+        "https://www.google.com/maps/place/Hemingway/@13.7429081,100.5564524,17z/data=!4m6!3m5!1s0x30e29fcad9406d83:0x748bd697ee3872d!8m2!3d13.7429081!4d100.5564524!16s%2Fg%2F11_rs63gh"
       ],
       "source": "instagram",
       "status": "identified",

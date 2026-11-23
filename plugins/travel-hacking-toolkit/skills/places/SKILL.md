@@ -102,6 +102,13 @@ The app shows them as tappable `# tag` chips on the card, a tag dropdown in the 
 header when filtered, List → Sort → By tag, and a Tags field in Edit (travels in Export → My changes).
 Google list names "Want to go" and "Instagram saved…" stay in `tags` but are hidden from the tag list.
 
+## Regular repeating events
+
+For a weekly night or class ("add this as a repeating event"), add the place with
+`"recurring": {"days": ["mon"], "text": "Every Monday · workshop 8–9 PM, party 9 PM–midnight"}` and pin it at the
+venue. The app shows a 🔁 line on the card and list row, "On today" on matching weekdays, and a
+"🔁 Regular events" filter chip.
+
 ## The app (`places/index.html`)
 
 - Map pins colored by category, starred places get a gold ring. Category chips along the top

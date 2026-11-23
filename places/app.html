@@ -155,6 +155,7 @@
            max-width:calc(100vw - 24px); padding:10px 10px 10px 16px; border-radius:14px; background:#1d1d1f; color:#fff; font-size:15px; box-shadow:0 4px 18px rgba(0,0,0,.35); }
   #toast.show { display:flex; } #toast span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   #toast button { min-height:36px; padding:6px 12px; border:0; border-radius:10px; background:#3a3a3c; color:#fff; font-weight:600; flex:none; }
+  .recur { margin-top:8px; padding:8px 10px; border-radius:10px; background:var(--bg); border:1px solid var(--line); font-size:14px; font-weight:600; color:var(--brand); }
   .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
   .tags .tag { min-height:32px; padding:4px 10px; border-radius:999px; font-size:13px; font-weight:600; background:var(--bg); color:var(--brand); border:1px solid var(--line); }
   .tagline { color:var(--brand); font-weight:600; }
@@ -411,7 +412,10 @@ try { filter.city = localStorage.getItem('walkabout.city') || ''; } catch (e) {}
 const inCity = p => !filter.city || (p.city || 'Elsewhere') === filter.city;
 let view = 'map', me = null, meMarker = null, nearShownId = null;
 const inStatus = p => (!filter.status || statusOf(p) === filter.status) && (!filter.trip || tripPlaceIds(filter.trip).has(p.id)) && (!filter.tag || tagsOf(p).includes(filter.tag));
-const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
+// Regular repeating events: p.recurring = { days:['mon'], text:'Every Monday · …' }
+const DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
+const onToday = p => !!(p.recurring && (p.recurring.days || []).includes(DAYS[new Date().getDay()]));
+const visible = () => allPlaces().filter(p => inCity(p) && inStatus(p) && (!filter.events || p.recurring) && (!filter.starred || p.starred) && (!filter.cats.size || filter.cats.has(p.category)));
 
 // ---------- map ----------
 const map = L.map('map', { zoomControl:false }).setView([13.7466, 100.5393], 13); // Bangkok
@@ -478,8 +482,9 @@ function renderChips() {
       `<option value="${k}" ${k === filter.status ? 'selected' : ''}>${STATUSES[k]} (${nStat[k] || 0})</option>`).join('')}</select>` +
     (tagNames.length ? `<select class="chip statsel ${filter.tag ? 'on' : ''}" id="tagsel" aria-label="Tag"><option value="">Any tag</option>${tagNames.map(t =>
       `<option value="${esc(t)}" ${t === filter.tag ? 'selected' : ''}># ${esc(t)} (${nTag[t]})</option>`).join('')}</select>` : '') +
-    `<button class="chip ${!filter.cats.size && !filter.starred ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
+    `<button class="chip ${!filter.cats.size && !filter.starred && !filter.events ? 'on' : ''}" data-k="all">All ${ps.length}</button>` +
     `<button class="chip ${filter.starred ? 'on' : ''}" data-k="star">★ Starred ${nStar}</button>` +
+    (ps.some(p => p.recurring) || filter.events ? `<button class="chip ${filter.events ? 'on' : ''}" data-k="events">🔁 Regular events ${ps.filter(p => p.recurring).length}</button>` : '') +
     cats.map(c => `<button class="chip ${filter.cats.has(c.id) ? 'on' : ''}" data-k="${esc(c.id)}">${glyph(c, 'currentColor')} ${esc(c.label)} ${counts[c.id]}</button>`).join('');
   document.getElementById('citysel').onchange = e => {
     filter.city = e.target.value; try { localStorage.setItem('walkabout.city', filter.city); } catch (err) {}
@@ -491,7 +496,8 @@ function renderChips() {
   document.querySelectorAll('#chips button.chip').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     if (k === 'trip') filter.trip = '';
-    else if (k === 'all') { filter.cats.clear(); filter.starred = false; }
+    else if (k === 'all') { filter.cats.clear(); filter.starred = false; filter.events = false; }
+    else if (k === 'events') filter.events = !filter.events;
     else if (k === 'star') filter.starred = !filter.starred;
     else filter.cats.has(k) ? filter.cats.delete(k) : filter.cats.add(k);
     renderAll();
@@ -508,7 +514,7 @@ function renderList() {
   const item = p => { const c = cat(p.category); return `<div class="litem" data-id="${esc(p.id)}">
       <div class="ic" style="background:${c.color}">${glyph(c)}</div>
       <div class="body"><div class="name"><span class="nm">${esc(p.name)}</span>${statusOf(p) !== 'identified' ? `<span class="st ${statusOf(p)}">${STATUSES[statusOf(p)]}</span>` : ''}</div>${p.closed ? '<span class="closed">Permanently closed</span>' : ''}
-        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div>${tagsOf(p).length ? `<div class="meta tagline">${tagsOf(p).map(t => '# ' + esc(t)).join('  ')}</div>` : ''}</div>
+        <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div>${p.recurring ? `<div class="meta tagline">🔁 ${esc(p.recurring.text)}${onToday(p) ? ' · On today' : ''}</div>` : ''}${tagsOf(p).length ? `<div class="meta tagline">${tagsOf(p).map(t => '# ' + esc(t)).join('  ')}</div>` : ''}</div>
       <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button>
       <button class="swipe-del" data-del="${esc(p.id)}" tabindex="-1">Remove</button></div>`; };
   let body;
@@ -698,6 +704,7 @@ function showPlace(id, isHere, keepView) {
       ` · <a href="${esc(u)}" target="_blank" rel="noopener">open the post${a.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('') : ''}${p.added ? ' · added ' + esc(p.added) : ''}</div>
     ${tagsOf(p).length ? `<div class="tags">${tagsOf(p).map(t => `<button class="tag" data-tag="${esc(t)}"># ${esc(t)}</button>`).join('')}</div>` : ''}
     ${p.coords_precision === 'approximate' ? '<div class="meta">📍 Pin is approximate. “Open in Google Maps” goes to the exact place.</div>' : ''}
+    ${p.recurring ? `<div class="recur">🔁 ${esc(p.recurring.text)}${onToday(p) ? ' <b>· On today</b>' : ''}</div>` : ''}
     ${p.hours ? `<div class="meta">🕒 ${esc(p.hours)}</div>` : ''}
     ${(p.sources||[]).length ? `<div class="meta">${p.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(new URL(u).hostname)}</a>`).join(' · ')}</div>` : ''}
     <div class="row">
