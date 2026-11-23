@@ -680,22 +680,34 @@ async function fetchJSON(url, opts = {}, ms = 9000) {
   try { const r = await fetch(url, { ...opts, signal: ac.signal }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
   finally { clearTimeout(t); }
 }
-async function nearbyPOIs(pos, radius) { // null = lookup failed, [] = nothing named here
-  const q = `[out:json][timeout:8];nwr(around:${radius},${pos.lat},${pos.lng})[name][~"^(${POI_KEYS.join('|')})$"~"."];out center tags 40;`;
-  for (const ep of OVERPASS) {
-    try {
-      const j = await fetchJSON(ep + '?data=' + encodeURIComponent(q));
-      return (j.elements || []).map(e => {
-        const t = e.tags || {}, lat = e.lat ?? (e.center && e.center.lat), lng = e.lon ?? (e.center && e.center.lon);
-        if (lat == null || lng == null) return null;
-        const en = t['name:en'], local = t.name, key = POI_KEYS.find(k => t[k]);
-        return { name: en && local && en !== local ? `${en} (${local})` : (en || local), search: en || local, lat, lng,
-          osmClass: key, osmType: t[key], kind: String(t[key] || '').replace(/_/g, ' '),
-          address: [[t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), t.level ? 'level ' + t.level : ''].filter(Boolean).join(', '),
-          text: [t.cuisine, t.description, t.amenity, t.shop, t.leisure, t.tourism].filter(Boolean).join(' '), d: dist(pos, { lat, lng }) };
-      }).filter(Boolean).sort((a, b) => a.d - b.d);
-    } catch (e) {}
-  }
+const poiSort = (a, b) => a.d - b.d;
+async function photonPOIs(pos, radius) { // Photon (komoot): fast reverse lookup that returns several OpenStreetMap features around a point
+  const j = await fetchJSON(`https://photon.komoot.io/reverse?lat=${pos.lat}&lon=${pos.lng}&radius=${(radius / 1000).toFixed(3)}&limit=25&lang=en`, {}, 7000);
+  return (j.features || []).map(ft => {
+    const p = ft.properties || {}, c = (ft.geometry || {}).coordinates || [];
+    if (!p.name || c.length < 2 || !(POI_KEYS.includes(p.osm_key) || p.osm_key === 'building')) return null;
+    const lat = c[1], lng = c[0];
+    return { name: p.name, search: p.name, lat, lng, osmClass: p.osm_key, osmType: p.osm_value,
+      kind: p.osm_key === 'building' ? 'building' : String(p.osm_value || '').replace(/_/g, ' '),
+      address: [p.housenumber, p.street].filter(Boolean).join(' '), text: [p.osm_value, p.osm_key].join(' '), d: dist(pos, { lat, lng }) };
+  }).filter(c => c && c.d <= radius).sort(poiSort);
+}
+async function overpassPOIs(pos, radius) {
+  const q = `[out:json][timeout:6];nwr(around:${radius},${pos.lat},${pos.lng})[name][~"^(${POI_KEYS.join('|')})$"~"."];out center tags 40;`;
+  const j = await fetchJSON(OVERPASS[0] + '?data=' + encodeURIComponent(q), {}, 7000);
+  return (j.elements || []).map(e => {
+    const t = e.tags || {}, lat = e.lat ?? (e.center && e.center.lat), lng = e.lon ?? (e.center && e.center.lon);
+    if (lat == null || lng == null) return null;
+    const en = t['name:en'], local = t.name, key = POI_KEYS.find(k => t[k]);
+    return { name: en && local && en !== local ? `${en} (${local})` : (en || local), search: en || local, lat, lng,
+      osmClass: key, osmType: t[key], kind: String(t[key] || '').replace(/_/g, ' '),
+      address: [[t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), t.level ? 'level ' + t.level : ''].filter(Boolean).join(', '),
+      text: [t.cuisine, t.description, t.amenity, t.shop, t.leisure, t.tourism].filter(Boolean).join(' '), d: dist(pos, { lat, lng }) };
+  }).filter(Boolean).sort(poiSort);
+}
+async function nearbyPOIs(pos, radius) { // null = both lookups failed, [] = nothing named here
+  try { return await photonPOIs(pos, radius); } catch (e) {}
+  try { return await overpassPOIs(pos, radius); } catch (e) {}
   return null;
 }
 async function reverseGeo(pos) {
