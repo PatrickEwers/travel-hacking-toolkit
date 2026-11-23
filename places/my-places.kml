@@ -422,6 +422,10 @@ https://maps.app.goo.gl/5ffS1LDFSE2qfgKU6</description><Point><coordinates>100.6
 1/14 Soi Sukhumvit 39, Khlong Tan Nuea, Watthana, Bangkok 10110
 My favorite massage place in the Soi 24 area.
 https://maps.app.goo.gl/EhrLUMoqWeyEvDVT9</description><Point><coordinates>100.5706483,13.7311677,0</coordinates></Point></Placemark>
+<Placemark><name>Carnation Sauna</name><styleUrl>#cat-spa</styleUrl><description>Spa &amp; massage
+298/1 Thiam Ruam Mit Rd, Samsen Nok, Huai Khwang, Bangkok 10310
+Super local Thai sauna place that Nick and his buddies often go to. He recommended it, but Billy actually took me there once!
+https://www.google.com/maps/place/Carnation+Sauna/@13.7675642,100.5872421,17z/data=!4m6!3m5!1s0x30e29f91a52c62bb:0xf0116907422b4a7b!8m2!3d13.7675642!4d100.5872421!16s%2Fg%2F11p_4k5s1g</description><Point><coordinates>100.5872421,13.7675642,0</coordinates></Point></Placemark>
 </Folder>
 <Folder><name>Hotel</name>
 <Placemark><name>Hotel Tagawa</name><styleUrl>#cat-hotel</styleUrl><description>Hotel

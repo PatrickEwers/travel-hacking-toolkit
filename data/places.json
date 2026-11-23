@@ -4028,6 +4028,29 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "carnation-sauna",
+      "name": "Carnation Sauna",
+      "category": "spa",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "298/1 Thiam Ruam Mit Rd, Samsen Nok, Huai Khwang, Bangkok 10310",
+      "lat": 13.7675642,
+      "lng": 100.5872421,
+      "coords_precision": "exact",
+      "google_maps_url": "https://www.google.com/maps/place/Carnation+Sauna/@13.7675642,100.5872421,17z/data=!4m6!3m5!1s0x30e29f91a52c62bb:0xf0116907422b4a7b!8m2!3d13.7675642!4d100.5872421!16s%2Fg%2F11p_4k5s1g",
+      "google_type": "sauna",
+      "notes": "Super local Thai sauna place that Nick and his buddies often go to. He recommended it, but Billy actually took me there once!",
+      "hours": "Open until 12 AM",
+      "tags": [],
+      "sources": [
+        "https://www.google.com/maps/place/Carnation+Sauna/@13.7675642,100.5872421,17z/data=!4m6!3m5!1s0x30e29f91a52c62bb:0xf0116907422b4a7b!8m2!3d13.7675642!4d100.5872421!16s%2Fg%2F11p_4k5s1g"
+      ],
+      "source": "manual",
+      "status": "visited",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
