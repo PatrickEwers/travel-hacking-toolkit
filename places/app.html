@@ -132,6 +132,15 @@
   .menu button { display:flex; width:100%; align-items:center; gap:12px; min-height:52px; border:0; border-bottom:1px solid var(--line); border-radius:0; background:none; font-size:16px; text-align:left; padding:0 4px; }
   .menu button:last-child { border-bottom:0; }
   .bar #logbtn { width:46px; height:46px; padding:0; border-radius:50%; border-color:transparent; background:var(--bg); color:var(--brand); box-shadow:0 2px 10px rgba(0,0,0,.2); display:flex; align-items:center; justify-content:center; flex:none; }
+  .litem { position:relative; overflow:hidden; transition:padding-right .18s ease; touch-action:pan-y; }
+  .litem .swipe-del { position:absolute; top:0; right:0; bottom:0; width:92px; min-height:0; border:0; border-radius:0; background:#b42318; color:#fff; font-size:15px; font-weight:600;
+                      transform:translateX(100%); transition:transform .18s ease; }
+  .litem.swiped { padding-right:100px; } .litem.swiped .swipe-del { transform:none; }
+  .lhint { padding:2px 16px 6px; }
+  #toast { position:fixed; left:50%; bottom:calc(var(--nav-h) + var(--safe-b) + 14px); transform:translateX(-50%); z-index:1100; display:none; align-items:center; gap:14px;
+           max-width:calc(100vw - 24px); padding:10px 10px 10px 16px; border-radius:14px; background:#1d1d1f; color:#fff; font-size:15px; box-shadow:0 4px 18px rgba(0,0,0,.35); }
+  #toast.show { display:flex; } #toast span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #toast button { min-height:36px; padding:6px 12px; border:0; border-radius:10px; background:#3a3a3c; color:#fff; font-weight:600; flex:none; }
   .cand { border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin-top:10px; }
   .cand.best { border-color:var(--brand); border-width:2px; }
   .cand b { font-size:17px; } .cand a.gl, .result a.gl { font-size:14px; }
@@ -158,6 +167,7 @@
   <div class="chips" id="chips"></div>
 </div>
 <div class="sheet" id="sheet"></div>
+<div id="toast" role="status"><span id="toast-msg"></span><button id="toast-act"></button></div>
 <nav class="nav">
   <button data-nav="map" class="on" aria-label="Map"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span>Map</span></button>
   <button data-nav="list" aria-label="List"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><span>List</span></button>
@@ -384,7 +394,8 @@ function renderList() {
       <div class="ic" style="background:${c.color}">${glyph(c)}</div>
       <div class="body"><div class="name">${esc(p.name)}</div>${p.closed ? '<span class="closed">Permanently closed</span>' : ''}
         <div class="meta">${esc(c.label)}${p.city ? ' · ' + esc(p.city) : ''}${p.d != null ? ' · ' + fmtDist(p.d) : ''}${p.address ? ' · ' + esc(p.address) : ''}</div></div>
-      <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button></div>`; };
+      <button class="star ${p.starred ? 'is' : ''}" data-star="${esc(p.id)}" title="Star">${p.starred ? '★' : '☆'}</button>
+      <button class="swipe-del" data-del="${esc(p.id)}" tabindex="-1">Remove</button></div>`; };
   let body;
   if (!ps.length) body = `<div class="empty">No places match this filter.</div>`;
   else if (sortBy === 'city') {
@@ -404,9 +415,28 @@ function renderList() {
   el.innerHTML = `<div style="height:${topH}px"></div><div class="lbrand">Walkabout</div>
     <div class="ltools"><span class="meta">Sort</span>
       <select class="inline" id="sort">${[['category','By category'],['city','By city'],['source','By source'],['distance','By distance'],['name','By name']].map(([v,l]) => `<option value="${v}" ${v===sortBy?'selected':''}>${l}</option>`).join('')}</select>
-      <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>${body}`;
+      <span style="flex:1"></span><button id="import">Import…</button><button id="export">Export…</button></div>
+    ${ps.length ? '<div class="meta lhint">Swipe a place to the left to remove it.</div>' : ''}${body}`;
   el.querySelectorAll('.lgroup h3').forEach(h => h.style.top = topH + 'px');
-  el.querySelectorAll('.litem').forEach(r => r.onclick = e => { if (e.target.dataset.star) return; showPlace(r.dataset.id); });
+  el.querySelectorAll('.litem').forEach(r => {
+    r.onclick = e => {
+      if (e.target.dataset.star) return;
+      if (e.target.dataset.del) return removeWithUndo(e.target.dataset.del);
+      if (r.dataset.swiping) { delete r.dataset.swiping; return; }          // the tap that ends a swipe is not a tap on the row
+      if (r.classList.contains('swiped')) return r.classList.remove('swiped'); // tap an open row to close it
+      showPlace(r.dataset.id);
+    };
+    let x0 = null, y0 = null;
+    r.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive:true });
+    r.addEventListener('touchend', e => {
+      if (x0 == null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      r.dataset.swiping = '1'; setTimeout(() => delete r.dataset.swiping, 350);
+      el.querySelectorAll('.litem.swiped').forEach(o => { if (o !== r) o.classList.remove('swiped'); });
+      r.classList.toggle('swiped', dx < 0);
+    }, { passive:true });
+  });
   el.querySelectorAll('[data-star]').forEach(b => b.onclick = () => toggleStar(b.dataset.star));
   document.getElementById('sort').onchange = e => { sortBy = e.target.value; renderList(); };
   document.getElementById('export').onclick = showExport;
@@ -578,6 +608,28 @@ window.sharePlace = async id => {
   await navigator.clipboard.writeText(`${p.name}\n${url}`);
   alert('Google Maps link copied');
 };
+// Remove with an Undo toast (used by the list's swipe action). Same effect as the card's Remove / Delete buttons.
+let toastTimer = null;
+function toast(msg, action, onAction) {
+  const t = document.getElementById('toast'), b = document.getElementById('toast-act');
+  document.getElementById('toast-msg').textContent = msg; b.textContent = action;
+  b.onclick = () => { t.classList.remove('show'); onAction(); };
+  t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 7000);
+}
+function removeWithUndo(id) {
+  const p = allPlaces().find(x => x.id === id); if (!p) return;
+  let undo;
+  if (isLocal(id)) {
+    const obj = load(LS.places).find(x => x.id === id);
+    store(LS.places, load(LS.places).filter(x => x.id !== id));
+    undo = () => store(LS.places, load(LS.places).concat(obj));
+  } else {
+    setField(id, 'review', 'removed');
+    undo = () => { const over = load(LS.over); if (over[id]) { delete over[id].review; if (!Object.keys(over[id]).length) delete over[id]; store(LS.over, over); } };
+  }
+  renderAll();
+  toast(`Removed “${p.name}”`, 'Undo', () => { undo(); renderAll(); });
+}
 // Remove a place that came from the shared database: hidden on this device right away (undo under More → Recently added → Removed),
 // deleted for good when Export → My changes is merged.
 window.hidePlace = id => {

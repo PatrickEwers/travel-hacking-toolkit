@@ -110,6 +110,7 @@ from the map and list right away on that device.
 - Each place: Open in Google Maps, Directions, Share (native share sheet / copies the link).
 - ✎ Edit on any place card changes name, address, comment (`notes`, with a Dictate button) and the Google Maps
   link; edits are saved on the device and `merge_changes.py` applies them from Export → My changes.
+- In the List view, swiping a row to the left reveals Remove (with an Undo toast).
 - Remove on any place card hides it on the device (undo: More → Recently added → Removed); it travels in
   Export → My changes as `review: "removed"` and `merge_changes.py` then deletes the place.
 - Deep link: `index.html#<place-id>` opens that place.
