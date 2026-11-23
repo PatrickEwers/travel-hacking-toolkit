@@ -3957,6 +3957,30 @@
       "status": "visited",
       "starred": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "tawandang-german-brewery-rama-3",
+      "name": "Tawandang German Brewery (Rama 3)",
+      "category": "bar",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "address": "462/61 Rama III Rd, Chong Nonsi, Yan Nawa, Bangkok 10120",
+      "lat": 13.6968911,
+      "lng": 100.5457968,
+      "coords_precision": "exact",
+      "google_maps_url": "https://maps.app.goo.gl/WKEcUasbiXeyqbYY8",
+      "google_type": "beer_hall",
+      "notes": "German beer place with a Thai twist, recommended by Nick.",
+      "hours": "Opens 5 PM (verify)",
+      "tags": [],
+      "sources": [
+        "https://maps.app.goo.gl/WKEcUasbiXeyqbYY8",
+        "http://www.tawandang.com/"
+      ],
+      "source": "manual",
+      "status": "identified",
+      "starred": false,
+      "added": "2026-11-23"
     }
   ]
 }
